@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7fb58b51f964204b9d10498cf7f2298, type: 3}
+  m_Name: SpawnSystemInstaller
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 8932929422559935258, guid: 39a2a328ba2320746a46615fd58f0bad, type: 3}

@@ -9,7 +9,7 @@ namespace Game.Installers
 	{
 		public override void InstallBindings()
 		{
-			Container.BindInterfacesAndSelfTo<AsyncManager>().AsSingle();
+			Container.BindInstance(Container.InstantiateComponentOnNewGameObject<AsyncManager>());
 
 			SignalBusInstaller.Install(Container);
 			ApplicationHandlerInstaller.Install(Container);

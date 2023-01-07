@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
+  _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: 81655efbb2f35d84daef7ba83a6d7f15, type: 2}
   _monoInstallers:
   - {fileID: 2802870694795667563}
   _installerPrefabs: []
@@ -78,6 +79,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e4b5c4888f7a8469e63de03676e7d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraSystem: {fileID: 0}
   subCanvas: {fileID: 4382914729106442935}
   joystick: {fileID: 1984189012587172244}
 --- !u!1 &4382914727351046018
@@ -578,7 +580,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ReferenceResolution: {x: 1080, y: 1920}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
