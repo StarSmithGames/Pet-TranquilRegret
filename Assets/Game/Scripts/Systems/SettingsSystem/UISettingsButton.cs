@@ -1,3 +1,4 @@
+using Game.Managers.GameManager;
 using Game.UI;
 
 using System.Collections;
@@ -18,11 +19,13 @@ namespace Game.Systems.SettingsSystem
 		private bool isShowing = false;
 
 		private UISubCanvas subCanvas;
+		private GameManager gameManager;
 
 		[Inject]
-		private void Construct(UISubCanvas subCanvas)
+		private void Construct(UISubCanvas subCanvas, GameManager gameManager)
 		{
 			this.subCanvas = subCanvas;
+			this.gameManager = gameManager;
 		}
 
 		protected override void OnClick()
@@ -31,10 +34,12 @@ namespace Game.Systems.SettingsSystem
 
 			if (isShowing)
 			{
+				gameManager.ChangeState(GameState.Pause);
 				subCanvas.WindowsRegistrator.Show<SettingsWindow>();
 			}
 			else
 			{
+				gameManager.ChangeState(gameManager.PreviousGameState);//PreGameplay, Gameplay
 				subCanvas.WindowsRegistrator.Hide<SettingsWindow>();
 			}
 

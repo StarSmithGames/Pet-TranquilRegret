@@ -1,4 +1,5 @@
 using Game.Managers.AsyncManager;
+using Game.Managers.GameManager;
 using Game.Systems.ApplicationHandler;
 
 using Zenject;
@@ -13,6 +14,7 @@ namespace Game.Installers
 
 			SignalBusInstaller.Install(Container);
 			ApplicationHandlerInstaller.Install(Container);
+			GameManagerInstaller.Install(Container);
 		}
 	}
 }

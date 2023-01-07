@@ -16,20 +16,17 @@ namespace Game.Systems.SpawnSystem
 		private SignalBus signalBus;
 		private Player.Factory playerFactory;
 		private CharacterManager characterManager;
-		private SceneManager sceneManager;
 		private AsyncManager asyncManager;
 
 		public SpawnSystem(
 			SignalBus signalBus,
 			Player.Factory playerFactory,
 			CharacterManager characterManager,
-			SceneManager sceneManager,
 			AsyncManager asyncManager)
 		{
 			this.signalBus = signalBus;
 			this.playerFactory = playerFactory;
 			this.characterManager = characterManager;
-			this.sceneManager = sceneManager;
 			this.asyncManager = asyncManager;
 		}
 
@@ -38,15 +35,6 @@ namespace Game.Systems.SpawnSystem
 			signalBus?.Subscribe<SignalSceneChanged>(OnSceneChanged);
 
 			SpawnPlayer();
-
-			//if (sceneManager.IsCurrentSceneMenu)
-			//{
-			//	Debug.LogError("IS MENU");
-			//}
-			//else
-			//{
-			//	asyncManager.StartCoroutine(SpawnPlayerWithDelay());
-			//}
 		}
 
 		private void SpawnPlayer()

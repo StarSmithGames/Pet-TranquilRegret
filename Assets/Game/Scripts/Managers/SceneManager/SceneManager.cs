@@ -1,3 +1,4 @@
+using Game.Managers.GameManager;
 using Game.Managers.TransitionManager;
 
 using System.Collections;
@@ -12,7 +13,7 @@ using Zenject;
 
 namespace Game.Managers.SceneManager
 {
-	public class SceneManager
+	public class SceneManager : IInitializable
     {
 		public bool IsCurrentSceneMenu => ScenePathes.First().Key == CurrentSceneName;
 		public bool IsCurrentSceneLevel => !IsCurrentSceneMenu;
@@ -28,17 +29,20 @@ namespace Game.Managers.SceneManager
 		private AsyncManager.AsyncManager asyncManager;
 		private TransitionManager.TransitionManager transitionManager;
 		private InfinityLoading infinityLoading;
+		private GameManager.GameManager gameManager;
 
 		public SceneManager(
 			SignalBus signalBus,
 			AsyncManager.AsyncManager asyncManager,
 			TransitionManager.TransitionManager transitionManager,
-			InfinityLoading infinityLoading)
+			InfinityLoading infinityLoading,
+			GameManager.GameManager gameManager)
         {
 			this.signalBus = signalBus;
 			this.asyncManager = asyncManager;
 			this.transitionManager = transitionManager;
 			this.infinityLoading = infinityLoading;
+			this.gameManager = gameManager;
 
 			int sceneCount = UnityEngine.SceneManagement.SceneManager.sceneCountInBuildSettings;
 			for (int i = 0; i < sceneCount; i++)
@@ -52,6 +56,18 @@ namespace Game.Managers.SceneManager
 			UpdateCurrentScene();
 		}
 
+		public void Initialize()
+		{
+			if (IsCurrentSceneMenu)
+			{
+				gameManager.ChangeState(GameState.Menu);
+			}
+			else
+			{
+				gameManager.ChangeState(GameState.PreGameplay);
+			}
+		}
+
 		public void SwitchScene(string sceneName, bool allow = true, UnityAction callback = null)
 		{
 			asyncManager.StartCoroutine(LoadFromBuild(sceneName, allow, callback));
@@ -59,6 +75,8 @@ namespace Game.Managers.SceneManager
 
 		private IEnumerator LoadFromBuild(string sceneName, bool allow = true, UnityAction callback = null)
 		{
+			gameManager.ChangeState(GameState.Loading);
+
 			transitionManager.In();
 
 			BuildProgressHandle handle = new BuildProgressHandle();
@@ -77,8 +95,6 @@ namespace Game.Managers.SceneManager
 
 			if (handle.AsyncOperation.isDone)
 			{
-				Debug.LogError("LOADED");
-
 				UpdateCurrentScene();
 				signalBus?.Fire(new SignalSceneChanged());
 				callback?.Invoke();
@@ -88,6 +104,7 @@ namespace Game.Managers.SceneManager
 				transitionManager.Out(() =>
 				{
 					signalBus?.Fire(new SignalSceneChangedLate());
+					gameManager.ChangeState(GameState.PreGameplay);
 				});
 			}
 			else

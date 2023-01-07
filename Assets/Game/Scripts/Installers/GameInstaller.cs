@@ -1,8 +1,8 @@
 using Game.Managers.CharacterManager;
+using Game.Managers.GameManager;
 using Game.Systems.CameraSystem;
 using Game.Systems.NavigationSystem;
 using Game.UI;
-using UnityEngine;
 
 using Zenject;
 
