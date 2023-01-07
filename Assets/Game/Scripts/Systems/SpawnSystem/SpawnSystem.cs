@@ -13,17 +13,20 @@ namespace Game.Systems.SpawnSystem
 {
 	public class SpawnSystem : IInitializable
 	{
+		private SignalBus signalBus;
 		private Player.Factory playerFactory;
 		private CharacterManager characterManager;
 		private SceneManager sceneManager;
 		private AsyncManager asyncManager;
 
 		public SpawnSystem(
+			SignalBus signalBus,
 			Player.Factory playerFactory,
 			CharacterManager characterManager,
 			SceneManager sceneManager,
 			AsyncManager asyncManager)
 		{
+			this.signalBus = signalBus;
 			this.playerFactory = playerFactory;
 			this.characterManager = characterManager;
 			this.sceneManager = sceneManager;
@@ -32,16 +35,18 @@ namespace Game.Systems.SpawnSystem
 
 		public void Initialize()
 		{
-			if (sceneManager.IsCurrentSceneMenu)
-			{
-				Debug.LogError("IS MENU");
-			}
-			else
-			{
-				asyncManager.StartCoroutine(SpawnPlayerWithDelay());
+			signalBus?.Subscribe<SignalSceneChanged>(OnSceneChanged);
 
-				Debug.LogError("IS DEBUG LEVEL");
-			}
+			SpawnPlayer();
+
+			//if (sceneManager.IsCurrentSceneMenu)
+			//{
+			//	Debug.LogError("IS MENU");
+			//}
+			//else
+			//{
+			//	asyncManager.StartCoroutine(SpawnPlayerWithDelay());
+			//}
 		}
 
 		private void SpawnPlayer()
@@ -62,6 +67,11 @@ namespace Game.Systems.SpawnSystem
 		{
 			yield return new WaitForSeconds(1f);
 
+			SpawnPlayer();
+		}
+
+		private void OnSceneChanged(SignalSceneChanged signal)
+		{
 			SpawnPlayer();
 		}
 	}

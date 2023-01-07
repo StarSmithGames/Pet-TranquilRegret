@@ -12,9 +12,12 @@ namespace Game.Managers.SceneManager
 		public override void InstallBindings()
 		{
 			Container.DeclareSignal<SignalSceneChanged>();
+			Container.DeclareSignal<SignalSceneChangedLate>();
+
 			Container.BindInterfacesAndSelfTo<SceneManager>().AsSingle().NonLazy();
 		}
 	}
 
 	public struct SignalSceneChanged { }
+	public struct SignalSceneChangedLate { }
 }
