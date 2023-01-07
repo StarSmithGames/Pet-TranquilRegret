@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Game.Systems.NavigationSystem;
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
