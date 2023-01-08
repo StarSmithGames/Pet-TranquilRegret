@@ -19,6 +19,7 @@ namespace Game.Managers.SceneManager
 		public bool IsCurrentSceneLevel => !IsCurrentSceneMenu;
 
 		public string CurrentSceneName { get; private set; }
+		public string CurrentSceneNameImmediately => UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
 		public string CurrentScenePath { get; private set; }
 
 		public IProgressHandler CurrentProgressHandle { get; private set; }
