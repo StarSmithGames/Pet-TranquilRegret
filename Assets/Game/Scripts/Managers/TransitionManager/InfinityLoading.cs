@@ -20,12 +20,17 @@ namespace Game.Managers.TransitionManager
 			this.asyncManager = asyncManager;
 		}
 
-		public void StartLoading(IProgressHandler progressHandler, UnityAction callback = null)
+		public void StartLoading(BuildProgressHandle progressHandler, UnityAction callback = null)
 		{
 			asyncManager.StartCoroutine(Loading(progressHandler, callback));
 		}
 
-		private IEnumerator Loading(IProgressHandler progressHandler, UnityAction callback = null)
+		public void StartLoading(AddressablesProgressHandle progressHandler, UnityAction callback = null)
+		{
+			asyncManager.StartCoroutine(Loading(progressHandler, callback));
+		}
+
+		private IEnumerator Loading(BuildProgressHandle progressHandler, UnityAction callback = null)
 		{
 			IsLoading = true;
 
@@ -45,6 +50,33 @@ namespace Game.Managers.TransitionManager
 					IsLoading = false;
 
 					progressHandler.AllowSceneActivation();
+
+					callback?.Invoke();
+					yield return null;
+				}
+
+				yield return null;
+			}
+		}
+
+		private IEnumerator Loading(AddressablesProgressHandle progressHandler, UnityAction callback = null)
+		{
+			IsLoading = true;
+
+			float targetValue;
+			float currentValue = 0f;
+
+			while (IsLoading)
+			{
+				targetValue = progressHandler.GetProgressPercent() / 0.9f;
+
+				currentValue = Mathf.MoveTowards(currentValue, targetValue, settings.progressAnimationMultiplier * Time.deltaTime);
+				//Progress.text = $"{Mathf.Round(currentValue * 100f)}%";
+
+				if (Mathf.Approximately(currentValue, 1))
+				{
+					//end progress
+					IsLoading = false;
 
 					callback?.Invoke();
 					yield return null;

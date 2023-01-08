@@ -1,9 +1,14 @@
+using Game.Managers.LevelManager;
+using Game.Managers.SceneManager;
+
 using Sirenix.OdinInspector;
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+using Zenject;
 
 namespace Game.HUD
 {
@@ -18,6 +23,15 @@ namespace Game.HUD
 		[SerializeField] private SliderColor gold;
 		[SerializeField] private SliderColor silver;
 		[SerializeField] private SliderColor cooper;
+
+		private LevelSettings levelSettings;
+
+		[Inject]
+		private void Construct(SceneManager sceneManager)
+		{
+			levelSettings = sceneManager.CurrentLevelSettings;
+			Debug.LogError("SETTINGS " + (levelSettings != null));
+		}
 
 		public void SetRemainigTime()
 		{

@@ -1,3 +1,4 @@
+using Game.Managers.AddresableManager;
 using Game.Managers.AsyncManager;
 using Game.Managers.GameManager;
 using Game.Systems.ApplicationHandler;
@@ -14,6 +15,7 @@ namespace Game.Installers
 
 			SignalBusInstaller.Install(Container);
 			ApplicationHandlerInstaller.Install(Container);
+			AddresableManagerInstaller.Install(Container);
 			GameManagerInstaller.Install(Container);
 		}
 	}

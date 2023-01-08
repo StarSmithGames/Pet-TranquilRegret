@@ -32,7 +32,7 @@ namespace Game.Systems.SpawnSystem
 
 		public void Initialize()
 		{
-			signalBus?.Subscribe<SignalSceneChanged>(OnSceneChanged);
+			//signalBus?.Subscribe<SignalSceneChanged>(OnSceneChanged);
 
 			SpawnPlayer();
 		}
