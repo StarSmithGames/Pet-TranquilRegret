@@ -177,18 +177,16 @@ namespace Game.HUD
 
 		public void Tick()
 		{
-			if (isCompleted) return;
-
 			if (isForward)
 			{
-				if (t < timeRemaining)
-				{
-					t += Time.deltaTime * 5f;
-				}
-				else
+				t += Time.deltaTime * 5f;
+
+				if (isCompleted) return;
+
+				if (t >= timeRemaining)
 				{
 					Debug.Log("Time has run out!");
-					t = timeRemaining;
+					//t = timeRemaining;
 
 					isCompleted = true;
 
@@ -197,6 +195,8 @@ namespace Game.HUD
 			}
 			else
 			{
+				if (isCompleted) return;
+
 				if (t > 0)
 				{
 					t -= Time.deltaTime;

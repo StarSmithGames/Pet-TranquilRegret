@@ -98,8 +98,14 @@ namespace Game.Managers.SceneManager
 
 		public void SwitchScene(string sceneName, bool allow = true, UnityAction callback = null)
 		{
-			//asyncManager.StartCoroutine(LoadFromBuild(sceneName, allow, callback));
-			asyncManager.StartCoroutine(LoadFromAddresables(sceneName, allow, callback));
+			if(sceneName == "Menu")
+			{
+				asyncManager.StartCoroutine(LoadFromBuild(sceneName, allow, callback));
+			}
+			else
+			{
+				asyncManager.StartCoroutine(LoadFromAddresables(sceneName, allow, callback));
+			}
 		}
 
 		private IEnumerator LoadFromBuild(string sceneName, bool allow = true, UnityAction callback = null)
