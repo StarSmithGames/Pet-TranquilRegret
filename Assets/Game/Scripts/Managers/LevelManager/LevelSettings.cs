@@ -1,27 +1,33 @@
-using Sirenix.OdinInspector;
-
 using System;
-using System.Collections;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Game.Managers.LevelManager
 {
-    [CreateAssetMenu(fileName = "LevelSettings", menuName = "Game/Level")]
+	[CreateAssetMenu(fileName = "LevelSettings", menuName = "Game/Level")]
     public class LevelSettings : ScriptableObject
     {
-		[ShowInInspector]
-		public TimeSpan estimatePlatinaTime;
+		public GameTime estimatePlatinaTime;
         [Space]
-		[ShowInInspector]
-		public TimeSpan estimateGoldTime;
+		public GameTime estimateGoldTime;
         [Space]
-        [ShowInInspector]
-		public TimeSpan estimateSilverTime;
+		public GameTime estimateSilverTime;
         [Space]
-		[ShowInInspector]
-		public TimeSpan estimateCooperTime;
+		public GameTime estimateCooperTime;
 
-		//bonus targets
+		[AssetSelector]
+		public List<CountableGoalData> primaryGoals = new List<CountableGoalData>();
+		[SerializeReference] public List<AbstractGoalData> secondaryGoals = new List<AbstractGoalData>();
+	}
+
+	[InlineProperty]
+	[System.Serializable]
+	public struct GameTime
+	{
+		public int TotalSeconds => Mathf.FloorToInt((float) new TimeSpan(0, minutes, seconds).TotalSeconds);
+
+		public int minutes;
+		public int seconds;
 	}
 }

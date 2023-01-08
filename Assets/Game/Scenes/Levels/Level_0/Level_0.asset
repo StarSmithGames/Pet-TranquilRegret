@@ -12,3 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 706a56087b1a7e84c954f16da4577af2, type: 3}
   m_Name: Level_0
   m_EditorClassIdentifier: 
+  estimatePlatinaTime:
+    minutes: 0
+    seconds: 0
+  estimateGoldTime:
+    minutes: 4
+    seconds: 20
+  estimateSilverTime:
+    minutes: 5
+    seconds: 40
+  estimateCooperTime:
+    minutes: 9
+    seconds: 0
+  primaryGoals:
+  - {fileID: 11400000, guid: fde70720d6218db44a142385e8e51c63, type: 2}
+  secondaryGoals: []

@@ -1,7 +1,58 @@
+using Game.HUD;
+using Game.Managers.LevelManager;
+using Game.Managers.SceneManager;
+
+using System.Collections.Generic;
+using System.Linq;
+
+using UnityEngine;
+
+using Zenject;
+
 namespace Game.UI
 {
     public class UIGameCanvas : UISubCanvas
     {
+        [field: SerializeField] public Transform GoalContent { get; private set; }
 
-    }
+		private List<UIGoal> goals = new List<UIGoal>();
+
+		private SignalBus signalBus;
+		private LevelManager levelManager;
+		private UIGoal.Factory goalFactory;
+
+		[Inject]
+		private void Construct(SignalBus signalBus, LevelManager levelManager, UIGoal.Factory goalFactory)
+		{
+			this.signalBus = signalBus;
+			this.levelManager = levelManager;
+			this.goalFactory = goalFactory;
+		}
+
+		private void Start()
+		{
+			GoalContent.DestroyChildren();
+
+			CollectionExtensions.Resize(levelManager.CurrentLevel.PrimaryGoals, goals,
+			() =>
+			{
+				var goal = goalFactory.Create();
+				goal.transform.SetParent(GoalContent);
+				goal.transform.localScale = Vector3.one;
+				return goal;
+			},
+			() =>
+			{
+				var goal = goals.Last();
+				goal.DespawnIt();
+
+				return goal;
+			});
+
+			for (int i = 0; i < goals.Count; i++)
+			{
+				goals[i].SetGoal(levelManager.CurrentLevel.PrimaryGoals[i]);
+			}
+		}
+	}
 }
