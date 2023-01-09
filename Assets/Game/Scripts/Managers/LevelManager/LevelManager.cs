@@ -33,6 +33,8 @@ namespace Game.Managers.LevelManager
 		public float CurrentPercent => (float)(CurrentSeconds / TotalSeconds);
 		public LevelReward CurrentReward { get; private set; } = LevelReward.Gold;
 
+		public Coins Coins = new Coins(0);
+
 		public List<CountableGoal> PrimaryGoals { get; private set; } = new List<CountableGoal>();
 		public List<IGoal> SecondaryGoals { get; private set; } = new List<IGoal>();
 

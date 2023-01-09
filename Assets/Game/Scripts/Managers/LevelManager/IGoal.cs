@@ -18,4 +18,11 @@
 			this.Data = data;
 		}
 	}
+
+	public class Coins : Attribute<int>
+	{
+		public Coins(int currentValue) : base(currentValue)
+		{
+		}
+	}
 }

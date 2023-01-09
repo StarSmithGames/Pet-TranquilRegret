@@ -835,8 +835,7 @@ MonoBehaviour:
   TabStyle:
     m_Name: window
     m_Normal:
-      m_Background: {fileID: 3030029797350296259, guid: 0000000000000000d000000000000000,
-        type: 0}
+      m_Background: {fileID: 3030029797350296259, guid: 0000000000000000d000000000000000, type: 0}
       m_ScaledBackgrounds:
       - {fileID: -7783218991985073443, guid: 0000000000000000d000000000000000, type: 0}
       m_TextColor: {r: 0.8235294, g: 0.8235294, b: 0.8235294, a: 1}
@@ -853,8 +852,7 @@ MonoBehaviour:
       m_ScaledBackgrounds: []
       m_TextColor: {r: 0, g: 0, b: 0, a: 1}
     m_OnNormal:
-      m_Background: {fileID: 8058632875595140008, guid: 0000000000000000d000000000000000,
-        type: 0}
+      m_Background: {fileID: 8058632875595140008, guid: 0000000000000000d000000000000000, type: 0}
       m_ScaledBackgrounds:
       - {fileID: 5918955158733009358, guid: 0000000000000000d000000000000000, type: 0}
       m_TextColor: {r: 0.8235294, g: 0.8235294, b: 0.8235294, a: 1}
@@ -1081,7 +1079,7 @@ MonoBehaviour:
   GrabbitFaceBigBlack: {fileID: 2800000, guid: d34b809e7b8296348afedd3595a3c6e1, type: 3}
   GrabbitSceneLogo: {fileID: 2800000, guid: 39b6d6b7b3a220e47b750d0734b43d84, type: 3}
   showSceneInfo: 1
-  showCollisionIndicators: 0
+  showCollisionIndicators: 1
   SetKinematicWhenNotActive: 1
   UseSoftCollision: 1
   DisplayWarning: 1
@@ -1100,11 +1098,11 @@ MonoBehaviour:
   StaticObjectsLayer: 0
   AlignStrength: 1
   ExtraDragForRotationMode: 100
-  GravityStrength: {x: 0, y: -9.782224, z: -0.000001166132}
+  GravityStrength: {x: 0, y: -9.797688, z: -0.0000011679755}
   LimitBodyVelocityInGravityMode: 0
   SetGravityInDirectionOfMouse: 0
   PausePositionReajustment: 1
-  ControlRotation: 0
+  ControlRotation: 1
   MaxVelocity: 10
   CollisionMaxVelocity: 1
   MaxAngularVelocity: 10

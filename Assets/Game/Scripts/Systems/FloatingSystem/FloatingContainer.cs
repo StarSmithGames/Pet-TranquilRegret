@@ -10,28 +10,33 @@ using UnityEngine;
 
 namespace Game.Systems.FloatingSystem
 {
+	[RequireComponent(typeof(InteractionPoint))]
 	public class FloatingContainer : MonoBehaviour
 	{
 		[SerializeField] private LayerMask layer;
 		[SerializeField] private InteractionPoint interactionPoint;
 		[SerializeField] private List<Floating3DObject> floatingObjects = new List<Floating3DObject>();
+		[SerializeField] private Settings settings;
 
 		private Transform target;
 
 		private void Start()
 		{
-			StartCoroutine(Observable());
+			if(settings.type == FloatingType.Random)
+			{
+				floatingObjects.Shuffle();
+			}
+
+			if (floatingObjects.Count > 0)
+			{
+				StartCoroutine(Observable());
+			}
 		}
 
 		private IEnumerator Observable()
 		{
 			while (true)
 			{
-				if (floatingObjects.Count == 0)
-				{
-					yield break;
-				}
-
 				if (IsAnyoneInRange(out Collider[] colliders))
 				{
 					target = colliders.First().transform;
@@ -43,28 +48,46 @@ namespace Game.Systems.FloatingSystem
 
 				if (target != null)
 				{
-					Floating3DObject obj = null;
-
-					for (int i = 0; i < floatingObjects.Count; i++)
+					if (settings.type == FloatingType.All)
 					{
-						if (!floatingObjects[i].IsHasTarget)
+						for (int i = 0; i < floatingObjects.Count; i++)
 						{
-							obj = floatingObjects[i];
-							break;
+							floatingObjects[i].SetTarget(target);
 						}
-					}
-
-					if(obj == null)
-					{
 						yield break;
 					}
+					else
+					{
+						var obj = GetObject();
 
-					obj.SetTarget(target);
-					yield return new WaitForSeconds(0.25f);
+						if (obj == null)
+						{
+							yield break;
+						}
+
+						obj.SetTarget(target);
+						yield return new WaitForSeconds(settings.waitBetween);
+					}
 				}
 
 				yield return null;
 			}
+		}
+
+		private Floating3DObject GetObject()
+		{
+			Floating3DObject obj = null;
+
+			if(settings.type == FloatingType.Forward || settings.type == FloatingType.Random)
+			{
+				obj = floatingObjects.First((x) => !x.IsHasTarget);
+			}
+			else if(settings.type == FloatingType.Backward)
+			{
+				obj = floatingObjects.Last((x) => !x.IsHasTarget);
+			}
+
+			return obj;
 		}
 
 		private bool IsAnyoneInRange(out Collider[] colliders)
@@ -78,6 +101,22 @@ namespace Game.Systems.FloatingSystem
 		private void Fill()
 		{
 			floatingObjects = GetComponentsInChildren<Floating3DObject>().ToList();
-		} 
+		}
+
+		[System.Serializable]
+		public class Settings
+		{
+			public FloatingType type = FloatingType.Forward;
+			[ShowIf("@type != FloatingType.All")]
+			public float waitBetween = 0.25f;
+		}
+	}
+
+	public enum FloatingType
+	{
+		Forward,
+		Backward,
+		Random,
+		All,
 	}
 }

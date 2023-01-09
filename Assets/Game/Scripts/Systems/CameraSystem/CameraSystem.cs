@@ -60,7 +60,7 @@ namespace Game.Systems.CameraSystem
 		{
 			signalBus?.Subscribe<SignalPlayerChanged>(OnPlayerChanged);
 
-			SetTarget(characterManager.CurrentPlayer?.transform);
+			SetTarget(characterManager.CurrentPlayer?.CameraPivot);
 		}
 
 		private void OnDestroy()
@@ -90,7 +90,7 @@ namespace Game.Systems.CameraSystem
 
 		private void OnPlayerChanged(SignalPlayerChanged signal)
 		{
-			SetTarget(signal.player?.transform);
+			SetTarget(signal.player?.CameraPivot);
 		}
 
 

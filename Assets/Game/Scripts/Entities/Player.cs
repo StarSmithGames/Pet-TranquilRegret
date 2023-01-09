@@ -6,6 +6,14 @@ using Zenject;
 
 public class Player : MonoBehaviour
 {
+    public Transform CameraPivot => cameraPivot;
+    [SerializeField] private Transform cameraPivot;
 
-    public class Factory : PlaceholderFactory<Player> { }
+	private void OnDrawGizmos()
+	{
+		Gizmos.color = Color.blue;
+		Gizmos.DrawSphere(cameraPivot.position, 0.1f);
+	}
+
+	public class Factory : PlaceholderFactory<Player> { }
 }

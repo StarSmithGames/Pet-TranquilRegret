@@ -77,8 +77,8 @@ namespace Game.Systems.FloatingSystem
 		[System.Serializable]
 		public class Settings
 		{
-			public float impulseForce = 10;
-			public float impulseTime = 0.15f;
+			public float impulseForce = 15;
+			public float impulseTime = 0.2f;
 			[Space]
 			public float pathSpeed = 0.1f;
 		}

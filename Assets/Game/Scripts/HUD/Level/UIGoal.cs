@@ -46,6 +46,7 @@ namespace Game.HUD
 		public void Punch()
 		{
 			Icon.transform.DORewind();
+			Count.transform.DORewind();
 			Icon.transform.DOPunchScale(punch.settings.GetPunch(), punch.settings.duration, punch.settings.vibrato, punch.settings.elasticity);
 			Count.transform.DOPunchScale(punch.settings.GetPunch(), punch.settings.duration, punch.settings.vibrato, punch.settings.elasticity);
 		}

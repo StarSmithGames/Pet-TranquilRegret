@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2157846211320139649
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6610585319269015948}
+  m_Layer: 7
+  m_Name: CameraPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6610585319269015948
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2157846211320139649}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 4, z: 2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8497729225031403475}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8497729225031403479
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,7 +44,7 @@ GameObject:
   - component: {fileID: 8497729225031403474}
   - component: {fileID: 8932929422559935258}
   - component: {fileID: 8497729225031403485}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PlayerTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,6 +64,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8497729226725154379}
+  - {fileID: 6610585319269015948}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -81,6 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ab84dec8e24eaa44afca514cb5075f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cameraPivot: {fileID: 6610585319269015948}
 --- !u!114 &8497729225031403485
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,7 +142,7 @@ GameObject:
   - component: {fileID: 8497729226560164023}
   - component: {fileID: 8497729226560164020}
   - component: {fileID: 8497729226560164021}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,7 +239,7 @@ GameObject:
   - component: {fileID: 8497729226725154420}
   - component: {fileID: 8497729226725154421}
   - component: {fileID: 8497729226725154378}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
