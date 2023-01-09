@@ -5,7 +5,7 @@
 		bool IsCompleted { get; }
 	}
 
-	public class CountableGoal : AttributeBar, IGoal
+	public class GoalBar : AttributeBar, IGoal
 	{
 		public bool IsCompleted => CurrentValue == MaxValue;
 
@@ -13,7 +13,7 @@
 
 		public CountableGoalData Data { get; private set; }
 
-		public CountableGoal(CountableGoalData data, float value, float min, float max) : base(value, min, max)
+		public GoalBar(CountableGoalData data, float value, float min, float max) : base(value, min, max)
 		{
 			this.Data = data;
 		}

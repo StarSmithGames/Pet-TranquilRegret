@@ -18,9 +18,9 @@ namespace Game.HUD
 		[Space]
 		[SerializeField] private PunchData punch;
 
-		public CountableGoal CurrentGoal { get; private set; }
+		public GoalBar CurrentGoal { get; private set; }
 
-		public void SetGoal(CountableGoal goal)
+		public void SetGoal(GoalBar goal)
 		{
 			this.CurrentGoal = goal;
 

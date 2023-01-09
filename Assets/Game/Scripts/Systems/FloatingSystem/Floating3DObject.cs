@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-
 using DG.Tweening;
 using DG.Tweening.Plugins.Core.PathCore;
 
@@ -13,22 +11,22 @@ namespace Game.Systems.FloatingSystem
 {
 	public abstract class Floating3DObject : MonoBehaviour
 	{
-		public bool IsHasTarget => target != null;
+		public bool IsHasTarget => CurrentTarget != null;
 
 		[SerializeField] private Rigidbody rigidbody;
 		[SerializeField] private Collider collider;
 		[SerializeField] private Settings settings;
 
-		protected Transform target;
+		public Transform CurrentTarget { get; private set; }
 
-		public void SetTarget(Transform target)
+		public void SetTarget(Transform target, UnityAction<Floating3DObject> callback = null)
 		{
-			this.target = target;
+			this.CurrentTarget = target;
 
-			StartCoroutine(Animation());
+			StartCoroutine(Animation(callback));
 		}
 
-		private IEnumerator Animation()
+		private IEnumerator Animation(UnityAction<Floating3DObject> callback = null)
 		{
 			collider.enabled = false;
 
@@ -38,7 +36,7 @@ namespace Game.Systems.FloatingSystem
 
 			yield return new WaitForSeconds(settings.impulseTime);
 
-			OnAnimationPath();
+			OnAnimationPathStart();
 
 			int pointIndex = 0;
 			float t = 0;
@@ -63,14 +61,14 @@ namespace Game.Systems.FloatingSystem
 				yield return null;
 			}
 
-			OnAnimationCompleted();
-
+			callback?.Invoke(this);
+			yield return null;
 			gameObject.SetActive(false);
 		}
 
 		private Vector3[] GetCatmullRomPath()
 		{
-			return new Path(PathType.CatmullRom, new Vector3[] { transform.position, target.position }, 10).wps;
+			return new Path(PathType.CatmullRom, new Vector3[] { transform.position, CurrentTarget.position }, 10).wps;
 		}
 
 		private void Disable()
@@ -79,13 +77,11 @@ namespace Game.Systems.FloatingSystem
 			rigidbody.isKinematic = true;
 		}
 
-		protected virtual void OnAnimationPath()
+		protected virtual void OnAnimationPathStart()
 		{
 			Disable();
 			transform.DOScale(0.5f, 0.5f);
 		}
-
-		protected abstract void OnAnimationCompleted();
 
 		[System.Serializable]
 		public class Settings

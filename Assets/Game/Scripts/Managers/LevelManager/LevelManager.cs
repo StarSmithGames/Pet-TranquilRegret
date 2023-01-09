@@ -35,10 +35,10 @@ namespace Game.Managers.LevelManager
 
 		public Coins Coins = new Coins(0);
 
-		public List<CountableGoal> PrimaryGoals { get; private set; } = new List<CountableGoal>();
+		public List<GoalBar> PrimaryGoals { get; private set; } = new List<GoalBar>();
 		public List<IGoal> SecondaryGoals { get; private set; } = new List<IGoal>();
 
-		private Dictionary<CountableGoalData, CountableGoal> primaryDataAndGoal = new Dictionary<CountableGoalData, CountableGoal>();
+		private Dictionary<CountableGoalData, GoalBar> primaryDataAndGoal = new Dictionary<CountableGoalData, GoalBar>();
 
 		public LevelSettings Settings { get; private set; }
 
@@ -55,7 +55,7 @@ namespace Game.Managers.LevelManager
 
 			for (int i = 0; i < settings.primaryGoals.Count; i++)
 			{
-				CountableGoal goal = new CountableGoal(settings.primaryGoals[i], 0, 0, settings.primaryGoals[i].count);
+				GoalBar goal = new GoalBar(settings.primaryGoals[i], 0, 0, settings.primaryGoals[i].count);
 				goal.onChanged += OnGoalChanged;
 				PrimaryGoals.Add(goal);
 
@@ -83,9 +83,9 @@ namespace Game.Managers.LevelManager
 			return CurrentReward == LevelReward.Gold ? Settings.estimateGoldTime : CurrentReward == LevelReward.Silver ? Settings.estimateSilverTime : Settings.estimateCooperTime;
 		}
 
-		public CountableGoal GetCountableGoal(CountableGoalData data)
+		public GoalBar GetCountableGoal(CountableGoalData data)
 		{
-			primaryDataAndGoal.TryGetValue(data, out CountableGoal goal);
+			primaryDataAndGoal.TryGetValue(data, out GoalBar goal);
 			Assert.IsNotNull(goal);
 			return goal;
 		}

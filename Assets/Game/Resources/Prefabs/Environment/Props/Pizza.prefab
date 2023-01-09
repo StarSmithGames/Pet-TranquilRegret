@@ -163,8 +163,28 @@ MonoBehaviour:
   rigidbody: {fileID: 2303416271380519358}
   collider: {fileID: 4165093942007309651}
   settings:
-    impulseForce: 15
     impulseTime: 0.2
+    jumpForce:
+      isRandomForce: 0
+      force: 15
+      forceMinMax: {x: 0, y: 0}
+    jumpDirecion:
+      isRandomDirection: 0
+      rotationDirection: {x: 0, y: 1, z: 0}
+      axisXMinMax: {x: 0, y: 0}
+      axisYMinMax: {x: 0, y: 0}
+      axisZMinMax: {x: 0, y: 0}
+    rotationForce:
+      isRandomForce: 0
+      force: 100
+      forceMinMax: {x: 0, y: 0}
+    rotationDirecion:
+      isRandomDirection: 0
+      rotationDirection: {x: 0, y: 1, z: 0}
+      axisXMinMax: {x: 0, y: 0}
+      axisYMinMax: {x: 0, y: 0}
+      axisZMinMax: {x: 0, y: 0}
     pathSpeed: 0.1
+    pathAccelaration: 1
   data: {fileID: 11400000, guid: fde70720d6218db44a142385e8e51c63, type: 2}
   count: 1

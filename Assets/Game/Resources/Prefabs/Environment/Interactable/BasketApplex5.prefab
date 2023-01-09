@@ -77,7 +77,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 409837543731926732, guid: fe856435f52e07546a3a80cbc8e833e0, type: 3}
       propertyPath: m_Name
-      value: AppleBasketx5
+      value: BasketApplex5
       objectReference: {fileID: 0}
     - target: {fileID: 409837543731926733, guid: fe856435f52e07546a3a80cbc8e833e0, type: 3}
       propertyPath: m_RootOrder
@@ -122,6 +122,10 @@ PrefabInstance:
     - target: {fileID: 409837543731926733, guid: fe856435f52e07546a3a80cbc8e833e0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 736420560095155462, guid: fe856435f52e07546a3a80cbc8e833e0, type: 3}
+      propertyPath: settings.type
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 736420560095155462, guid: fe856435f52e07546a3a80cbc8e833e0, type: 3}
       propertyPath: floatingObjects.Array.size

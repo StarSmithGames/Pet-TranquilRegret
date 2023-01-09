@@ -1,3 +1,5 @@
+using Game.Entities;
+using Game.Managers.LevelManager;
 using Game.Systems.InteractionSystem;
 
 using Sirenix.OdinInspector;
@@ -7,6 +9,8 @@ using System.Collections.Generic;
 using System.Linq;
 
 using UnityEngine;
+
+using Zenject;
 
 namespace Game.Systems.FloatingSystem
 {
@@ -18,17 +22,27 @@ namespace Game.Systems.FloatingSystem
 		[SerializeField] private List<Floating3DObject> floatingObjects = new List<Floating3DObject>();
 		[SerializeField] private Settings settings;
 
-		private Transform target;
+		private Transform currentTarget;
+
+		private LevelManager levelManager;
+		private FloatingSystem floatingSystem;
+
+		[Inject]
+		private void Construct(LevelManager levelManager, FloatingSystem floatingSystem)
+		{
+			this.levelManager = levelManager;
+			this.floatingSystem = floatingSystem;
+
+		}
 
 		private void Start()
 		{
-			if(settings.type == FloatingType.Random)
-			{
-				floatingObjects.Shuffle();
-			}
-
 			if (floatingObjects.Count > 0)
 			{
+				if (settings.type == FloatingType.Random)
+				{
+					floatingObjects = floatingObjects.Shuffle();
+				}
 				StartCoroutine(Observable());
 			}
 		}
@@ -39,20 +53,20 @@ namespace Game.Systems.FloatingSystem
 			{
 				if (IsAnyoneInRange(out Collider[] colliders))
 				{
-					target = colliders.First().transform;
+					currentTarget = colliders.First().transform;
 				}
 				else
 				{
-					target = null;
+					currentTarget = null;
 				}
 
-				if (target != null)
+				if (currentTarget != null)
 				{
 					if (settings.type == FloatingType.All)
 					{
 						for (int i = 0; i < floatingObjects.Count; i++)
 						{
-							floatingObjects[i].SetTarget(target);
+							floatingObjects[i].SetTarget(currentTarget, i == floatingObjects.Count - 1 ? OnAnimationCompleted : null);
 						}
 						yield break;
 					}
@@ -65,7 +79,7 @@ namespace Game.Systems.FloatingSystem
 							yield break;
 						}
 
-						obj.SetTarget(target);
+						obj.SetTarget(currentTarget, OnAnimationCompleted);
 						yield return new WaitForSeconds(settings.waitBetween);
 					}
 				}
@@ -80,11 +94,11 @@ namespace Game.Systems.FloatingSystem
 
 			if(settings.type == FloatingType.Forward || settings.type == FloatingType.Random)
 			{
-				obj = floatingObjects.First((x) => !x.IsHasTarget);
+				obj = floatingObjects.Find((x) => !x.IsHasTarget);
 			}
 			else if(settings.type == FloatingType.Backward)
 			{
-				obj = floatingObjects.Last((x) => !x.IsHasTarget);
+				obj = floatingObjects.FindLast((x) => !x.IsHasTarget);
 			}
 
 			return obj;
@@ -95,6 +109,50 @@ namespace Game.Systems.FloatingSystem
 			colliders = Physics.OverlapSphere(transform.position, interactionPoint.InteractionSettings.maxRange, layer);
 
 			return colliders.Length > 0;
+		}
+
+		private void OnAnimationCompleted(Floating3DObject obj)
+		{
+			if(settings.type == FloatingType.All)
+			{
+				if (obj is GoalCountable countable)
+				{
+					int totalCount = 0;
+
+					for (int i = 0; i < floatingObjects.Count; i++)
+					{
+						totalCount += (floatingObjects[i] as GoalCountable).Count;
+					}
+
+					floatingSystem.CreateText(obj.CurrentTarget.position, $"+{totalCount}", countable.Data.information.portrait);
+					countable.Goal.CurrentValue += totalCount;
+				}
+				else if (obj is Coin coin)
+				{
+					int totalCount = 0;
+
+					for (int i = 0; i < floatingObjects.Count; i++)
+					{
+						totalCount += (floatingObjects[i] as Coin).Count;
+					}
+
+					floatingSystem.CreateText(obj.CurrentTarget.position, $"+{totalCount}", color: Color.yellow);
+					levelManager.CurrentLevel.Coins.CurrentValue += totalCount;
+				}
+			}
+			else
+			{
+				if (obj is GoalCountable countable)
+				{
+					floatingSystem.CreateText(obj.CurrentTarget.position, $"+{countable.Count}", countable.Data.information.portrait);
+					countable.Goal.CurrentValue += countable.Count;
+				}
+				else if (obj is Coin coin)
+				{
+					floatingSystem.CreateText(obj.CurrentTarget.position, $"+{coin.Count}", color: Color.yellow);
+					levelManager.CurrentLevel.Coins.CurrentValue += coin.Count;
+				}
+			}
 		}
 
 		[Button(DirtyOnClick = true)]

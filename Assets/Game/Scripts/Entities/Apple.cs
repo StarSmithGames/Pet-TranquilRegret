@@ -1,4 +1,4 @@
 namespace Game.Entities
 {
-	public class Apple : CountableFloating3DObject { }
+	public class Apple : GoalCountable { }
 }
