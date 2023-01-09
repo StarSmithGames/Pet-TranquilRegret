@@ -97,6 +97,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.8782709, y: 1.8782713, z: 0.3538236}
   m_Center: {x: -0.0042135715, y: -0.013554337, z: -0.088909246}
+--- !u!1 &3011370930220564267
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5134090474421500964}
+  m_Layer: 0
+  m_Name: ForcePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5134090474421500964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3011370930220564267}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.2, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3076967952633514227}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3076967952633514226
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,6 +159,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3258687971691313621}
+  - {fileID: 5134090474421500964}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -162,7 +194,26 @@ MonoBehaviour:
   rigidbody: {fileID: 3076967952633514224}
   collider: {fileID: 1915987954475513457}
   settings:
-    impulseForce: 15
-    impulseTime: 0.2
-    pathSpeed: 0.1
+    impulseTime: 0.35
+    jumpForce:
+      isRandomForce: 1
+      force: 15
+      forceMinMax: {x: 8, y: 12}
+    jumpDirecion:
+      isRandomDirection: 1
+      rotationDirection: {x: 0, y: 1, z: 0}
+      axisXMinMax: {x: -0.5, y: 0.5}
+      axisYMinMax: {x: 1, y: 1}
+      axisZMinMax: {x: -0.5, y: 0.5}
+    rotationForce:
+      isRandomForce: 1
+      force: 15
+      forceMinMax: {x: 500, y: 1500}
+    rotationDirecion:
+      isRandomDirection: 1
+      rotationDirection: {x: 0, y: 1, z: 0}
+      axisXMinMax: {x: 0, y: 0}
+      axisYMinMax: {x: 0, y: 0}
+      axisZMinMax: {x: 1, y: 1}
+    pathSpeed: 0.2
   count: 1

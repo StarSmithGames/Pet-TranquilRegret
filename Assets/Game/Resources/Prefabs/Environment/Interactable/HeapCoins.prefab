@@ -64,7 +64,7 @@ MonoBehaviour:
   - {fileID: 8390111674262908798}
   settings:
     type: 1
-    waitBetween: 0.25
+    waitBetween: 0.15
 --- !u!114 &6835404380931161585
 MonoBehaviour:
   m_ObjectHideFlags: 0

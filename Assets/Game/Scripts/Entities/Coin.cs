@@ -20,6 +20,8 @@ namespace Game.Entities
 			this.floatingSystem = floatingSystem;
 		}
 
+		protected override void OnAnimationPath() { }
+
 		protected override void OnAnimationCompleted()
 		{
 			floatingSystem.CreateText(target.position, $"+{count}");
