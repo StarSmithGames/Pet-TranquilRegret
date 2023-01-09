@@ -500,3 +500,4 @@ MonoBehaviour:
   <Icon>k__BackingField: {fileID: 1894712674962497285}
   <Text>k__BackingField: {fileID: 2591689946430485154}
   <Count>k__BackingField: {fileID: 923586658025878499}
+  punch: {fileID: 11400000, guid: 34bb957b692d4c542aa57120f82c95f2, type: 2}

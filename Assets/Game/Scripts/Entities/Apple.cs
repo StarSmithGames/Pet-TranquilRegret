@@ -12,17 +12,28 @@ namespace Game.Entities
 		[Min(1)]
 		[SerializeField] private int count;
 
+		private CountableGoal goal;
+
+		private LevelManager levelManager;
 		private FloatingSystem floatingSystem;
 
 		[Inject]
-		private void Construct(FloatingSystem floatingSystem)
+		private void Construct(LevelManager levelManager, FloatingSystem floatingSystem)
 		{
+			this.levelManager = levelManager;
 			this.floatingSystem = floatingSystem;
+		}
+
+		private void Start()
+		{
+			goal = levelManager.CurrentLevel.GetCountableGoal(data);
 		}
 
 		protected override void OnAnimationCompleted()
 		{
 			floatingSystem.CreateText(target.position, $"+{count}", data.information.portrait);
+			
+			goal.CurrentValue += count;
 		}
 	}
 }

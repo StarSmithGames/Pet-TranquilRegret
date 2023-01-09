@@ -2,6 +2,7 @@ using System.Collections;
 using DG.Tweening;
 using DG.Tweening.Plugins.Core.PathCore;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Systems.FloatingSystem
 {

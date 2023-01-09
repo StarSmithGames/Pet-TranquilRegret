@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using UnityEngine;
+using UnityEngine.Assertions;
 
 using Zenject;
 
@@ -35,6 +36,8 @@ namespace Game.Managers.LevelManager
 		public List<CountableGoal> PrimaryGoals { get; private set; } = new List<CountableGoal>();
 		public List<IGoal> SecondaryGoals { get; private set; } = new List<IGoal>();
 
+		private Dictionary<CountableGoalData, CountableGoal> primaryDataAndGoal = new Dictionary<CountableGoalData, CountableGoal>();
+
 		public LevelSettings Settings { get; private set; }
 
         public Level(LevelSettings settings)
@@ -53,6 +56,8 @@ namespace Game.Managers.LevelManager
 				CountableGoal goal = new CountableGoal(settings.primaryGoals[i], 0, 0, settings.primaryGoals[i].count);
 				goal.onChanged += OnGoalChanged;
 				PrimaryGoals.Add(goal);
+
+				primaryDataAndGoal.Add(settings.primaryGoals[i], goal);
 			}
 
 			//for (int i = 0; i < settings.primaryGoals.Count; i++)
@@ -74,6 +79,13 @@ namespace Game.Managers.LevelManager
 		public GameTime GetEstimateTime()
 		{
 			return CurrentReward == LevelReward.Gold ? Settings.estimateGoldTime : CurrentReward == LevelReward.Silver ? Settings.estimateSilverTime : Settings.estimateCooperTime;
+		}
+
+		public CountableGoal GetCountableGoal(CountableGoalData data)
+		{
+			primaryDataAndGoal.TryGetValue(data, out CountableGoal goal);
+			Assert.IsNotNull(goal);
+			return goal;
 		}
 
 		private void OnGoalChanged()
