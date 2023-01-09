@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
 
 	private void OnDrawGizmos()
 	{
+		if (cameraPivot == null) return;
+
 		Gizmos.color = Color.blue;
 		Gizmos.DrawSphere(cameraPivot.position, 0.1f);
 	}

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7fb58b51f964204b9d10498cf7f2298, type: 3}
   m_Name: SpawnSystemInstaller
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 8932929422559935258, guid: 39a2a328ba2320746a46615fd58f0bad, type: 3}
+  playerPrefab: {fileID: 7834858090861041472, guid: 181ebc7adbc190445a881e74c320b8c3, type: 3}

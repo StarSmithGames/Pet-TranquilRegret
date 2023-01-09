@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.TextCore.Text;
 
 using Zenject;
 
@@ -9,8 +6,8 @@ namespace Game.Systems.NavigationSystem
 {
 	public class CharacterController : MonoBehaviour
 	{
-		public float moveSpeed;
-		public float rotateSpeed;
+		public float moveSpeed = 7.5f;
+		public float rotateSpeed = 10;
 
 		[SerializeField] private Rigidbody rigidbody;
 		[SerializeField] private Transform model;
