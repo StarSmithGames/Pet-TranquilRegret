@@ -16,6 +16,8 @@ namespace Game.Systems.CameraSystem
 {
 	public class CameraSystem : MonoBehaviour
 	{
+		public Quaternion Rotation => brain.OutputCamera.transform.rotation;
+
 		[SerializeField] private CinemachineBrain brain;
 		[SerializeField] private List<CinemachineVirtualCamera> camers = new List<CinemachineVirtualCamera>();
 		[SerializeField] private Transform target;
