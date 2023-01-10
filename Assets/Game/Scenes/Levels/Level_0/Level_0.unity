@@ -1909,6 +1909,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BasketApplex7
       objectReference: {fileID: 0}
+    - target: {fileID: 6942770008325633785, guid: fcfddc28db01b8245ab1144e3c41d4ae, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5b8d53edc43711848a2e62bd05a0e717, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fcfddc28db01b8245ab1144e3c41d4ae, type: 3}
 --- !u!1001 &6634866965302176145
