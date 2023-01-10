@@ -14,11 +14,10 @@ using Zenject;
 
 namespace Game.Systems.FloatingSystem
 {
-	[RequireComponent(typeof(InteractionPoint))]
+	[RequireComponent(typeof(InteractionZone))]
 	public class FloatingContainer : MonoBehaviour
 	{
-		[SerializeField] private LayerMask layer;
-		[SerializeField] private InteractionPoint interactionPoint;
+		[SerializeField] private InteractionZone interactionZone;
 		[SerializeField] private List<Floating3DObject> floatingObjects = new List<Floating3DObject>();
 		[SerializeField] private Settings settings;
 
@@ -45,21 +44,19 @@ namespace Game.Systems.FloatingSystem
 				}
 				StartCoroutine(Observable());
 			}
+
+			interactionZone.onCollectionChanged += OnZoneCollectionChanged;
+		}
+
+		private void OnDestroy()
+		{
+			interactionZone.onCollectionChanged -= OnZoneCollectionChanged;
 		}
 
 		private IEnumerator Observable()
 		{
 			while (true)
 			{
-				if (IsAnyoneInRange(out Collider[] colliders))
-				{
-					currentTarget = colliders.First().transform;
-				}
-				else
-				{
-					currentTarget = null;
-				}
-
 				if (currentTarget != null)
 				{
 					if (settings.type == FloatingType.All)
@@ -104,11 +101,9 @@ namespace Game.Systems.FloatingSystem
 			return obj;
 		}
 
-		private bool IsAnyoneInRange(out Collider[] colliders)
+		private void OnZoneCollectionChanged()
 		{
-			colliders = Physics.OverlapSphere(transform.position, interactionPoint.InteractionSettings.maxRange, layer);
-
-			return colliders.Length > 0;
+			currentTarget = interactionZone.GetCollection().FirstOrDefault()?.transform;
 		}
 
 		private void OnAnimationCompleted(Floating3DObject obj)

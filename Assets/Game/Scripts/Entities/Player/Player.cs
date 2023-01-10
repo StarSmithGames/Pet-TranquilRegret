@@ -1,7 +1,4 @@
 using Game.Entities;
-
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 using Zenject;
@@ -13,6 +10,9 @@ public class Player : MonoBehaviour
 
 	public PlayerVFX PlayerVFX => playerVFX;
 	[SerializeField] private PlayerVFX playerVFX;
+
+	public PlayerCanvas PlayerCanvas => playerCanvas;
+	[SerializeField] private PlayerCanvas playerCanvas;
 
 	private void OnDrawGizmos()
 	{

@@ -39,8 +39,8 @@ namespace Game.Systems.NavigationSystem
 			}
 			else if (joystick.Horizontal == 0 && joystick.Vertical == 0)
 			{
-				//_animatorController.PlayIdle();
 				player.PlayerVFX.EnableDust(false);
+				//_animatorController.PlayIdle();
 			}
 
 			rigidbody.MovePosition(rigidbody.position + moveVector);

@@ -567,6 +567,10 @@ PrefabInstance:
       propertyPath: floatingObjects.Array.data[6]
       value: 
       objectReference: {fileID: 9064032172695770339}
+    - target: {fileID: 8818152123163842625, guid: fe856435f52e07546a3a80cbc8e833e0, type: 3}
+      propertyPath: settings.maxRange
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe856435f52e07546a3a80cbc8e833e0, type: 3}
 --- !u!4 &2902107874702006406 stripped

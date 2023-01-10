@@ -213,7 +213,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 409837543731926732, guid: fe856435f52e07546a3a80cbc8e833e0, type: 3}
       propertyPath: m_Name
-      value: AppleBasketx3
+      value: BasketApplex3
       objectReference: {fileID: 0}
     - target: {fileID: 409837543731926733, guid: fe856435f52e07546a3a80cbc8e833e0, type: 3}
       propertyPath: m_RootOrder
@@ -275,6 +275,10 @@ PrefabInstance:
       propertyPath: floatingObjects.Array.data[2]
       value: 
       objectReference: {fileID: 2433063387620982925}
+    - target: {fileID: 8818152123163842625, guid: fe856435f52e07546a3a80cbc8e833e0, type: 3}
+      propertyPath: settings.maxRange
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe856435f52e07546a3a80cbc8e833e0, type: 3}
 --- !u!4 &8213512186674694961 stripped
