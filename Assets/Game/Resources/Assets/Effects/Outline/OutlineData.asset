@@ -17,7 +17,7 @@ MonoBehaviour:
     complexMaskingMode: 0
     drawingMode: 1
     outlineLayer: 0
-    renderStyle: 1
+    renderStyle: 2
     outlineParameters:
       enabled: 1
       color: {r: 0.015686274, g: 0.7508158, b: 1, a: 1}
@@ -28,14 +28,14 @@ MonoBehaviour:
         serializedProperties: []
     backParameters:
       enabled: 1
-      color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+      color: {r: 0.015686274, g: 0.77644604, b: 1, a: 1}
       dilateShift: 1
       blurShift: 1
       fillPass:
         shader: {fileID: 0}
         serializedProperties: []
     frontParameters:
-      enabled: 1
+      enabled: 0
       color: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
       dilateShift: 1
       blurShift: 1
