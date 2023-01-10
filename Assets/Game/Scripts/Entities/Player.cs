@@ -1,3 +1,5 @@
+using Game.Entities;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +10,9 @@ public class Player : MonoBehaviour
 {
     public Transform CameraPivot => cameraPivot;
     [SerializeField] private Transform cameraPivot;
+
+	public PlayerVFX PlayerVFX => playerVFX;
+	[SerializeField] private PlayerVFX playerVFX;
 
 	private void OnDrawGizmos()
 	{

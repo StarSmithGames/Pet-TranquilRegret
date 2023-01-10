@@ -9,6 +9,7 @@ namespace Game.Systems.NavigationSystem
 		public float moveSpeed = 7.5f;
 		public float rotateSpeed = 10;
 
+		[SerializeField] private Player player;
 		[SerializeField] private Rigidbody rigidbody;
 		[SerializeField] private Transform model;
 
@@ -33,12 +34,13 @@ namespace Game.Systems.NavigationSystem
 				Vector3 direction = Vector3.RotateTowards(model.forward, moveVector, rotateSpeed * Time.deltaTime, 0.0f);
 				model.rotation = Quaternion.LookRotation(direction);
 
+				player.PlayerVFX.EnableDust(true);
 				//_animatorController.PlayRun();
 			}
-
 			else if (joystick.Horizontal == 0 && joystick.Vertical == 0)
 			{
 				//_animatorController.PlayIdle();
+				player.PlayerVFX.EnableDust(false);
 			}
 
 			rigidbody.MovePosition(rigidbody.position + moveVector);
