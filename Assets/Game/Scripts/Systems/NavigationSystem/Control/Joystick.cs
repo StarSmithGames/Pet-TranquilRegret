@@ -91,9 +91,9 @@ namespace Game.Systems.NavigationSystem
             FormatInput();
             HandleInput(input.magnitude, input.normalized, radius, cam);
             handle.anchoredPosition = input * radius * handleRange;
-        }
+		}
 
-        protected virtual void HandleInput(float magnitude, Vector2 normalised, Vector2 radius, Camera cam)
+		protected virtual void HandleInput(float magnitude, Vector2 normalised, Vector2 radius, Camera cam)
         {
             if (magnitude > deadZone)
             {

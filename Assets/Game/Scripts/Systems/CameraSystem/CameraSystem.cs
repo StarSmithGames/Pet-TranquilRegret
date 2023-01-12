@@ -8,6 +8,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+using Unity.VisualScripting;
+
 using UnityEngine;
 
 using Zenject;
@@ -16,12 +18,17 @@ namespace Game.Systems.CameraSystem
 {
 	public class CameraSystem : MonoBehaviour
 	{
-		public Quaternion Rotation => brain.OutputCamera.transform.rotation;
+		public Vector3 Forward => outputCamera.forward;
+		public Vector3 Right => outputCamera.right;
+
+		public float EulerAngleY => outputCamera.eulerAngles.y;
+		public Quaternion Rotation => outputCamera.rotation;
 
 		[SerializeField] private CinemachineBrain brain;
 		[SerializeField] private List<CinemachineVirtualCamera> camers = new List<CinemachineVirtualCamera>();
-		[SerializeField] private Transform target;
+		[SerializeField] private float cameraDistance = 15f;
 
+		private Transform outputCamera;
 		private CinemachineFramingTransposer CurrentTransposer
 		{
 			set
@@ -60,7 +67,9 @@ namespace Game.Systems.CameraSystem
 		{
 			signalBus?.Subscribe<SignalPlayerChanged>(OnPlayerChanged);
 
-			SetTarget(characterManager.CurrentPlayer?.CameraPivot);
+			outputCamera = brain.OutputCamera.transform;
+
+			SetTarget(characterManager.CurrentPlayer.CameraFollowPivot, characterManager.CurrentPlayer.CameraLookAtPivot);
 		}
 
 		private void OnDestroy()
@@ -71,13 +80,25 @@ namespace Game.Systems.CameraSystem
 
 		public void SetTarget(Transform target)
 		{
-			this.target = target;
-
 			camers.ForEach((x) =>
 			{
 				x.Follow = target;
 				x.LookAt = target;
 			});
+		}
+
+		public void SetTarget(Transform follow, Transform lookAt)
+		{
+			camers.ForEach((x) =>
+			{
+				x.Follow = follow;
+				x.LookAt = lookAt;
+			});
+		}
+
+		public void SetTracketOffsetDirection(Vector3 tracketObjectOffset)
+		{
+			CurrentTransposer.m_TrackedObjectOffset = tracketObjectOffset * cameraDistance;
 		}
 
 		private IEnumerator WaitWhileCamerasBlendes()
@@ -90,14 +111,7 @@ namespace Game.Systems.CameraSystem
 
 		private void OnPlayerChanged(SignalPlayerChanged signal)
 		{
-			SetTarget(signal.player?.CameraPivot);
-		}
-
-
-		[Button(DirtyOnClick = true)]
-		private void Refresh()
-		{
-			SetTarget(target);
+			SetTarget(signal.player?.CameraFollowPivot, signal.player?.CameraLookAtPivot);
 		}
 	}
 }

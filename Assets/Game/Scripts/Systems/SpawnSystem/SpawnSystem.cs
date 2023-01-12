@@ -15,17 +15,20 @@ namespace Game.Systems.SpawnSystem
 	{
 		private SignalBus signalBus;
 		private Player.Factory playerFactory;
+		private CameraSystem.CameraSystem cameraSystem;
 		private CharacterManager characterManager;
 		private AsyncManager asyncManager;
 
 		public SpawnSystem(
 			SignalBus signalBus,
 			Player.Factory playerFactory,
+			CameraSystem.CameraSystem cameraSystem,
 			CharacterManager characterManager,
 			AsyncManager asyncManager)
 		{
 			this.signalBus = signalBus;
 			this.playerFactory = playerFactory;
+			this.cameraSystem = cameraSystem;
 			this.characterManager = characterManager;
 			this.asyncManager = asyncManager;
 		}
@@ -45,8 +48,12 @@ namespace Game.Systems.SpawnSystem
 
 			var player = playerFactory.Create();
 			var point = points.RandomItem();
-			player.transform.position = point.transform.position;
-			player.transform.rotation = point.transform.rotation;
+			player.transform.position = point.GetRootPosition();
+			player.Model.rotation = point.GetModelRotation();
+			player.CameraFollowPivot.position = point.GetFollowPosition();
+			player.CameraLookAtPivot.position = point.GetLookAtPosition();
+
+			cameraSystem.SetTracketOffsetDirection(point.GetTracketObjectOffset());
 
 			characterManager.SetPlayer(player);
 		}

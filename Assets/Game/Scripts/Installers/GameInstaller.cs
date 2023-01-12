@@ -13,7 +13,6 @@ namespace Game.Installers
 {
 	public class GameInstaller : MonoInstaller<GameInstaller>
 	{
-		public CameraSystem cameraSystem;
 		public UISubCanvas subCanvas;
 		public Joystick joystick;
 		[Header("UI")]
@@ -21,7 +20,7 @@ namespace Game.Installers
 
 		public override void InstallBindings()
 		{
-			Container.BindInstance(cameraSystem);
+			Container.BindInstance(FindObjectOfType<CameraSystem>());
 			Container.BindInstance(subCanvas);
 			Container.BindInstance(joystick);
 

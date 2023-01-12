@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.TextCore.Text;
 
 using Zenject;
 
@@ -6,58 +8,103 @@ namespace Game.Systems.NavigationSystem
 {
 	public class CharacterController : MonoBehaviour
 	{
-		public float moveSpeed = 7.5f;
-		public float rotateSpeed = 10;
-
 		[SerializeField] private Player player;
-		[SerializeField] private Rigidbody rigidbody;
+		[SerializeField] private Rigidbody rb;
 		[SerializeField] private Transform model;
+		[SerializeField] private Settings settings;
 
-		private Vector3 moveVector;
+		private float turnSmoothTime = 0.1f;
+		private float smoothVelocity;
 
 		private Joystick joystick;
+		private CameraSystem.CameraSystem cameraSystem;
 
 		[Inject]
-		private void Construct(Joystick joystick)
+		private void Construct(Joystick joystick, CameraSystem.CameraSystem cameraSystem)
 		{
 			this.joystick = joystick;
+			this.cameraSystem = cameraSystem;
 		}
 
-		private void FixedUpdate()
+		private void Update()
 		{
-			moveVector = Vector3.zero;
-			moveVector.x = joystick.Horizontal * moveSpeed * Time.deltaTime;
-			moveVector.z = joystick.Vertical * moveSpeed * Time.deltaTime;
+			//Rotation
+			Vector3 directionVector = GetDirection();
 
-			if (joystick.Horizontal != 0 || joystick.Vertical != 0)
+			if (directionVector.x != 0 || directionVector.z != 0)
 			{
-				Vector3 direction = Vector3.RotateTowards(model.forward, moveVector, rotateSpeed * Time.deltaTime, 0.0f);
-				model.rotation = Quaternion.LookRotation(direction);
+				float targetAngle = Mathf.Atan2(directionVector.x, directionVector.z) * Mathf.Rad2Deg + cameraSystem.EulerAngleY;
+				float angle = Mathf.SmoothDampAngle(model.eulerAngles.y, targetAngle, ref smoothVelocity, turnSmoothTime);
 
-				player.PlayerVFX.EnableDust(true);
-				//_animatorController.PlayRun();
+				model.rotation = Quaternion.Euler(0, angle, 0);
 			}
-			else if (joystick.Horizontal == 0 && joystick.Vertical == 0)
+
+			//Movement
+			Vector3 moveVector = Vector3.zero;
+
+			if (IsGrounded())
 			{
+				moveVector = GetRelativeToCamera(GetDirection()) * settings.moveSpeed * Time.deltaTime;
+
+				if (Input.GetButtonDown("Jump"))
+				{
+					rb.AddForce(new Vector3(0, 5, 0), ForceMode.Impulse);
+				}
+
+				if (directionVector.x != 0 || directionVector.z != 0)
+				{
+					player.PlayerVFX.EnableDust(true);
+					//_animatorController.PlayRun();
+				}
+				else if (directionVector.x == 0 && directionVector.z == 0)
+				{
+					player.PlayerVFX.EnableDust(false);
+					//_animatorController.PlayIdle();
+				}
+			}
+			else
+			{
+				moveVector = GetRelativeToCamera(GetDirection()) * settings.moveSpeed * Time.deltaTime;
+
 				player.PlayerVFX.EnableDust(false);
-				//_animatorController.PlayIdle();
 			}
 
-			rigidbody.MovePosition(rigidbody.position + moveVector);
+			rb.MovePosition(rb.position + moveVector);
+		}
 
+		private Vector3 GetDirection()
+		{
+			return new Vector3(joystick.Horizontal, 0, joystick.Vertical);
+		}
 
+		private Vector3 GetRelativeToCamera(Vector3 direction)
+		{
+			Vector3 forward = cameraSystem.Forward;
+			Vector3 right = cameraSystem.Right;
 
-			//rigidbody.velocity = new Vector3(joystick.Horizontal * moveSpeed, rigidbody.velocity.y, joystick.Vertical * moveSpeed);
+			forward.y = 0f;
+			right.y = 0f;
 
-			//if (joystick.Horizontal != 0 || joystick.Vertical != 0)
-			//{
-			//	Vector3 direction = joystick.Direction;//.normalized;
+			return right.normalized * direction.x + forward.normalized * direction.z;
+		}
 
-			//	float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;// + character.CameraVision.transform.eulerAngles.y;
-			//	float angle = Mathf.SmoothDampAngle(model.eulerAngles.y, targetAngle, ref smoothVelocity, turnSmoothTime);
+		private bool IsGrounded()
+		{
+			return Physics.Raycast(transform.position, Vector3.down, settings.disstanceToGround, settings.groundLayer);
+		}
 
-			//	model.rotation = Quaternion.Euler(0, angle, 0);
-			//}
+		private void OnDrawGizmos()
+		{
+			Gizmos.DrawLine(transform.position, transform.position + Vector3.down * (settings.disstanceToGround));
+		}
+
+		[System.Serializable]
+		public class Settings
+		{
+			public float moveSpeed = 7.5f;
+
+			public LayerMask groundLayer;
+			public float disstanceToGround = 0.5f;
 		}
 	}
 }
