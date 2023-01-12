@@ -14,6 +14,7 @@ namespace Game.Installers
 			Container.BindInstance(Container.InstantiateComponentOnNewGameObject<AsyncManager>());
 
 			SignalBusInstaller.Install(Container);
+
 			ApplicationHandlerInstaller.Install(Container);
 			AddresableManagerInstaller.Install(Container);
 			GameManagerInstaller.Install(Container);

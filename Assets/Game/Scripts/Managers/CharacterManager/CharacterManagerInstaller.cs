@@ -1,3 +1,5 @@
+using Game.Entities;
+
 using Zenject;
 
 namespace Game.Managers.CharacterManager

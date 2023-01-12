@@ -18,7 +18,7 @@ namespace Game.Entities
 			this.cameraSystem = cameraSystem;
 		}
 
-		private void Start()
+		private void Update()
 		{
 			transform.rotation = cameraSystem.Rotation;
 		}

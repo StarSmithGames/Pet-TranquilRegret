@@ -33,6 +33,8 @@ public class Registrator<T>
 			onItemAdded?.Invoke(register);
 			onCollectionChanged?.Invoke();
 
+			OnRegistrated(register);
+
 			return true;
 		}
 
@@ -46,6 +48,8 @@ public class Registrator<T>
 			if (!registers.Contains(register))
 			{
 				registers.Add(register);
+
+				OnRegistrated(register);
 			}
 		}
 
@@ -60,6 +64,8 @@ public class Registrator<T>
 
 			onItemRemoved?.Invoke(register);
 			onCollectionChanged?.Invoke();
+
+			OnUnRegistrated(register);
 
 			return true;
 		}
@@ -92,5 +98,16 @@ public class Registrator<T>
 	{
 		registr = registers.OfType<REGISTR>().FirstOrDefault();
 		return registr != null;
+	}
+
+
+	protected virtual void OnRegistrated(T register)
+	{
+
+	}
+
+	protected virtual void OnUnRegistrated(T register)
+	{
+
 	}
 }

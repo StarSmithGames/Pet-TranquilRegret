@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+using Game.Entities;
 using Zenject;
 
 namespace Game.Managers.CharacterManager

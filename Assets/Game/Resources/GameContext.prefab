@@ -94,7 +94,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers:
   - {fileID: 11400000, guid: 81655efbb2f35d84daef7ba83a6d7f15, type: 2}
+  - {fileID: 11400000, guid: 0316f4f9fe1890e49b67115692901602, type: 2}
   - {fileID: 11400000, guid: 7ad0c571db82a07498d3444672919ea0, type: 2}
+  - {fileID: 11400000, guid: f425d27d4bfb10d418e254fe14bef84e, type: 2}
   _monoInstallers:
   - {fileID: 2802870694795667563}
   _installerPrefabs: []
@@ -126,7 +128,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e4b5c4888f7a8469e63de03676e7d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraSystem: {fileID: 0}
   subCanvas: {fileID: 4382914729106442935}
   joystick: {fileID: 1984189012587172244}
   goalPrefab: {fileID: 16312574267014373, guid: c1f47e87bde362e46a4e2dfa8497cefe, type: 3}

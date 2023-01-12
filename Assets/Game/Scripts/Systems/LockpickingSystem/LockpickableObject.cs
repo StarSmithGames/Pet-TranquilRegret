@@ -1,5 +1,6 @@
-using DG.Tweening;
 
+
+using Game.Entities;
 using Game.Systems.InteractionSystem;
 using Game.VFX;
 using System.Linq;
@@ -10,20 +11,22 @@ namespace Game.Systems.LockpickingSystem
 {
 	public class LockpickableObject : MonoBehaviour
 	{
-		[SerializeField] private InteractionZone interactionZone;
-		[SerializeField] private DecalVFX decalVFX;
-		[SerializeField] private Settings settings;
+		[SerializeField] protected InteractionZone interactionZone;
+		[SerializeField] protected DecalVFX decalVFX;
+		[SerializeField] protected Settings settings;
 
 		private Player lastPlayer;
 		private Player player;
 		private float t;
 		private float progress;
 
-		private void Start()
+		protected virtual void Start()
 		{
-			if (!settings.isLocked)
+			decalVFX.Enable(settings.isLocked);
+
+			if (settings.isLocked)
 			{
-				decalVFX.Enable(false);
+				IdleAnimation();
 			}
 
 			interactionZone.onCollectionChanged += OnZoneCollectionChanged;
@@ -51,7 +54,7 @@ namespace Game.Systems.LockpickingSystem
 				if (progress >= 1f)
 				{
 					settings.isLocked = false;
-					UnlockAnimation();
+					OnLockChanged();
 				}
 			}
 			else
@@ -70,16 +73,27 @@ namespace Game.Systems.LockpickingSystem
 			player.PlayerCanvas.LockpickBar.Unlock();
 		}
 
+		private void IdleAnimation()
+		{
+			decalVFX.StartIdleAnimation();
+		}
+
 		private void StartAnimation()
 		{
+			decalVFX.Kill();
 			decalVFX.ScaleTo(1.25f);
 			player.PlayerCanvas.LockpickBar.Show();
 		}
 
 		private void ResetAnimation()
 		{
-			decalVFX.ScaleTo(1f);
+			decalVFX.ScaleTo(1f, callback: decalVFX.StartIdleAnimation);
 			lastPlayer.PlayerCanvas.LockpickBar.Hide();
+		}
+
+		protected virtual void OnLockChanged()
+		{
+			UnlockAnimation();
 		}
 
 		private void OnZoneCollectionChanged()

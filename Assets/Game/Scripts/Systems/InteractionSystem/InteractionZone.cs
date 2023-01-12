@@ -10,7 +10,7 @@ namespace Game.Systems.InteractionSystem
 
 		[SerializeField] private Settings settings;
 
-		private List<Collider> collectionList = new List<Collider>();
+		protected List<Collider> collectionList = new List<Collider>();
 
 		private void OnTriggerEnter(Collider other)
 		{
@@ -20,6 +20,9 @@ namespace Game.Systems.InteractionSystem
 			{
 				collectionList.Add(other);
 				onCollectionChanged?.Invoke();
+
+				OnEnter(other);
+				OnCollectionChanged();
 			}
 		}
 
@@ -31,12 +34,30 @@ namespace Game.Systems.InteractionSystem
 			{
 				collectionList.Remove(other);
 				onCollectionChanged?.Invoke();
+
+				OnExit(other);
+				OnCollectionChanged();
 			}
 		}
 
 		public List<Collider> GetCollection()
 		{
 			return collectionList;
+		}
+
+		protected virtual void OnEnter(Collider other)
+		{
+
+		}
+
+		protected virtual void OnExit(Collider other)
+		{
+
+		}
+
+		protected virtual void OnCollectionChanged()
+		{
+
 		}
 
 		[System.Serializable]

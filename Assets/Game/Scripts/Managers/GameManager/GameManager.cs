@@ -23,8 +23,6 @@ namespace Game.Managers.GameManager
 				PreviousGameState = CurrentGameState;
 				CurrentGameState = gameState;
 
-				Debug.LogError(CurrentGameState);
-
 				signalBus?.Fire(new SignalGameStateChanged
 				{
 					newGameState = CurrentGameState,

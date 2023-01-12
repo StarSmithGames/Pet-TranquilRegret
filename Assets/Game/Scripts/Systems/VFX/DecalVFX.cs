@@ -14,6 +14,7 @@ namespace Game.VFX
 		private float sizeFactor = 1f;
 		private Vector2 originalSize;
 		private Material sharedMaterial;
+		private Sequence idleSequence;
 
 		private void Start()
 		{
@@ -24,6 +25,16 @@ namespace Game.VFX
 		{
 			IsEnabled = trigger;
 			projector.enabled = IsEnabled;
+		}
+
+		public void StartIdleAnimation()
+		{
+			idleSequence = DOTween.Sequence();
+
+			idleSequence
+				.AppendCallback(() => projector.DORewind())
+				.Append(DOTween.Punch(() => originalSize, (x) => projector.size = new Vector3(x.x, x.y, 10), new Vector3(0.25f, 0.25f, 0), 0.25f))
+				.SetLoops(-1);
 		}
 
 		public void SetSizeFactor(float sizeFactor)
@@ -97,6 +108,16 @@ namespace Game.VFX
 			}
 
 			sharedMaterial.color = color;
+		}
+
+
+		public void Kill()
+		{
+			idleSequence.Kill(true);
+			idleSequence = null;
+
+			projector.DOKill(true);
+			transform.DOKill(true);
 		}
 	}
 }

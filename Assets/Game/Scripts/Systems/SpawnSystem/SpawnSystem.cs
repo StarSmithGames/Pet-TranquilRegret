@@ -1,3 +1,4 @@
+using Game.Entities;
 using Game.Managers.AsyncManager;
 using Game.Managers.CharacterManager;
 using Game.Managers.SceneManager;
@@ -54,6 +55,8 @@ namespace Game.Systems.SpawnSystem
 			player.CameraLookAtPivot.position = point.GetLookAtPosition();
 
 			cameraSystem.SetTracketOffsetDirection(point.GetTracketObjectOffset());
+
+			point.gameObject.SetActive(false);
 
 			characterManager.SetPlayer(player);
 		}
