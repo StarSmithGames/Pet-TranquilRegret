@@ -640,6 +640,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ContentUnder>k__BackingField: {fileID: 6839250973500183957}
   <DustTrailEffect>k__BackingField: {fileID: 3824707169976275815}
+  player: {fileID: 7834858090861041472}
+  stepDelta: 0.7
+  stepGap: 0.25
 --- !u!1 &6175756428434662564
 GameObject:
   m_ObjectHideFlags: 0

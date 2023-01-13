@@ -9,8 +9,10 @@ namespace Game.Systems.NavigationSystem
 {
 	public class CharacterController : MonoBehaviour
 	{
+		public UnityAction onJumped;
 		public UnityAction onLanded;
 
+		public bool IsJumping { get; private set; }
 		public bool IsFalling => rb.velocity.y < 0;
 		public bool IsGrounded { get; private set; } = false;
 		public GroundLayer CurrentGroundLayer { get; private set; }
@@ -27,7 +29,6 @@ namespace Game.Systems.NavigationSystem
 		private float turnSmoothTime = 0.1f;
 		private float smoothVelocity;
 
-		private bool isJumping;
 
 		private Joystick joystick;
 		private CameraSystem.CameraSystem cameraSystem;
@@ -70,7 +71,9 @@ namespace Game.Systems.NavigationSystem
 				{
 					rb.AddForce(GetJumpImpulse(), ForceMode.Impulse);
 
-					isJumping = true;
+					IsJumping = true;
+
+					onJumped?.Invoke();
 				}
 			}
 			else
@@ -147,13 +150,13 @@ namespace Game.Systems.NavigationSystem
 
 		private void OnGroundedChanged()
 		{
-			if (isJumping)
+			if (IsJumping)
 			{
 				if (IsGrounded && IsFalling)
 				{
 					onLanded?.Invoke();
 
-					isJumping = false;
+					IsJumping = false;
 				}
 			}
 		}

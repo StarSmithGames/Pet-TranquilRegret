@@ -31,6 +31,8 @@ namespace Game.Systems.NavigationSystem
 		public PlayerGroundImplementation(Player player, TickableManager tickableManager) : base(player, tickableManager)
 		{
 			this.player = player;
+
+			controller.onJumped += OnJumped;
 			controller.onLanded += OnLanded;
 		}
 
@@ -53,7 +55,7 @@ namespace Game.Systems.NavigationSystem
 				return;
 			}
 
-			if (controller.IsGrounded)
+			if (controller.IsGrounded && !controller.IsJumping)
 			{
 				if (controller.IsIdling())
 				{
@@ -70,11 +72,17 @@ namespace Game.Systems.NavigationSystem
 						Disable();
 					}
 				}
+
+				player.PlayerVFX.PawStep();
 			}
 			else
 			{
 				Disable();
 			}
+		}
+
+		private void OnJumped()
+		{
 		}
 
 		private void OnLanded()
@@ -89,6 +97,8 @@ namespace Game.Systems.NavigationSystem
 			{
 				player.PlayerVFX.SmallPoof();
 			}
+
+			player.PlayerVFX.PawSteps();
 		}
 
 		public class Factory : PlaceholderFactory<Player, PlayerGroundImplementation> { }

@@ -46,18 +46,22 @@ namespace Game.VFX
 
 	public abstract class PoolableParticalVFX : PoolableObject
 	{
-		public bool IsPlaying { get; private set; }
+		public bool IsPlaying { get; protected set; }
 
-		[SerializeField] private bool isEmit = false;
-		[SerializeField] private int emitCount = 50;
-		[SerializeField] private ParticleSystem particleSystem;
+		[SerializeField] protected ParticleSystem particleSystem;
 
-		private float duration;
-		private float t = 0;
+		[SerializeField] protected bool isCustomDuration = false;
+		[Min(0.1f)]
+		[ShowIf("isCustomDuration")]
+		[SerializeField] protected float customDuration = 0.1f;
+		[SerializeField] protected int emitCount = 50;
+
+		protected float duration;
+		protected float t = 0;
 
 		private void Start()
 		{
-			duration = particleSystem.main.duration;
+			duration = isCustomDuration ? customDuration : particleSystem.main.duration;
 		}
 
 		private void Update()
@@ -71,19 +75,22 @@ namespace Game.VFX
 				DespawnIt();
 			}
 		}
-
-		public void Play()
+	
+		[Button]
+		public virtual void Play()
 		{
 			t = 0;
 
-			if (isEmit)
-			{
-				particleSystem.Emit(emitCount);
-			}
-			else
-			{
-				particleSystem.Play();
-			}
+			particleSystem.Emit(emitCount);
+
+			IsPlaying = true;
+		}
+
+		public virtual void Play(ParticleSystem.EmitParams emit)
+		{
+			t = 0;
+
+			particleSystem.Emit(emit, emitCount);
 
 			IsPlaying = true;
 		}
