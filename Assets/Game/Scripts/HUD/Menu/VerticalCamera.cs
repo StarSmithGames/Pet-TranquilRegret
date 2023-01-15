@@ -1,0 +1,165 @@
+using Game.HUD.Menu;
+using Game.Managers.SwipeManager;
+
+using Sirenix.OdinInspector;
+using UnityEngine;
+
+using Zenject;
+
+public class VerticalCamera : MonoBehaviour
+{
+	public float FrustumHeight {
+		get
+		{
+			if (frustumHeight == 0)
+			{
+				frustumHeight = 2.0f * distance * Mathf.Tan(camera.fieldOfView * 0.5f * Mathf.Deg2Rad);
+			}
+
+			return frustumHeight;
+		}
+	}
+	private float frustumHeight = 0;
+	public float FrustumWidth
+	{
+		get
+		{
+			if(frustumWidth == 0)
+			{
+				frustumWidth = FrustumHeight * camera.aspect;
+			}
+
+			return frustumWidth;
+		}
+	}
+	private float frustumWidth = 0;
+
+	public Vector3 BottomPoint
+	{
+		get
+		{
+			if(bottomPoint == Vector3.zero)
+			{
+				bottomPoint = transform.position + new Vector3(0, -(FrustumHeight / 2), distance);
+			}
+
+			return bottomPoint;
+		}
+	}
+	private Vector3 bottomPoint;
+
+	[SerializeField] private Camera camera;
+	[SerializeField] private float distance = 100;
+	[SerializeField] private UISwipeMenu menu;
+	[Space]
+	[SerializeField] private float mouseSensitivity = 1.0f;
+	[SerializeField] private float dragDamping = 0.1f;
+
+	private bool isSwiping = false;
+	private float swipeTime = 0.1f;
+	private float t = 0;
+
+	private Vector3 lastPosition;
+	private Vector3 velocity;
+
+	private SwipeManager swipeManager;
+
+	[Inject]
+	private void Construct(SwipeManager swipeManager)
+	{
+		this.swipeManager = swipeManager;
+	}
+
+	private void Start()
+	{
+		swipeManager.OnSwipeDetected += OnSwipeDetected;
+	}
+
+	private void Update()
+	{
+		if (Input.GetMouseButtonDown(0))
+		{
+			isSwiping = true;
+			t = 0;
+			lastPosition = Input.mousePosition;
+		}
+
+		if (Input.GetMouseButtonUp(0))
+		{
+			isSwiping = false;
+		}
+
+		if(t <= swipeTime)
+		{
+			SwipeCamera();
+		}
+		else
+		{
+			PanCamera();
+		}
+
+		ClampTransform();
+
+		if (isSwiping)
+		{
+			t += Time.deltaTime;
+		}
+	}
+
+	private void ClampTransform()
+	{
+		transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, BottomPoint.y + FrustumHeight / 2, menu.TopPoint.y - FrustumHeight / 2), transform.position.z);
+	}
+
+	private void PanCamera()
+	{
+		if (Input.GetMouseButton(0))
+		{
+			Vector3 delta = lastPosition - Input.mousePosition;
+			transform.Translate(0, delta.y * mouseSensitivity, 0);
+			lastPosition = Input.mousePosition;
+		}
+	}
+
+	private Vector3 GetWorldPosition(float z)
+	{
+		Ray mousePos = camera.ScreenPointToRay(Input.mousePosition);
+		Plane ground = new Plane(Vector3.forward, new Vector3(0, 0, z));
+		float distance;
+		ground.Raycast(mousePos, out distance);
+		return mousePos.GetPoint(distance);
+	}
+
+	private Vector3 GetWorldMousePosition()
+	{
+		return camera.ScreenToWorldPoint(GetMousePosition());
+	}
+
+	private Vector3 GetMousePosition()
+	{
+		Vector3 mousePos = Input.mousePosition;
+		mousePos.z = camera.nearClipPlane;
+
+		return mousePos;
+	}
+
+	private void SwipeCamera()
+	{
+		transform.position += velocity * Time.deltaTime;
+		velocity *= Mathf.Pow(dragDamping, Time.deltaTime);
+	}
+
+	private void OnSwipeDetected(Swipe swipeDirection, Vector2 swipeVelocity)
+	{
+		velocity = swipeVelocity;
+		velocity.x = 0;
+	}
+
+	private void OnDrawGizmos()
+	{
+		Gizmos.color = Color.red;
+
+		Gizmos.DrawLine(transform.position, BottomPoint);
+		Gizmos.DrawLine(transform.position, menu.TopPoint);
+	}
+}
