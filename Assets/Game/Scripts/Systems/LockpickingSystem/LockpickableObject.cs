@@ -49,7 +49,7 @@ namespace Game.Systems.LockpickingSystem
 				t += Time.deltaTime;
 				progress = t / settings.unlockTime;
 
-				player.PlayerCanvas.LockpickBar.FillAmount = progress;
+				player.PlayerCanvas.Lockpick.FillAmount = progress;
 
 				if (progress >= 1f)
 				{
@@ -70,7 +70,7 @@ namespace Game.Systems.LockpickingSystem
 		private void UnlockAnimation()
 		{
 			decalVFX.ScaleTo(0f);
-			player.PlayerCanvas.LockpickBar.Unlock();
+			player.PlayerCanvas.Lockpick.Unlock();
 		}
 
 		private void IdleAnimation()
@@ -82,13 +82,13 @@ namespace Game.Systems.LockpickingSystem
 		{
 			decalVFX.Kill();
 			decalVFX.ScaleTo(1.25f);
-			player.PlayerCanvas.LockpickBar.Show();
+			player.PlayerCanvas.Lockpick.Show();
 		}
 
 		private void ResetAnimation()
 		{
 			decalVFX.ScaleTo(1f, callback: decalVFX.StartIdleAnimation);
-			lastPlayer.PlayerCanvas.LockpickBar.Hide();
+			lastPlayer.PlayerCanvas.Lockpick.Hide();
 		}
 
 		protected virtual void OnLockChanged()

@@ -1,3 +1,5 @@
+using Game.HUD.Menu;
+
 using UnityEngine.Assertions;
 using UnityEngine.Events;
 
@@ -50,9 +52,8 @@ namespace Game.Managers.StorageManager
 
 		public Profile Profile { get; private set; }
 
-		public IStorageData<bool> IsWasHere{ get; private set; }
+		public IStorageData<bool> IsWasHere { get; private set; }
 		public IStorageData<bool> IsFirstTime { get; private set; }
-
 
 		/// <summary>
 		/// Default Data
@@ -99,11 +100,14 @@ namespace Game.Managers.StorageManager
 
 	public class Profile
 	{
-		public Data data;
+		private Data data;
 
 		public Profile()
 		{
-
+			data = new Data()
+			{
+				map = new RoadMap.Data(),
+			};
 		}
 
 		public Profile(string json)
@@ -116,20 +120,12 @@ namespace Game.Managers.StorageManager
 			return JsonSerializator.ConvertToUnityJson(data);
 		}
 
-		public Data GetData()
-		{
-			if(data == null)
-			{
-				data = new Data();
-			}
-
-			return data;
-		}
+		public Data GetData() => data;
 
 		[System.Serializable]
 		public class Data
 		{
-	
+			public RoadMap.Data map;
 		}
 	}
 }

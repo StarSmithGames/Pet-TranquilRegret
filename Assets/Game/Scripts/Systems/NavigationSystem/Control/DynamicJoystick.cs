@@ -1,20 +1,28 @@
-﻿using UnityEngine;
+﻿using Sirenix.OdinInspector;
+
+using UnityEngine;
 using UnityEngine.EventSystems;
+
+using static Sirenix.OdinInspector.Editor.UnityPropertyEmitter;
 
 namespace Game.Systems.NavigationSystem
 {
     public class DynamicJoystick : Joystick
     {
-        public float MoveThreshold { get { return moveThreshold; } set { moveThreshold = Mathf.Abs(value); } }
+        public bool IsEnable => canvasGroup.alpha == 1f;
+
+		public float MoveThreshold { get { return moveThreshold; } set { moveThreshold = Mathf.Abs(value); } }
 
         [SerializeField] private float moveThreshold = 1;
+        [SerializeField] private CanvasGroup canvasGroup;
 
         protected override void Start()
         {
             MoveThreshold = moveThreshold;
             base.Start();
             background.gameObject.SetActive(false);
-        }
+            canvasGroup.alpha = 1f;
+		}
 
         public override void OnPointerDown(PointerEventData eventData)
         {
@@ -38,5 +46,25 @@ namespace Game.Systems.NavigationSystem
             }
             base.HandleInput(magnitude, normalised, radius, cam);
         }
-    }
+
+        [Button]
+        public void Enable(bool trigger)
+        {
+            canvasGroup.alpha = trigger ? 1f : 0f;
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (Application.isPlaying) return;
+
+			handle.anchorMax = center;
+			handle.anchorMin = center;
+			handle.pivot = center;
+			handle.anchoredPosition = Vector2.zero;
+
+			background.anchorMax = Vector2.zero;
+			background.anchorMin = Vector2.zero;
+			background.pivot = center;
+		}
+	}
 }

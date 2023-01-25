@@ -7,7 +7,9 @@ namespace Game.VFX
     public class VFXInstaller : ScriptableObjectInstaller<VFXInstaller>
     {
 		public ParticalVFXFootStep stepFootPrintEffect;
-		public ParticalVFXFootStep stepPawPrintEffect;
+		public ParticalVFXFootStep stepPawHorizontalPrintEffect;
+		public ParticalVFXFootStep stepPawVerticalPrintEffect;
+		[Space]
 		public ParticalVFXPoofEffect poofEffect;
 		public ParticalVFXPoofEffect smallPoofEffect;
 
@@ -19,9 +21,14 @@ namespace Game.VFX
 				.FromComponentInNewPrefab(stepFootPrintEffect));
 
 			Container
-				.BindFactory<ParticalVFXFootStep, ParticalVFXFootStep.Factory>().WithId("StepPawPrint")
+				.BindFactory<ParticalVFXFootStep, ParticalVFXFootStep.Factory>().WithId("StepPawHorizontalPrint")
 				.FromMonoPoolableMemoryPool((x) => x.WithInitialSize(10)
-				.FromComponentInNewPrefab(stepPawPrintEffect));
+				.FromComponentInNewPrefab(stepPawHorizontalPrintEffect));
+
+			Container
+				.BindFactory<ParticalVFXFootStep, ParticalVFXFootStep.Factory>().WithId("StepPawVerticalPrint")
+				.FromMonoPoolableMemoryPool((x) => x.WithInitialSize(10)
+				.FromComponentInNewPrefab(stepPawVerticalPrintEffect));
 
 			Container
 				.BindFactory<ParticalVFXPoofEffect, ParticalVFXPoofEffect.Factory>().WithId("Poof")

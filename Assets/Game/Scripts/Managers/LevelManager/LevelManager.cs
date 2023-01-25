@@ -98,7 +98,13 @@ namespace Game.Managers.LevelManager
 			}
 		}
 
-        public class Factory : PlaceholderFactory<LevelSettings, Level> { }
+		[System.Serializable]
+		public class Data
+		{
+			public int stars = 0;
+		}
+
+		public class Factory : PlaceholderFactory<LevelSettings, Level> { }
     }
 
 	public enum LevelReward

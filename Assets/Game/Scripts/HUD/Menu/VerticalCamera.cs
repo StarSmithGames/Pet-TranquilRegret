@@ -2,7 +2,10 @@ using Game.HUD.Menu;
 using Game.Managers.SwipeManager;
 
 using Sirenix.OdinInspector;
+using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 using Zenject;
 
@@ -43,17 +46,19 @@ public class VerticalCamera : MonoBehaviour
 				bottomPoint = transform.position + new Vector3(0, -(FrustumHeight / 2), distance);
 			}
 
-			return bottomPoint;
+			return bottomPoint + bottomOffset;
 		}
 	}
 	private Vector3 bottomPoint;
 
 	[SerializeField] private Camera camera;
 	[SerializeField] private float distance = 100;
-	[SerializeField] private UISwipeMenu menu;
+	[SerializeField] private RoadMap menu;
 	[Space]
 	[SerializeField] private float mouseSensitivity = 1.0f;
 	[SerializeField] private float dragDamping = 0.1f;
+	[Space]
+	[SerializeField] private Vector3 bottomOffset;
 
 	private bool isSwiping = false;
 	private float swipeTime = 0.1f;
@@ -77,11 +82,14 @@ public class VerticalCamera : MonoBehaviour
 
 	private void Update()
 	{
-		if (Input.GetMouseButtonDown(0))
+		if(!IsPointerOverUIObject())
 		{
-			isSwiping = true;
-			t = 0;
-			lastPosition = Input.mousePosition;
+			if (Input.GetMouseButtonDown(0))
+			{
+				isSwiping = true;
+				t = 0;
+				lastPosition = Input.mousePosition;
+			}
 		}
 
 		if (Input.GetMouseButtonUp(0))
@@ -89,21 +97,23 @@ public class VerticalCamera : MonoBehaviour
 			isSwiping = false;
 		}
 
-		if(t <= swipeTime)
-		{
-			SwipeCamera();
-		}
-		else
-		{
-			PanCamera();
-		}
-
 		ClampTransform();
 
 		if (isSwiping)
 		{
+			PanCamera();
+
 			t += Time.deltaTime;
 		}
+	}
+
+	public void SetPosition(Vector3 position)
+	{
+		position.x = 0;
+		position.z = transform.position.z;
+		transform.position = position;
+
+		ClampTransform();
 	}
 
 	private void ClampTransform()
@@ -147,6 +157,20 @@ public class VerticalCamera : MonoBehaviour
 	{
 		transform.position += velocity * Time.deltaTime;
 		velocity *= Mathf.Pow(dragDamping, Time.deltaTime);
+	}
+
+	private bool IsPointerOverUIObject()
+	{
+		if (EventSystem.current.IsPointerOverGameObject())//Windows
+		{
+			return true;
+		}
+		//Mobile
+		PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+		eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+		List<RaycastResult> results = new List<RaycastResult>();
+		EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+		return results.Count > 0;
 	}
 
 	private void OnSwipeDetected(Swipe swipeDirection, Vector2 swipeVelocity)

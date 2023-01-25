@@ -36,10 +36,13 @@ namespace Game.Systems.NavigationSystem
         [SerializeField] private bool snapY = false;
 
         [SerializeField] protected RectTransform background = null;
-        [SerializeField] private RectTransform handle = null;
+        [SerializeField] protected RectTransform handle = null;
         private RectTransform baseRect = null;
 
-        private Canvas canvas;
+		protected Vector2 center = new Vector2(0.5f, 0.5f);
+
+
+		private Canvas canvas;
         private Camera cam;
 
         private Vector2 input = Vector2.zero;

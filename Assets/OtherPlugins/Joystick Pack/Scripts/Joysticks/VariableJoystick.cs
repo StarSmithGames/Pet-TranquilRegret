@@ -60,6 +60,11 @@ public class VariableJoystick : Joystick
         }
         base.HandleInput(magnitude, normalised, radius, cam);
     }
+
+	private void OnDrawGizmos()
+	{
+        background.pivot = center;
+	}
 }
 
 public enum JoystickType { Fixed, Floating, Dynamic }

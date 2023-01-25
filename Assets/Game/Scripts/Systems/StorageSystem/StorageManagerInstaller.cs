@@ -14,6 +14,7 @@ namespace Game.Managers.StorageManager
 
 			Container.BindInstance(playerPrefsSettings).WhenInjectedInto<PlayerPrefsSaveLoad>();
 			Container.BindInterfacesTo<PlayerPrefsSaveLoad>().AsSingle().NonLazy();
+			Container.BindInterfacesAndSelfTo<SaveHandler>().AsSingle().NonLazy();
 		}
 	}
 

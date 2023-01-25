@@ -96,7 +96,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 81655efbb2f35d84daef7ba83a6d7f15, type: 2}
   - {fileID: 11400000, guid: 0316f4f9fe1890e49b67115692901602, type: 2}
   - {fileID: 11400000, guid: 7ad0c571db82a07498d3444672919ea0, type: 2}
-  - {fileID: 11400000, guid: f425d27d4bfb10d418e254fe14bef84e, type: 2}
   _monoInstallers:
   - {fileID: 2802870694795667563}
   _installerPrefabs: []
@@ -1008,6 +1007,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 9044886247573739158}
     m_Modifications:
+    - target: {fileID: 8025583618976188961, guid: 689437049af815f49ae1cbcf2a9d6f5e, type: 3}
+      propertyPath: m_Alpha
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8229181960017020848, guid: 689437049af815f49ae1cbcf2a9d6f5e, type: 3}
       propertyPath: m_Name
       value: Dynamic Joystick

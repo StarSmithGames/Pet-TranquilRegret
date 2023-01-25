@@ -1,26 +1,12 @@
 using Game.Systems.CameraSystem;
+using Game.Systems.LockpickingSystem;
 
 using UnityEngine;
 
-using Zenject;
-
 namespace Game.Entities
 {
-	public class PlayerCanvas : MonoBehaviour
+	public class PlayerCanvas : CameraTracker
 	{
-		[field: SerializeField] public UILockpickBar LockpickBar { get; private set; }
-
-		private CameraSystem cameraSystem;
-
-		[Inject]
-		private void Construct(CameraSystem cameraSystem)
-		{
-			this.cameraSystem = cameraSystem;
-		}
-
-		private void Update()
-		{
-			transform.rotation = cameraSystem.Rotation;
-		}
+		[field: SerializeField] public UILockpick Lockpick { get; private set; }
 	}
 }

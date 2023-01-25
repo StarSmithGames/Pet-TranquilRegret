@@ -27,7 +27,7 @@ namespace Game.Entities
 			[Inject(Id = "Poof")] ParticalVFXPoofEffect.Factory poofEffectFactory,
 			[Inject(Id = "SmallPoof")] ParticalVFXPoofEffect.Factory smallPoofEffectFactory,
 			[Inject(Id = "StepFootPrint")] ParticalVFXFootStep.Factory footStepFactory,
-			[Inject(Id = "StepPawPrint")] ParticalVFXFootStep.Factory pawStepFactory)
+			[Inject(Id = "StepPawHorizontalPrint")] ParticalVFXFootStep.Factory pawStepFactory)
 		{
 			this.poofEffectFactory = poofEffectFactory;
 			this.smallPoofEffectFactory = smallPoofEffectFactory;

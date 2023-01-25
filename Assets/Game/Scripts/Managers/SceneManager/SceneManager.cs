@@ -96,6 +96,27 @@ namespace Game.Managers.SceneManager
 			}
 		}
 
+		public AsyncOperationHandle<LevelSettings> GetLevelSettings(int level, UnityAction<LevelSettings> callback = null)
+		{
+			string addressableSettingsKey = addresableManager.GetSceneSettingsKey($"Level_{level}");
+
+			AsyncOperationHandle<LevelSettings> handle = Addressables.LoadAssetAsync<LevelSettings>(addressableSettingsKey);
+			handle.Completed += (x) =>
+			{
+				if (x.Status == AsyncOperationStatus.Succeeded)
+				{
+					callback?.Invoke(x.Result);
+				}
+				else
+				{
+					Debug.LogError("ERROR ASSET NOT LOADED");
+					callback?.Invoke(null);
+				}
+			};
+
+			return handle;
+		}
+
 		public void SwitchScene(string sceneName, bool allow = true, UnityAction callback = null)
 		{
 			if(sceneName == "Menu")

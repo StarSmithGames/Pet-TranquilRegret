@@ -25,4 +25,11 @@ public class FloatingJoystick : Joystick
         background.gameObject.SetActive(false);
         base.OnPointerUp(eventData);
     }
+
+	private void OnDrawGizmos()
+	{
+		background.anchorMax = Vector2.zero;
+		background.anchorMin = Vector2.zero;
+		background.pivot = center;
+	}
 }

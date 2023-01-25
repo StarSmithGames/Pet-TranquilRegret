@@ -26,11 +26,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: ba574f80dda72a149b0ac84feae6d97e
-    m_Address: Assets/Game/Scenes/Levels/Level1/Level_1.asset
+    m_Address: Assets/Game/Scenes/Levels/Level_1/Level_1.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
   - m_GUID: e4e3357b97f8bca45ba9d6548d171bf7
-    m_Address: Assets/Game/Scenes/Levels/Level1/Level_1.unity
+    m_Address: Assets/Game/Scenes/Levels/Level_1/Level_1.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0
