@@ -1,3 +1,5 @@
+using Sirenix.OdinInspector;
+
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,6 +10,7 @@ namespace Game.Systems.InteractionSystem
     {
 		public event UnityAction onCollectionChanged;
 
+		[InfoBox("Required Trigger Collider", InfoMessageType.Error, VisibleIf = "CheckCollider")]
 		[SerializeField] private Settings settings;
 
 		protected List<Collider> collectionList = new List<Collider>();
@@ -58,6 +61,11 @@ namespace Game.Systems.InteractionSystem
 		protected virtual void OnCollectionChanged()
 		{
 
+		}
+
+		private bool CheckCollider()
+		{
+			return !GetComponentInChildren<Collider>()?.isTrigger ?? false;
 		}
 
 		[System.Serializable]

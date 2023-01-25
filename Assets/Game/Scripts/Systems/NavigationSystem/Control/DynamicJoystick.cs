@@ -3,8 +3,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-using static Sirenix.OdinInspector.Editor.UnityPropertyEmitter;
-
 namespace Game.Systems.NavigationSystem
 {
     public class DynamicJoystick : Joystick

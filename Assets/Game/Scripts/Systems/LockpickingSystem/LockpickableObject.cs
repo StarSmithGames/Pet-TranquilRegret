@@ -1,5 +1,3 @@
-
-
 using Game.Entities;
 using Game.Systems.InteractionSystem;
 using Game.VFX;

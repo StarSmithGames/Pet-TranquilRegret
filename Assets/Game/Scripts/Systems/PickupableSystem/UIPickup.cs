@@ -3,9 +3,11 @@ using Game.UI;
 using UnityEngine;
 using UnityEngine.UI;
 
+using Zenject;
+
 namespace Game.Systems.PickupableSystem
 {
-	public class UIPickup : WindowPopupBase
+	public class UIPickup : WindowPopupBasePoolable
 	{
 		public float FillAmount
 		{
@@ -24,6 +26,15 @@ namespace Game.Systems.PickupableSystem
 			Enable(false);
 
 			icon = (Icon.transform as RectTransform);
+
+			Button.onClick.AddListener(OnClicked);
 		}
+
+		private void OnClicked()
+		{
+			Debug.LogError("HERER");
+		}
+
+		public class Factory : PlaceholderFactory<UIPickup> { }
 	}
 }
