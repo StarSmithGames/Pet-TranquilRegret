@@ -76,7 +76,7 @@ namespace Game.Entities
 			{
 				ObjectInHands.transform.SetParent(null);
 				ObjectInHands.Enable(true);
-
+				ObjectInHands.Rigidbody.AddForce(Vector3.Lerp(Model.forward, transform.up, 0.5f) * 7f, ForceMode.Impulse);
 				ObjectInHands = null;
 
 				onObjectInHandsChanged?.Invoke(null);

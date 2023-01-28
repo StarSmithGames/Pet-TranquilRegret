@@ -85,6 +85,7 @@ MonoBehaviour:
   - {fileID: 1370307616643842326}
   settings:
     positionOffset: {x: 0, y: 1, z: 0}
+    fallMultipier: 3
 --- !u!114 &8409577164962017327
 MonoBehaviour:
   m_ObjectHideFlags: 0

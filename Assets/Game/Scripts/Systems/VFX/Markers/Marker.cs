@@ -73,6 +73,11 @@ namespace Game.VFX.Markers
 		public void Enable(bool trigger)
 		{
 			IsEnable = trigger;
+
+			if (!IsEnable)
+			{
+				DisposePointer();
+			}
 		}
 
 		private Quaternion GetIconRotation(int planeIndex)

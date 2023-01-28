@@ -23,6 +23,7 @@ namespace Game.Systems.PickupableSystem
 
 		public Vector3 PositionOffset => transform.position + settings.positionOffset;
 
+		public Rigidbody Rigidbody => rigidbody;
 		[SerializeField] protected Rigidbody rigidbody;
 		[SerializeField] protected InteractionZone interactionZone;
 		[SerializeField] protected Outlinable outlinable;
@@ -53,6 +54,14 @@ namespace Game.Systems.PickupableSystem
 			{
 				interactionZone.onEnterChanged -= OnEnterChanged;
 				interactionZone.onExitChanged -= OnExitChanged;
+			}
+		}
+
+		private void FixedUpdate()
+		{
+			if (rigidbody.velocity.y < 0)
+			{
+				rigidbody.velocity += Vector3.up * Physics.gravity.y * settings.fallMultipier * Time.fixedDeltaTime;
 			}
 		}
 
@@ -144,6 +153,7 @@ namespace Game.Systems.PickupableSystem
 		public class Settings
 		{
 			public Vector3 positionOffset;
+			public float fallMultipier = 3f;
 		}
 	}
 }
