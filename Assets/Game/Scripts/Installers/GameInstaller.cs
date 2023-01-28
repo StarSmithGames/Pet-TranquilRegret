@@ -5,6 +5,8 @@ using Game.Systems.CameraSystem;
 using Game.Systems.NavigationSystem;
 using Game.Systems.PickupableSystem;
 using Game.UI;
+using Game.VFX.Markers;
+using Game.VFX;
 
 using UnityEngine;
 
@@ -22,7 +24,7 @@ namespace Game.Installers
 		public override void InstallBindings()
 		{
 			Container.BindInstance(FindObjectOfType<CameraSystem>());
-			Container.BindInstance(subCanvas);
+			Container.BindInstance(subCanvas).NonLazy();
 
 			Container.BindFactory<UIGoal, UIGoal.Factory>()
 				.FromComponentInNewPrefab(goalPrefab)

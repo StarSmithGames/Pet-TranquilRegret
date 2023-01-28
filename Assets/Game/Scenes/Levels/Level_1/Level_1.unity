@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 13228367}
   - component: {fileID: 13228368}
+  - component: {fileID: 13228369}
   m_Layer: 0
   m_Name: DropZone
   m_TagString: Untagged
@@ -171,6 +172,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   decal: {fileID: 7696208264841537226}
   interactionZone: {fileID: 7696208264841537229}
+  marker: {fileID: 13228369}
+--- !u!114 &13228369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 13228366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca6188a14bf487849b68c2e623ca4298, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &30833513
 PrefabInstance:
   m_ObjectHideFlags: 0

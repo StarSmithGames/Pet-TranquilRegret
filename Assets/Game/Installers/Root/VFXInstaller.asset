@@ -17,3 +17,4 @@ MonoBehaviour:
   stepPawVerticalPrintEffect: {fileID: 5543319789158506421, guid: c8eb6ea2a85eb9b4a95836d71ea3bdcd, type: 3}
   poofEffect: {fileID: 7337268969511371573, guid: 5d97a74136b224b44a91ca46e670c8aa, type: 3}
   smallPoofEffect: {fileID: 3591418448674264809, guid: e1913e842bd34d44aa4b546fe0556e31, type: 3}
+  pointerUIPrefab: {fileID: 7741903393482948371, guid: 22bd46fa01ffec2478175fd0a7fcda4a, type: 3}

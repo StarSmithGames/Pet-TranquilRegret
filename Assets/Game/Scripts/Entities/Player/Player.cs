@@ -4,6 +4,7 @@ using Game.Systems.PickupableSystem;
 using Game.UI;
 
 using UnityEngine;
+using UnityEngine.Events;
 
 using Zenject;
 
@@ -51,6 +52,8 @@ namespace Game.Entities
 
 	public partial class Player
 	{
+		public event UnityAction<PickupableObject> onObjectInHandsChanged;
+
 		public bool IsHandsEmpty => ObjectInHands == null;
 		public PickupableObject ObjectInHands { get; private set; }
 
@@ -63,6 +66,8 @@ namespace Game.Entities
 			ObjectInHands.transform.forward = PlayerAvatar.BothHandsPoint.forward;
 
 			subCanvas.Drop.Show();
+
+			onObjectInHandsChanged?.Invoke(pickupable);
 		}
 
 		public void DropHandsObject()
@@ -73,6 +78,8 @@ namespace Game.Entities
 				ObjectInHands.Enable(true);
 
 				ObjectInHands = null;
+
+				onObjectInHandsChanged?.Invoke(null);
 			}
 		}
 

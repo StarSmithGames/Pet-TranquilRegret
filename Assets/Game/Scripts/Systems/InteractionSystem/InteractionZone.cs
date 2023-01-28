@@ -13,6 +13,8 @@ namespace Game.Systems.InteractionSystem
     public class InteractionZone : MonoBehaviour, IEnableable
 	{
 		public event UnityAction onCollectionChanged;
+		public event UnityAction<Collider> onEnterChanged;
+		public event UnityAction<Collider> onExitChanged;
 
 		public bool IsEnable { get; private set; } = true;
 
@@ -67,9 +69,15 @@ namespace Game.Systems.InteractionSystem
 
 		public List<Collider> GetCollection() => collectionList;
 
-		protected virtual void OnEnter(Collider other) { }
+		protected virtual void OnEnter(Collider other)
+		{
+			onEnterChanged?.Invoke(other);
+		}
 
-		protected virtual void OnExit(Collider other) { }
+		protected virtual void OnExit(Collider other)
+		{
+			onExitChanged?.Invoke(other);
+		}
 
 		protected virtual void OnCollectionChanged() { }
 

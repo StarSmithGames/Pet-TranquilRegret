@@ -1,41 +1,28 @@
-using Game.Entities;
 using Game.Systems.InteractionSystem;
-using Game.VFX;
-using System.Linq;
 
 using UnityEngine;
 
 namespace Game.Systems.LockpickingSystem
 {
-	public class LockpickableObject : MonoBehaviour
+	public class LockpickableObject : InteratableZoneObject
 	{
-		[SerializeField] protected InteractionZone interactionZone;
-		[SerializeField] protected DecalVFX decalVFX;
 		[SerializeField] protected Settings settings;
 
-		private Player lastPlayer;
-		private Player player;
 		private float t;
 		private float progress;
 
-		protected virtual void Start()
+		protected override void Start()
 		{
-			decalVFX.Enable(settings.isLocked);
+			decal.Enable(settings.isLocked);
 
 			if (settings.isLocked)
 			{
 				IdleAnimation();
 			}
 
+			interactionZone.onEnterChanged += OnEnterChanged;
+			interactionZone.onExitChanged += OnExitChanged;
 			interactionZone.onCollectionChanged += OnZoneCollectionChanged;
-		}
-
-		private void OnDestroy()
-		{
-			if(interactionZone != null)
-			{
-				interactionZone.onCollectionChanged -= OnZoneCollectionChanged;
-			}
 		}
 
 		private void Update()
@@ -67,48 +54,48 @@ namespace Game.Systems.LockpickingSystem
 
 		private void UnlockAnimation()
 		{
-			decalVFX.ScaleTo(0f);
+			decal.ScaleTo(0f);
 			player.PlayerCanvas.Lockpick.Unlock();
 		}
 
-		private void IdleAnimation()
+		#region Override
+		protected override void EnterAnimation()
 		{
-			decalVFX.StartIdleAnimation();
-		}
-
-		private void StartAnimation()
-		{
-			decalVFX.Kill();
-			decalVFX.ScaleTo(1.25f);
+			base.EnterAnimation();
 			player.PlayerCanvas.Lockpick.Show();
 		}
 
-		private void ResetAnimation()
+		protected override void ResetAnimation()
 		{
-			decalVFX.ScaleTo(1f, callback: decalVFX.StartIdleAnimation);
+			base.ResetAnimation();
 			lastPlayer.PlayerCanvas.Lockpick.Hide();
 		}
+
+		protected override void OnEnterChanged(Collider other)
+		{
+			if (!settings.isLocked) return;
+
+			base.OnEnterChanged(other);
+		}
+
+		protected override void OnExitChanged(Collider other)
+		{
+			if (!settings.isLocked) return;
+
+			base.OnExitChanged(other);
+		}
+
+		protected override void OnZoneCollectionChanged()
+		{
+			if (!settings.isLocked) return;
+
+			base.OnZoneCollectionChanged();
+		}
+		#endregion
 
 		protected virtual void OnLockChanged()
 		{
 			UnlockAnimation();
-		}
-
-		private void OnZoneCollectionChanged()
-		{
-			if (!settings.isLocked) return;
-
-			lastPlayer = player;
-			player = interactionZone.GetCollection().FirstOrDefault()?.GetComponentInParent<Player>();
-		
-			if (player != null)
-			{
-				StartAnimation();
-			}
-			else
-			{
-				ResetAnimation();
-			}
 		}
 
 		[System.Serializable]

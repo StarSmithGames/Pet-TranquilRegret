@@ -68,7 +68,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 223
+    m_Bits: 479
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -301,7 +301,7 @@ MonoBehaviour:
   brain: {fileID: 5105999991763592065}
   camers:
   - {fileID: 5105999992554466784}
-  target: {fileID: 0}
+  cameraDistance: 15
 --- !u!1 &5105999993062792910
 GameObject:
   m_ObjectHideFlags: 0

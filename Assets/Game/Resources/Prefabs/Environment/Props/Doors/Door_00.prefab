@@ -100,8 +100,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: def9497ea052d5d40bf98279d56e87f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  decal: {fileID: 7234878327278819777}
   interactionZone: {fileID: 7234878327278819782}
-  decalVFX: {fileID: 7234878327278819777}
   settings:
     isLocked: 1
     unlockTime: 2.5

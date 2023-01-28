@@ -48,17 +48,21 @@ namespace Game.VFX
 				.SetLoops(-1);
 		}
 
-		public void SetSizeFactor(float sizeFactor)
-		{
-			this.sizeFactor = sizeFactor;
-			masterProjector.size = new Vector3(originalSize.x * sizeFactor, originalSize.y * sizeFactor, 10);
-		}
-
+		#region Scale
 		public void SetScale(Vector3 size)
 		{
 			for (int i = 0; i < projectors.Count; i++)
 			{
 				projectors[i].size = size;
+			}
+		}
+
+		public void SetSizeFactor(float sizeFactor)
+		{
+			this.sizeFactor = sizeFactor;
+			for (int i = 0; i < projectors.Count; i++)
+			{
+				projectors[i].size = new Vector3(originalSize.x * sizeFactor, originalSize.y * sizeFactor, depth);
 			}
 		}
 
@@ -84,11 +88,15 @@ namespace Game.VFX
 					});
 			}
 		}
+		#endregion
 
+		#region Fade
 		public DecalVFX SetFade(float value)
 		{
-			masterProjector.fadeFactor = value;
-			Enable(masterProjector.fadeFactor != 0);
+			for (int i = 0; i < projectors.Count; i++)
+			{
+				projectors[i].fadeFactor = value;
+			}
 
 			return this;
 		}
@@ -100,7 +108,7 @@ namespace Game.VFX
 			if (end == 0)
 			{
 				DOTween
-					.To(() => masterProjector.fadeFactor, x => masterProjector.fadeFactor = x, 0f, duration)
+					.To(() => masterProjector.fadeFactor, x => SetFade(x), 0f, duration)
 					.OnComplete(() =>
 					{
 						Enable(false);
@@ -110,14 +118,16 @@ namespace Game.VFX
 			else
 			{
 				DOTween
-					.To(() => masterProjector.fadeFactor, x => masterProjector.fadeFactor = x, end, duration)
+					.To(() => masterProjector.fadeFactor, x => SetFade(x), end, duration)
 					.OnComplete(() =>
 					{
 						callback?.Invoke();
 					});
 			}
 		}
+		#endregion
 
+		#region Color
 		public void SetColor(Color color)
 		{
 			if(sharedMaterial == null)
@@ -128,7 +138,7 @@ namespace Game.VFX
 
 			sharedMaterial.color = color;
 		}
-
+		#endregion
 
 		public void Kill()
 		{

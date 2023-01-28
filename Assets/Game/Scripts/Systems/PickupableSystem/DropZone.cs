@@ -1,42 +1,74 @@
-using Game.Entities;
-using Game.Systems.InteractionSystem;
-using Game.VFX;
+using DG.Tweening;
 
-using System.Collections;
+using Game.Entities;
+using Game.Managers.CharacterManager;
+using Game.Systems.InteractionSystem;
+using Game.VFX.Markers;
+
 using System.Collections.Generic;
 using System.Linq;
 
 using UnityEngine;
 
+using Zenject;
+
 namespace Game.Systems.PickupableSystem
 {
-	public class DropZone : MonoBehaviour
+	public class DropZone : InteratableZoneObject
 	{
-		[SerializeField] private DecalVFX decal;
-		[SerializeField] private InteractionZone interactionZone;
+		[SerializeField] private Marker marker;
 
-		private Player lastPlayer;
-		private Player player;
+		private List<PickupableObject> pickupables = new List<PickupableObject>();
 
-		private void Start()
+		private CharacterManager characterManager;
+
+		[Inject]
+		private void Constrct(CharacterManager characterManager)
 		{
-			interactionZone.onCollectionChanged += OnInteractionCollectionChanged;
-
-			decal.StartIdleAnimation();
+			this.characterManager = characterManager;
 		}
 
-		private void OnDestroy()
+		protected override void Start()
 		{
-			if (interactionZone != null)
+			base.Start();
+
+			characterManager.CurrentPlayer.onObjectInHandsChanged += onObjectInPlayerHandsChanged;
+		}
+
+		private void onObjectInPlayerHandsChanged(PickupableObject pickupable)
+		{
+			marker.Enable(pickupable != null);
+		}
+
+		protected override void OnEnterChanged(Collider other)
+		{
+			base.OnEnterChanged(other);
+
+			var pickupable = other.GetComponentInParent<PickupableObject>();
+
+			if (pickupable != null)
 			{
-				interactionZone.onCollectionChanged -= OnInteractionCollectionChanged;
-			}
-		}
 
-		private void OnInteractionCollectionChanged()
-		{
-			lastPlayer = player;
-			player = interactionZone.GetCollection().FirstOrDefault()?.GetComponentInParent<Player>();
+				if (!pickupables.Contains(pickupable))
+				{
+					pickupables.Add(pickupable);
+
+					Debug.LogError("HERER");
+
+					Sequence sequence = DOTween.Sequence();
+
+					sequence
+						.AppendInterval(3f)
+						.Append(pickupable.transform.DOScale(0, 0.2f))
+						.OnComplete(() =>
+						{
+							Debug.LogError("Chpok");
+
+							pickupables.Remove(pickupable);
+							Destroy(pickupable.gameObject);
+						});
+				}
+			}
 		}
 	}
 }

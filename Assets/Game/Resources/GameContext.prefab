@@ -57,6 +57,7 @@ GameObject:
   - component: {fileID: 2802870694795667573}
   - component: {fileID: 2802870694795667572}
   - component: {fileID: 2802870694795667563}
+  - component: {fileID: 1865050009513248611}
   m_Layer: 0
   m_Name: GameContext
   m_TagString: Untagged
@@ -99,6 +100,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7ad0c571db82a07498d3444672919ea0, type: 2}
   _monoInstallers:
   - {fileID: 2802870694795667563}
+  - {fileID: 1865050009513248611}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -131,6 +133,22 @@ MonoBehaviour:
   subCanvas: {fileID: 4382914729106442935}
   goalPrefab: {fileID: 16312574267014373, guid: c1f47e87bde362e46a4e2dfa8497cefe, type: 3}
   pickupPrefab: {fileID: 8366643560980759166, guid: 3794dafaee18b054f8ff5055ca314dd5, type: 3}
+--- !u!114 &1865050009513248611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2802870694795667571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa3e935b61ed6d4fa00e0b8b4543c6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stepFootPrintEffect: {fileID: 5823451059639025679, guid: 8d7446f1c44bfb94f955d996e0c3b214, type: 3}
+  poofEffect: {fileID: 7337268969511371573, guid: 5d97a74136b224b44a91ca46e670c8aa, type: 3}
+  smallPoofEffect: {fileID: 3591418448674264809, guid: e1913e842bd34d44aa4b546fe0556e31, type: 3}
+  pointerUIPrefab: {fileID: 7741903393482948371, guid: 22bd46fa01ffec2478175fd0a7fcda4a, type: 3}
 --- !u!1 &2854987380397265322
 GameObject:
   m_ObjectHideFlags: 0
