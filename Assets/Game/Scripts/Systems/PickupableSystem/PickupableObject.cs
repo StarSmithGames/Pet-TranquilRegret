@@ -2,6 +2,7 @@ using EPOOutline;
 
 using Game.Entities;
 using Game.Systems.InteractionSystem;
+using Game.UI;
 
 using Sirenix.OdinInspector;
 
@@ -14,8 +15,12 @@ using Zenject;
 
 namespace Game.Systems.PickupableSystem
 {
-	public class PickupableObject : MonoBehaviour
+	public class PickupableObject : MonoBehaviour, IEnableable
 	{
+		public bool IsEnable { get; private set; } = true;
+
+		public bool IsInteractable { get; private set; } = true;
+
 		public Vector3 PositionOffset => transform.position + settings.positionOffset;
 
 		[SerializeField] protected Rigidbody rigidbody;
@@ -38,32 +43,41 @@ namespace Game.Systems.PickupableSystem
 
 		private void Start()
 		{
-			interactionZone.onCollectionChanged += OnZoneCollectionChanged;
+			interactionZone.onEnterChanged += OnEnterChanged;
+			interactionZone.onExitChanged += OnExitChanged;
 		}
 
 		private void OnDestroy()
 		{
 			if (interactionZone != null)
 			{
-				interactionZone.onCollectionChanged -= OnZoneCollectionChanged;
+				interactionZone.onEnterChanged -= OnEnterChanged;
+				interactionZone.onExitChanged -= OnExitChanged;
 			}
 		}
 
 		public void Enable(bool trigger)
 		{
-			interactionZone.Enable(trigger);
 			colliders.ForEach((x) => x.enabled = trigger);
 			rigidbody.isKinematic = !trigger;
 			rigidbody.useGravity = trigger;
+
+			IsEnable = trigger;
 		}
 
-
-		private void StartAnimation()
+		public void EnableInteract(bool trigger)
 		{
-			//decalVFX.Kill();
-			//decalVFX.ScaleTo(1.25f);
-			//itemCanvas.Pickup.Show();
+			interactionZone.Enable(trigger);
+			IsInteractable = trigger;
+		}
 
+		private void PickupAnimation()
+		{
+			
+		}
+
+		private void EnterAnimation()
+		{
 			currentPickup = pickupFactory.Create();
 			currentPickup.onClicked += OnPickuped;
 			currentPickup.Show(this);
@@ -71,9 +85,6 @@ namespace Game.Systems.PickupableSystem
 
 		private void ResetAnimation()
 		{
-			//decalVFX.ScaleTo(1f, callback: decalVFX.StartIdleAnimation);
-			//itemCanvas.Pickup.Hide();
-
 			if (currentPickup != null)
 			{
 				currentPickup.onClicked -= OnPickuped;
@@ -86,21 +97,34 @@ namespace Game.Systems.PickupableSystem
 		{
 			Enable(false);
 
+			PickupAnimation();
+
 			lastPlayer.Pickup(this);
 		}
 	
-		private void OnZoneCollectionChanged()
+		protected virtual void OnEnterChanged(Collider other)
 		{
-			lastPlayer = player;
-			player = interactionZone.GetCollection().FirstOrDefault()?.GetComponentInParent<Player>();
+			var p = other.GetComponentInParent<Player>();
 
-			if (player != null)
+			if (p != null)
 			{
-				StartAnimation();
+				player = p;
+				lastPlayer = player;
+
+				EnterAnimation();
 			}
-			else
+		}
+
+		protected virtual void OnExitChanged(Collider other)
+		{
+			var p = other.GetComponentInParent<Player>();
+
+			if (p == player)
 			{
 				ResetAnimation();
+
+				lastPlayer = player;
+				player = null;
 			}
 		}
 

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Game.Systems.InteractionSystem
 {
-	public class InteratableZoneObject : MonoBehaviour
+	public class InteractableZoneObject : MonoBehaviour
 	{
 		[SerializeField] protected DecalVFX decal;
 		[SerializeField] protected InteractionZone interactionZone;

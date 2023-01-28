@@ -14,7 +14,7 @@ using Zenject;
 
 namespace Game.Systems.PickupableSystem
 {
-	public class DropZone : InteratableZoneObject
+	public class DropZone : InteractableZoneObject
 	{
 		[SerializeField] private Marker marker;
 
@@ -51,14 +51,13 @@ namespace Game.Systems.PickupableSystem
 
 				if (!pickupables.Contains(pickupable))
 				{
+					pickupable.EnableInteract(false);
 					pickupables.Add(pickupable);
-
-					Debug.LogError("HERER");
 
 					Sequence sequence = DOTween.Sequence();
 
 					sequence
-						.AppendInterval(3f)
+						.AppendInterval(2f)
 						.Append(pickupable.transform.DOScale(0, 0.2f))
 						.OnComplete(() =>
 						{
