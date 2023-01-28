@@ -3,6 +3,7 @@ using Game.Managers.CharacterManager;
 using Game.Managers.LevelManager;
 using Game.Systems.CameraSystem;
 using Game.Systems.NavigationSystem;
+using Game.Systems.PickupableSystem;
 using Game.UI;
 
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace Game.Installers
 		public Joystick joystick;
 		[Header("UI")]
 		public UIGoal goalPrefab;
+		public UIPickup pickupPrefab;
 
 		public override void InstallBindings()
 		{
@@ -27,6 +29,12 @@ namespace Game.Installers
 			Container.BindFactory<UIGoal, UIGoal.Factory>()
 				.FromComponentInNewPrefab(goalPrefab)
 				.AsSingle();
+
+			Container.BindFactory<UIPickup, UIPickup.Factory>()
+				.FromMonoPoolableMemoryPool(
+				(x) => x.WithInitialSize(1)
+				.FromComponentInNewPrefab(pickupPrefab)
+				.UnderTransform(subCanvas.VFX));
 
 			LevelManagerInstaller.Install(Container);
 			CharacterManagerInstaller.Install(Container);

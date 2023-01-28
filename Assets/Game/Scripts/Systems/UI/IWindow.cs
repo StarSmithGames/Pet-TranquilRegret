@@ -1,5 +1,6 @@
 using DG.Tweening;
 using Sirenix.OdinInspector;
+
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,12 +8,17 @@ using Zenject;
 
 namespace Game.UI
 {
-	public interface IShowable
+	public interface IEnableable
+	{
+		bool IsEnable { get; }
+		void Enable(bool trigger);
+	}
+
+	public interface IShowable : IEnableable
 	{
 		bool IsShowing { get; }
 		bool IsInProcess { get; }
 
-		void Enable(bool trigger);
 		void Show(UnityAction callback = null);
 		void Hide(UnityAction callback = null);
 	}
@@ -21,6 +27,7 @@ namespace Game.UI
 
 	public abstract class WindowBase : MonoBehaviour, IWindow
 	{
+		public bool IsEnable { get; protected set; } = true;
 		public bool IsShowing { get; protected set; }
 		public bool IsInProcess { get; protected set; }
 
@@ -66,6 +73,7 @@ namespace Game.UI
 		{
 			CanvasGroup.Enable(trigger);
 			IsShowing = trigger;
+			IsEnable = trigger;
 		}
 
 		[Button(DirtyOnClick = true)]

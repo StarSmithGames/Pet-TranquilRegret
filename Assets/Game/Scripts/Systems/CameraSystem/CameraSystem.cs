@@ -24,6 +24,8 @@ namespace Game.Systems.CameraSystem
 		public float EulerAngleY => outputCamera.eulerAngles.y;
 		public Quaternion Rotation => outputCamera.rotation;
 
+		public Camera Camera => brain.OutputCamera;
+
 		[SerializeField] private CinemachineBrain brain;
 		[SerializeField] private List<CinemachineVirtualCamera> camers = new List<CinemachineVirtualCamera>();
 		[SerializeField] private float cameraDistance = 15f;
@@ -69,7 +71,7 @@ namespace Game.Systems.CameraSystem
 
 			outputCamera = brain.OutputCamera.transform;
 
-			SetTarget(characterManager.CurrentPlayer.CameraFollowPivot, characterManager.CurrentPlayer.CameraLookAtPivot);
+			SetTarget(characterManager.CurrentPlayer.PlayerAvatar.CameraFollowPivot, characterManager.CurrentPlayer.PlayerAvatar.CameraLookAtPivot);
 		}
 
 		private void OnDestroy()
@@ -111,7 +113,7 @@ namespace Game.Systems.CameraSystem
 
 		private void OnPlayerChanged(SignalPlayerChanged signal)
 		{
-			SetTarget(signal.player?.CameraFollowPivot, signal.player?.CameraLookAtPivot);
+			SetTarget(signal.player?.PlayerAvatar.CameraFollowPivot, signal.player?.PlayerAvatar.CameraLookAtPivot);
 		}
 	}
 }

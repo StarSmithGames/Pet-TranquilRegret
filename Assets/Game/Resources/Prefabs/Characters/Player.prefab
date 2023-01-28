@@ -246,6 +246,37 @@ MonoBehaviour:
   player: {fileID: 7834858090861041472}
   stepDelta: 0.7
   stepGap: 0.25
+--- !u!1 &6041993594842295319
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6938332618890771977}
+  m_Layer: 7
+  m_Name: HandsPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6938332618890771977
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6041993594842295319}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7270360303451774335}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6957612298334312421
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,12 +405,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ab84dec8e24eaa44afca514cb5075f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 3410461041638132046}
-  cameraFollowPivot: {fileID: 7834858090112434423}
-  cameraLookAtPivot: {fileID: 5013008285101183381}
-  playerVFX: {fileID: 1829516488092622016}
-  controller: {fileID: 3619111434604853016}
-  playerCanvas: {fileID: 8025597471232736764}
+  <Model>k__BackingField: {fileID: 3410461041638132046}
+  <PlayerVFX>k__BackingField: {fileID: 1829516488092622016}
+  <PlayerAvatar>k__BackingField: {fileID: 759182227161381909}
+  <Controller>k__BackingField: {fileID: 3619111434604853016}
+  <PlayerCanvas>k__BackingField: {fileID: 8025597471232736764}
 --- !u!114 &3619111434604853016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,6 +446,7 @@ GameObject:
   - component: {fileID: 8407849907146712592}
   - component: {fileID: 6001708101480682203}
   - component: {fileID: 8912561935298761583}
+  - component: {fileID: 759182227161381909}
   m_Layer: 7
   m_Name: Fox
   m_TagString: Untagged
@@ -434,7 +465,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 1.1, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6938332618890771977}
   m_Father: {fileID: 3410461041638132046}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -514,6 +546,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 034bc47afcbf5e141a58d5c20b7808e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &759182227161381909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8047460300693718981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 650085439b3f64141ab8b5eb12f484ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <CameraFollowPivot>k__BackingField: {fileID: 7834858090112434423}
+  <CameraLookAtPivot>k__BackingField: {fileID: 5013008285101183381}
+  <LeftHand>k__BackingField: {fileID: 0}
+  <LeftRightHand>k__BackingField: {fileID: 0}
+  <BothHandsPoint>k__BackingField: {fileID: 6938332618890771977}
 --- !u!1001 &2829525920331071231
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -620,10 +669,6 @@ PrefabInstance:
     - target: {fileID: 7285937656478143652, guid: ec0a66ffaeb0b0d46995e4bff8dfedfb, type: 3}
       propertyPath: m_BlocksRaycasts
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7308216516081135173, guid: ec0a66ffaeb0b0d46995e4bff8dfedfb, type: 3}
-      propertyPath: m_PresetInfoIsWorld
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec0a66ffaeb0b0d46995e4bff8dfedfb, type: 3}

@@ -1,5 +1,6 @@
 using Game.Systems.InteractionSystem;
 using Game.Systems.NavigationSystem;
+using Game.Systems.PickupableSystem;
 
 using UnityEngine;
 
@@ -18,25 +19,14 @@ namespace Game.Entities
 	{
 		public Effects Effects { get; private set; }
 
-
-		public Transform Model => model;
-		[SerializeField] private Transform model;
-
-		public Transform CameraFollowPivot => cameraFollowPivot;
-		[SerializeField] private Transform cameraFollowPivot;
-
-		public Transform CameraLookAtPivot => cameraLookAtPivot;
-		[SerializeField] private Transform cameraLookAtPivot;
-
-		public PlayerVFX PlayerVFX => playerVFX;
-		[SerializeField] private PlayerVFX playerVFX;
-
-		public Systems.NavigationSystem.CharacterController Controller => controller;
-		[SerializeField] private Systems.NavigationSystem.CharacterController controller;
-
-		public PlayerCanvas PlayerCanvas => playerCanvas;
-
-		[SerializeField] private PlayerCanvas playerCanvas;
+		[field: SerializeField] public Transform Model { get; private set; }
+		[field: Space]
+		[field: SerializeField] public PlayerVFX PlayerVFX { get; private set; }
+		[field: SerializeField] public PlayerAvatar PlayerAvatar { get; private set; }
+		[field: Space]
+		[field: SerializeField] public Systems.NavigationSystem.CharacterController Controller { get; private set; }
+		[field: Space]
+		[field: SerializeField] public PlayerCanvas PlayerCanvas { get; private set; }
 
 		private GroundImplementation groundImplementation;
 
@@ -48,19 +38,9 @@ namespace Game.Entities
 			Effects = new Effects(this);
 		}
 
-		private void OnDrawGizmos()
+		public void Pickup(PickupableObject pickupable)
 		{
-			if (cameraLookAtPivot != null)
-			{
-				Gizmos.color = Color.red;
-				Gizmos.DrawSphere(cameraLookAtPivot.position, 0.2f);
-			}
 
-			if (cameraFollowPivot != null)
-			{
-				Gizmos.color = Color.blue;
-				Gizmos.DrawSphere(cameraFollowPivot.position, 0.2f);
-			}
 		}
 
 		public class Factory : PlaceholderFactory<Player> { }

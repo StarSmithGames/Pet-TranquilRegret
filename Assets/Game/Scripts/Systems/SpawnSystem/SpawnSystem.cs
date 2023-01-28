@@ -51,8 +51,8 @@ namespace Game.Systems.SpawnSystem
 			var point = points.RandomItem();
 			player.transform.position = point.GetRootPosition();
 			player.Model.rotation = point.GetModelRotation();
-			player.CameraFollowPivot.position = point.GetFollowPosition();
-			player.CameraLookAtPivot.position = point.GetLookAtPosition();
+			player.PlayerAvatar.CameraFollowPivot.position = point.GetFollowPosition();
+			player.PlayerAvatar.CameraLookAtPivot.position = point.GetLookAtPosition();
 
 			cameraSystem.SetTracketOffsetDirection(point.GetTracketObjectOffset());
 
