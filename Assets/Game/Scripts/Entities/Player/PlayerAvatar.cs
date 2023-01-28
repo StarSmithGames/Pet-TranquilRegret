@@ -38,6 +38,8 @@ namespace Game.Entities
 			Gizmos.color = Color.green;
 			Gizmos.DrawSphere(BothHandsPoint.position, 0.05f);
 			Handles.Label(BothHandsPoint.position + Vector3.down * 0.1f, "Hands", style);
+			Gizmos.color = Color.blue;
+			DrawArrow.ForGizmo(BothHandsPoint.position, BothHandsPoint.forward * 0.5f);
 		}
 #endif
 	}

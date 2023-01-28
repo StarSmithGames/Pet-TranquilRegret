@@ -10,7 +10,7 @@ using UnityEngine.UI;
 
 using Zenject;
 
-namespace Game.HUD
+namespace Game.HUD.Gameplay
 {
 	public class UITimer : MonoBehaviour
 	{

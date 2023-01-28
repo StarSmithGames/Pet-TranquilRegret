@@ -7,7 +7,7 @@ using UnityEngine.WSA;
 
 using Zenject;
 
-namespace Game.HUD
+namespace Game.HUD.Gameplay
 {
 	public class UIGoal : PoolableObject
 	{

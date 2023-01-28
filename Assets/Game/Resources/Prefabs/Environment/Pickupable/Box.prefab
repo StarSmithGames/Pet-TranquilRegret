@@ -77,8 +77,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c94391c6b5f20cb4e93bec771daec587, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigidbody: {fileID: 8409577164962017325}
   interactionZone: {fileID: 8409577164962017327}
   outlinable: {fileID: 1370307616643842322}
+  colliders:
+  - {fileID: 8409577164962017326}
+  - {fileID: 1370307616643842326}
   settings:
     positionOffset: {x: 0, y: 1, z: 0}
 --- !u!114 &8409577164962017327
@@ -209,7 +213,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineTargets:
-  - IsVisible: 0
+  - IsVisible: 1
     CutoutMask: 8
     edgeDilateAmount: 5
     frontEdgeDilateAmount: 5

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Systems.NavigationSystem
 {
-	public class FixedJoystick : Joystick
+	public class FixedJoystick : UIJoystick
 	{
 
 	}

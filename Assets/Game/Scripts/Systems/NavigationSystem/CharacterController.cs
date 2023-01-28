@@ -1,4 +1,5 @@
 using Game.Entities;
+using Game.UI;
 
 using UnityEngine;
 using UnityEngine.Events;
@@ -30,13 +31,13 @@ namespace Game.Systems.NavigationSystem
 		private float smoothVelocity;
 
 
-		private Joystick joystick;
+		private UIGameCanvas subCanvas;
 		private CameraSystem.CameraSystem cameraSystem;
 
 		[Inject]
-		private void Construct(Joystick joystick, CameraSystem.CameraSystem cameraSystem)
+		private void Construct(UISubCanvas subCanvas, CameraSystem.CameraSystem cameraSystem)
 		{
-			this.joystick = joystick;
+			this.subCanvas = subCanvas as UIGameCanvas;
 			this.cameraSystem = cameraSystem;
 		}
 
@@ -104,7 +105,7 @@ namespace Game.Systems.NavigationSystem
 
 		private Vector3 GetDirection()
 		{
-			return new Vector3(joystick.Horizontal, 0, joystick.Vertical);
+			return new Vector3(subCanvas.Joystick.Horizontal, 0, subCanvas.Joystick.Vertical);
 		}
 
 		private Vector3 GetRelativeToCamera(Vector3 direction)

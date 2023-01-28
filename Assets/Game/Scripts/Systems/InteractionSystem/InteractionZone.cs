@@ -14,7 +14,7 @@ namespace Game.Systems.InteractionSystem
 	{
 		public event UnityAction onCollectionChanged;
 
-		public bool IsEnable { get; private set; }
+		public bool IsEnable { get; private set; } = true;
 
 		[InfoBox("Required Trigger Collider", InfoMessageType.Error, VisibleIf = "CheckCollider")]
 		[SerializeField] private Settings settings;
@@ -79,7 +79,7 @@ namespace Game.Systems.InteractionSystem
 		}
 
 #if UNITY_EDITOR
-		private void OnDrawGizmos()
+		private void OnDrawGizmosSelected()
 		{
 			if (CheckCollider()) return;
 

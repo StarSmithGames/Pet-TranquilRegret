@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class FloatingJoystick : Joystick
+public class FloatingJoystick : UIJoystick
 {
     protected override void Start()
     {

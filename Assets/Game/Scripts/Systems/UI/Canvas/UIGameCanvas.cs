@@ -1,6 +1,6 @@
-using Game.HUD;
+using Game.HUD.Gameplay;
 using Game.Managers.LevelManager;
-using Game.Managers.SceneManager;
+using Game.Systems.NavigationSystem;
 
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,11 @@ namespace Game.UI
 {
     public class UIGameCanvas : UISubCanvas
     {
-        [field: SerializeField] public Transform GoalContent { get; private set; }
+		[field: SerializeField] public Transform GoalContent { get; private set; }
+		[field: Header("Control")]
+		[field: SerializeField] public UIJoystick Joystick { get; private set; }
+		[field: SerializeField] public UIDropButton Drop { get; private set; }
+
 
 		private List<UIGoal> goals = new List<UIGoal>();
 

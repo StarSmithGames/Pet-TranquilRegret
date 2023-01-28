@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4042790298525675387}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0.25152636, y: 0.11705582, z: -0.9399986}
-  m_LocalScale: {x: 1, y: 1, z: 0.22227164}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -47,7 +47,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b694a0a65f9c544bc313c39281849f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projector: {fileID: 4042790298525675364}
+  masterProjector: {fileID: 4042790298525675364}
+  projectors:
+  - {fileID: 4042790298525675364}
+  depth: 10
+  size: {x: 1, y: 1}
 --- !u!114 &4042790298525675364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,7 +73,7 @@ MonoBehaviour:
   m_UVBias: {x: 0, y: 0}
   m_ScaleMode: 0
   m_Offset: {x: 0, y: 0, z: 0.5}
-  m_Size: {x: 1.5, y: 1.5, z: 1}
+  m_Size: {x: 1.5, y: 1.5, z: 10}
   m_FadeFactor: 1
 --- !u!114 &4042790298525675367
 MonoBehaviour:

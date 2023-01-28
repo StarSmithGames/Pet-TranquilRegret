@@ -2,6 +2,10 @@ using EPOOutline;
 
 using Game.Entities;
 using Game.Systems.InteractionSystem;
+
+using Sirenix.OdinInspector;
+
+using System.Collections.Generic;
 using System.Linq;
 
 using UnityEngine;
@@ -14,8 +18,10 @@ namespace Game.Systems.PickupableSystem
 	{
 		public Vector3 PositionOffset => transform.position + settings.positionOffset;
 
+		[SerializeField] protected Rigidbody rigidbody;
 		[SerializeField] protected InteractionZone interactionZone;
 		[SerializeField] protected Outlinable outlinable;
+		[SerializeField] protected List<Collider> colliders = new List<Collider>();
 		[SerializeField] protected Settings settings;
 
 		private Player lastPlayer;
@@ -43,6 +49,15 @@ namespace Game.Systems.PickupableSystem
 			}
 		}
 
+		public void Enable(bool trigger)
+		{
+			interactionZone.Enable(trigger);
+			colliders.ForEach((x) => x.enabled = trigger);
+			rigidbody.isKinematic = !trigger;
+			rigidbody.useGravity = trigger;
+		}
+
+
 		private void StartAnimation()
 		{
 			//decalVFX.Kill();
@@ -69,15 +84,11 @@ namespace Game.Systems.PickupableSystem
 
 		private void OnPickuped()
 		{
-			interactionZone.Enable(false);
-			player.Pickup(this);
-		}
+			Enable(false);
 
-		private void OnDropped()
-		{
-			interactionZone.Enable(true);
+			lastPlayer.Pickup(this);
 		}
-
+	
 		private void OnZoneCollectionChanged()
 		{
 			lastPlayer = player;
@@ -91,6 +102,12 @@ namespace Game.Systems.PickupableSystem
 			{
 				ResetAnimation();
 			}
+		}
+
+		[Button(DirtyOnClick = true)]
+		private void FillColliders()
+		{
+			colliders = GetComponentsInChildren<Collider>().ToList();
 		}
 
 		private void OnDrawGizmos()
