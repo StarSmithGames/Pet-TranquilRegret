@@ -17,14 +17,11 @@ namespace Game.Entities
 		Systems.NavigationSystem.CharacterController Controller { get; }
 
 		PlayerSheet Sheet { get; }
-
-		EffectConverter EffectConverter { get; }
 	}
 
 	public partial class Player : MonoBehaviour, ICharacter
 	{
 		public PlayerSheet Sheet { get; private set; }
-		public EffectConverter EffectConverter { get; private set; }
 
 		[field: SerializeField] public Transform Model { get; private set; }
 		[field: Space]
@@ -40,14 +37,12 @@ namespace Game.Entities
 
 		[Inject]
 		private void Construct(UISubCanvas subCanvas,
-			GroudImplementationFactory groudImplementationFactory,
-			EffectConverter effectConverter)
+			GroudImplementationFactory groudImplementationFactory)
 		{
 			this.subCanvas = subCanvas as UIGameCanvas;
 			groundImplementation = groudImplementationFactory.Create(this);
 
 			Sheet = new PlayerSheet(this);
-			EffectConverter = effectConverter;
 		}
 
 		private void Start()
@@ -84,7 +79,7 @@ namespace Game.Entities
 			{
 				ObjectInHands.transform.SetParent(null);
 				ObjectInHands.Enable(true);
-				ObjectInHands.Rigidbody.AddForce(Vector3.Lerp(Model.forward, transform.up, 0.5f) * 7f, ForceMode.Impulse);
+				ObjectInHands.Rigidbody.AddForce(Vector3.Lerp(Model.forward, transform.up, 0.5f) * Sheet.ThrowImpulse.TotalValue, ForceMode.Impulse);
 				ObjectInHands = null;
 
 				onObjectInHandsChanged?.Invoke(null);
@@ -103,6 +98,7 @@ namespace Game.Entities
 	{
 		public MoveSpeed MoveSpeed { get; private set; }
 		public JumpImpulse JumpImpulse { get; private set; }
+		public ThrowImpulse ThrowImpulse { get; private set; }
 
 		public Effects Effects { get; private set; }
 
@@ -110,6 +106,7 @@ namespace Game.Entities
 		{
 			MoveSpeed = new MoveSpeed(7.5f);
 			JumpImpulse = new JumpImpulse(5);
+			ThrowImpulse = new ThrowImpulse(7f);
 
 			Effects = new Effects(character);
 		}

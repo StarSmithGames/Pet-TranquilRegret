@@ -1,12 +1,11 @@
 using Game.Entities;
 using Game.VFX;
-using System.Linq;
 
 using UnityEngine;
 
 namespace Game.Systems.InteractionSystem
 {
-	public class InteractableZoneObject : MonoBehaviour
+	public class InteractableObject : MonoBehaviour
 	{
 		[SerializeField] protected DecalVFX decal;
 		[SerializeField] protected InteractionZone interactionZone;

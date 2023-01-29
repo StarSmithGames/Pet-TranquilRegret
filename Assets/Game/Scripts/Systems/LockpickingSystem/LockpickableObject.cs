@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Systems.LockpickingSystem
 {
-	public class LockpickableObject : InteractableZoneObject
+	public class LockpickableObject : InteractableObject
 	{
 		[SerializeField] protected Settings settings;
 

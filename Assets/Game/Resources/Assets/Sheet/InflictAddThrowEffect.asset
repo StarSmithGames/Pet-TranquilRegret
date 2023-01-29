@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50611254e08a8e342889cb919bea728d, type: 3}
+  m_Name: InflictAddThrowEffect
+  m_EditorClassIdentifier: 
+  information:
+    portrait: {fileID: 0}
+    isIconSimple: 1
+    name: 
+    isNameId: 1
+    description: 
+    isDescriptionId: 1
+  enchantments:
+  - rid: 6879299672968790016
+  references:
+    version: 2
+    RefIds:
+    - rid: 6879299672968790016
+      type: {class: AddThrowImpulse, ns: Game.Systems.SheetSystem.Effects, asm: Assembly-CSharp}
+      data:
+        add: -5

@@ -139,7 +139,7 @@ namespace Game.Systems.NavigationSystem
 
 		private Vector3 GetJumpImpulse()
 		{
-			return new Vector3(0, 5, 0);
+			return new Vector3(0, player.Sheet.JumpImpulse.TotalValue, 0);
 		}
 
 		private void OnGroundedChanged()

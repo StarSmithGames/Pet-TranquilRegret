@@ -1,10 +1,6 @@
 using Game.Entities;
 using Game.Systems.SheetSystem.Effects;
-
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 
 using Zenject;
 
@@ -12,24 +8,22 @@ namespace Game.Systems.SheetSystem
 {
 	public class EffectConverter
 	{
-		private ICharacter character;
 		private EffectFactory effectFactory;
 
-		public EffectConverter(ICharacter character, EffectFactory effectFactory)
+		public EffectConverter(EffectFactory effectFactory)
 		{
-			this.character = character;
 			this.effectFactory = effectFactory;
 		}
 
 		public IEffect Convert(EffectData data)
 		{
-			return effectFactory.Create(data, character);
+			return effectFactory.Create(data);
 		}
 	}
 
-	public sealed class EffectFactory : PlaceholderFactory<EffectData, ICharacter, IEffect> { }
+	public sealed class EffectFactory : PlaceholderFactory<EffectData, IEffect> { }
 
-	public sealed class CustomEffectFactory : IFactory<EffectData, ICharacter, IEffect>
+	public sealed class CustomEffectFactory : IFactory<EffectData, IEffect>
 	{
 		//private InstantEffect.Factory instantFactory;
 		//private ProcessEffect.Factory processFactory;
@@ -42,7 +36,7 @@ namespace Game.Systems.SheetSystem
 			this.infictFactory = infictFactory;
 		}
 
-		public IEffect Create(EffectData data, ICharacter character)
+		public IEffect Create(EffectData data)
 		{
 			//if (data is InstantEffectData instantData)
 			//{
@@ -54,7 +48,7 @@ namespace Game.Systems.SheetSystem
 			//}
 			if (data is InflictEffectData inflictData)
 			{
-				return infictFactory.Create(inflictData, character);
+				return infictFactory.Create(inflictData);
 			}
 
 			throw new NotImplementedException();

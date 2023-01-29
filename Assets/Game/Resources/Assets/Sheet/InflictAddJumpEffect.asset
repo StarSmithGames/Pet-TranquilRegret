@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 50611254e08a8e342889cb919bea728d, type: 3}
-  m_Name: InflictEffect
+  m_Name: InflictAddJumpEffect
   m_EditorClassIdentifier: 
   information:
     portrait: {fileID: 0}

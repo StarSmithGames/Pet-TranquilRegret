@@ -11,6 +11,7 @@ using Game.VFX;
 using UnityEngine;
 
 using Zenject;
+using Game.Systems.SheetSystem.Effects;
 
 namespace Game.Installers
 {
@@ -38,6 +39,7 @@ namespace Game.Installers
 
 			LevelManagerInstaller.Install(Container);
 			CharacterManagerInstaller.Install(Container);
+			EffectSystemInstaller.Install(Container);
 		}
 	}
 }

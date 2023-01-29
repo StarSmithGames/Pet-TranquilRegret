@@ -10,9 +10,11 @@ namespace Game.Entities
 {
 	public class PlayerInstaller : MonoInstaller<PlayerInstaller>
 	{
+		public Player player;
+
 		public override void InstallBindings()
 		{
-			Container.BindInterfacesAndSelfTo<EffectConverter>().AsSingle();
+			Container.Bind<ICharacter>().FromInstance(player);
 		}
 	}
 }

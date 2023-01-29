@@ -49,15 +49,7 @@ MonoBehaviour:
     layer:
       serializedVersion: 2
       m_Bits: 128
-  effect:
-    rid: 6879299295363203072
-  references:
-    version: 2
-    RefIds:
-    - rid: 6879299295363203072
-      type: {class: IncreaseJumpImpulse, ns: Game.Systems.InteractionSystem, asm: Assembly-CSharp}
-      data:
-        jumpImpulse: {x: 0, y: 7, z: 0}
+  data: {fileID: 11400000, guid: d998ddd7b787b2f46bc64e65b587abcc, type: 2}
 --- !u!136 &4417598406666540297
 CapsuleCollider:
   m_ObjectHideFlags: 0

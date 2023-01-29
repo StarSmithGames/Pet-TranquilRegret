@@ -10,12 +10,14 @@ namespace Game.Systems.SheetSystem.Effects
 		{
 			//Container.BindFactory<InstantEffectData, ISheet, InstantEffect, InstantEffect.Factory>().NonLazy();
 			//Container.BindFactory<PersistentEffectData, ISheet, ProcessEffect, ProcessEffect.Factory>().NonLazy();
-			Container.BindFactory<InflictEffectData, ICharacter, InflictEffect, InflictEffect.Factory>().NonLazy();
+			Container.BindFactory<InflictEffectData, InflictEffect, InflictEffect.Factory>().NonLazy();
 
 			Container
-				.BindFactory<EffectData, ICharacter, IEffect, EffectFactory>()
+				.BindFactory<EffectData, IEffect, EffectFactory>()
 				.FromFactory<CustomEffectFactory>()
 				.NonLazy();
+
+			Container.BindInterfacesAndSelfTo<EffectConverter>().AsSingle();
 		}
 	}
 }

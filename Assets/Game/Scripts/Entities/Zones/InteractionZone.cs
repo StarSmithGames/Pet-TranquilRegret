@@ -8,7 +8,7 @@ using UnityEngine.Events;
 using UnityEditor;
 #endif
 
-namespace Game.Systems.InteractionSystem
+namespace Game.Entities
 {
     public class InteractionZone : MonoBehaviour, IEnableable
 	{

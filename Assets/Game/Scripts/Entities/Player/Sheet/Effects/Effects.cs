@@ -1,5 +1,4 @@
 ﻿using Game.Entities;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Events;
@@ -11,17 +10,25 @@ namespace Game.Systems.SheetSystem.Effects
 	public class Effects : Registrator<IEffect>
 	{
 		private ICharacter character;
-		private EffectFactory effectFactory;
 
 		public Effects(ICharacter character)
 		{
 			this.character = character;
-			this.effectFactory = effectFactory;
+		}
+
+		protected override void OnRegistrated(IEffect effect)
+		{
+			effect.Activate(character);
+		}
+
+		protected override void OnUnRegistrated(IEffect effect)
+		{
+			effect.Deactivate();
 		}
 	}
 
 	#region Effects
-	public interface IEffect : IActivation
+	public interface IEffect : IActivation<ICharacter>
 	{
 		public event UnityAction<IEffect> onActivationChanged;
 
@@ -36,7 +43,7 @@ namespace Game.Systems.SheetSystem.Effects
 
 		public virtual EffectData Data { get; private set; }
 
-		public virtual void Activate()
+		public virtual void Activate(ICharacter character)
 		{
 			IsActive = true;
 
@@ -58,21 +65,24 @@ namespace Game.Systems.SheetSystem.Effects
 		public override EffectData Data => data;
 		private InflictEffectData data;
 
-		public InflictEffect(InflictEffectData data, ICharacter character)
+		public InflictEffect(InflictEffectData data)
 		{
 			this.data = data;
-
-			enchantments = data.enchantments.Select((x) => x.GetEnchantment(character)).ToList();
 		}
 
-		public override void Activate()
+		public override void Activate(ICharacter character)
 		{
-			base.Activate();
+			if(enchantments == null)
+			{
+				enchantments = data.enchantments.Select((x) => x.GetEnchantment(character)).ToList();
+			}
 
 			for (int i = 0; i < enchantments.Count; i++)
 			{
 				enchantments[i].Activate();
 			}
+
+			base.Activate(character);
 		}
 
 		public override void Deactivate()
@@ -85,8 +95,7 @@ namespace Game.Systems.SheetSystem.Effects
 			base.Deactivate();
 		}
 
-		public class Factory : PlaceholderFactory<InflictEffectData, ICharacter, InflictEffect> { }
+		public class Factory : PlaceholderFactory<InflictEffectData, InflictEffect> { }
 	}
 	#endregion
-
 }

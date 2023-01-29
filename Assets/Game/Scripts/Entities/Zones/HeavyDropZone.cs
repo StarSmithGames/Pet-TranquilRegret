@@ -1,20 +1,17 @@
 using DG.Tweening;
 
-using Game.Entities;
 using Game.Managers.CharacterManager;
-using Game.Systems.InteractionSystem;
+using Game.Systems.PickupableSystem;
 using Game.VFX.Markers;
 
 using System.Collections.Generic;
-using System.Linq;
-
 using UnityEngine;
 
 using Zenject;
 
-namespace Game.Systems.PickupableSystem
+namespace Game.Entities
 {
-	public class DropZone : InteractableZoneObject
+	public class HeavyDropZone : DropZone
 	{
 		[SerializeField] private Marker marker;
 
@@ -32,7 +29,7 @@ namespace Game.Systems.PickupableSystem
 		{
 			base.Start();
 
-			characterManager.CurrentPlayer.onObjectInHandsChanged += onObjectInPlayerHandsChanged;
+			characterManager.CurrentPlayer.onObjectInHandsChanged += OnObjectInPlayerHandsChanged;
 		}
 
 		protected override void ResetAnimation()
@@ -47,10 +44,10 @@ namespace Game.Systems.PickupableSystem
 			}
 		}
 
-		private void onObjectInPlayerHandsChanged(PickupableObject pickupable)
+		private void OnObjectInPlayerHandsChanged(PickupableObject pickupable)
 		{
 			marker.Enable(pickupable != null);
-			if(pickupable != null)
+			if (pickupable != null)
 			{
 				IdleAnimation();
 			}
@@ -62,24 +59,12 @@ namespace Game.Systems.PickupableSystem
 
 		protected override void OnEnterChanged(Collider other)
 		{
-			var p = other.GetComponentInParent<Player>();
-
-			if (p != null)
-			{
-				player = p;
-				lastPlayer = player;
-
-				if (!p.IsHandsEmpty)
-				{
-					EnterAnimation();
-				}
-			}
+			base.OnEnterChanged(other);
 
 			var pickupable = other.GetComponentInParent<PickupableObject>();
 
 			if (pickupable != null)
 			{
-
 				if (!pickupables.Contains(pickupable))
 				{
 					pickupable.EnableInteract(false);
