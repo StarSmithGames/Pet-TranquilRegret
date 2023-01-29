@@ -66,7 +66,7 @@ namespace Game.Systems.NavigationSystem
 
 			if (IsGrounded)
 			{
-				moveVector = GetRelativeToCamera(GetDirection()) * settings.moveSpeed * Time.deltaTime;
+				moveVector = GetRelativeToCamera(GetDirection()) * player.Sheet.MoveSpeed.TotalValue * Time.deltaTime;
 
 				if (Input.GetButtonDown("Jump"))
 				{
@@ -79,7 +79,7 @@ namespace Game.Systems.NavigationSystem
 			}
 			else
 			{
-				moveVector = GetRelativeToCamera(GetDirection()) * settings.moveSpeed * Time.deltaTime;
+				moveVector = GetRelativeToCamera(GetDirection()) * player.Sheet.MoveSpeed.TotalValue * Time.deltaTime;
 			}
 
 			rb.MovePosition(rb.position + moveVector);
@@ -139,14 +139,7 @@ namespace Game.Systems.NavigationSystem
 
 		private Vector3 GetJumpImpulse()
 		{
-			var jumpImpulse = player.Effects.GetJumpImpulse();
-
-			if(jumpImpulse != Vector3.zero)
-			{
-				return jumpImpulse;
-			}
-
-			return settings.jumpImpulse;
+			return new Vector3(0, 5, 0);
 		}
 
 		private void OnGroundedChanged()
@@ -170,8 +163,6 @@ namespace Game.Systems.NavigationSystem
 		[System.Serializable]
 		public class Settings
 		{
-			public float moveSpeed = 7.5f;
-			public Vector3 jumpImpulse = new Vector3(0, 5, 0);
 			public float fallMultipier = 1f;
 			[Space]
 			public LayerMask groundLayer;

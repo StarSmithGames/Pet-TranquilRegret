@@ -35,14 +35,45 @@ namespace Game.Systems.PickupableSystem
 			characterManager.CurrentPlayer.onObjectInHandsChanged += onObjectInPlayerHandsChanged;
 		}
 
+		protected override void ResetAnimation()
+		{
+			if (characterManager.CurrentPlayer.IsHandsEmpty)
+			{
+				decal.ScaleTo(1f);
+			}
+			else
+			{
+				base.ResetAnimation();
+			}
+		}
+
 		private void onObjectInPlayerHandsChanged(PickupableObject pickupable)
 		{
 			marker.Enable(pickupable != null);
+			if(pickupable != null)
+			{
+				IdleAnimation();
+			}
+			else
+			{
+				KillIdleAnimation();
+			}
 		}
 
 		protected override void OnEnterChanged(Collider other)
 		{
-			base.OnEnterChanged(other);
+			var p = other.GetComponentInParent<Player>();
+
+			if (p != null)
+			{
+				player = p;
+				lastPlayer = player;
+
+				if (!p.IsHandsEmpty)
+				{
+					EnterAnimation();
+				}
+			}
 
 			var pickupable = other.GetComponentInParent<PickupableObject>();
 
@@ -61,8 +92,6 @@ namespace Game.Systems.PickupableSystem
 						.Append(pickupable.transform.DOScale(0, 0.2f))
 						.OnComplete(() =>
 						{
-							Debug.LogError("Chpok");
-
 							pickupables.Remove(pickupable);
 							Destroy(pickupable.gameObject);
 						});

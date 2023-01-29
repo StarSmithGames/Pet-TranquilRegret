@@ -19,8 +19,6 @@ namespace Game.Systems.InteractionSystem
 			interactionZone.onEnterChanged += OnEnterChanged;
 			interactionZone.onExitChanged += OnExitChanged;
 			interactionZone.onCollectionChanged += OnZoneCollectionChanged;
-
-			IdleAnimation();
 		}
 
 		protected virtual void OnDestroy()
@@ -38,9 +36,14 @@ namespace Game.Systems.InteractionSystem
 			decal.StartIdleAnimation();
 		}
 
-		protected virtual void EnterAnimation()
+		protected virtual void KillIdleAnimation()
 		{
 			decal.Kill();
+		}
+
+		protected virtual void EnterAnimation()
+		{
+			KillIdleAnimation();
 			decal.ScaleTo(1.2f);
 		}
 

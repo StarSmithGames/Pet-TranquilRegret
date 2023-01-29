@@ -1,6 +1,8 @@
 using Game.Systems.InteractionSystem;
 using Game.Systems.NavigationSystem;
 using Game.Systems.PickupableSystem;
+using Game.Systems.SheetSystem;
+using Game.Systems.SheetSystem.Effects;
 using Game.UI;
 
 using UnityEngine;
@@ -14,12 +16,15 @@ namespace Game.Entities
 	{
 		Systems.NavigationSystem.CharacterController Controller { get; }
 
-		Effects Effects { get; }
+		PlayerSheet Sheet { get; }
+
+		EffectConverter EffectConverter { get; }
 	}
 
 	public partial class Player : MonoBehaviour, ICharacter
 	{
-		public Effects Effects { get; private set; }
+		public PlayerSheet Sheet { get; private set; }
+		public EffectConverter EffectConverter { get; private set; }
 
 		[field: SerializeField] public Transform Model { get; private set; }
 		[field: Space]
@@ -30,16 +35,19 @@ namespace Game.Entities
 		[field: Space]
 		[field: SerializeField] public PlayerCanvas PlayerCanvas { get; private set; }
 
-		private GroundImplementation groundImplementation;
 		private UIGameCanvas subCanvas;
+		private GroundImplementation groundImplementation;
 
 		[Inject]
-		private void Construct(UISubCanvas subCanvas, GroudImplementationFactory groudImplementationFactory)
+		private void Construct(UISubCanvas subCanvas,
+			GroudImplementationFactory groudImplementationFactory,
+			EffectConverter effectConverter)
 		{
 			this.subCanvas = subCanvas as UIGameCanvas;
 			groundImplementation = groudImplementationFactory.Create(this);
 
-			Effects = new Effects(this);
+			Sheet = new PlayerSheet(this);
+			EffectConverter = effectConverter;
 		}
 
 		private void Start()
@@ -87,6 +95,23 @@ namespace Game.Entities
 		{
 			subCanvas.Drop.Hide();
 			DropHandsObject();
+		}
+	}
+
+
+	public class PlayerSheet
+	{
+		public MoveSpeed MoveSpeed { get; private set; }
+		public JumpImpulse JumpImpulse { get; private set; }
+
+		public Effects Effects { get; private set; }
+
+		public PlayerSheet(ICharacter character)
+		{
+			MoveSpeed = new MoveSpeed(7.5f);
+			JumpImpulse = new JumpImpulse(5);
+
+			Effects = new Effects(character);
 		}
 	}
 }

@@ -170,7 +170,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b694a0a65f9c544bc313c39281849f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projector: {fileID: 4687621907152042049}
+  masterProjector: {fileID: 0}
+  projectors: []
+  depth: 10
+  size: {x: 1, y: 1}
 --- !u!114 &4687621907152042049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -348,6 +351,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7834858090861041475}
+  - component: {fileID: 7556629589435806289}
+  - component: {fileID: 3572570929318607996}
   - component: {fileID: 7721312390031984499}
   - component: {fileID: 7834858090861041472}
   - component: {fileID: 3619111434604853016}
@@ -377,6 +382,36 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7556629589435806289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7834858090861041474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 3572570929318607996}
+  _installerPrefabs: []
+  _autoRun: 1
+  _kernel: {fileID: 0}
+--- !u!114 &3572570929318607996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7834858090861041474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d981889c64a4f94cbd71f2e94e59b19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!54 &7721312390031984499
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -426,8 +461,6 @@ MonoBehaviour:
   rb: {fileID: 7721312390031984499}
   model: {fileID: 3410461041638132046}
   settings:
-    moveSpeed: 7.5
-    jumpImpulse: {x: 0, y: 6, z: 0}
     fallMultipier: 3
     groundLayer:
       serializedVersion: 2
