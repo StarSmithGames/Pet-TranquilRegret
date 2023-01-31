@@ -51,6 +51,10 @@ namespace Game.Systems.InteractionSystem
 			decal.ScaleTo(1f, callback: decal.StartIdleAnimation);
 		}
 
+		protected virtual void OnPlayerEnter(Player player) { }
+
+		protected virtual void OnPlayerExit(Player player) { }
+
 		protected virtual void OnEnterChanged(Collider other)
 		{
 			var p = other.GetComponentInParent<Player>();
@@ -61,6 +65,8 @@ namespace Game.Systems.InteractionSystem
 				lastPlayer = player;
 
 				EnterAnimation();
+
+				OnPlayerEnter(player);
 			}
 		}
 
@@ -74,6 +80,8 @@ namespace Game.Systems.InteractionSystem
 
 				lastPlayer = player;
 				player = null;
+
+				OnPlayerExit(lastPlayer);
 			}
 		}
 

@@ -46,6 +46,12 @@ namespace Game.Entities
 
 		private void OnObjectInPlayerHandsChanged(PickupableObject pickupable)
 		{
+			if(player != null)
+			{
+				OnPlayerEnter(player);
+				return;
+			}
+
 			marker.Enable(pickupable != null);
 			if (pickupable != null)
 			{
@@ -57,13 +63,22 @@ namespace Game.Entities
 			}
 		}
 
+		protected override void OnPlayerEnter(Player player)
+		{
+			if (!player.IsHandsEmpty)
+			{
+				player.AutoDropClick();
+			}
+		}
+
 		protected override void OnEnterChanged(Collider other)
 		{
 			base.OnEnterChanged(other);
 
+			///Pickable
 			var pickupable = other.GetComponentInParent<PickupableObject>();
 
-			if (pickupable != null)
+			if (pickupable != null && !other.isTrigger)
 			{
 				if (!pickupables.Contains(pickupable))
 				{
@@ -78,7 +93,7 @@ namespace Game.Entities
 						.OnComplete(() =>
 						{
 							pickupables.Remove(pickupable);
-							Destroy(pickupable.gameObject);
+							pickupable.gameObject.SetActive(false);
 						});
 				}
 			}

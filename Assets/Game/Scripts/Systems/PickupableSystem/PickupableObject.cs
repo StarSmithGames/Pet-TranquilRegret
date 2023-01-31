@@ -104,11 +104,12 @@ namespace Game.Systems.PickupableSystem
 
 		private void OnPickuped()
 		{
-			Enable(false);
-
 			PickupAnimation();
+			ResetAnimation();
 
 			lastPlayer.Pickup(this);
+			lastPlayer = player;
+			player = null;
 		}
 	
 		protected virtual void OnEnterChanged(Collider other)

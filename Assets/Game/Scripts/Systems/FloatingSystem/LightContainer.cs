@@ -15,7 +15,7 @@ using Zenject;
 namespace Game.Systems.FloatingSystem
 {
 	[RequireComponent(typeof(InteractionZone))]
-	public class FloatingContainer : MonoBehaviour
+	public class LightContainer : MonoBehaviour
 	{
 		[SerializeField] private InteractionZone interactionZone;
 		[SerializeField] private List<Floating3DObject> floatingObjects = new List<Floating3DObject>();

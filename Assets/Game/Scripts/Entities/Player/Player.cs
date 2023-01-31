@@ -62,8 +62,19 @@ namespace Game.Entities
 
 		public void Pickup(PickupableObject pickupable)
 		{
-			ObjectInHands = pickupable;
+			if (!IsHandsEmpty)
+			{
+				Sheet.ThrowImpulse.Enable(false);
+				DropHandsObject();
+			}
 
+			if (!IsHandsEmpty)
+			{
+				return;
+			}
+
+			ObjectInHands = pickupable;
+			ObjectInHands.Enable(false);
 			ObjectInHands.transform.SetParent(PlayerAvatar.BothHandsPoint);
 			ObjectInHands.transform.localPosition = Vector3.zero;
 			ObjectInHands.transform.forward = PlayerAvatar.BothHandsPoint.forward;
@@ -86,8 +97,14 @@ namespace Game.Entities
 			}
 		}
 
+		public void AutoDropClick()
+		{
+			OnDropClicked();
+		}
+
 		private void OnDropClicked()
 		{
+			Sheet.ThrowImpulse.Enable(true);
 			subCanvas.Drop.Hide();
 			DropHandsObject();
 		}

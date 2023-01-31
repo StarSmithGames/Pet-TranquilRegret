@@ -6,5 +6,6 @@ namespace Game.Entities
 {
 	public abstract class DropZone : InteractableObject
 	{
+
 	}
 }

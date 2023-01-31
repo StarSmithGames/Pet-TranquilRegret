@@ -70,8 +70,6 @@ namespace Game.Systems.PickupableSystem
 
 		private void OnClicked()
 		{
-			Hide();
-
 			onClicked?.Invoke();
 		}
 
