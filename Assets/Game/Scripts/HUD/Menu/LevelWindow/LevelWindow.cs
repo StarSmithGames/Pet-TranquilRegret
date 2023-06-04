@@ -1,5 +1,4 @@
 using Game.Managers.LevelManager;
-using Game.Managers.SceneManager;
 using Game.UI;
 
 using System.Collections.Generic;
@@ -24,14 +23,14 @@ namespace Game.HUD.Menu
 
 		private UIMenuCanvas menuCanvas;
 		private UIGoalItem.Factory goalFactory;
-		private SceneManager sceneManager;
+		//private SceneManager sceneManager;
 
 		[Inject]
-		private void Construct(UIMenuCanvas menuCanvas, UIGoalItem.Factory goalFactory, SceneManager sceneManager)
+		private void Construct(UIMenuCanvas menuCanvas, UIGoalItem.Factory goalFactory/*, SceneManager sceneManager*/)
 		{
 			this.menuCanvas = menuCanvas;
 			this.goalFactory = goalFactory;
-			this.sceneManager = sceneManager;
+			//this.sceneManager = sceneManager;
 		}
 
 		private void Start()
@@ -83,7 +82,7 @@ namespace Game.HUD.Menu
 
 		private void OnStart()
 		{
-			sceneManager.SwitchScene(settings.name, false);
+			//sceneManager.SwitchScene(settings.name, false);
 		}
 
 		private void OnClose()

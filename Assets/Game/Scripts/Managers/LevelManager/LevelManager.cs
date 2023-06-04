@@ -13,10 +13,10 @@ namespace Game.Managers.LevelManager
         public Level CurrentLevel { get; private set; }
 
 		public LevelManager(SignalBus signalBus,
-            SceneManager.SceneManager sceneManager,
+            //SceneManager.SceneManager sceneManager,
 			Level.Factory levelFactory)
         {
-			CurrentLevel = levelFactory.Create(sceneManager.CurrentLevelSettings);
+			//CurrentLevel = levelFactory.Create(sceneManager.CurrentLevelSettings);
 		}
 	}
 

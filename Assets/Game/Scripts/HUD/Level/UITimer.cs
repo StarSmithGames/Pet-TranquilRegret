@@ -1,6 +1,5 @@
 using Game.Managers.GameManager;
 using Game.Managers.LevelManager;
-using Game.Managers.SceneManager;
 
 using Sirenix.OdinInspector;
 

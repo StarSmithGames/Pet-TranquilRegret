@@ -1,24 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.AddressableAssets.ResourceLocators;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine.ResourceManagement.ResourceProviders;
 using UnityEngine.SceneManagement;
-
-using Zenject;
 
 namespace Game.Managers.AddresableManager
 {
 	public class AddresableManager
 	{
 		private bool clearPreviousScene;
-		private SceneInstance previousScene;
+		//private SceneInstance previousScene;
 
 		public AddresableManager()
 		{
-			Addressables.InitializeAsync().Completed += OnAddressableInitializCompleted;
+			//Addressables.InitializeAsync().Completed += OnAddressableInitializCompleted;
 		}
 
 		public string GetSceneKey(string sceneName)
@@ -30,38 +22,38 @@ namespace Game.Managers.AddresableManager
 			return $"Assets/Game/Scenes/Levels/{sceneName}/{sceneName}.asset";
 		}
 
-		public AsyncOperationHandle<SceneInstance> LoadAddressableLevel(string key)
-		{
-			if (clearPreviousScene)
-			{
-				Addressables.UnloadSceneAsync(previousScene).Completed += (asyncHandle) =>
-				{
-					clearPreviousScene = false;
-					previousScene = new SceneInstance();
-					Debug.LogError($"Unload scene {key} succefully");
-				};
-			}
+		//public AsyncOperationHandle<SceneInstance> LoadAddressableLevel(string key)
+		//{
+		//	if (clearPreviousScene)
+		//	{
+		//		Addressables.UnloadSceneAsync(previousScene).Completed += (asyncHandle) =>
+		//		{
+		//			clearPreviousScene = false;
+		//			previousScene = new SceneInstance();
+		//			Debug.LogError($"Unload scene {key} succefully");
+		//		};
+		//	}
 
-			var operation = Addressables.LoadSceneAsync(key, LoadSceneMode.Single);
-			operation.Completed += (asyncHandle) =>
-			{
-				clearPreviousScene = true;
-				previousScene = asyncHandle.Result;
-				Debug.LogError($"Load scene {key} succefully");
-			};
+		//	var operation = Addressables.LoadSceneAsync(key, LoadSceneMode.Single);
+		//	operation.Completed += (asyncHandle) =>
+		//	{
+		//		clearPreviousScene = true;
+		//		previousScene = asyncHandle.Result;
+		//		Debug.LogError($"Load scene {key} succefully");
+		//	};
 
-			return operation;
-		}
+		//	return operation;
+		//}
 
-		private void OnAddressableInitializCompleted(AsyncOperationHandle<IResourceLocator> operationHandle)
-		{
-			Debug.LogError($"OnAddressableInitializCompleted");
-		}
+		//private void OnAddressableInitializCompleted(AsyncOperationHandle<IResourceLocator> operationHandle)
+		//{
+		//	Debug.LogError($"OnAddressableInitializCompleted");
+		//}
 	}
 
-	[System.Serializable]
-	public class AssetReferenceAudioClip : AssetReferenceT<AudioClip>
-	{
-		public AssetReferenceAudioClip(string guid) : base(guid) { }
-	}
+	//[System.Serializable]
+	//public class AssetReferenceAudioClip : AssetReferenceT<AudioClip>
+	//{
+	//	public AssetReferenceAudioClip(string guid) : base(guid) { }
+	//}
 }

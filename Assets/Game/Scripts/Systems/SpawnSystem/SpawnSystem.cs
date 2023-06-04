@@ -1,7 +1,6 @@
 using Game.Entities;
 using Game.Managers.AsyncManager;
 using Game.Managers.CharacterManager;
-using Game.Managers.SceneManager;
 
 using System.Collections;
 
@@ -68,9 +67,9 @@ namespace Game.Systems.SpawnSystem
 			SpawnPlayer();
 		}
 
-		private void OnSceneChanged(SignalSceneChanged signal)
-		{
-			SpawnPlayer();
-		}
+		//private void OnSceneChanged(SignalSceneChanged signal)
+		//{
+		//	SpawnPlayer();
+		//}
 	}
 }

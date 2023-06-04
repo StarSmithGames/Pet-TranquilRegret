@@ -1,7 +1,6 @@
 using DG.Tweening;
 
 using Game.Managers.LevelManager;
-using Game.Managers.SceneManager;
 using Game.Managers.StorageManager;
 using Game.UI;
 using Game.VFX;
@@ -16,7 +15,6 @@ using System.Collections.Generic;
 using System.Linq;
 
 using UnityEngine;
-using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UIElements;
 
 using Zenject;
@@ -57,19 +55,19 @@ namespace Game.HUD.Menu
 
 		private UIMenuCanvas menuCanvas;
 		private ISaveLoad saveLoad;
-		private SceneManager sceneManager;
+		//private SceneManager sceneManager;
 		private ParticalVFXFootStep.Factory pawStepFactory;
 
 		[Inject]
 		private void Construct(
 			UIMenuCanvas menuCanvas,
 			ISaveLoad saveLoad,
-			SceneManager sceneManager,
+			//SceneManager sceneManager,
 			[Inject(Id = "StepPawVerticalPrint")] ParticalVFXFootStep.Factory pawStepFactory)
 		{
 			this.menuCanvas = menuCanvas;
 			this.saveLoad = saveLoad;
-			this.sceneManager = sceneManager;
+			//this.sceneManager = sceneManager;
 			this.pawStepFactory = pawStepFactory;
 		}
 
@@ -243,19 +241,19 @@ namespace Game.HUD.Menu
 
 		private void ShowLevelWindow(int index)
 		{
-			sceneManager.GetLevelSettings(index, (settings) =>
-			{
-				if (settings != null)
-				{
-					var window = menuCanvas.WindowsRegistrator.GetAs<LevelWindow>();
-					window.SetLevel(settings);
-					window.Show();
-				}
-				else
-				{
-					Debug.LogError("LevelSettings == NULL");
-				}
-			});
+			//sceneManager.GetLevelSettings(index, (settings) =>
+			//{
+			//	if (settings != null)
+			//	{
+			//		var window = menuCanvas.WindowsRegistrator.GetAs<LevelWindow>();
+			//		window.SetLevel(settings);
+			//		window.Show();
+			//	}
+			//	else
+			//	{
+			//		Debug.LogError("LevelSettings == NULL");
+			//	}
+			//});
 		}
 
 		[Button(DirtyOnClick = true)]
