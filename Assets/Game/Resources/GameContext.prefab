@@ -78,7 +78,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4382914729106442928}
-  - {fileID: 6660129804110153056}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -149,141 +148,6 @@ MonoBehaviour:
   poofEffect: {fileID: 7337268969511371573, guid: 5d97a74136b224b44a91ca46e670c8aa, type: 3}
   smallPoofEffect: {fileID: 3591418448674264809, guid: e1913e842bd34d44aa4b546fe0556e31, type: 3}
   pointerUIPrefab: {fileID: 7741903393482948371, guid: 22bd46fa01ffec2478175fd0a7fcda4a, type: 3}
---- !u!1 &2854987380397265322
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6660129804110153056}
-  - component: {fileID: 5452623440616346879}
-  m_Layer: 5
-  m_Name: Advanced FPS Counter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6660129804110153056
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2854987380397265322}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 2802870694795667573}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5452623440616346879
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2854987380397265322}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4ff4051e75dc9443879b116bd65c930, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fpsCounter:
-    enabled: 1
-    anchor: 5
-    color: {r: 0.33333334, g: 0.85490197, b: 0.4, a: 1}
-    style: 1
-    updateInterval: 0.5
-    warningLevelValue: 50
-    criticalLevelValue: 20
-    resetAverageOnNewScene: 1
-    resetMinMaxOnNewScene: 1
-    minMaxIntervalsToSkip: 3
-    realtimeFPSFoldout: 0
-    realtimeFPS: 1
-    milliseconds: 1
-    averageFoldout: 0
-    average: 1
-    averageMilliseconds: 1
-    averageNewLine: 1
-    averageSamples: 50
-    minMaxFoldout: 0
-    minMax: 1
-    minMaxMilliseconds: 0
-    minMaxNewLine: 1
-    minMaxTwoLines: 0
-    renderFoldout: 0
-    render: 0
-    renderNewLine: 1
-    renderAutoAdd: 1
-    colorWarning: {r: 0.9254902, g: 0.8784314, b: 0.34509805, a: 1}
-    colorCritical: {r: 0.9764706, g: 0.35686275, b: 0.35686275, a: 1}
-    colorRender: {r: 0.654902, g: 0.43137255, b: 0.81960785, a: 1}
-  memoryCounter:
-    enabled: 1
-    anchor: 5
-    color: {r: 0.91764706, g: 0.93333334, b: 0.39607844, a: 1}
-    style: 1
-    updateInterval: 0.5
-    precise: 1
-    total: 1
-    allocated: 1
-    monoUsage: 1
-    gfx: 0
-  deviceInfoCounter:
-    enabled: 0
-    anchor: 5
-    color: {r: 0.6745098, g: 0.6745098, b: 0.6745098, a: 1}
-    style: 0
-    platform: 0
-    cpuModel: 0
-    cpuModelNewLine: 1
-    gpuModel: 0
-    gpuModelNewLine: 1
-    gpuApi: 0
-    gpuApiNewLine: 1
-    gpuSpec: 0
-    gpuSpecNewLine: 1
-    ramSize: 0
-    ramSizeNewLine: 1
-    screenData: 0
-    screenDataNewLine: 1
-    deviceModel: 0
-    deviceModelNewLine: 1
-  hotKey: 96
-  circleGesture: 0
-  hotKeyCtrl: 0
-  hotKeyShift: 0
-  hotKeyAlt: 0
-  keepAlive: 1
-  operationMode: 2
-  forceFrameRate: 0
-  forcedFrameRate: -1
-  background: 1
-  backgroundColor: {r: 0, g: 0, b: 0, a: 0.60784316}
-  backgroundPadding: 5
-  shadow: 0
-  shadowColor: {r: 0, g: 0, b: 0, a: 0.5019608}
-  shadowDistance: {x: 1, y: -1}
-  outline: 0
-  outlineColor: {r: 0, g: 0, b: 0, a: 0.5019608}
-  outlineDistance: {x: 1, y: -1}
-  autoScale: 0
-  scaleFactor: 2
-  labelsFont: {fileID: 12800000, guid: fb80074802966ad438ec681fae1be1c2, type: 3}
-  fontSize: 14
-  lineSpacing: 1
-  countersSpacing: 0
-  paddingOffset: {x: 5, y: 5}
-  pixelPerfect: 1
-  sortingOrder: 10000
-  lookAndFeelFoldout: 0
-  advancedFoldout: 0
 --- !u!1 &4382914727788082158
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,6 +650,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8332641183785384128}
     m_Modifications:
+    - target: {fileID: 1752779189212552123, guid: 42221dadd70609943a957595be907653, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1752779189212552123, guid: 42221dadd70609943a957595be907653, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1924927168538996102, guid: 42221dadd70609943a957595be907653, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1594,6 +1466,14 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5407720249543662292, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5407720249543662292, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5598650957586291307, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1632,6 +1512,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5639390187709535748, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5790963258094879814, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5790963258094879814, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6130126916346775702, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
