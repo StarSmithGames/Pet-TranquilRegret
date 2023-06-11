@@ -1,4 +1,7 @@
 ﻿using Game.Entities;
+
+using StarSmithGames.Core;
+
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.Events;
@@ -18,11 +21,13 @@ namespace Game.Systems.SheetSystem.Effects
 
 		protected override void OnRegistrated(IEffect effect)
 		{
+			base.OnRegistrated(effect);
 			effect.Activate(character);
 		}
 
 		protected override void OnUnRegistrated(IEffect effect)
 		{
+			base.OnUnRegistrated(effect);
 			effect.Deactivate();
 		}
 	}

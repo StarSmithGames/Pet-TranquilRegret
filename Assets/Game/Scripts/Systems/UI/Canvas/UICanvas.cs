@@ -1,23 +1,24 @@
-using System.Linq;
+using StarSmithGames.Go;
+
 using UnityEngine;
 
 namespace Game.UI
 {
 	public abstract class UICanvas : MonoBehaviour
 	{
-		public WindowsRegistrator WindowsRegistrator
+		public ViewRegistrator ViewRegistrator
 		{
 			get
 			{
-				if (windowsRegistrator == null)
+				if (viewRegistrator == null)
 				{
-					windowsRegistrator = new WindowsRegistrator();
+					viewRegistrator = new ViewRegistrator();
 				}
 
-				return windowsRegistrator;
+				return viewRegistrator;
 			}
 		}
-		protected WindowsRegistrator windowsRegistrator;
+		protected ViewRegistrator viewRegistrator;
 
 		public Transform Windows
 		{
@@ -32,34 +33,5 @@ namespace Game.UI
 			}
 		}
 		[SerializeField] protected Transform windows;
-	}
-
-	public class WindowsRegistrator : Registrator<IWindow>
-	{
-		public bool IsAnyWindowShowing()
-		{
-			return registers.Any((x) => x.IsShowing);
-		}
-		public bool IsAllHided()
-		{
-			return registers.All((x) => !x.IsShowing);
-		}
-
-		public void Show<T>() where T : class, IWindow
-		{
-			GetAs<T>().Show();
-		}
-		public void Hide<T>() where T : class, IWindow
-		{
-			GetAs<T>().Hide();
-		}
-
-		public void HideAll()
-		{
-			for (int i = 0; i < registers.Count; i++)
-			{
-				registers[i].Hide();
-			}
-		}
 	}
 }

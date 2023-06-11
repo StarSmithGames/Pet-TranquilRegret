@@ -10,12 +10,10 @@ namespace Game.Managers.TransitionManager
 		public bool IsLoading { get; private set; } = false;
 
 		private InfinityLoadingSettings settings;
-		private AsyncManager.AsyncManager asyncManager;
 
-		public InfinityLoading(InfinityLoadingSettings settings, AsyncManager.AsyncManager asyncManager)
+		public InfinityLoading(InfinityLoadingSettings settings)
 		{
 			this.settings = settings;
-			this.asyncManager = asyncManager;
 		}
 
 		//public void StartLoading(BuildProgressHandle progressHandler, UnityAction callback = null)

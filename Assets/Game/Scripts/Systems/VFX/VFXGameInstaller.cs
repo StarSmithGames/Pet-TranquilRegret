@@ -12,8 +12,8 @@ namespace Game.VFX
 		public ParticalVFXFootStep stepFootPrintEffect;
 		public ParticalVFXPoofEffect poofEffect;
 		public ParticalVFXPoofEffect smallPoofEffect;
-		[Header("Markers")]
-		public UIPointer pointerUIPrefab;
+		//[Header("Markers")]
+		//public UIPointer pointerUIPrefab;
 
 		public override void InstallBindings()
 		{
@@ -35,11 +35,11 @@ namespace Game.VFX
 
 
 			//UI
-			Container
-				.BindFactory<UIPointer, UIPointer.Factory>()
-				.FromMonoPoolableMemoryPool((x) => x.WithInitialSize(1)
-				.FromComponentInNewPrefab(pointerUIPrefab)
-				.UnderTransform((x) => x.Container.Resolve<UISubCanvas>().VFX));
+			//Container
+			//	.BindFactory<UIPointer, UIPointer.Factory>()
+			//	.FromMonoPoolableMemoryPool((x) => x.WithInitialSize(1)
+			//	.FromComponentInNewPrefab(pointerUIPrefab)
+			//	.UnderTransform((x) => x.Container.Resolve<UISubCanvas>().VFX));
 		}
 	}
 }

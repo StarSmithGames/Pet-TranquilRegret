@@ -35,12 +35,12 @@ namespace Game.Systems.SettingsSystem
 			if (isShowing)
 			{
 				gameManager.ChangeState(GameState.Pause);
-				subCanvas.WindowsRegistrator.Show<SettingsWindow>();
+				subCanvas.ViewRegistrator.Show<SettingsWindow>();
 			}
 			else
 			{
 				gameManager.ChangeState(gameManager.PreviousGameState);//PreGameplay, Gameplay
-				subCanvas.WindowsRegistrator.Hide<SettingsWindow>();
+				subCanvas.ViewRegistrator.Hide<SettingsWindow>();
 			}
 
 			image.sprite = isShowing ? close : open;

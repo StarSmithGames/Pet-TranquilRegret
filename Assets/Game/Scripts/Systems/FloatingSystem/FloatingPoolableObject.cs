@@ -1,5 +1,7 @@
 using DG.Tweening;
 
+using StarSmithGames.Go;
+
 namespace Game.Systems.FloatingSystem
 {
 	public abstract class FloatingPoolableObject : PoolableObject

@@ -1,11 +1,8 @@
 using DG.Tweening;
 
 using Game.Managers.LevelManager;
-using Game.Managers.StorageManager;
 using Game.UI;
 using Game.VFX;
-
-using ModestTree;
 
 using Sirenix.OdinInspector;
 
@@ -54,20 +51,14 @@ namespace Game.HUD.Menu
 		private UIRoadPin Pin => menuCanvas.Pin;
 
 		private UIMenuCanvas menuCanvas;
-		private ISaveLoad saveLoad;
-		//private SceneManager sceneManager;
 		private ParticalVFXFootStep.Factory pawStepFactory;
 
 		[Inject]
 		private void Construct(
 			UIMenuCanvas menuCanvas,
-			ISaveLoad saveLoad,
-			//SceneManager sceneManager,
 			[Inject(Id = "StepPawVerticalPrint")] ParticalVFXFootStep.Factory pawStepFactory)
 		{
 			this.menuCanvas = menuCanvas;
-			this.saveLoad = saveLoad;
-			//this.sceneManager = sceneManager;
 			this.pawStepFactory = pawStepFactory;
 		}
 
@@ -75,7 +66,7 @@ namespace Game.HUD.Menu
 		{
 			BackgroundFullRefresh();
 
-			data = saveLoad.GetStorage().Profile.GetData().map;
+			//data = saveLoad.GetStorage().Profile.GetData().map;
 
 			for (int i = 0; i < levels.Count; i++)
 			{
@@ -95,23 +86,23 @@ namespace Game.HUD.Menu
 				}
 			}
 
-			if (saveLoad.GetStorage().IsFirstTime.GetData())
-			{
-				var level = new Level.Data();
-				levels
-					.First()
-					.SetLevel(level)
-					.Enable(true);
-				data.levels.Add(level);
+			//if (saveLoad.GetStorage().IsFirstTime.GetData())
+			//{
+			//	var level = new Level.Data();
+			//	levels
+			//		.First()
+			//		.SetLevel(level)
+			//		.Enable(true);
+			//	data.levels.Add(level);
 
-				StartCoroutine(FirstTime());
-			}
-			else
-			{
-				Vector3 position = levels[data.lastIndex].transform.position;
-				verticalCamera.SetPosition(position);
-				Pin.transform.position = position;
-			}
+			//	StartCoroutine(FirstTime());
+			//}
+			//else
+			//{
+			//	Vector3 position = levels[data.lastIndex].transform.position;
+			//	verticalCamera.SetPosition(position);
+			//	Pin.transform.position = position;
+			//}
 		}
 
 		private void BackgroundFullRefresh()

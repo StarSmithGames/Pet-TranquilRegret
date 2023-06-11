@@ -1,4 +1,4 @@
-﻿using Game.UI;
+﻿using StarSmithGames.Core;
 
 public abstract class Stat : AttributeModifiableFloat
 {

@@ -1,14 +1,13 @@
-using Game.UI;
+using StarSmithGames.Go;
 
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Game.HUD.Gameplay
 {
-    public class UIDropButton : WindowPopupBase
+    public class UIDropButton : ViewPopupBase
     {
 		public event UnityAction onClicked;
 
@@ -21,7 +20,7 @@ namespace Game.HUD.Gameplay
 			Enable(false);
 		}
 
-		public override void Show(UnityAction callback = null)
+		public override void Show(Action callback = null)
 		{
 			if (!isInitialized)
 			{

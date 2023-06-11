@@ -1,8 +1,10 @@
 using Game.UI;
 
+using StarSmithGames.Go;
+
 namespace Game.Managers.TransitionManager
 {
-    public class UIFadeTransition : WindowBase, ITransitable
+    public class UIFadeTransition : ViewBase, ITransitable
     {
 		private void Start()
 		{

@@ -1,6 +1,8 @@
 using Game.Managers.LevelManager;
 using Game.UI;
 
+using StarSmithGames.Go;
+
 using System.Collections.Generic;
 using System.Linq;
 
@@ -11,7 +13,7 @@ using Zenject;
 
 namespace Game.HUD.Menu
 {
-	public class LevelWindow : WindowPopupBase
+	public class LevelWindow : ViewPopupBase
 	{
 		[field: SerializeField] public TMPro.TextMeshProUGUI Title { get; private set; }
 		[field: SerializeField] public Transform GoalContent { get; private set; }
@@ -40,14 +42,14 @@ namespace Game.HUD.Menu
 
 			GoalContent.DestroyChildren();
 
-			menuCanvas.WindowsRegistrator.Registrate(this);
+			menuCanvas.ViewRegistrator.Registrate(this);
 		}
 
 		private void OnDestroy()
 		{
 			StartButton.onClick.RemoveAllListeners();
 			Blank.onClick.RemoveAllListeners();
-			menuCanvas.WindowsRegistrator.UnRegistrate(this);
+			menuCanvas.ViewRegistrator.UnRegistrate(this);
 		}
 
 		public void SetLevel(LevelSettings settings)

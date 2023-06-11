@@ -1,9 +1,12 @@
 using Game.UI;
+
+using StarSmithGames.Go;
+
 using Zenject;
 
 namespace Game.Systems.SettingsSystem
 {
-    public class SettingsWindow : WindowBase
+    public class SettingsWindow : ViewBase
     {
 		private UISubCanvas subCanvas;
 
@@ -17,12 +20,12 @@ namespace Game.Systems.SettingsSystem
 		{
 			Enable(false);
 
-			subCanvas.WindowsRegistrator.Registrate(this);
+			subCanvas.ViewRegistrator.Registrate(this);
 		}
 
 		private void OnDestroy()
 		{
-			subCanvas.WindowsRegistrator.UnRegistrate(this);
+			subCanvas.ViewRegistrator.UnRegistrate(this);
 		}
 	}
 }

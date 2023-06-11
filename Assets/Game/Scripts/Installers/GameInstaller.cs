@@ -31,11 +31,11 @@ namespace Game.Installers
 				.FromComponentInNewPrefab(goalPrefab)
 				.AsSingle();
 
-			Container.BindFactory<UIPickup, UIPickup.Factory>()
-				.FromMonoPoolableMemoryPool(
-				(x) => x.WithInitialSize(1)
-				.FromComponentInNewPrefab(pickupPrefab)
-				.UnderTransform(subCanvas.VFX));
+			//Container.BindFactory<UIPickup, UIPickup.Factory>()
+			//	.FromMonoPoolableMemoryPool(
+			//	(x) => x.WithInitialSize(1)
+			//	.FromComponentInNewPrefab(pickupPrefab)
+			//	.UnderTransform(subCanvas.VFX));
 
 			LevelManagerInstaller.Install(Container);
 			CharacterManagerInstaller.Install(Container);
