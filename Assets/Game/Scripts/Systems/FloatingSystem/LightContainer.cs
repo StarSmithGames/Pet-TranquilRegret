@@ -4,6 +4,8 @@ using Game.Systems.InteractionSystem;
 
 using Sirenix.OdinInspector;
 
+using StarSmithGames.Core;
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;

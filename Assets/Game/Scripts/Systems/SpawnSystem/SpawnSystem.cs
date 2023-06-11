@@ -1,7 +1,7 @@
 using Game.Entities;
 using Game.Managers.CharacterManager;
 
-using StarSmithGames.Go.AsyncManager;
+using StarSmithGames.Core;
 
 using System.Collections;
 

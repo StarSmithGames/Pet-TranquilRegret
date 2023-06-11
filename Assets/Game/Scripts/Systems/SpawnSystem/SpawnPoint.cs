@@ -1,5 +1,6 @@
 using Sirenix.OdinInspector;
 using UnityEngine;
+using StarSmithGames.Core;
 
 #if UNITY_EDITOR
 using UnityEditor;

@@ -7,7 +7,7 @@
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "3.1.0"
       },
-      "hash": "4ca4947498076559b37871dbf59e6a4fb2c7365c"
+      "hash": "fd67df942c6ac3d2408adc2092b06ac94da32d8b"
     },
     "com.starsmithgames.go": {
       "version": "https://github.com/StarSmithGames/com.starsmithgames.go.git",

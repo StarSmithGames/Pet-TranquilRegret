@@ -2,6 +2,8 @@ using Game.HUD.Gameplay;
 using Game.Managers.LevelManager;
 using Game.Systems.NavigationSystem;
 
+using StarSmithGames.Core;
+
 using System.Collections.Generic;
 using System.Linq;
 
@@ -37,7 +39,7 @@ namespace Game.UI
 		{
 			GoalContent.DestroyChildren();
 
-			CollectionExtensions.Resize(levelManager.CurrentLevel.PrimaryGoals, goals,
+			StarSmithGames.Core.CollectionExtensions.Resize(levelManager.CurrentLevel.PrimaryGoals, goals,
 			() =>
 			{
 				var goal = goalFactory.Create();

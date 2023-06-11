@@ -1,4 +1,6 @@
-﻿namespace Game.Managers.LevelManager
+﻿using StarSmithGames.Core;
+
+namespace Game.Managers.LevelManager
 {
 	public interface IGoal
 	{
@@ -19,7 +21,7 @@
 		}
 	}
 
-	public class Coins : Attribute<int>
+	public class Coins : Attribute
 	{
 		public Coins(int currentValue) : base(currentValue)
 		{

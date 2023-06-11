@@ -1,6 +1,7 @@
 using Game.Managers.LevelManager;
 using Game.UI;
 
+using StarSmithGames.Core;
 using StarSmithGames.Go;
 
 using System.Collections.Generic;
@@ -58,7 +59,7 @@ namespace Game.HUD.Menu
 
 			Title.text = $"Level {settings.name.Split("_")[1]}";
 
-			CollectionExtensions.Resize(settings.primaryGoals, goals,
+			StarSmithGames.Core.CollectionExtensions.Resize(settings.primaryGoals, goals,
 			() =>
 			{
 				var goal = goalFactory.Create();

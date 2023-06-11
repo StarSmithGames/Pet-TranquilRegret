@@ -1,6 +1,6 @@
 ﻿using StarSmithGames.Core;
 
-public abstract class Stat : AttributeModifiableFloat
+public abstract class Stat : Attribute
 {
 	protected Stat(float value) : base(value) { }
 }
