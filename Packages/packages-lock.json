@@ -1,5 +1,21 @@
 {
   "dependencies": {
+    "com.starsmithgames.core": {
+      "version": "https://github.com/StarSmithGames/com.starsmithgames.core.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.1.0"
+      },
+      "hash": "7091eeb7b696744fb0785124aa25c8a6a42d79ad"
+    },
+    "com.starsmithgames.go": {
+      "version": "https://github.com/StarSmithGames/com.starsmithgames.go.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "496e70a6fe5f344fcda2272aa866cfc9e5c50202"
+    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
@@ -73,8 +89,8 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.nuget.newtonsoft-json": {
-      "version": "3.0.2",
-      "depth": 2,
+      "version": "3.1.0",
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"

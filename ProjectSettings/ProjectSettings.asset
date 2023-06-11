@@ -156,7 +156,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.StarSmithGames.BillowingBoundary
-    Standalone: com.DefaultCompany.Billowing-Boundary
+    Standalone: com.StarSmith-Games.Billowing-Boundary
   buildNumber:
     Standalone: 0
     iPhone: 0
@@ -720,7 +720,7 @@ PlayerSettings:
     PS4: EPO_DOTWEEN;URP_OUTLINE
     PS5: EPO_DOTWEEN;URP_OUTLINE
     Stadia: EPO_DOTWEEN;URP_OUTLINE
-    Standalone: ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;EPO_DOTWEEN;URP_OUTLINE
+    Standalone: ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;URP_OUTLINE;MOREMOUNTAINS_NICEVIBRATIONS;ENABLE_UNITY_ANALYTICS;ENABLE_AMPLITUDE_ANALYTICS;ENABLE_APPSFLYER_ANALYTICS
     WebGL: EPO_DOTWEEN;URP_OUTLINE
     Windows Store Apps: EPO_DOTWEEN;URP_OUTLINE
     XboxOne: EPO_DOTWEEN;URP_OUTLINE
@@ -736,7 +736,7 @@ PlayerSettings:
   allowUnsafeCode: 0
   useDeterministicCompilation: 1
   enableRoslynAnalyzers: 1
-  selectedPlatform: 2
+  selectedPlatform: 0
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 1
   gcIncremental: 1

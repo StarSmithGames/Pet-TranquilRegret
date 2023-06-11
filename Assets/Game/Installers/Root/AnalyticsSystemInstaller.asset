@@ -9,6 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1593082acadae7a4aaf3ab942419255b, type: 3}
+  m_Script: {fileID: 11500000, guid: 14cdd6d91057ba3439e8e7c548788fb2, type: 3}
   m_Name: AnalyticsSystemInstaller
   m_EditorClassIdentifier: 
+  enableUnity: 1
+  enableAmplitude: 1
+  enableAppsFlyer: 1
+  amplitudeSettings:
+    apiKey: 
+  appsFlyerSettings:
+    devKey: 
+    appID: 

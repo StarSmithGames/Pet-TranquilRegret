@@ -1,5 +1,7 @@
 {
   "dependencies": {
+    "com.starsmithgames.core": "https://github.com/StarSmithGames/com.starsmithgames.core.git",
+    "com.starsmithgames.go": "https://github.com/StarSmithGames/com.starsmithgames.go.git",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.cinemachine": "2.8.9",
     "com.unity.collab-proxy": "1.17.7",
