@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.UI
 {
-    public class UIMenuCanvas : UISubCanvas
+    public class UIMenuCanvas : UICanvas
     {
         [field: SerializeField] public UIRoadPin Pin { get; private set; }
     }

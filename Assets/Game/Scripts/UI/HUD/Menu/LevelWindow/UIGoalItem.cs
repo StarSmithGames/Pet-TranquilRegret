@@ -12,7 +12,7 @@ namespace Game.Managers.LevelManager
 		[field: SerializeField] public Image Icon { get; private set; }
 		[field: SerializeField] public TMPro.TextMeshProUGUI Count { get; private set; }
 
-		public void SetGoal(CountableGoalData goal)
+		public void SetGoal(CountableGoalConfig goal)
 		{
 			Icon.sprite = goal.information.portrait;
 			Count.text = goal.count.ToString();

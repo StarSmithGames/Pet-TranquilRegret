@@ -37,7 +37,6 @@ namespace Game.Installers
 			//	.FromComponentInNewPrefab(pickupPrefab)
 			//	.UnderTransform(subCanvas.VFX));
 
-			LevelManagerInstaller.Install(Container);
 			CharacterManagerInstaller.Install(Container);
 			EffectSystemInstaller.Install(Container);
 		}

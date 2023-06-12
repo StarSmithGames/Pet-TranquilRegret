@@ -905,7 +905,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4760826830663249628}
-  - component: {fileID: 7324508322288162302}
   - component: {fileID: 2601995383507547605}
   - component: {fileID: 7862355098193412951}
   - component: {fileID: 7773918690546248892}
@@ -938,36 +937,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7324508322288162302
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8517057740605334469}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &2601995383507547605
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1000,12 +969,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6252fa1f43e072944827b94888ada6c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CanvasGroup>k__BackingField: {fileID: 7862355098193412951}
-  <Window>k__BackingField: {fileID: 8863817155933415108}
-  <Title>k__BackingField: {fileID: 8923520328945324380}
-  <GoalContent>k__BackingField: {fileID: 2801472022875140070}
-  <StartButton>k__BackingField: {fileID: 9150410953469269894}
-  <Blank>k__BackingField: {fileID: 5256088305231451609}
+  canvasGroup: {fileID: 7862355098193412951}
+  window: {fileID: 8863817155933415108}
+  title: {fileID: 8923520328945324380}
+  goalContent: {fileID: 2801472022875140070}
+  startButton: {fileID: 9150410953469269894}
+  blank: {fileID: 5256088305231451609}
 --- !u!1001 &6056618321432830545
 PrefabInstance:
   m_ObjectHideFlags: 0

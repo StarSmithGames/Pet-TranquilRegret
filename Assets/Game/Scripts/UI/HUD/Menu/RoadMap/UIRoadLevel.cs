@@ -1,4 +1,4 @@
-using Game.Managers.LevelManager;
+using Game.Systems.GameSystem;
 
 using UnityEngine;
 using UnityEngine.Events;
@@ -25,7 +25,7 @@ namespace Game.HUD.Menu
 		[SerializeField] private Color enabled;
 		[SerializeField] private Color passed;
 
-		public Level.Data Level { get; private set; }
+		public LevelConfig levelConfig;
 
 		private void Start()
 		{
@@ -44,11 +44,11 @@ namespace Game.HUD.Menu
 		}
 #endif
 
-		public UIRoadLevel SetLevel(Level.Data level)
+		public UIRoadLevel SetLevel(LevelConfig config)
 		{
-			Level = level;
+			levelConfig = config;
 
-			EnableStars(level?.stars ?? 0);
+			EnableStars(0);
 
 			return this;
 		}

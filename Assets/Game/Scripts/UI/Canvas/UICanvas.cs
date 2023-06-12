@@ -33,5 +33,19 @@ namespace Game.UI
 			}
 		}
 		[SerializeField] protected Transform windows;
+
+		public Transform VFX
+		{
+			get
+			{
+				if (vfx == null)
+				{
+					vfx = transform.Find("VFX");
+				}
+
+				return vfx;
+			}
+		}
+		[SerializeField] protected Transform vfx;
 	}
 }

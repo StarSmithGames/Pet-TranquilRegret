@@ -1,15 +1,11 @@
 using Game.Managers.LevelManager;
 using Game.UI;
 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using Zenject;
 
 namespace Game.Installers
 {
-    public class MenuInstaller : MonoInstaller
+	public class MenuInstaller : MonoInstaller
     {
 		public UIMenuCanvas menuCanvas;
 

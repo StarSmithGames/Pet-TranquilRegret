@@ -10,20 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 706a56087b1a7e84c954f16da4577af2, type: 3}
-  m_Name: Level_0
+  m_Name: Level_1
   m_EditorClassIdentifier: 
-  estimatePlatinaTime:
-    minutes: 0
-    seconds: 0
-  estimateGoldTime:
-    minutes: 4
-    seconds: 20
-  estimateSilverTime:
-    minutes: 5
-    seconds: 40
-  estimateCooperTime:
-    minutes: 9
-    seconds: 0
+  id: 1
+  name: 
+  scene:
+    sceneAsset: {fileID: 102900000, guid: 41169f98602dee947be480c18c288044, type: 3}
+    scenePath: Assets/Game/Scenes/Levels/Level_0/Level_0.unity
+  estimatedTime: 300
+  penaltyTime: 15
+  addTime: 60
+  remainingTime: 30
   primaryGoals:
   - {fileID: 11400000, guid: fde70720d6218db44a142385e8e51c63, type: 2}
   secondaryGoals: []
+  hasBeenInitialised: 1

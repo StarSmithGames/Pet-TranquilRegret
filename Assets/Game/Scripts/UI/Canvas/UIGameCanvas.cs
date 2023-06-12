@@ -13,7 +13,7 @@ using Zenject;
 
 namespace Game.UI
 {
-    public class UIGameCanvas : UISubCanvas
+    public class UIGameCanvas : UICanvas
     {
 		[field: SerializeField] public Transform GoalContent { get; private set; }
 		[field: Header("Control")]
@@ -24,14 +24,12 @@ namespace Game.UI
 		private List<UIGoal> goals = new List<UIGoal>();
 
 		private SignalBus signalBus;
-		private LevelManager levelManager;
 		private UIGoal.Factory goalFactory;
 
 		[Inject]
-		private void Construct(SignalBus signalBus, LevelManager levelManager, UIGoal.Factory goalFactory)
+		private void Construct(SignalBus signalBus, UIGoal.Factory goalFactory)
 		{
 			this.signalBus = signalBus;
-			this.levelManager = levelManager;
 			this.goalFactory = goalFactory;
 		}
 
@@ -39,26 +37,26 @@ namespace Game.UI
 		{
 			GoalContent.DestroyChildren();
 
-			StarSmithGames.Core.CollectionExtensions.Resize(levelManager.CurrentLevel.PrimaryGoals, goals,
-			() =>
-			{
-				var goal = goalFactory.Create();
-				goal.transform.SetParent(GoalContent);
-				goal.transform.localScale = Vector3.one;
-				return goal;
-			},
-			() =>
-			{
-				var goal = goals.Last();
-				goal.DespawnIt();
+			//StarSmithGames.Core.CollectionExtensions.Resize(levelManager.CurrentLevel.PrimaryGoals, goals,
+			//() =>
+			//{
+			//	var goal = goalFactory.Create();
+			//	goal.transform.SetParent(GoalContent);
+			//	goal.transform.localScale = Vector3.one;
+			//	return goal;
+			//},
+			//() =>
+			//{
+			//	var goal = goals.Last();
+			//	goal.DespawnIt();
 
-				return goal;
-			});
+			//	return goal;
+			//});
 
-			for (int i = 0; i < goals.Count; i++)
-			{
-				goals[i].SetGoal(levelManager.CurrentLevel.PrimaryGoals[i]);
-			}
+			//for (int i = 0; i < goals.Count; i++)
+			//{
+			//	goals[i].SetGoal(levelManager.CurrentLevel.PrimaryGoals[i]);
+			//}
 		}
 	}
 }

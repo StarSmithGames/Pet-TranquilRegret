@@ -29,34 +29,30 @@ namespace Game.HUD.Gameplay
 		[SerializeField] private SliderColor silver;
 		[SerializeField] private SliderColor cooper;
 
-		private Level level;
 		private bool isPause = true;
 		private Timer timer;
 
 		private SignalBus signalBus;
-		private LevelManager levelManager;
 
 		[Inject]
-		private void Construct(SignalBus signalBus, LevelManager levelManager)
+		private void Construct(SignalBus signalBus)
 		{
 			this.signalBus = signalBus;
-			this.levelManager = levelManager;
 		}
 
 		private void Start()
 		{
-			this.level = levelManager.CurrentLevel;
 
 			signalBus?.Subscribe<SignalGameStateChanged>(OnGameStateChanged);
 
-			timer = new Timer((float)level.TotalSeconds, true);
+			//timer = new Timer((float)level.TotalSeconds, true);
 
-			float width = SliderRect.rect.width;
+			//float width = SliderRect.rect.width;
 
-			Separator0.anchoredPosition = new Vector2(level.PercentToSilver * (width + 2.5f), Separator0.anchoredPosition.y);
-			Separator1.anchoredPosition = new Vector2(level.PercentToCooper * (width + 2.5f), Separator1.anchoredPosition.y);
+			//Separator0.anchoredPosition = new Vector2(level.PercentToSilver * (width + 2.5f), Separator0.anchoredPosition.y);
+			//Separator1.anchoredPosition = new Vector2(level.PercentToCooper * (width + 2.5f), Separator1.anchoredPosition.y);
 
-			Slider.value = 0;
+			//Slider.value = 0;
 
 			UpdateUI();
 		}
@@ -68,34 +64,34 @@ namespace Game.HUD.Gameplay
 
 		private void Update()
 		{
-			if (!isPause)
-			{
-				timer.Tick();
-				SetRemainigTime(timer.GetMinutes(), timer.GetSeconds(), timer.GetMilliseconds());
+			//if (!isPause)
+			//{
+			//	timer.Tick();
+			//	SetRemainigTime(timer.GetMinutes(), timer.GetSeconds(), timer.GetMilliseconds());
 
-				level.SetCurrentSeconds(timer.TotalSeconds);
+			//	level.SetCurrentSeconds(timer.TotalSeconds);
 
-				Slider.value = level.CurrentPercent;
+			//	Slider.value = level.CurrentPercent;
 
-				if(level.CurrentReward == LevelReward.Gold)
-				{
-					if (Slider.value >= level.PercentToSilver)
-					{
-						Separator0.gameObject.SetActive(false);
-						level.SetCurrentReward(LevelReward.Silver);
-						UpdateUI();
-					}
-				}
-				else if(level.CurrentReward == LevelReward.Silver)
-				{
-					if (Slider.value >= level.PercentToCooper)
-					{
-						Separator1.gameObject.SetActive(false);
-						level.SetCurrentReward(LevelReward.Cooper);
-						UpdateUI();
-					}
-				}
-			}
+			//	if(level.CurrentReward == LevelReward.Gold)
+			//	{
+			//		if (Slider.value >= level.PercentToSilver)
+			//		{
+			//			Separator0.gameObject.SetActive(false);
+			//			level.SetCurrentReward(LevelReward.Silver);
+			//			UpdateUI();
+			//		}
+			//	}
+			//	else if(level.CurrentReward == LevelReward.Silver)
+			//	{
+			//		if (Slider.value >= level.PercentToCooper)
+			//		{
+			//			Separator1.gameObject.SetActive(false);
+			//			level.SetCurrentReward(LevelReward.Cooper);
+			//			UpdateUI();
+			//		}
+			//	}
+			//}
 		}
 
 		public void SetRemainigTime(int minutes, int seconds, int milliseconds)
@@ -107,14 +103,14 @@ namespace Game.HUD.Gameplay
 
 		private void UpdateUI()
 		{
-			RefreshTime(level.GetEstimateTime());
-			RefreshColor(level.CurrentReward == LevelReward.Gold ? gold : level.CurrentReward == LevelReward.Silver ? silver : cooper);
+			//RefreshTime(level.GetEstimateTime());
+			//RefreshColor(level.CurrentReward == LevelReward.Gold ? gold : level.CurrentReward == LevelReward.Silver ? silver : cooper);
 		}
 
-		private void RefreshTime(GameTime time)
-		{
-			RemainingTime.text = string.Format("{0:00}:{1:00}", time.minutes, time.seconds);
-		}
+		//private void RefreshTime(GameTime time)
+		//{
+		//	RemainingTime.text = string.Format("{0:00}:{1:00}", time.minutes, time.seconds);
+		//}
 
 		private void RefreshColor(SliderColor color)
 		{

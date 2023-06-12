@@ -2,19 +2,19 @@
 
 namespace Game.Managers.LevelManager
 {
-	public abstract class GoalData : ScriptableObject
+	public abstract class GoalConfig : ScriptableObject
 	{
 		public virtual string LocalizationTitleKey => "ui.goals";
 	}
 
-	public abstract class CountableGoalData : GoalData
+	public abstract class CountableGoalConfig : GoalConfig
 	{
 		public Information information;
 		[Min(1)]
 		public int count;
 	}
 
-	public abstract class AbstractGoalData : GoalData
+	public abstract class AbstractGoalConfig : GoalConfig
 	{
 
 	}

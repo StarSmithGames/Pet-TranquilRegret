@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers:
-  - {fileID: 11400000, guid: 3c0be95f5d8a4654c9d837ea93499c34, type: 2}
   - {fileID: 11400000, guid: 6184bd26c588fac41a2f7a7ac650b058, type: 2}
   - {fileID: 11400000, guid: ebd4dd7a9094e3b4694fb048dc6d9e71, type: 2}
   - {fileID: 11400000, guid: 265020d6469432a4184426ec6acd6e31, type: 2}
@@ -79,3 +78,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de3d3f63d445b8945b9658a3e28c538f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameplayConfig: {fileID: 11400000, guid: 03d435281335d2249b7b272d101746d3, type: 2}

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Game.UI
 {
-	public class UIIntermediateCanvas : UISubCanvas
+	public class UIIntermediateCanvas : UICanvas
 	{
 		[field: Space]
 		[field: SerializeField] public UIFadeTransition FadeTransition { get; private set; }

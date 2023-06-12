@@ -1,11 +1,16 @@
 using Game.Managers.LevelManager;
+using Game.Systems.GameSystem;
 using Game.UI;
 
 using StarSmithGames.Core;
 using StarSmithGames.Go;
+using StarSmithGames.Go.SceneManager;
 
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+
+using UnityEditor;
 
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,76 +21,75 @@ namespace Game.HUD.Menu
 {
 	public class LevelWindow : ViewPopupBase
 	{
-		[field: SerializeField] public TMPro.TextMeshProUGUI Title { get; private set; }
-		[field: SerializeField] public Transform GoalContent { get; private set; }
-		[field: SerializeField] public Button StartButton { get; private set; }
-		[field: SerializeField] public Button Blank { get; private set; }
+		public TMPro.TextMeshProUGUI title;
+		public Transform goalContent;
+		public Button startButton;
+		public Button blank;
 
 		private List<UIGoalItem> goals = new List<UIGoalItem>();
-		private LevelSettings settings;
+		private LevelConfig levelConfig;
 
 		private UIMenuCanvas menuCanvas;
 		private UIGoalItem.Factory goalFactory;
-		//private SceneManager sceneManager;
+		private SceneManager sceneManager;
 
 		[Inject]
-		private void Construct(UIMenuCanvas menuCanvas, UIGoalItem.Factory goalFactory/*, SceneManager sceneManager*/)
+		private void Construct(UIMenuCanvas menuCanvas, UIGoalItem.Factory goalFactory, SceneManager sceneManager)
 		{
 			this.menuCanvas = menuCanvas;
 			this.goalFactory = goalFactory;
-			//this.sceneManager = sceneManager;
+			this.sceneManager = sceneManager;
 		}
 
 		private void Start()
 		{
-			StartButton.onClick.AddListener(OnStart);
-			Blank.onClick.AddListener(OnClose);
+			goalContent.DestroyChildren();
 
-			GoalContent.DestroyChildren();
-
+			startButton.onClick.AddListener(OnStart);
+			blank.onClick.AddListener(OnClose);
+			
 			menuCanvas.ViewRegistrator.Registrate(this);
 		}
 
 		private void OnDestroy()
 		{
-			StartButton.onClick.RemoveAllListeners();
-			Blank.onClick.RemoveAllListeners();
+			startButton.onClick.RemoveAllListeners();
+			blank.onClick.RemoveAllListeners();
+
 			menuCanvas.ViewRegistrator.UnRegistrate(this);
 		}
 
-		public void SetLevel(LevelSettings settings)
+		public void SetLevel(LevelConfig levelConfig)
 		{
-			this.settings = settings;
+			this.levelConfig = levelConfig;
 
-			Title.text = $"Level {settings.name.Split("_")[1]}";
+			title.text = $"{levelConfig.name}";
 
-			StarSmithGames.Core.CollectionExtensions.Resize(settings.primaryGoals, goals,
-			() =>
+			goals.Clear();
+			goalContent.DestroyChildren();
+
+			for (int i = 0; i < levelConfig.primaryGoals.Count; i++)
 			{
 				var goal = goalFactory.Create();
-				goal.transform.SetParent(GoalContent);
+				goal.transform.SetParent(goalContent);
 				goal.transform.localScale = Vector3.one;
 				goal.transform.localPosition = Vector3.zero;
 
-				return goal;
-			},
-			() =>
-			{
-				var goal = goals.Last();
-				goal.DespawnIt();
+				goal.SetGoal(levelConfig.primaryGoals[i]);
 
-				return goal;
-			});
-
-			for (int i = 0; i < goals.Count; i++)
-			{
-				goals[i].SetGoal(settings.primaryGoals[i]);
+				goals.Add(goal);
 			}
 		}
 
 		private void OnStart()
 		{
-			//sceneManager.SwitchScene(settings.name, false);
+			var name = Path.GetFileNameWithoutExtension(levelConfig.scene.ScenePath);
+			Debug.LogError(name);
+			Debug.LogError(levelConfig.scene.ScenePath);
+			//sceneManager.LoadSceneAsync(name, true);
+			var scene = UnityEngine.SceneManagement.SceneManager.GetSceneByName(name);
+			Debug.LogError(scene.name);
+			UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(scene.buildIndex, UnityEngine.SceneManagement.LoadSceneMode.Single);
 		}
 
 		private void OnClose()

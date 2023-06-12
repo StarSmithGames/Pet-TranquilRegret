@@ -1,17 +1,18 @@
 using DG.Tweening;
 
-using Game.Managers.LevelManager;
+using Game.Systems.GameSystem;
 using Game.UI;
 using Game.VFX;
 
 using Sirenix.OdinInspector;
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 using UnityEngine;
+using UnityEngine.Assertions;
+using UnityEngine.Playables;
 using UnityEngine.UIElements;
 
 using Zenject;
@@ -20,7 +21,7 @@ namespace Game.HUD.Menu
 {
 	public partial class RoadMap : MonoBehaviour
 	{
-		public bool IsInTransition { get; private set; }
+		public bool IsInProcess { get; private set; }
 
 		public Vector3 TopPoint
 		{
@@ -38,26 +39,31 @@ namespace Game.HUD.Menu
 		private Vector3 topPoint;
 
 		[SerializeField] private VerticalCamera verticalCamera;
-		[Space]
+		[Header("Background")]
 		[SerializeField] private Transform backgroundsContent;
 		[SerializeField] private List<SpriteRenderer> sprites = new List<SpriteRenderer>();
 		[SerializeField] private bool isFitSpriteWidth = true;
-		[Space]
+		[Header("Levels")]
 		[SerializeField] private Transform levelsContent;
 		[SerializeField] private List<UIRoadLevel> levels = new List<UIRoadLevel>();
 		[SerializeField] private List<LevelConnection> connections = new List<LevelConnection>();
 
-		private Data data;
 		private UIRoadPin Pin => menuCanvas.Pin;
 
+		private int lastIndex = -1;
+		private GameProgress gameProgress;
+
+		private GameData gameData;
 		private UIMenuCanvas menuCanvas;
 		private ParticalVFXFootStep.Factory pawStepFactory;
 
 		[Inject]
 		private void Construct(
+			GameData gameData,
 			UIMenuCanvas menuCanvas,
 			[Inject(Id = "StepPawVerticalPrint")] ParticalVFXFootStep.Factory pawStepFactory)
 		{
+			this.gameData = gameData;
 			this.menuCanvas = menuCanvas;
 			this.pawStepFactory = pawStepFactory;
 		}
@@ -66,43 +72,28 @@ namespace Game.HUD.Menu
 		{
 			BackgroundFullRefresh();
 
-			//data = saveLoad.GetStorage().Profile.GetData().map;
-
-			for (int i = 0; i < levels.Count; i++)
+			if (gameData.IsFirstTime.GetData())
 			{
-				if (i < data.levels.Count)
+				gameData.IsFirstTime.SetData(false);
+				gameData.StorageKeeper.GetStorage().GameProgress.SetData(new GameProgress()
 				{
-					levels[i]
-						.SetLevel(data.levels[i])
-						.Enable(true)
-						.onClicked += OnLevelClicked;
-				}
-				else
-				{
-					levels[i]
-						.SetLevel(null)
-						.Enable(false)
-						.onClicked += OnLevelClicked;
-				}
+					progressMainIndex = 0,
+				});
+				gameProgress = gameData.StorageKeeper.GetStorage().GameProgress.GetData();
+				lastIndex = gameProgress.progressMainIndex;
+				gameData.StorageKeeper.Save();
+
+				OpenRoadMap(true);
+			}
+			else
+			{
+				gameProgress = gameData.StorageKeeper.GetStorage().GameProgress.GetData();
+				lastIndex = gameProgress.progressMainIndex;
+
+				OpenRoadMap(false);
 			}
 
-			//if (saveLoad.GetStorage().IsFirstTime.GetData())
-			//{
-			//	var level = new Level.Data();
-			//	levels
-			//		.First()
-			//		.SetLevel(level)
-			//		.Enable(true);
-			//	data.levels.Add(level);
-
-			//	StartCoroutine(FirstTime());
-			//}
-			//else
-			//{
-			//	Vector3 position = levels[data.lastIndex].transform.position;
-			//	verticalCamera.SetPosition(position);
-			//	Pin.transform.position = position;
-			//}
+			LevelsRefresh();
 		}
 
 		private void BackgroundFullRefresh()
@@ -132,13 +123,39 @@ namespace Game.HUD.Menu
 			}
 		}
 
+		private void LevelsRefresh()
+		{
+			var config = gameData.GameplayConfig;
+			Assert.AreEqual(config.levels.Count, levels.Count);
+
+			for (int i = 0; i < levels.Count; i++)
+			{
+				levels[i]
+					.SetLevel(config.levels[i])
+					.Enable(i <= gameProgress.progressMainIndex)
+					.onClicked += OnLevelClicked;
+			}
+		}
+
+		private void OpenRoadMap(bool isFirstTime)
+		{
+			if (isFirstTime)
+			{
+				StartCoroutine(FirstTime());
+			}
+			else
+			{
+				Vector3 position = levels[gameProgress.progressMainIndex].transform.position;
+				verticalCamera.SetPosition(position);
+				Pin.transform.position = position;
+			}
+		}
+
 		private IEnumerator FirstTime()
 		{
-			IsInTransition = true;
+			IsInProcess = true;
 
 			Pin.transform.position = new Vector3(0, -100, 0);
-
-			data.lastIndex = 0;
 
 			yield return new WaitForSeconds(0.5f);
 
@@ -150,34 +167,37 @@ namespace Game.HUD.Menu
 				{
 					Step(pawStepFactory);
 				})
-				.OnComplete(() => IsInTransition = false);
+				.OnComplete(() => IsInProcess = false);
+		}
+
+
+		private void ShowLevelWindow()
+		{
+			var window = menuCanvas.ViewRegistrator.GetAs<LevelWindow>();
+			window.SetLevel(gameData.GetLevelConfig(lastIndex));
+			window.Show();
 		}
 
 		private void OnLevelClicked(UIRoadLevel level)
 		{
-			if (IsInTransition) return;
+			if (IsInProcess) return;
 
 			Pin.transform.DOKill(true);
 
 			if (level.IsEnable)
 			{
 				int index = levels.IndexOf(level);
-				int diff = index - data.lastIndex;
-
-				data.lastIndex = index;
+				int diff = index - lastIndex;
+				lastIndex = index;
 
 				if (diff != 0)
 				{
-					IsInTransition = true;
-
-					data.lastIndex = index;
+					IsInProcess = true;
 
 					if (diff == 1)//up on 1
 					{
 						var connection = connections[levels.IndexOf(level)];
 						var points = connection.GetPoints();
-
-						var data = level.Level;
 
 						Sequence sequence = DOTween.Sequence();
 
@@ -189,21 +209,12 @@ namespace Game.HUD.Menu
 								}))
 							.OnComplete(() =>
 							{
-								IsInTransition = false;
+								IsInProcess = false;
 
-								if (data.stars > 0)
-								{
-									//Restart
-								}
-								else
-								{
-									//Start
-								}
-
-								ShowLevelWindow(index + 1);
+								ShowLevelWindow();
 							});
 					}
-					else//down
+					else//down or up
 					{
 						Sequence sequence = DOTween.Sequence();
 
@@ -213,38 +224,21 @@ namespace Game.HUD.Menu
 							.Append(Pin.transform.DOScale(1, 0.25f).SetEase(Ease.OutBounce))
 							.OnComplete(() =>
 							{
-								IsInTransition = false;
+								IsInProcess = false;
 
-								ShowLevelWindow(index + 1);
+								ShowLevelWindow();
 							});
 					}
 				}
 				else
 				{
-					ShowLevelWindow(index + 1);
+					ShowLevelWindow();
 				}
 			}
-			else
-			{
-				//disabled
-			}
-		}
-
-		private void ShowLevelWindow(int index)
-		{
-			//sceneManager.GetLevelSettings(index, (settings) =>
+			//else
 			//{
-			//	if (settings != null)
-			//	{
-			//		var window = menuCanvas.WindowsRegistrator.GetAs<LevelWindow>();
-			//		window.SetLevel(settings);
-			//		window.Show();
-			//	}
-			//	else
-			//	{
-			//		Debug.LogError("LevelSettings == NULL");
-			//	}
-			//});
+			//	//disabled
+			//}
 		}
 
 		[Button(DirtyOnClick = true)]
@@ -259,18 +253,7 @@ namespace Game.HUD.Menu
 		{
 			BackgroundFullRefresh();
 		}
-
-
-		[System.Serializable]
-		public class Data
-		{
-			public int lastIndex;
-			public List<Level.Data> levels = new List<Level.Data>();
-		}
 	}
-
-
-
 
 	/// <summary>
 	/// Paw steps

@@ -13,9 +13,9 @@ namespace Game.Managers.LevelManager
 
 		public override string LocalizationKey => Data.LocalizationTitleKey;
 
-		public CountableGoalData Data { get; private set; }
+		public CountableGoalConfig Data { get; private set; }
 
-		public GoalBar(CountableGoalData data, float value, float min, float max) : base(value, min, max)
+		public GoalBar(CountableGoalConfig data, float value, float min, float max) : base(value, min, max)
 		{
 			this.Data = data;
 		}

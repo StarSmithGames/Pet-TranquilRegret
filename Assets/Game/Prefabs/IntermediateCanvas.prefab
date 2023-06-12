@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e474380ee20f3549ae2f41d666c5bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CanvasGroup>k__BackingField: {fileID: 7800579039000808168}
+  canvasGroup: {fileID: 7800579039000808168}
 --- !u!1 &8116430762374099361
 GameObject:
   m_ObjectHideFlags: 0
