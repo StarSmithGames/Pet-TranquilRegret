@@ -1,3 +1,4 @@
+using StarSmithGames.Core;
 using StarSmithGames.Core.StorageSystem;
 
 namespace Game.Systems.GameSystem
@@ -7,20 +8,30 @@ namespace Game.Systems.GameSystem
 		public GameplayConfig GameplayConfig => gameplayConfig;
 		private GameplayConfig gameplayConfig;
 
+		#region FastData
+		public bool IsFirstTime
+		{
+			get => InputOutput.PlayerPrefsGet("is_first_time").CastObject<bool>(true);
+			set => InputOutput.PlayerPrefsSet("is_first_time", value);
+		}
+
+		#endregion
+
 		#region Data
-		public FastData<bool> IsFirstTime { get; private set; }
 
 		public ISaveLoadStorage<Storage> StorageKeeper { get; private set; }
 		#endregion
 
-		#region NoSave
+		#region IntermediateData
+		#endregion
+
+		#region Tutorials
 		#endregion
 
 		public GameData(GameplayConfig gameplayConfig)
 		{
 			this.gameplayConfig = gameplayConfig;
 
-			IsFirstTime = new FastData<bool>("is_first_time", true);
 			StorageKeeper = new PlayerPrefsStorageWrapper<Storage>("data");
 		}
 

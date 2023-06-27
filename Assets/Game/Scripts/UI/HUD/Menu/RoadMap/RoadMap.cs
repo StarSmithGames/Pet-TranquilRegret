@@ -72,9 +72,9 @@ namespace Game.HUD.Menu
 		{
 			BackgroundFullRefresh();
 
-			if (gameData.IsFirstTime.GetData())
+			if (gameData.IsFirstTime)
 			{
-				gameData.IsFirstTime.SetData(false);
+				gameData.IsFirstTime = false;
 				gameData.StorageKeeper.GetStorage().GameProgress.SetData(new GameProgress()
 				{
 					progressMainIndex = 0,
