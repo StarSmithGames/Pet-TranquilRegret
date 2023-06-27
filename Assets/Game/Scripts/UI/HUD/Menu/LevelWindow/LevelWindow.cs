@@ -13,6 +13,7 @@ using System.Linq;
 using UnityEditor;
 
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 
 using Zenject;
@@ -86,10 +87,7 @@ namespace Game.HUD.Menu
 			var name = Path.GetFileNameWithoutExtension(levelConfig.scene.ScenePath);
 			Debug.LogError(name);
 			Debug.LogError(levelConfig.scene.ScenePath);
-			//sceneManager.LoadSceneAsync(name, true);
-			var scene = UnityEngine.SceneManagement.SceneManager.GetSceneByName(name);
-			Debug.LogError(scene.name);
-			UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(scene.buildIndex, UnityEngine.SceneManagement.LoadSceneMode.Single);
+			sceneManager.LoadSceneAsyncFromAddressables(name, levelConfig.scene.ScenePath);
 		}
 
 		private void OnClose()
