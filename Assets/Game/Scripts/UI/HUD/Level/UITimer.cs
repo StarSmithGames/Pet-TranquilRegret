@@ -59,7 +59,7 @@ namespace Game.HUD.Gameplay
 
 		private void OnDestroy()
 		{
-			signalBus?.Unsubscribe<SignalGameStateChanged>(OnGameStateChanged);
+			signalBus?.TryUnsubscribe<SignalGameStateChanged>(OnGameStateChanged);
 		}
 
 		private void Update()

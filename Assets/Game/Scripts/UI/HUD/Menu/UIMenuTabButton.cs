@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Game.HUD.Menu
 {
-	public class UIMenuTabButton : UIButton
+	public class UIMenuTabButton : MonoBehaviour
 	{
 		public event UnityAction<UIMenuTabButton> onClicked;
 
@@ -29,22 +29,22 @@ namespace Game.HUD.Menu
 		private RectTransform rectIcon;
 		private RectTransform rectText;
 
-		protected override void Start()
-		{
-			Alert?.gameObject.SetActive(false);
+		//protected override void Start()
+		//{
+		//	Alert?.gameObject.SetActive(false);
 		
-			base.Start();
-		}
+		//	base.Start();
+		//}
 
-		public override void Enable(bool trigger)
-		{
-			base.Enable(trigger);
+		//public override void Enable(bool trigger)
+		//{
+		//	base.Enable(trigger);
 
-			IsSelected = false;
+		//	IsSelected = false;
 
-			Icon.color = trigger ? IsSelected ? selected : diselected : disabled;
-			TextCanvasGroup.Enable(false);
-		}
+		//	Icon.color = trigger ? IsSelected ? selected : diselected : disabled;
+		//	TextCanvasGroup.Enable(false);
+		//}
 
 		public void Select(bool animation = true)
 		{
@@ -117,11 +117,11 @@ namespace Game.HUD.Menu
 			}
 		}
 
-		protected override void OnClick()
-		{
-			base.OnClick();
+		//protected override void OnClick()
+		//{
+		//	base.OnClick();
 
-			onClicked?.Invoke(this);
-		}
+		//	onClicked?.Invoke(this);
+		//}
 	}
 }

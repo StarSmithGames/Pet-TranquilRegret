@@ -35,9 +35,9 @@ namespace Game.Systems.NavigationSystem
 		private CameraSystem.CameraSystem cameraSystem;
 
 		[Inject]
-		private void Construct(UISubCanvas subCanvas, CameraSystem.CameraSystem cameraSystem)
+		private void Construct(UIGameCanvas subCanvas, CameraSystem.CameraSystem cameraSystem)
 		{
-			//this.subCanvas = subCanvas as UIGameCanvas;
+			this.subCanvas = subCanvas;
 			this.cameraSystem = cameraSystem;
 		}
 

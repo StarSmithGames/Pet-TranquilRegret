@@ -23,3 +23,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 285d300613a25204882dc52cac267193, type: 2}
   - {fileID: 11400000, guid: 8bdbf631bd52fea45812cbba20ab2f1c, type: 2}
   - {fileID: 11400000, guid: 5b56ebc87e3c0cb468cf7dcf9f289b70, type: 2}
+  taps:
+  - {fileID: 8300000, guid: 8a7739905fdd6534794155f7b1a8bc6c, type: 3}

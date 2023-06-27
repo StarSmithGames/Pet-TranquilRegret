@@ -1,23 +1,19 @@
 using Game.HUD.Gameplay;
 using Game.Managers.CharacterManager;
-using Game.Managers.LevelManager;
 using Game.Systems.CameraSystem;
-using Game.Systems.NavigationSystem;
 using Game.Systems.PickupableSystem;
+using Game.Systems.SheetSystem.Effects;
 using Game.UI;
-using Game.VFX.Markers;
-using Game.VFX;
 
 using UnityEngine;
 
 using Zenject;
-using Game.Systems.SheetSystem.Effects;
 
 namespace Game.Installers
 {
 	public class GameInstaller : MonoInstaller<GameInstaller>
 	{
-		public UISubCanvas subCanvas;
+		public UIGameCanvas subCanvas;
 		[Header("UI")]
 		public UIGoal goalPrefab;
 		public UIPickup pickupPrefab;

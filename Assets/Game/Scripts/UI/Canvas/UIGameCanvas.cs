@@ -1,11 +1,9 @@
 using Game.HUD.Gameplay;
-using Game.Managers.LevelManager;
 using Game.Systems.NavigationSystem;
 
 using StarSmithGames.Core;
 
 using System.Collections.Generic;
-using System.Linq;
 
 using UnityEngine;
 
@@ -13,7 +11,7 @@ using Zenject;
 
 namespace Game.UI
 {
-    public class UIGameCanvas : UICanvas
+	public class UIGameCanvas : UICanvas
     {
 		[field: SerializeField] public Transform GoalContent { get; private set; }
 		[field: Header("Control")]

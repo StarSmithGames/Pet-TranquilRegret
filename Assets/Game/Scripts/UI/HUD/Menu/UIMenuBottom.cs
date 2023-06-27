@@ -16,7 +16,7 @@ namespace Game.HUD.Menu
 		{
 			Chest.Diselect(false);
 			Map.Select(false);
-			Gallery.Enable(false);
+			//Gallery.Enable(false);
 
 			last = Map;
 
@@ -27,7 +27,7 @@ namespace Game.HUD.Menu
 
 		private void OnClicked(UIMenuTabButton button)
 		{
-			if (!button.IsEnable) return;
+			//if (!button.IsEnable) return;
 			if (last == button) return;
 
 			last?.Diselect();

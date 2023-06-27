@@ -1,4 +1,5 @@
 using Game.Managers.GameManager;
+using Game.Services.VSFXService;
 using Game.Systems.GameSystem;
 
 using StarSmithGames.Go.ApplicationHandler;
@@ -15,16 +16,17 @@ namespace Game.Installers
 
 		public override void InstallBindings()
 		{
-			Container.BindInstance(Container.InstantiateComponentOnNewGameObject<AsyncManager>());
+			Container.BindInterfacesAndSelfTo<SceneManager>().AsSingle().NonLazy();
+			Container.BindInterfacesAndSelfTo<VSFXService>().AsSingle().NonLazy();
+			
+			Container.BindInstance(gameplayConfig).WhenInjectedInto<GameData>();
+			Container.BindInterfacesAndSelfTo<GameData>().AsSingle().NonLazy();
 
 			SignalBusInstaller.Install(Container);
-
-			Container.BindInterfacesAndSelfTo<SceneManager>().AsSingle().NonLazy();
 			ApplicationHandlerInstaller.Install(Container);
 			GameManagerInstaller.Install(Container);
 
-			Container.BindInstance(gameplayConfig).WhenInjectedInto<GameData>();
-			Container.BindInterfacesAndSelfTo<GameData>().AsSingle().NonLazy();
+			Container.BindInstance(Container.InstantiateComponentOnNewGameObject<AsyncManager>());
 		}
 	}
 }

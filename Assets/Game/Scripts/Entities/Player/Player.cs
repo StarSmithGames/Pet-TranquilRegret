@@ -36,10 +36,10 @@ namespace Game.Entities
 		private GroundImplementation groundImplementation;
 
 		[Inject]
-		private void Construct(UISubCanvas subCanvas,
+		private void Construct(UIGameCanvas subCanvas,
 			GroudImplementationFactory groudImplementationFactory)
 		{
-			//this.subCanvas = subCanvas as UIGameCanvas;
+			this.subCanvas = subCanvas;
 			groundImplementation = groudImplementationFactory.Create(this);
 
 			Sheet = new PlayerSheet(this);

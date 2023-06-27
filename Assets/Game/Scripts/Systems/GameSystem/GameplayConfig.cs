@@ -13,5 +13,8 @@ namespace Game.Systems.GameSystem
 	{
 		[ListDrawerSettings(ShowIndexLabels = true, ListElementLabelName = "Title")]
 		public List<LevelConfig> levels = new List<LevelConfig>();
+
+		[Header("Audio")]
+		public List<AudioClip> taps = new List<AudioClip>();
 	}
 }
