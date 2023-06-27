@@ -7,14 +7,14 @@
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "3.1.0"
       },
-      "hash": "fd67df942c6ac3d2408adc2092b06ac94da32d8b"
+      "hash": "82446d12779441e45c0d56a460255d51120056e2"
     },
     "com.starsmithgames.go": {
       "version": "https://github.com/StarSmithGames/com.starsmithgames.go.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "4da30fac94341f095507befacb4abc4f69b9eb45"
+      "hash": "411318153039f14622fc5e9ceb068ef1aaae091b"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
