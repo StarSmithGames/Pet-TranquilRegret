@@ -6,7 +6,7 @@ using StarSmithGames.Go.VibrationService;
 
 using Zenject;
 
-namespace Game.Services.VSFXService
+namespace Game.Services
 {
     public class VSFXService
     {

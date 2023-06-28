@@ -9,6 +9,12 @@ namespace Game.Systems.GameSystem
 		private GameplayConfig gameplayConfig;
 
 		#region FastData
+		public bool IsGDPRApplied
+		{
+			get => InputOutput.PlayerPrefsGet("is_gdpr_applied").CastObject<bool>(false);
+			set => InputOutput.PlayerPrefsSet("is_gdpr_applied", value);
+		}
+
 		public bool IsFirstTime
 		{
 			get => InputOutput.PlayerPrefsGet("is_first_time").CastObject<bool>(true);

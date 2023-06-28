@@ -1,5 +1,5 @@
 using Game.Managers.GameManager;
-using Game.Services.VSFXService;
+using Game.Services;
 using Game.Systems.GameSystem;
 
 using StarSmithGames.Go.ApplicationHandler;
@@ -17,6 +17,7 @@ namespace Game.Installers
 		public override void InstallBindings()
 		{
 			Container.BindInterfacesAndSelfTo<SceneManager>().AsSingle().NonLazy();
+			Container.BindInterfacesAndSelfTo<ViewService>().AsSingle().NonLazy();
 			Container.BindInterfacesAndSelfTo<VSFXService>().AsSingle().NonLazy();
 			
 			Container.BindInstance(gameplayConfig).WhenInjectedInto<GameData>();
