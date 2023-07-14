@@ -16,7 +16,7 @@ namespace Game.Systems.GameSystem
     {
 		[Inject] private GameData gameData;
 		[Inject] private ViewService viewService;
-		[Inject] private TransitionManager transitionManager;
+		//[Inject] private TransitionManager transitionManager;
 
 		private GDPRDialog window;
 

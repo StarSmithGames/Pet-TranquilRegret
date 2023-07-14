@@ -17,10 +17,10 @@ namespace Game.Managers.TransitionManager
 		{
 			Container.BindInstance(infinityLoadingSettings).WhenInjectedInto<InfinityLoading>();
 
-			Container
-				.Bind<InfinityLoading>()
-				.FromComponentInNewPrefab(infinityLoadingPrefab).AsSingle().NonLazy();
-			Container.BindInterfacesAndSelfTo<TransitionManager>().AsSingle();
+			//Container
+			//	.Bind<InfinityLoading>()
+			//	.FromComponentInNewPrefab(infinityLoadingPrefab).AsSingle().NonLazy();
+			//Container.BindInterfacesAndSelfTo<TransitionManager>().AsSingle();
 		}
 	}
 }
