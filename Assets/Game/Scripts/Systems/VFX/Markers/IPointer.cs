@@ -1,4 +1,5 @@
-using StarSmithGames.Go;
+using StarSmithGames.IoC;
+
 using UnityEngine;
 
 namespace Game.VFX.Markers

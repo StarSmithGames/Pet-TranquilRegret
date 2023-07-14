@@ -1,20 +1,36 @@
 {
   "dependencies": {
-    "com.starsmithgames.core": {
-      "version": "https://github.com/StarSmithGames/com.starsmithgames.core.git",
+    "com.starsmithgames.analytics": {
+      "version": "0.2.8",
       "depth": 0,
-      "source": "git",
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://registry.npmjs.org"
+    },
+    "com.starsmithgames.core": {
+      "version": "0.2.6",
+      "depth": 0,
+      "source": "registry",
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "3.1.0"
       },
-      "hash": "82446d12779441e45c0d56a460255d51120056e2"
+      "url": "https://registry.npmjs.org"
     },
     "com.starsmithgames.go": {
-      "version": "https://github.com/StarSmithGames/com.starsmithgames.go.git",
+      "version": "0.3.9",
       "depth": 0,
-      "source": "git",
+      "source": "registry",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.1.0"
+      },
+      "url": "https://registry.npmjs.org"
+    },
+    "com.starsmithgames.ioc": {
+      "version": "1.0.1",
+      "depth": 0,
+      "source": "registry",
       "dependencies": {},
-      "hash": "6101ace3384388b0888e8f95d90caf8363a087c0"
+      "url": "https://registry.npmjs.org"
     },
     "com.unity.2d.sprite": {
       "version": "1.0.0",

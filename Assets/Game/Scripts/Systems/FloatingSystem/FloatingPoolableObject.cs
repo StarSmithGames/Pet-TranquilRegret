@@ -1,6 +1,6 @@
 using DG.Tweening;
 
-using StarSmithGames.Go;
+using StarSmithGames.IoC;
 
 namespace Game.Systems.FloatingSystem
 {

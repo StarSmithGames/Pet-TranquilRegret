@@ -1,4 +1,4 @@
-using StarSmithGames.Go;
+using StarSmithGames.IoC;
 
 using UnityEngine;
 using UnityEngine.UI;

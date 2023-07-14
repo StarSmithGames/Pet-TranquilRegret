@@ -1,6 +1,6 @@
 using Game.Managers.GameManager;
-using StarSmithGames.Go.AsyncManager;
 using StarSmithGames.Go.SceneManager;
+using StarSmithGames.IoC.AsyncManager;
 
 using System;
 using System.Collections;

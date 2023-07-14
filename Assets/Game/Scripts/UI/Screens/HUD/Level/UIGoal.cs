@@ -2,7 +2,7 @@ using DG.Tweening;
 
 using Game.Managers.LevelManager;
 
-using StarSmithGames.Go;
+using StarSmithGames.IoC;
 
 using UnityEngine;
 using UnityEngine.UI;

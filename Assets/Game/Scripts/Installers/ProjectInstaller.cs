@@ -3,8 +3,8 @@ using Game.Services;
 using Game.Systems.GameSystem;
 
 using StarSmithGames.Go.ApplicationHandler;
-using StarSmithGames.Go.AsyncManager;
 using StarSmithGames.Go.SceneManager;
+using StarSmithGames.IoC.AsyncManager;
 
 using Zenject;
 

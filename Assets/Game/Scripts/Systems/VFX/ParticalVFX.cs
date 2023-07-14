@@ -1,6 +1,6 @@
 using Sirenix.OdinInspector;
 
-using StarSmithGames.Go;
+using StarSmithGames.IoC;
 
 using UnityEngine;
 
