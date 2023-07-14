@@ -1,13 +1,16 @@
+using StarSmithGames.Go;
+using StarSmithGames.Go.SceneManager;
+
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Game.Managers.TransitionManager
 {
-	public class InfinityLoading
+	public class InfinityLoading : ViewBase
 	{
 		public bool IsLoading { get; private set; } = false;
+
+		private IProgressHandler progressHandler;
 
 		private InfinityLoadingSettings settings;
 
@@ -16,10 +19,31 @@ namespace Game.Managers.TransitionManager
 			this.settings = settings;
 		}
 
-		//public void StartLoading(BuildProgressHandle progressHandler, UnityAction callback = null)
-		//{
-		//	asyncManager.StartCoroutine(Loading(progressHandler, callback));
-		//}
+		public InfinityLoading StartProgress(float speed = 50f)
+		{
+			var fictProgressHandle = new FictProgressHandler();
+			fictProgressHandle.speed = speed;
+
+			progressHandler = fictProgressHandle;
+
+			return this;
+		}
+
+		public InfinityLoading StartProgress(BuildProgressHandler buildProgressHandler)
+		{
+			progressHandler = buildProgressHandler;
+
+			return this;
+		}
+
+		public IEnumerator WaitUntilDone()
+		{
+			if(progressHandler != null)
+			{
+				yield return new WaitUntil(() => progressHandler.IsDone);
+			}
+		}
+
 
 		//public void StartLoading(AddressablesProgressHandle progressHandler, UnityAction callback = null)
 		//{

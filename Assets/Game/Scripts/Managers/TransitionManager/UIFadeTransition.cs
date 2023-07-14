@@ -4,7 +4,7 @@ using StarSmithGames.Go;
 
 namespace Game.Managers.TransitionManager
 {
-    public class UIFadeTransition : ViewBase, ITransitable
+    public class UIFadeTransition : ViewBase
     {
 		private void Start()
 		{

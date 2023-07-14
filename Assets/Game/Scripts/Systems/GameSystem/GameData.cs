@@ -21,6 +21,17 @@ namespace Game.Systems.GameSystem
 			set => InputOutput.PlayerPrefsSet("is_first_time", value);
 		}
 
+		public int TimeInGame
+		{
+			get => InputOutput.PlayerPrefsGet("time_in_game").CastObject<int>(0);
+			set => InputOutput.PlayerPrefsSet("time_in_game", value);
+		}
+
+		public int SessionsCount
+		{
+			get => InputOutput.PlayerPrefsGet("sessions_count").CastObject<int>(0);
+			set => InputOutput.PlayerPrefsSet("sessions_count", value);
+		}
 		#endregion
 
 		#region Data
