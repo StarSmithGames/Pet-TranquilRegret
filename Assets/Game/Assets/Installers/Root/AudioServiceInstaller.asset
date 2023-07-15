@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: AudioServiceInstaller
   m_EditorClassIdentifier: 
   poolSize: 2
-  audioMixer: {fileID: 0}
+  audioMixer: {fileID: 24100000, guid: d7318c948ccebbe4c9791facf2f6ff96, type: 2}

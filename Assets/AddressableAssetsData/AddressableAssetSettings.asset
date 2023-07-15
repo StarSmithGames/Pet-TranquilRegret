@@ -44,6 +44,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 89ea12508040d9f43bf566047f9280ab, type: 2}
   - {fileID: 11400000, guid: cc8b1589f933fa94a9d4a5c598c91d13, type: 2}
   - {fileID: 11400000, guid: 1a4e639132fd4ea42bc94e1acc2272a7, type: 2}
+  - {fileID: 11400000, guid: 278dc0b17eea8e24fa1cdd381aa9f832, type: 2}
+  - {fileID: 11400000, guid: 348163aed6475a545a2e53b4cdb67994, type: 2}
+  - {fileID: 11400000, guid: 1954560f5eed1414ebdb74d2528f32a5, type: 2}
+  - {fileID: 11400000, guid: edb8d6cd0e1286c4a9aa5c8b20332dc6, type: 2}
+  - {fileID: 11400000, guid: 55349b21991dce843b99a509610b8d57, type: 2}
+  - {fileID: 11400000, guid: 1672e7b983ef2b747b152a308af5e492, type: 2}
+  - {fileID: 11400000, guid: 690e756fc58f6bb44b7498ce5a874583, type: 2}
+  - {fileID: 11400000, guid: 17c3ed2bd4bb51643bd0b2eba38a9295, type: 2}
+  - {fileID: 11400000, guid: b4ef844e16e90a14e9be9048161f01e5, type: 2}
+  - {fileID: 11400000, guid: 9a9950731f1358a4db43ee562ce0748f, type: 2}
+  - {fileID: 11400000, guid: ad5d266b8863bfa44b0ea193c62e74d0, type: 2}
+  - {fileID: 11400000, guid: f7582a4b9aaeeb549a9f331c1033c79c, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -85,6 +97,18 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - Locale
+    - Locale-en
+    - Preload
+    - Locale-ru
+    - Locale-de
+    - Locale-fr
+    - Locale-pt-BR
+    - Locale-it
+    - Locale-es
+    - Locale-ja
+    - Locale-ko
+    - Locale-zh
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: aa7697ec5b056c04085eedd4937d0948, type: 2}

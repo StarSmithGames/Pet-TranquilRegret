@@ -1,10 +1,9 @@
-using Game.Managers.LevelManager;
-
 using Sirenix.OdinInspector;
 
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.Localization;
 
 namespace Game.Systems.GameSystem
 {
@@ -16,5 +15,22 @@ namespace Game.Systems.GameSystem
 
 		[Header("Audio")]
 		public List<AudioClip> taps = new List<AudioClip>();
+
+		public LocalizationSettins localizationSettins;
+	}
+
+	[System.Serializable]
+	public class LocalizationSettins
+	{
+		public List<Flag> flags = new List<Flag>();
+	}
+
+
+	[System.Serializable]
+	public class Flag
+	{
+		public Sprite sprite;
+		public Locale locale;
+		public string country;
 	}
 }

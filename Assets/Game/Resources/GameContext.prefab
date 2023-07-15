@@ -1691,7 +1691,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7455436456768104576}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 383666725475838932}
+        m_TargetAssemblyTypeName: Game.Systems.SettingsSystem.SettingsButtonHUD,
+          Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!225 &6659865258340394976
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2435,7 +2448,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5639390187709535748, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639390187709535748, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5639390187709535748, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5639390187709535748, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
@@ -2463,7 +2484,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6130126916346775702, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6130126916346775702, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6130126916346775702, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6130126916346775702, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
@@ -2535,7 +2564,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7281639325625350929, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7281639325625350929, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7281639325625350929, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
+      propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7281639325625350929, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
@@ -2588,7 +2625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7884134997334267532, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
       propertyPath: m_Name
-      value: SettingsWindow
+      value: SettingsDialog
       objectReference: {fileID: 0}
     - target: {fileID: 8314589785926708086, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
       propertyPath: m_AnchorMax.y

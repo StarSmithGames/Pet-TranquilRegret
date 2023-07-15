@@ -1,12 +1,14 @@
 using StarSmithGames.Core;
 using StarSmithGames.Core.StorageSystem;
 
+using Zenject;
+
 namespace Game.Systems.GameSystem
 {
 	public class GameData
 	{
-		public GameplayConfig GameplayConfig => gameplayConfig;
-		private GameplayConfig gameplayConfig;
+		[Inject]
+		public GameplayConfig GameplayConfig { get; private set; }
 
 		#region FastData
 		public bool IsGDPRApplied
@@ -32,10 +34,21 @@ namespace Game.Systems.GameSystem
 			get => InputOutput.PlayerPrefsGet("sessions_count").CastObject<int>(0);
 			set => InputOutput.PlayerPrefsSet("sessions_count", value);
 		}
+
+		public int LevelNumber
+		{
+			get => InputOutput.PlayerPrefsGet("level_number").CastObject<int>(1);
+			set => InputOutput.PlayerPrefsSet("level_number", value);
+		}
+
+		public int LanguageIndex
+		{
+			get => InputOutput.PlayerPrefsGet("language").CastObject<int>(0);
+			set => InputOutput.PlayerPrefsSet("language", value);
+		}
 		#endregion
 
 		#region Data
-
 		public ISaveLoadStorage<Storage> StorageKeeper { get; private set; }
 		#endregion
 
@@ -45,16 +58,14 @@ namespace Game.Systems.GameSystem
 		#region Tutorials
 		#endregion
 
-		public GameData(GameplayConfig gameplayConfig)
+		public GameData()
 		{
-			this.gameplayConfig = gameplayConfig;
-
 			StorageKeeper = new PlayerPrefsStorageWrapper<Storage>("data");
 		}
 
-		public LevelConfig GetLevelConfig(int index)
+		public LevelConfig GetLevelConfig(int number)
 		{
-			return gameplayConfig.levels[index];
+			return GameplayConfig.levels[number - 1];
 		}
 
 		public GameProgress GameProgress => StorageKeeper.GetStorage().GameProgress.GetData();

@@ -25,3 +25,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5b56ebc87e3c0cb468cf7dcf9f289b70, type: 2}
   taps:
   - {fileID: 8300000, guid: 8a7739905fdd6534794155f7b1a8bc6c, type: 3}
+  localizationSettins:
+    flags:
+    - sprite: {fileID: 21300000, guid: dbfe5f6257b3b2941a4fa2b33e439104, type: 3}
+      locale: {fileID: 11400000, guid: 04ac04001f91d88478fb592b9d29fc54, type: 2}
+      country: English
+    - sprite: {fileID: 21300000, guid: 117a68155f9c06c41901c1cc0614f33f, type: 3}
+      locale: {fileID: 11400000, guid: 34a7e2759a474674e8b465f535bd7201, type: 2}
+      country: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439"
+    - sprite: {fileID: 21300000, guid: c0c2d0e893821bf4a93d648ce4cb4a6d, type: 3}
+      locale: {fileID: 11400000, guid: 69024ca5d42a1e04280713d507d1106f, type: 2}
+      country: Deutsch

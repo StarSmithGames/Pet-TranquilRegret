@@ -173,8 +173,8 @@ namespace Game.HUD.Menu
 
 		private void ShowLevelWindow()
 		{
-			var window = menuCanvas.ViewRegistrator.GetAs<LevelWindow>();
-			window.SetLevel(gameData.GetLevelConfig(lastIndex));
+			var window = menuCanvas.ViewRegistrator.GetAs<LevelDialog>();
+			window.SetLevel(gameData.GetLevelConfig(lastIndex + 1));
 			window.Show();
 		}
 

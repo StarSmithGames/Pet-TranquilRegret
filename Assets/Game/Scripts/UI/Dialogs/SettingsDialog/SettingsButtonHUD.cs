@@ -28,7 +28,7 @@ namespace Game.Systems.SettingsSystem
 		public void OnClick()
 		{
 			gameManager.ChangeState(GameState.Pause);
-			subCanvas.ViewRegistrator.Show<SettingsWindow>();
+			subCanvas.ViewRegistrator.Show<SettingsDialog>();
 			Enable(false);
 		}
 
