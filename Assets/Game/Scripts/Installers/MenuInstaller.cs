@@ -18,7 +18,7 @@ namespace Game.Installers
 				.FromComponentInNewPrefab(goalPrefab)
 				.AsSingle();
 
-			Container.BindInstance(menuCanvas);
+			Container.Bind<UICanvas>().FromInstance(menuCanvas);
 		}
 	}
 }

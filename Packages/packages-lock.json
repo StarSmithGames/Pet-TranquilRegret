@@ -17,7 +17,7 @@
       "url": "https://registry.npmjs.org"
     },
     "com.starsmithgames.go": {
-      "version": "0.4.4",
+      "version": "0.4.6",
       "depth": 0,
       "source": "registry",
       "dependencies": {

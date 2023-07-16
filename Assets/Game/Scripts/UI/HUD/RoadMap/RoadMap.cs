@@ -60,11 +60,11 @@ namespace Game.HUD.Menu
 		[Inject]
 		private void Construct(
 			GameData gameData,
-			UIMenuCanvas menuCanvas,
+			UICanvas menuCanvas,
 			[Inject(Id = "StepPawVerticalPrint")] ParticalVFXFootStep.Factory pawStepFactory)
 		{
 			this.gameData = gameData;
-			this.menuCanvas = menuCanvas;
+			this.menuCanvas = menuCanvas as UIMenuCanvas;
 			this.pawStepFactory = pawStepFactory;
 		}
 

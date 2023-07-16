@@ -2,6 +2,7 @@ using Game.Systems.GameSystem;
 
 using StarSmithGames.Go.LocalizationSystem;
 
+using System.Collections.Generic;
 using System.Linq;
 
 using UnityEngine;
@@ -15,14 +16,18 @@ namespace Game.Systems.SettingsSystem
 	{
 		public Image flag;
 		public TMPro.TextMeshProUGUI country;
+		public Button left;
+		public Button right;
 
 		[Inject] private GameData gameData;
 		[Inject] private LocalizationSystem localizationSystem;
 
-		private int currentIndex = -1;
+		private LocalizationSettins settins;
 
 		private void Awake()
 		{
+			settins = gameData.GameplayConfig.localizationSettins;
+
 			localizationSystem.onLocalizationChanged += OnLocalizationChanged;
 			OnLocalizationChanged();
 		}
@@ -37,19 +42,34 @@ namespace Game.Systems.SettingsSystem
 
 		public void OnLeftClick()
 		{
+			left.interactable = false;
+			right.interactable = false;
 
+			gameData.LanguageIndex = (gameData.LanguageIndex - 1 + settins.flags.Count) % settins.flags.Count;
+			UpdateLocalization();
 		}
 
 		public void OnRightClick()
 		{
+			left.interactable = false;
+			right.interactable = false;
 
+			gameData.LanguageIndex = (gameData.LanguageIndex + 1) % settins.flags.Count;
+			UpdateLocalization();
+		}
+
+		private void UpdateLocalization()
+		{
+			localizationSystem.ChangeLocale(gameData.LanguageIndex);
 		}
 
 		private void OnLocalizationChanged()
 		{
-			var flags = gameData.GameplayConfig.localizationSettins.flags;
-			var data = flags.Find((x) => x.locale == localizationSystem.CurrentLocale);
-			data = data ?? flags.First();
+			left.interactable = true;
+			right.interactable = true;
+
+			var data = settins.flags.Find((x) => x.locale == localizationSystem.CurrentLocale);
+			data = data ?? settins.flags.First();
 
 			flag.sprite = data.sprite;
 			country.text = data.country;

@@ -18,39 +18,43 @@ MonoBehaviour:
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 3456700416
+  - m_Id: 2898857984
     m_Localized: Map
     m_Metadata:
       m_Items: []
-  - m_Id: 3502837760
+  - m_Id: 2944995328
     m_Localized: Chest
     m_Metadata:
       m_Items: []
-  - m_Id: 3507032064
+  - m_Id: 2944995329
     m_Localized: Gallery
     m_Metadata:
       m_Items: []
-  - m_Id: 3507032065
+  - m_Id: 2944995330
     m_Localized: Level
     m_Metadata:
       m_Items: []
-  - m_Id: 3507032066
+  - m_Id: 2949189632
     m_Localized: Let's Go!
     m_Metadata:
       m_Items: []
-  - m_Id: 3507032067
+  - m_Id: 2949189633
+    m_Localized: Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2949189634
     m_Localized: Pause
     m_Metadata:
       m_Items: []
-  - m_Id: 3507032068
+  - m_Id: 2949189635
     m_Localized: Vibration
     m_Metadata:
       m_Items: []
-  - m_Id: 3507032069
+  - m_Id: 2949189636
     m_Localized: Language
     m_Metadata:
       m_Items: []
-  - m_Id: 3507032070
+  - m_Id: 2949189637
     m_Localized: Back to menu
     m_Metadata:
       m_Items: []

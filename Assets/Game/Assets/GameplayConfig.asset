@@ -30,7 +30,7 @@ MonoBehaviour:
     - sprite: {fileID: 21300000, guid: dbfe5f6257b3b2941a4fa2b33e439104, type: 3}
       locale: {fileID: 11400000, guid: 04ac04001f91d88478fb592b9d29fc54, type: 2}
       country: English
-    - sprite: {fileID: 21300000, guid: 117a68155f9c06c41901c1cc0614f33f, type: 3}
+    - sprite: {fileID: 21300000, guid: cdd90adc1d6c6434c906706ad2a64557, type: 3}
       locale: {fileID: 11400000, guid: 34a7e2759a474674e8b465f535bd7201, type: 2}
       country: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439"
     - sprite: {fileID: 21300000, guid: c0c2d0e893821bf4a93d648ce4cb4a6d, type: 3}

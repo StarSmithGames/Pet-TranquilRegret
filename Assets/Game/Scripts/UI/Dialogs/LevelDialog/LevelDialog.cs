@@ -28,18 +28,19 @@ namespace Game.UI
 		private List<UIGoalItem> goals = new List<UIGoalItem>();
 		private LevelConfig levelConfig;
 
-		private UIMenuCanvas menuCanvas;
+		private UICanvas subCanvas;
 		private UIGoalItem.Factory goalFactory;
 		private SceneManager sceneManager;
 		private LocalizationSystem localizationSystem;
 
 		[Inject]
-		private void Construct(UIMenuCanvas menuCanvas,
+		private void Construct(
+			UICanvas subCanvas,
 			UIGoalItem.Factory goalFactory,
 			SceneManager sceneManager,
 			LocalizationSystem localizationSystem)
 		{
-			this.menuCanvas = menuCanvas;
+			this.subCanvas = subCanvas;
 			this.goalFactory = goalFactory;
 			this.sceneManager = sceneManager;
 			this.localizationSystem = localizationSystem;
@@ -47,13 +48,13 @@ namespace Game.UI
 
 		private void Awake()
 		{
-			menuCanvas.ViewRegistrator.Registrate(this);
+			subCanvas.ViewRegistrator.Registrate(this);
 			goalContent.DestroyChildren();
 		}
 
 		private void OnDestroy()
 		{
-			menuCanvas.ViewRegistrator.UnRegistrate(this);
+			subCanvas.ViewRegistrator.UnRegistrate(this);
 		}
 
 		public override void Show(Action callback = null)

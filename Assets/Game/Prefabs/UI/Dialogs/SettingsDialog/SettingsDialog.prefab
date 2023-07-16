@@ -356,6 +356,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flag: {fileID: 2804113681212409933}
   country: {fileID: 3187116429868965854}
+  left: {fileID: 7928937252096562748}
+  right: {fileID: 5573168337567647691}
 --- !u!1 &3347764455720317237
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,7 +898,6 @@ GameObject:
   - component: {fileID: 3286159322522774740}
   - component: {fileID: 1947113739828470349}
   - component: {fileID: 3810268433900746999}
-  - component: {fileID: 3222013101048410851}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1015,26 +1016,12 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 125, y: 0, z: 125, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &3222013101048410851
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6309346512334394151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e185492179cac9d47865a0bf546cde29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  label: {fileID: 3810268433900746999}
-  id: ui.settings_dialog.title
 --- !u!1 &6437593586873613777
 GameObject:
   m_ObjectHideFlags: 0
@@ -1701,6 +1688,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 4796838534625553524}
+  title: {fileID: 3810268433900746999}
+  backButton: {fileID: 2063378215925518610}
 --- !u!1 &8089562962379547038
 GameObject:
   m_ObjectHideFlags: 0
@@ -2070,7 +2059,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 117a68155f9c06c41901c1cc0614f33f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cdd90adc1d6c6434c906706ad2a64557, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

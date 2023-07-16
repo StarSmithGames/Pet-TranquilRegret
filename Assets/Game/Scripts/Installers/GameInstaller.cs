@@ -21,7 +21,7 @@ namespace Game.Installers
 		public override void InstallBindings()
 		{
 			Container.BindInstance(FindObjectOfType<CameraSystem>());
-			Container.BindInstance(subCanvas).NonLazy();
+			Container.Bind<UICanvas>().FromInstance(subCanvas);
 
 			Container.BindFactory<UIGoal, UIGoal.Factory>()
 				.FromComponentInNewPrefab(goalPrefab)

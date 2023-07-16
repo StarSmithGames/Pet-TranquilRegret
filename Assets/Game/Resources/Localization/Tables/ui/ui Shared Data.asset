@@ -15,50 +15,54 @@ MonoBehaviour:
   m_TableCollectionName: ui
   m_TableCollectionNameGuidString: ae17e025c881dc244b55e636edcb9ff8
   m_Entries:
-  - m_Id: 3456700416
+  - m_Id: 2898857984
     m_Key: ui.hud.map
     m_Metadata:
       m_Items: []
-  - m_Id: 3502837760
+  - m_Id: 2944995328
     m_Key: ui.hud.chest
     m_Metadata:
       m_Items: []
-  - m_Id: 3507032064
+  - m_Id: 2944995329
     m_Key: ui.hud.gallery
     m_Metadata:
       m_Items: []
-  - m_Id: 3507032065
+  - m_Id: 2944995330
     m_Key: ui.level_dialog.title
     m_Metadata:
       m_Items: []
-  - m_Id: 3507032066
+  - m_Id: 2949189632
     m_Key: ui.level_dialog.start
     m_Metadata:
       m_Items: []
-  - m_Id: 3507032067
-    m_Key: ui.settings_dialog.title
+  - m_Id: 2949189633
+    m_Key: ui.settings_dialog.title_menu
     m_Metadata:
       m_Items: []
-  - m_Id: 3507032068
+  - m_Id: 2949189634
+    m_Key: ui.settings_dialog.title_game
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2949189635
     m_Key: ui.settings_dialog.vibration
     m_Metadata:
       m_Items: []
-  - m_Id: 3507032069
+  - m_Id: 2949189636
     m_Key: ui.settings_dialog.language
     m_Metadata:
       m_Items: []
-  - m_Id: 3507032070
+  - m_Id: 2949189637
     m_Key: ui.settings_dialog.back
     m_Metadata:
       m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
-    rid: 5505344134601506910
+    rid: 5505344150279290884
   references:
     version: 2
     RefIds:
-    - rid: 5505344134601506910
+    - rid: 5505344150279290884
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
-        m_CustomEpoch: 1689437725626
+        m_CustomEpoch: 1689496291741
