@@ -12,7 +12,6 @@ using System.Linq;
 
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Playables;
 using UnityEngine.UIElements;
 
 using Zenject;
@@ -23,30 +22,15 @@ namespace Game.HUD.Menu
 	{
 		public bool IsInProcess { get; private set; }
 
-		public Vector3 TopPoint
-		{
-			get
-			{
-				if(topPoint == Vector3.zero)
-				{
-					topPoint = sprites.Last().transform.position;
-					topPoint.y += sprites.Last().bounds.size.y / 2;
-				}
-
-				return topPoint;
-			}
-		}
-		private Vector3 topPoint;
-
-		[SerializeField] private VerticalCamera verticalCamera;
+		public VerticalCamera verticalCamera;
 		[Header("Background")]
-		[SerializeField] private Transform backgroundsContent;
-		[SerializeField] private List<SpriteRenderer> sprites = new List<SpriteRenderer>();
-		[SerializeField] private bool isFitSpriteWidth = true;
+		public Transform backgroundsContent;
+		public List<SpriteRenderer> sprites = new List<SpriteRenderer>();
+		public bool isFitSpriteWidth = true;
 		[Header("Levels")]
-		[SerializeField] private Transform levelsContent;
-		[SerializeField] private List<UIRoadLevel> levels = new List<UIRoadLevel>();
-		[SerializeField] private List<LevelConnection> connections = new List<LevelConnection>();
+		public Transform levelsContent;
+		public List<UIRoadLevel> levels = new List<UIRoadLevel>();
+		public List<LevelConnection> connections = new List<LevelConnection>();
 
 		private UIRoadPin Pin => menuCanvas.Pin;
 

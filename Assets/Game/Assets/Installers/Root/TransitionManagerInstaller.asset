@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6554fca970c1f44c888862023999027, type: 3}
   m_Name: TransitionManagerInstaller
   m_EditorClassIdentifier: 
-  subCanvasPrefab: {fileID: 8116430763052684992, guid: eedfa218ee07a3849be6e33e3fda768e, type: 3}
+  infinityLoadingPrefab: {fileID: 3138819551661671058, guid: 37574dc35297cc849a8e3382503497d3, type: 3}
   infinityLoadingSettings:
     progressAnimationMultiplier: 1

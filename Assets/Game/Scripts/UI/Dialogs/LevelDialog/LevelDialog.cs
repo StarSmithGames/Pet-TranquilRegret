@@ -1,4 +1,5 @@
 using Game.Managers.LevelManager;
+using Game.Managers.TransitionManager;
 using Game.Systems.GameSystem;
 using Game.UI;
 
@@ -10,6 +11,7 @@ using StarSmithGames.Go.SceneManager;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Transactions;
 
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -31,6 +33,7 @@ namespace Game.UI
 		private UICanvas subCanvas;
 		private UIGoalItem.Factory goalFactory;
 		private SceneManager sceneManager;
+		private TransitionManager transitionManager;
 		private LocalizationSystem localizationSystem;
 
 		[Inject]
@@ -38,11 +41,13 @@ namespace Game.UI
 			UICanvas subCanvas,
 			UIGoalItem.Factory goalFactory,
 			SceneManager sceneManager,
+			TransitionManager transitionManager,
 			LocalizationSystem localizationSystem)
 		{
 			this.subCanvas = subCanvas;
 			this.goalFactory = goalFactory;
 			this.sceneManager = sceneManager;
+			this.transitionManager = transitionManager;
 			this.localizationSystem = localizationSystem;
 		}
 
@@ -90,10 +95,12 @@ namespace Game.UI
 		{
 			startButton.interactable = false;
 
-			var name = Path.GetFileNameWithoutExtension(levelConfig.scene.ScenePath);
-			Debug.LogError(name);
-			Debug.LogError(levelConfig.scene.ScenePath);
-			sceneManager.LoadSceneAsyncFromAddressables(name, levelConfig.scene.ScenePath);
+			transitionManager.StartInfinityLoading(
+			() => {
+				var name = Path.GetFileNameWithoutExtension(levelConfig.scene.ScenePath);
+				sceneManager.LoadSceneAsyncFromAddressables(name, levelConfig.scene.ScenePath);
+				return sceneManager.ProgressHandler;
+			}, false);
 		}
 
 		public void OnBackClick()

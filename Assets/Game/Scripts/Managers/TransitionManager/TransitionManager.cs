@@ -23,54 +23,64 @@ namespace Game.Managers.TransitionManager
 			this.infinityLoading = infinityLoading;
 		}
 
-		public void StartInfinityLoadingSceneAsync(int sceneInBuild, bool allow, Action onShowed = null, Action onHided = null, Action callback = null)
+		public void StartInfinityLoadingFict(FictProgressHandler fictProgressHandler, Action onShowed = null, Action onHided = null, Action callback = null)
 		{
-			asyncManager.StartCoroutine(LoaderBuild(sceneInBuild, allow, onShowed, onHided, callback));
+			asyncManager.StartCoroutine(LoaderFict(fictProgressHandler, onShowed, onHided, callback));
 		}
 
-		private IEnumerator LoaderBuild(int sceneInBuild, bool allow, Action onShowed = null, Action onHided = null, Action callback = null)
+		public void StartInfinityLoading(Func<IProgressHandler> progressHandler, bool allow = true, Action onShowed = null, Action onHided = null, Action callback = null)
 		{
-			sceneManager.LoadSceneAsyncFromBuild(sceneInBuild, false);
-			var buildHandler = sceneManager.ProgressHandler as BuildProgressHandler;
+			asyncManager.StartCoroutine(LoaderProgress(progressHandler, allow, onShowed, onHided, callback));
+		}
 
-			infinityLoading
-				.StartProgress(buildHandler)
-				.Show(() =>
-				{
-					gameManager.ChangeState(GameState.Loading);
-					onShowed?.Invoke();
-				});
-			yield return infinityLoading.WaitUntilDone();
-			infinityLoading.Hide(onHided);
-			yield return new WaitForSeconds(0.5f);
-
-			//if (allow)
-			//{
-			//	buildHandler.AllowSceneActivation();
-			//}
-
+		private IEnumerator LoaderProgress(Func<IProgressHandler> progressHandler, bool allow = true, Action onShowed = null, Action onHided = null, Action callback = null)
+		{
+			infinityLoading.Show(onShowed);
+			yield return infinityLoading.WaitUntilProcessDone();
+			yield return new WaitForSeconds(0.16f);
+			var progress = progressHandler.Invoke();
+			yield return Loop(progress);
+			yield return progress.WaitUntilDone();
+			if (allow)
+			{
+				infinityLoading.Hide(onHided);
+			}
+			else
+			{
+				yield return new WaitForSeconds(5f);
+				infinityLoading.Hide(onHided);
+			}
 			callback?.Invoke();
 		}
 
-
-		public void StartInfinityLoadingFict(Action onShowed = null, Action onHided = null, Action callback = null)
+		private IEnumerator LoaderFict(FictProgressHandler fictProgressHandler, Action onShowed = null, Action onHided = null, Action callback = null)
 		{
-			asyncManager.StartCoroutine(LoaderFict(onShowed, onHided, callback));
+			fictProgressHandler.speed = 65f;
+
+			infinityLoading.Show(() =>
+			{
+				gameManager.ChangeState(GameState.Loading);
+				onShowed?.Invoke();
+			});
+			yield return infinityLoading.WaitUntilProcessDone();
+			yield return null;
+			yield return fictProgressHandler.WaitUntilDone();
+			infinityLoading.Hide(onHided);
+			callback?.Invoke();
 		}
 
-		private IEnumerator LoaderFict(Action onShowed = null, Action onHided = null, Action callback = null)
+		private IEnumerator Loop(IProgressHandler progress)
 		{
-			infinityLoading
-				.StartProgress(65f)
-				.Show(() =>
-				{
-					gameManager.ChangeState(GameState.Loading);
-					onShowed?.Invoke();
-				});
-			yield return infinityLoading.WaitUntilDone();
-			infinityLoading.Hide(onHided);
-			yield return new WaitForSeconds(0.5f);
-			callback?.Invoke();
+			infinityLoading.progress.text = "0%";
+
+			while (!progress.IsDone)
+			{
+				infinityLoading.progress.text = $"{progress.GetProgress() * 100}%";
+
+				yield return null;
+			}
+
+			infinityLoading.progress.text = "100%";
 		}
 	}
 }

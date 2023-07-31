@@ -3,6 +3,7 @@ using Game.Managers.SwipeManager;
 
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
+using System.Linq;
 
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -37,6 +38,21 @@ public class VerticalCamera : MonoBehaviour
 	}
 	private float frustumWidth = 0;
 
+	public Vector3 TopPoint
+	{
+		get
+		{
+			if (topPoint == Vector3.zero)
+			{
+				topPoint = menu.sprites.Last().transform.position;
+				topPoint.y += menu.sprites.Last().bounds.size.y / 2;
+			}
+
+			return topPoint + topOffset;
+		}
+	}
+	private Vector3 topPoint;
+
 	public Vector3 BottomPoint
 	{
 		get
@@ -51,14 +67,15 @@ public class VerticalCamera : MonoBehaviour
 	}
 	private Vector3 bottomPoint;
 
-	[SerializeField] private Camera camera;
-	[SerializeField] private float distance = 100;
-	[SerializeField] private RoadMap menu;
+	public Camera camera;
+	public float distance = 100;
+	public RoadMap menu;
 	[Space]
-	[SerializeField] private float mouseSensitivity = 1.0f;
-	[SerializeField] private float dragDamping = 0.1f;
+	public float mouseSensitivity = 1.0f;
+	public float dragDamping = 0.1f;
 	[Space]
-	[SerializeField] private Vector3 bottomOffset;
+	public Vector3 topOffset;
+	public Vector3 bottomOffset;
 
 	private bool isSwiping = false;
 	private float swipeTime = 0.1f;
@@ -118,7 +135,9 @@ public class VerticalCamera : MonoBehaviour
 
 	private void ClampTransform()
 	{
-		transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, BottomPoint.y + FrustumHeight / 2, menu.TopPoint.y - FrustumHeight / 2), transform.position.z);
+		var min = BottomPoint.y  + FrustumHeight / 2;
+		var max = TopPoint.y - FrustumHeight / 2;
+		transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, min, max), transform.position.z);
 	}
 
 	private void PanCamera()
@@ -184,6 +203,6 @@ public class VerticalCamera : MonoBehaviour
 		Gizmos.color = Color.red;
 
 		Gizmos.DrawLine(transform.position, BottomPoint);
-		Gizmos.DrawLine(transform.position, menu.TopPoint);
+		Gizmos.DrawLine(transform.position, TopPoint);
 	}
 }

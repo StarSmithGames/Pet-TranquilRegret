@@ -2,7 +2,7 @@
   "dependencies": {
     "com.starsmithgames.analytics": "0.2.8",
     "com.starsmithgames.core": "0.2.7",
-    "com.starsmithgames.go": "0.4.6",
+    "com.starsmithgames.go": "0.5.0",
     "com.starsmithgames.ioc": "1.0.1",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.addressables": "1.19.19",

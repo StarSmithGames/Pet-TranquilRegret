@@ -1,5 +1,3 @@
-using Game.UI;
-
 using UnityEngine;
 
 using Zenject;
@@ -11,16 +9,12 @@ namespace Game.Managers.TransitionManager
 	{
 		public InfinityLoading infinityLoadingPrefab;
 
-		public InfinityLoadingSettings infinityLoadingSettings;
-
 		public override void InstallBindings()
 		{
-			Container.BindInstance(infinityLoadingSettings).WhenInjectedInto<InfinityLoading>();
-
-			//Container
-			//	.Bind<InfinityLoading>()
-			//	.FromComponentInNewPrefab(infinityLoadingPrefab).AsSingle().NonLazy();
-			//Container.BindInterfacesAndSelfTo<TransitionManager>().AsSingle();
+			Container
+				.Bind<InfinityLoading>()
+				.FromComponentInNewPrefab(infinityLoadingPrefab).AsSingle().NonLazy();
+			Container.BindInterfacesAndSelfTo<TransitionManager>().AsSingle();
 		}
 	}
 }
