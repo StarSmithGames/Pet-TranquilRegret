@@ -1,17 +1,15 @@
 using EPOOutline;
 
 using Game.Entities;
-using Game.Systems.InteractionSystem;
-using Game.UI;
 
 using Sirenix.OdinInspector;
+
+using StarSmithGames.Core;
 
 using System.Collections.Generic;
 using System.Linq;
 
 using UnityEngine;
-
-using Zenject;
 
 namespace Game.Systems.PickupableSystem
 {
@@ -34,13 +32,13 @@ namespace Game.Systems.PickupableSystem
 		private Player player;
 		private UIPickup currentPickup;
 
-		private UIPickup.Factory pickupFactory;
+		//private UIPickup.Factory pickupFactory;
 
-		[Inject]
-		private void Construct(UIPickup.Factory pickupFactory)
-		{
-			this.pickupFactory = pickupFactory;
-		}
+		//[Inject]
+		//private void Construct(UIPickup.Factory pickupFactory)
+		//{
+		//	this.pickupFactory = pickupFactory;
+		//}
 
 		private void Start()
 		{
@@ -87,18 +85,18 @@ namespace Game.Systems.PickupableSystem
 
 		private void EnterAnimation()
 		{
-			currentPickup = pickupFactory.Create();
-			currentPickup.onClicked += OnPickuped;
-			currentPickup.Show(this);
+			//currentPickup = pickupFactory.Create();
+			//currentPickup.onClicked += OnPickuped;
+			//currentPickup.Show(this);
 		}
 
 		private void ResetAnimation()
 		{
 			if (currentPickup != null)
 			{
-				currentPickup.onClicked -= OnPickuped;
-				currentPickup.Hide();
-				currentPickup = null;
+				//currentPickup.onClicked -= OnPickuped;
+				//currentPickup.Hide();
+				//currentPickup = null;
 			}
 		}
 

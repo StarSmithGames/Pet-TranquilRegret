@@ -1,4 +1,7 @@
 using Sirenix.OdinInspector;
+
+using StarSmithGames.Core;
+
 using UnityEngine;
 
 [System.Serializable]

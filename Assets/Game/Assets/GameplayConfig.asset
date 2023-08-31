@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7de27b9dd44c0324f9a0ace83ff09a9f, type: 3}
+  m_Name: GameplayConfig
+  m_EditorClassIdentifier: 
+  levels:
+  - {fileID: 11400000, guid: 64a17ff8bbf85bd4a9dc7ad5de910e39, type: 2}
+  - {fileID: 11400000, guid: ba574f80dda72a149b0ac84feae6d97e, type: 2}
+  - {fileID: 11400000, guid: 90cc15772b1b3d341b4c8af0ca9d440d, type: 2}
+  - {fileID: 11400000, guid: 211bc197168fbeb45bf97ad9ad3581a8, type: 2}
+  - {fileID: 11400000, guid: 8d3120f9c98a6c845a1be66488e4d345, type: 2}
+  - {fileID: 11400000, guid: 4f236b91fb1ba3d45b244e0817664d15, type: 2}
+  - {fileID: 11400000, guid: 9f3bfe455d9a26346ae20e285f9cfa31, type: 2}
+  - {fileID: 11400000, guid: 285d300613a25204882dc52cac267193, type: 2}
+  - {fileID: 11400000, guid: 8bdbf631bd52fea45812cbba20ab2f1c, type: 2}
+  - {fileID: 11400000, guid: 5b56ebc87e3c0cb468cf7dcf9f289b70, type: 2}
+  taps:
+  - {fileID: 8300000, guid: 8a7739905fdd6534794155f7b1a8bc6c, type: 3}
+  localizationSettins:
+    flags:
+    - sprite: {fileID: 21300000, guid: dbfe5f6257b3b2941a4fa2b33e439104, type: 3}
+      locale: {fileID: 11400000, guid: 04ac04001f91d88478fb592b9d29fc54, type: 2}
+      country: English
+    - sprite: {fileID: 21300000, guid: cdd90adc1d6c6434c906706ad2a64557, type: 3}
+      locale: {fileID: 11400000, guid: 34a7e2759a474674e8b465f535bd7201, type: 2}
+      country: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439"
+    - sprite: {fileID: 21300000, guid: c0c2d0e893821bf4a93d648ce4cb4a6d, type: 3}
+      locale: {fileID: 11400000, guid: 69024ca5d42a1e04280713d507d1106f, type: 2}
+      country: Deutsch

@@ -1,12 +1,16 @@
 using DG.Tweening;
-using Game.UI;
+
+using StarSmithGames.Go;
+
+using System;
+
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Game.Systems.LockpickingSystem
 {
-	public class UILockpick : WindowPopupBase
+	public class UILockpick : ViewPopupBase
 	{
 		public float FillAmount
 		{
@@ -31,7 +35,7 @@ namespace Game.Systems.LockpickingSystem
 			icon = (Icon.transform as RectTransform);
 		}
 
-		public override void Show(UnityAction callback = null)
+		public override void Show(Action callback = null)
 		{
 			icon.anchoredPosition = Vector3.zero;
 			Icon.sprite = lockSprite;
@@ -43,13 +47,13 @@ namespace Game.Systems.LockpickingSystem
 			});
 		}
 
-		public override void Hide(UnityAction callback = null)
+		public override void Hide(Action callback = null)
 		{
 			Kill();
 			base.Hide(callback);
 		}
 
-		public void Unlock(UnityAction callback = null)
+		public void Unlock(Action callback = null)
 		{
 			Kill();
 
