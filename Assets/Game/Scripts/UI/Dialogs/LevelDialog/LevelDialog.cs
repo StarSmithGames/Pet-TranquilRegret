@@ -96,7 +96,8 @@ namespace Game.UI
 			startButton.interactable = false;
 
 			var name = Path.GetFileNameWithoutExtension(levelConfig.scene.ScenePath);
-			sceneManager.LoadSceneAsyncFromAddressables(name, levelConfig.scene.ScenePath);
+			Debug.LogError(name);
+			sceneManager.LoadSceneAsyncFromAddressables(name, name);
 
 			//transitionManager.StartInfinityLoading(
 			//() => {
