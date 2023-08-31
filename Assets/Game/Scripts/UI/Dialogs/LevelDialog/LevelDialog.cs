@@ -95,12 +95,15 @@ namespace Game.UI
 		{
 			startButton.interactable = false;
 
-			transitionManager.StartInfinityLoading(
-			() => {
-				var name = Path.GetFileNameWithoutExtension(levelConfig.scene.ScenePath);
-				sceneManager.LoadSceneAsyncFromAddressables(name, levelConfig.scene.ScenePath);
-				return sceneManager.ProgressHandler;
-			}, false);
+			var name = Path.GetFileNameWithoutExtension(levelConfig.scene.ScenePath);
+			sceneManager.LoadSceneAsyncFromAddressables(name, levelConfig.scene.ScenePath);
+
+			//transitionManager.StartInfinityLoading(
+			//() => {
+			//	var name = Path.GetFileNameWithoutExtension(levelConfig.scene.ScenePath);
+			//	sceneManager.LoadSceneAsyncFromAddressables(name, levelConfig.scene.ScenePath);
+			//	return sceneManager.ProgressHandler;
+			//}, false);
 		}
 
 		public void OnBackClick()

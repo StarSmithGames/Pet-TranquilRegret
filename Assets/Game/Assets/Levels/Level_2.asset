@@ -16,7 +16,7 @@ MonoBehaviour:
   name: 
   scene:
     sceneAsset: {fileID: 102900000, guid: e4e3357b97f8bca45ba9d6548d171bf7, type: 3}
-    scenePath: Assets/Game/Scenes/Levels/Level_1/Level_1.unity
+    scenePath: Assets/Game/Scenes/Levels/Level_2/Level_2.unity
   estimatedTime: 300
   penaltyTime: 15
   addTime: 60
