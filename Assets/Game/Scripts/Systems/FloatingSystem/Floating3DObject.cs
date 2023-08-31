@@ -4,6 +4,8 @@ using DG.Tweening.Plugins.Core.PathCore;
 
 using Sirenix.OdinInspector;
 
+using StarSmithGames.Core;
+
 using UnityEngine;
 using UnityEngine.Events;
 

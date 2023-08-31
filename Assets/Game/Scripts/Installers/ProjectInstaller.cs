@@ -1,7 +1,10 @@
-using Game.Managers.AddresableManager;
-using Game.Managers.AsyncManager;
 using Game.Managers.GameManager;
-using Game.Systems.ApplicationHandler;
+using Game.Services;
+using Game.Systems.GameSystem;
+
+using StarSmithGames.Go.ApplicationHandler;
+using StarSmithGames.Go.SceneManager;
+using StarSmithGames.IoC.AsyncManager;
 
 using Zenject;
 
@@ -9,15 +12,23 @@ namespace Game.Installers
 {
 	public class ProjectInstaller : MonoInstaller<ProjectInstaller>
 	{
+		public GameplayConfig gameplayConfig;
+
 		public override void InstallBindings()
 		{
-			Container.BindInstance(Container.InstantiateComponentOnNewGameObject<AsyncManager>());
+			Container.BindInterfacesAndSelfTo<SceneManager>().AsSingle().NonLazy();
+			Container.BindInterfacesAndSelfTo<ViewService>().AsSingle().NonLazy();
+			Container.BindInterfacesAndSelfTo<VSFXService>().AsSingle().NonLazy();
+			
+			Container.BindInstance(gameplayConfig).WhenInjectedInto<GameData>();
+			Container.BindInterfacesAndSelfTo<GameData>().AsSingle().NonLazy();
 
 			SignalBusInstaller.Install(Container);
-
 			ApplicationHandlerInstaller.Install(Container);
-			AddresableManagerInstaller.Install(Container);
 			GameManagerInstaller.Install(Container);
+			AsyncManagerInstaller.Install(Container);
+
+			Container.BindInstance(Container.InstantiateComponentOnNewGameObject<GameController>());
 		}
 	}
 }

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4231335c8986134c8c7bfc65550e32b, type: 3}
+  m_Name: LocalizationServiceInstaller
+  m_EditorClassIdentifier: 
+  googleSheetId: 1hvgh1hhgT22Yp2Jprjdy3fkp6OXHt5MZF1d5EBoWr0Y
+  localizationTablesFolder: {fileID: 102900000, guid: 2dba0f77f90dcbe41b94a3e83bc05464, type: 3}
+  sheetProvider: {fileID: 11400000, guid: c815092091f29e246a87da297369758f, type: 2}

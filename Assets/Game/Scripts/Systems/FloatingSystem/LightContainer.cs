@@ -4,6 +4,8 @@ using Game.Systems.InteractionSystem;
 
 using Sirenix.OdinInspector;
 
+using StarSmithGames.Core;
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,13 +25,11 @@ namespace Game.Systems.FloatingSystem
 
 		private Transform currentTarget;
 
-		private LevelManager levelManager;
 		private FloatingSystem floatingSystem;
 
 		[Inject]
-		private void Construct(LevelManager levelManager, FloatingSystem floatingSystem)
+		private void Construct(FloatingSystem floatingSystem)
 		{
-			this.levelManager = levelManager;
 			this.floatingSystem = floatingSystem;
 
 		}
@@ -132,7 +132,7 @@ namespace Game.Systems.FloatingSystem
 					}
 
 					floatingSystem.CreateText(obj.CurrentTarget.position, $"+{totalCount}", color: Color.yellow);
-					levelManager.CurrentLevel.Coins.CurrentValue += totalCount;
+					//levelManager.CurrentLevel.Coins.CurrentValue += totalCount;
 				}
 			}
 			else
@@ -145,7 +145,7 @@ namespace Game.Systems.FloatingSystem
 				else if (obj is Coin coin)
 				{
 					floatingSystem.CreateText(obj.CurrentTarget.position, $"+{coin.Count}", color: Color.yellow);
-					levelManager.CurrentLevel.Coins.CurrentValue += coin.Count;
+					//levelManager.CurrentLevel.Coins.CurrentValue += coin.Count;
 				}
 			}
 		}

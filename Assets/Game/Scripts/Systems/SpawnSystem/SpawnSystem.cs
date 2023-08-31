@@ -1,7 +1,7 @@
 using Game.Entities;
-using Game.Managers.AsyncManager;
 using Game.Managers.CharacterManager;
-using Game.Managers.SceneManager;
+
+using StarSmithGames.Core;
 
 using System.Collections;
 
@@ -14,30 +14,22 @@ namespace Game.Systems.SpawnSystem
 {
 	public class SpawnSystem : IInitializable
 	{
-		private SignalBus signalBus;
 		private Player.Factory playerFactory;
 		private CameraSystem.CameraSystem cameraSystem;
 		private CharacterManager characterManager;
-		private AsyncManager asyncManager;
 
 		public SpawnSystem(
-			SignalBus signalBus,
 			Player.Factory playerFactory,
 			CameraSystem.CameraSystem cameraSystem,
-			CharacterManager characterManager,
-			AsyncManager asyncManager)
+			CharacterManager characterManager)
 		{
-			this.signalBus = signalBus;
 			this.playerFactory = playerFactory;
 			this.cameraSystem = cameraSystem;
 			this.characterManager = characterManager;
-			this.asyncManager = asyncManager;
 		}
 
 		public void Initialize()
 		{
-			//signalBus?.Subscribe<SignalSceneChanged>(OnSceneChanged);
-
 			SpawnPlayer();
 		}
 
@@ -68,9 +60,9 @@ namespace Game.Systems.SpawnSystem
 			SpawnPlayer();
 		}
 
-		private void OnSceneChanged(SignalSceneChanged signal)
-		{
-			SpawnPlayer();
-		}
+		//private void OnSceneChanged(SignalSceneChanged signal)
+		//{
+		//	SpawnPlayer();
+		//}
 	}
 }

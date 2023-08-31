@@ -1,6 +1,7 @@
 using Game.Managers.CharacterManager;
 using Game.Systems.CameraSystem;
-using Game.UI;
+
+using StarSmithGames.Core;
 
 using UnityEngine;
 
@@ -14,14 +15,14 @@ namespace Game.VFX.Markers
 
 		private IPointer pointer;
 
-		private UIPointer.Factory factoryPointerUI;
+		//private UIPointer.Factory factoryPointerUI;
 		private CharacterManager characterManager;
 		private CameraSystem cameraSystem;
 
 		[Inject]
-		private void Construct(UIPointer.Factory factoryPointerUI, CharacterManager characterManager, CameraSystem cameraSystem)
+		private void Construct(/*UIPointer.Factory factoryPointerUI, */CharacterManager characterManager, CameraSystem cameraSystem)
 		{
-			this.factoryPointerUI = factoryPointerUI;
+			//this.factoryPointerUI = factoryPointerUI;
 			this.characterManager = characterManager;
 			this.cameraSystem = cameraSystem;
 		}
@@ -100,7 +101,7 @@ namespace Game.VFX.Markers
 
 		private void CreatePointer()
 		{
-			pointer = factoryPointerUI.Create();
+			//pointer = factoryPointerUI.Create();
 		}
 
 		private void DisposePointer()

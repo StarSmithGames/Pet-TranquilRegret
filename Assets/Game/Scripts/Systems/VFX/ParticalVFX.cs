@@ -1,9 +1,8 @@
-using Game.Managers.AsyncManager;
-
 using Sirenix.OdinInspector;
-using UnityEngine;
 
-using Zenject;
+using StarSmithGames.IoC;
+
+using UnityEngine;
 
 namespace Game.VFX
 {

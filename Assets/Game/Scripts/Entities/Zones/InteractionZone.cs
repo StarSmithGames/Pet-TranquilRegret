@@ -3,6 +3,7 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using StarSmithGames.Core;
 
 #if UNITY_EDITOR
 using UnityEditor;

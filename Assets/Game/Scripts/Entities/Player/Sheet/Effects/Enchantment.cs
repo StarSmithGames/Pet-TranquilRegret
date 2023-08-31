@@ -1,5 +1,7 @@
 using Game.Entities;
 
+using StarSmithGames.Core;
+
 namespace Game.Systems.SheetSystem.Effects
 {
 	public abstract class Enchantment : IActivation

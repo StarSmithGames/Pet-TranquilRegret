@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StarSmithGames.Core;
 
 #if UNITY_EDITOR
 using UnityEditor;

@@ -1,5 +1,8 @@
 using Game.UI;
 
+using StarSmithGames.Go;
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,11 +20,11 @@ namespace Game.VFX.Markers
 		{
 		}
 
-		public void Show(UnityAction callback = null)
+		public void Show(Action callback = null)
 		{
 		}
 
-		public void Hide(UnityAction callback = null)
+		public void Hide(Action callback = null)
 		{
 		}
 	}
