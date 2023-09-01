@@ -1,10 +1,7 @@
-using Game.Managers.TransitionManager;
 using Game.Services;
 using Game.UI;
 
-using StarSmithGames.Go.SceneManager;
-
-using System.Transactions;
+using System.Collections;
 
 using UnityEngine;
 
@@ -12,15 +9,15 @@ using Zenject;
 
 namespace Game.Systems.GameSystem
 {
-    public class Preloader : MonoBehaviour
+	public class Preloader : MonoBehaviour
     {
 		[Inject] private GameData gameData;
 		[Inject] private ViewService viewService;
-		//[Inject] private TransitionManager transitionManager;
+		[Inject] private GameLoader gameLoader;
 
 		private GDPRDialog window;
 
-		private void Start()
+		private IEnumerator Start()
 		{
 			gameData.SessionsCount++;
 
@@ -28,6 +25,7 @@ namespace Game.Systems.GameSystem
 			{
 				window = viewService.DialogViewRegistrator.GetAs<GDPRDialog>();
 				window.onAgreeClicked += OnAgreeClicked;
+				yield return new WaitForSeconds(1f);
 				window.Show();
 			}
 			else
@@ -46,14 +44,25 @@ namespace Game.Systems.GameSystem
 
 		private void LoadGame()
 		{
-			//transitionManager.StartInfinityLoadingSceneAsync(1);//Main Menu;
+			gameLoader.LoadMenu();
 		}
 
 		private void OnAgreeClicked()
 		{
 			gameData.IsGDPRApplied = true;
 
-			LoadGame();
+			if (window != null)
+			{
+				window.onAgreeClicked -= OnAgreeClicked;
+				window.Hide(() =>
+				{
+					LoadGame();
+				});
+			}
+			else
+			{
+				LoadGame();
+			}
 		}
 	}
 }

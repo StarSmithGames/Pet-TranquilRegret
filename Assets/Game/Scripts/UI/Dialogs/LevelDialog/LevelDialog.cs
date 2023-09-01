@@ -1,20 +1,13 @@
-using Game.Managers.LevelManager;
-using Game.Managers.TransitionManager;
 using Game.Systems.GameSystem;
-using Game.UI;
 
 using StarSmithGames.Core;
 using StarSmithGames.Go;
 using StarSmithGames.Go.LocalizationSystem;
-using StarSmithGames.Go.SceneManager;
 
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Transactions;
 
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 using UnityEngine.UI;
 
 using Zenject;
@@ -30,24 +23,19 @@ namespace Game.UI
 		private List<UIGoalItem> goals = new List<UIGoalItem>();
 		private LevelConfig levelConfig;
 
+		[Inject] private GameLoader gameLoader;
 		private UICanvas subCanvas;
 		private UIGoalItem.Factory goalFactory;
-		private SceneManager sceneManager;
-		private TransitionManager transitionManager;
 		private LocalizationSystem localizationSystem;
 
 		[Inject]
 		private void Construct(
 			UICanvas subCanvas,
 			UIGoalItem.Factory goalFactory,
-			SceneManager sceneManager,
-			TransitionManager transitionManager,
 			LocalizationSystem localizationSystem)
 		{
 			this.subCanvas = subCanvas;
 			this.goalFactory = goalFactory;
-			this.sceneManager = sceneManager;
-			this.transitionManager = transitionManager;
 			this.localizationSystem = localizationSystem;
 		}
 
@@ -95,16 +83,7 @@ namespace Game.UI
 		{
 			startButton.interactable = false;
 
-			var name = Path.GetFileNameWithoutExtension(levelConfig.scene.ScenePath);
-			Debug.LogError(name);
-			sceneManager.LoadSceneAsyncFromAddressables(name, name);
-
-			//transitionManager.StartInfinityLoading(
-			//() => {
-			//	var name = Path.GetFileNameWithoutExtension(levelConfig.scene.ScenePath);
-			//	sceneManager.LoadSceneAsyncFromAddressables(name, levelConfig.scene.ScenePath);
-			//	return sceneManager.ProgressHandler;
-			//}, false);
+			gameLoader.LoadLevel(levelConfig);
 		}
 
 		public void OnBackClick()

@@ -1,19 +1,18 @@
 using Game.Managers.GameManager;
+using Game.Systems.GameSystem;
 
 using StarSmithGames.Go;
 using StarSmithGames.Go.LocalizationSystem;
-using StarSmithGames.Go.SceneManager;
 
 using System;
 
-using UnityEngine;
 using UnityEngine.UI;
 
 using Zenject;
 
 namespace Game.UI
 {
-    public class SettingsDialog : ViewBase
+	public class SettingsDialog : ViewBase
     {
 		public event Action<SettingsDialog> onShowingChanged;
 
@@ -23,19 +22,17 @@ namespace Game.UI
 		private UICanvas subCanvas;
 		private GameManager gameManager;
 		private LocalizationSystem localizationSystem;
-		private SceneManager sceneManager;
+		[Inject] private GameLoader gameLoader;
 
 		[Inject]
 		private void Construct(
 			UICanvas subCanvas,
 			GameManager gameManager,
-			LocalizationSystem localizationSystem,
-			SceneManager sceneManager)
+			LocalizationSystem localizationSystem)
 		{
 			this.subCanvas = subCanvas;
 			this.gameManager = gameManager;
 			this.localizationSystem = localizationSystem;
-			this.sceneManager = sceneManager;
 		}
 
 		private void Awake()
@@ -89,8 +86,7 @@ namespace Game.UI
 		{
 			backButton.interactable = false;
 
-			gameManager.ChangeState(GameState.Loading);
-			sceneManager.LoadSceneAsyncFromBuild(1, true);//Menu
+			gameLoader.LoadMenu();
 		}
 
 		private void OnLocalizationChanged()

@@ -1,5 +1,6 @@
 using Game.HUD.Gameplay;
 using Game.Managers.CharacterManager;
+using Game.Managers.GameManager;
 using Game.Systems.CameraSystem;
 using Game.Systems.PickupableSystem;
 using Game.Systems.SheetSystem.Effects;
@@ -35,6 +36,14 @@ namespace Game.Installers
 
 			CharacterManagerInstaller.Install(Container);
 			EffectSystemInstaller.Install(Container);
+
+#if UNITY_EDITOR
+			var gameManager = Container.Resolve<GameManager>();
+			if (gameManager.CurrentGameState == GameState.Empty)
+			{
+				gameManager.ChangeState(GameState.PreGameplay);
+			}
+#endif
 		}
 	}
 }

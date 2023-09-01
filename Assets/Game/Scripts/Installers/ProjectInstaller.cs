@@ -29,6 +29,7 @@ namespace Game.Installers
 			AsyncManagerInstaller.Install(Container);
 
 			Container.BindInstance(Container.InstantiateComponentOnNewGameObject<GameController>());
+			Container.BindInterfacesAndSelfTo<GameLoader>().AsSingle().NonLazy();
 		}
 	}
 }

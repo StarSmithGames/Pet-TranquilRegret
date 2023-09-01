@@ -124,11 +124,6 @@ namespace Game.HUD.Gameplay
 		{
 			if(signal.newGameState == GameState.Gameplay)
 			{
-				isPause = false;
-			}
-			else if(signal.newGameState == GameState.Pause)
-			{
-				isPause = true;
 			}
 		}
 

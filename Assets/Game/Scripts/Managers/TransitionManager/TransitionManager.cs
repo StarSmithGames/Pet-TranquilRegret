@@ -13,8 +13,6 @@ namespace Game.Managers.TransitionManager
 	public class TransitionManager
 	{
 		[Inject] private AsyncManager asyncManager;
-		[Inject] private GameManager.GameManager gameManager;
-		[Inject] private SceneManager sceneManager;
 
 		private InfinityLoading infinityLoading;
 
@@ -28,12 +26,12 @@ namespace Game.Managers.TransitionManager
 			asyncManager.StartCoroutine(LoaderFict(fictProgressHandler, onShowed, onHided, callback));
 		}
 
-		public void StartInfinityLoading(Func<IProgressHandler> progressHandler, bool allow = true, Action onShowed = null, Action onHided = null, Action callback = null)
+		public void StartInfinityLoading(Func<IProgressHandler> progressHandler, float waitTime = 0f, Action onShowed = null, Action onHided = null, Action callback = null)
 		{
-			asyncManager.StartCoroutine(LoaderProgress(progressHandler, allow, onShowed, onHided, callback));
+			asyncManager.StartCoroutine(LoaderProgress(progressHandler, waitTime, onShowed, onHided, callback));
 		}
 
-		private IEnumerator LoaderProgress(Func<IProgressHandler> progressHandler, bool allow = true, Action onShowed = null, Action onHided = null, Action callback = null)
+		private IEnumerator LoaderProgress(Func<IProgressHandler> progressHandler, float waitTime = 0f, Action onShowed = null, Action onHided = null, Action callback = null)
 		{
 			infinityLoading.Show(onShowed);
 			yield return infinityLoading.WaitUntilProcessDone();
@@ -41,15 +39,11 @@ namespace Game.Managers.TransitionManager
 			var progress = progressHandler.Invoke();
 			yield return Loop(progress);
 			yield return progress.WaitUntilDone();
-			if (allow)
+			if (waitTime > 0f)
 			{
-				infinityLoading.Hide(onHided);
+				yield return new WaitForSeconds(waitTime);
 			}
-			else
-			{
-				yield return new WaitForSeconds(5f);
-				infinityLoading.Hide(onHided);
-			}
+			infinityLoading.Hide(onHided);
 			callback?.Invoke();
 		}
 
@@ -59,7 +53,6 @@ namespace Game.Managers.TransitionManager
 
 			infinityLoading.Show(() =>
 			{
-				gameManager.ChangeState(GameState.Loading);
 				onShowed?.Invoke();
 			});
 			yield return infinityLoading.WaitUntilProcessDone();
@@ -75,7 +68,7 @@ namespace Game.Managers.TransitionManager
 
 			while (!progress.IsDone)
 			{
-				infinityLoading.progress.text = $"{progress.GetProgress() * 100}%";
+				infinityLoading.progress.text = $"{Math.Round(progress.GetProgress() * 100f)}%";
 
 				yield return null;
 			}

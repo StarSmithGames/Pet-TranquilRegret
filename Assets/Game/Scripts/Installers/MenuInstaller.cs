@@ -1,5 +1,7 @@
-using Game.Managers.LevelManager;
+using Game.Managers.GameManager;
 using Game.UI;
+
+using UnityEngine;
 
 using Zenject;
 
@@ -19,6 +21,14 @@ namespace Game.Installers
 				.AsSingle();
 
 			Container.Bind<UICanvas>().FromInstance(menuCanvas);
+
+#if UNITY_EDITOR
+			var gameManager = Container.Resolve<GameManager>();
+			if (gameManager.CurrentGameState == GameState.Empty)
+			{
+				gameManager.ChangeState(GameState.Menu);
+			}
+#endif
 		}
 	}
 }

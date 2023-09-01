@@ -7,17 +7,8 @@ namespace Game.UI
 	{
 		private SettingsDialog settingsDialog;
 
-		private UICanvas subCanvas;
-		private GameManager gameManager;
-
 		[Inject]
-		private void Construct(
-			UICanvas subCanvas,
-			GameManager gameManager)
-		{
-			this.subCanvas = subCanvas;
-			this.gameManager = gameManager;
-		}
+		private UICanvas subCanvas;
 
 		private void Start()
 		{
@@ -36,7 +27,6 @@ namespace Game.UI
 		public void OnClick()
 		{
 			settingsDialog.Show();
-			gameManager.ChangeState(GameState.Pause);
 		}
 
 		private void OnShowingChanged(SettingsDialog dialog)

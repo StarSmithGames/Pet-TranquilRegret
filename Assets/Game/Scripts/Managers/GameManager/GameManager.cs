@@ -8,8 +8,8 @@ namespace Game.Managers.GameManager
 	{
 		public bool IsGame => CurrentGameState == GameState.PreGameplay || CurrentGameState == GameState.Gameplay;
 
-		public GameState CurrentGameState { get; private set; }
-		public GameState PreviousGameState { get; private set; }
+		public GameState CurrentGameState { get; private set; } = GameState.Empty;
+		public GameState PreviousGameState { get; private set; } = GameState.Empty;
 
 		private SignalBus signalBus;
 
@@ -40,10 +40,9 @@ namespace Game.Managers.GameManager
 	public enum GameState
 	{
 		Empty,
-		Menu,
 		Loading,
+		Menu,
 		PreGameplay,
 		Gameplay,
-		Pause,
 	}
 }
