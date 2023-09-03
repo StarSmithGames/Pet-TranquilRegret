@@ -27,9 +27,12 @@ namespace Game.Systems.CameraSystem
 
 		public Camera Camera => brain.OutputCamera;
 
-		[SerializeField] private CinemachineBrain brain;
-		[SerializeField] private List<CinemachineVirtualCamera> camers = new List<CinemachineVirtualCamera>();
-		[SerializeField] private float cameraDistance = 15f;
+		public CinemachineBrain brain;
+		public List<CinemachineVirtualCamera> camers = new List<CinemachineVirtualCamera>();
+#if UNITY_EDITOR
+		public Transform lookAtPivotEditor;
+		public Transform folowPivotEditor;
+#endif
 
 		private Transform outputCamera;
 		private CinemachineFramingTransposer CurrentTransposer
@@ -55,16 +58,6 @@ namespace Game.Systems.CameraSystem
 			}
 		}
 		private CinemachineFramingTransposer currentTransposer;
-
-		private SignalBus signalBus;
-		private CharacterManager characterManager;
-
-		[Inject]
-		public void Construct(SignalBus signalBus, CharacterManager characterManager)
-		{
-			this.signalBus = signalBus;
-			this.characterManager = characterManager;
-		}
 
 		private void Start()
 		{
@@ -100,7 +93,7 @@ namespace Game.Systems.CameraSystem
 
 		public void SetTracketOffsetDirection(Vector3 tracketObjectOffset)
 		{
-			CurrentTransposer.m_TrackedObjectOffset = tracketObjectOffset * cameraDistance;
+			CurrentTransposer.m_TrackedObjectOffset = tracketObjectOffset;
 		}
 
 		private IEnumerator WaitWhileCamerasBlendes()

@@ -67,7 +67,6 @@ namespace Game.Systems.GameSystem
 
 		private IEnumerator GamePipeline()
 		{
-			yield return new WaitForSeconds(1f);
 			gameManager.ChangeState(GameState.PreGameplay);
 			spawnSystem.SpawnPlayer();
 

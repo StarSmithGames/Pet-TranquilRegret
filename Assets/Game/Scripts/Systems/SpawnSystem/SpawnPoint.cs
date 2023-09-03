@@ -17,56 +17,42 @@ using UnityEditor;
 
 namespace Game.Systems.SpawnSystem
 {
+	[ExecuteInEditMode]
 	public class SpawnPoint : MonoBehaviour
 	{
+		public Vector3 FollowPosition => transform.position + settings.followPoint;
+		public Vector3 LookPosition => transform.position + settings.lookAtPoint;
+		public Vector3 TracketObjectOffset => settings.tracketObjectOffset * settings.cameraDistance;
+
+		public Settings settings;
+
 		[Inject] private DiContainer diContainer;
 		[Inject] private GameData gameData;
 		[Inject] private CharacterManager characterManager;
 		[Inject] private CameraSystem.CameraSystem cameraSystem;
 
-		[OnValueChanged("OnChanged", true)]
-		[SerializeField] private Settings settings;
-
 		public void Spawn()
 		{
 			var character = diContainer.InstantiatePrefab(gameData.GameplayConfig.characterPrefab).GetComponent<AbstractCharacter>();
 
-			character.transform.position = GetRootPosition();
-			character.model.rotation = GetModelRotation();
+			character.root.position = transform.position;
+			character.model.rotation = transform.rotation;
+
+			character.facade.cameraFollowPivot.position = FollowPosition;
+			character.facade.cameraLookAtPivot.position = LookPosition;
 
 			characterManager.Registrate(character);
 			cameraSystem
 				.SetTarget(character)
-				.SetTracketOffsetDirection(GetTracketObjectOffset());
+				.SetTracketOffsetDirection(TracketObjectOffset);
 		}
 
-		public Vector3 GetFollowPosition()
+#if UNITY_EDITOR
+		[ContextMenu("Update Settings")]
+		private void UpdateSettings()
 		{
-			return transform.position + settings.followPoint;
-		}
+			var camera = FindAnyObjectByType<CameraSystem.CameraSystem>();
 
-		public Vector3 GetTracketObjectOffset()
-		{
-			return settings.tracketObjectOffset;
-		}
-
-		public Vector3 GetLookAtPosition()
-		{
-			return transform.position + settings.followPoint;
-		}
-
-		public Vector3 GetRootPosition()
-		{
-			return transform.position;
-		}
-
-		public Quaternion GetModelRotation()
-		{
-			return transform.rotation;
-		}
-
-		private void OnChanged()
-		{
 			if (!settings.isCustom)
 			{
 				if (settings.spawnPlace == SpawnPlace.Forward)
@@ -102,13 +88,32 @@ namespace Game.Systems.SpawnSystem
 					transform.rotation = Quaternion.Euler(0, 90, 0);
 				}
 
-#if UNITY_EDITOR
 				EditorUtility.SetDirty(this);
-#endif
+			}
+
+			if (camera != null)
+			{
+				camera.folowPivotEditor.position = FollowPosition;
+				camera.lookAtPivotEditor.position = LookPosition;
+				camera.SetTracketOffsetDirection(TracketObjectOffset);
+				EditorUtility.SetDirty(camera);
 			}
 		}
 
-#if UNITY_EDITOR
+		private void Update()
+		{
+			if (Application.isPlaying) return;
+
+			UpdateSettings();
+		}
+
+		private void OnValidate()
+		{
+			if (Application.isPlaying) return;
+
+			UpdateSettings();
+		}
+
 		private void OnDrawGizmos()
 		{
 			Gizmos.color = Color.blue;
@@ -117,19 +122,22 @@ namespace Game.Systems.SpawnSystem
 			Gizmos.DrawSphere(transform.position, 0.15f);
 
 			Gizmos.color = Color.red;
-			Gizmos.DrawSphere(transform.position + settings.followPoint, 0.15f);
+			Gizmos.DrawSphere(FollowPosition, 0.15f);
 
 			Gizmos.color = Color.gray;
-			Gizmos.DrawSphere(transform.position + settings.lookAtPoint, 0.1f);
+			Gizmos.DrawSphere(LookPosition, 0.1f);
 
 			Gizmos.color = Color.blue;
-			DrawArrow.ForGizmo(transform.position + settings.followPoint, settings.tracketObjectOffset);
+			DrawArrow.ForGizmo(FollowPosition, settings.tracketObjectOffset);
+			DrawArrow.ForGizmo(LookPosition, settings.tracketObjectOffset);
 		}
 #endif
 
 		[System.Serializable]
 		public class Settings
 		{
+			public float cameraDistance = 15f;
+
 			public bool isCustom = false;
 			[ShowIf("isCustom")]
 			public Vector3 followPoint;
