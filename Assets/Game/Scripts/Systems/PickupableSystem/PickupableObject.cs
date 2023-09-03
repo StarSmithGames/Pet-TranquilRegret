@@ -1,5 +1,6 @@
 using EPOOutline;
 
+using Game.Character;
 using Game.Entities;
 
 using Sirenix.OdinInspector;
@@ -28,8 +29,8 @@ namespace Game.Systems.PickupableSystem
 		[SerializeField] protected List<Collider> colliders = new List<Collider>();
 		[SerializeField] protected Settings settings;
 
-		private Player lastPlayer;
-		private Player player;
+		private Character.Character lastPlayer;
+		private Character.Character player;
 		private UIPickup currentPickup;
 
 		//private UIPickup.Factory pickupFactory;
@@ -105,35 +106,35 @@ namespace Game.Systems.PickupableSystem
 			PickupAnimation();
 			ResetAnimation();
 
-			lastPlayer.Pickup(this);
+			//lastPlayer.Pickup(this);
 			lastPlayer = player;
 			player = null;
 		}
 	
 		protected virtual void OnEnterChanged(Collider other)
 		{
-			var p = other.GetComponentInParent<Player>();
+			//var p = other.GetComponentInParent<Character>();
 
-			if (p != null)
-			{
-				player = p;
-				lastPlayer = player;
+			//if (p != null)
+			//{
+			//	player = p;
+			//	lastPlayer = player;
 
-				EnterAnimation();
-			}
+			//	EnterAnimation();
+			//}
 		}
 
 		protected virtual void OnExitChanged(Collider other)
 		{
-			var p = other.GetComponentInParent<Player>();
+			//var p = other.GetComponentInParent<Character>();
 
-			if (p == player)
-			{
-				ResetAnimation();
+			//if (p == player)
+			//{
+			//	ResetAnimation();
 
-				lastPlayer = player;
-				player = null;
-			}
+			//	lastPlayer = player;
+			//	player = null;
+			//}
 		}
 
 		[Button(DirtyOnClick = true)]

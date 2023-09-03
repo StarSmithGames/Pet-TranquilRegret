@@ -36,3 +36,4 @@ MonoBehaviour:
     - sprite: {fileID: 21300000, guid: c0c2d0e893821bf4a93d648ce4cb4a6d, type: 3}
       locale: {fileID: 11400000, guid: 69024ca5d42a1e04280713d507d1106f, type: 2}
       country: Deutsch
+  characterPrefab: {fileID: 7834858090861041472, guid: 181ebc7adbc190445a881e74c320b8c3, type: 3}

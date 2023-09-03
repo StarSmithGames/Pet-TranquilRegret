@@ -31,7 +31,7 @@ namespace Game.VFX.Markers
 		{
 			if (IsEnable)
 			{
-				Vector3 playerPosition = characterManager.CurrentPlayer.transform.position;
+				Vector3 playerPosition = Vector3.zero; //characterManager.CurrentPlayer.transform.position;
 				Vector3 direction = transform.position - playerPosition;
 
 				Ray ray = new Ray(playerPosition, direction);

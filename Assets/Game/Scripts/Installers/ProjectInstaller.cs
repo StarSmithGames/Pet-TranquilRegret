@@ -1,6 +1,8 @@
+using Game.Managers.CharacterManager;
 using Game.Managers.GameManager;
 using Game.Services;
 using Game.Systems.GameSystem;
+using Game.Systems.SpawnSystem;
 
 using StarSmithGames.Go.ApplicationHandler;
 using StarSmithGames.Go.SceneManager;
@@ -24,9 +26,11 @@ namespace Game.Installers
 			Container.BindInterfacesAndSelfTo<GameData>().AsSingle().NonLazy();
 
 			SignalBusInstaller.Install(Container);
+			AsyncManagerInstaller.Install(Container);
 			ApplicationHandlerInstaller.Install(Container);
 			GameManagerInstaller.Install(Container);
-			AsyncManagerInstaller.Install(Container);
+			CharacterManagerInstaller.Install(Container);
+			SpawnSystemInstaller.Install(Container);
 
 			Container.BindInstance(Container.InstantiateComponentOnNewGameObject<GameController>());
 			Container.BindInterfacesAndSelfTo<GameLoader>().AsSingle().NonLazy();

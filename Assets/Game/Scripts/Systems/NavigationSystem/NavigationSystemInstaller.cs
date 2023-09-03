@@ -1,3 +1,4 @@
+using Game.Character;
 using Game.Entities;
 
 using UnityEngine;
@@ -11,12 +12,12 @@ namespace Game.Systems.NavigationSystem
     {
 		public override void InstallBindings()
 		{
-			Container.BindFactory<Player, PlayerGroundImplementation, PlayerGroundImplementation.Factory>().NonLazy();
+			//Container.BindFactory<Player, PlayerGroundImplementation, PlayerGroundImplementation.Factory>().NonLazy();
 
-			Container
-				.BindFactory<ICharacter, GroundImplementation, GroudImplementationFactory>()
-				.FromFactory<CustomGroudImplementationFactory>()
-				.NonLazy();
+			//Container
+			//	.BindFactory<ICharacterModel, GroundImplementation, GroudImplementationFactory>()
+			//	.FromFactory<CustomGroudImplementationFactory>()
+			//	.NonLazy();
 		}
 	}
 }

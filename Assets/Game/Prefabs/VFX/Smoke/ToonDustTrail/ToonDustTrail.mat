@@ -62,5 +62,5 @@ Material:
     - _Light: {r: 10, g: 2, b: 1, a: 0}
     - _LightDirection: {r: -1, g: 1, b: 0, a: 0}
     - _ShadowColor: {r: 0.5801887, g: 0.71251243, b: 0.7735849, a: 1}
-    - _WorldPos: {r: -14.781698, g: -0.22012371, b: 14.471834, a: 0}
+    - _WorldPos: {r: -14.705233, g: -0.24999905, b: 21.08234, a: 0}
   m_BuildTextureStacks: []

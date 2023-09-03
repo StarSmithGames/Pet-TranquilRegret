@@ -1,3 +1,4 @@
+using Game.Character;
 using Game.Entities;
 using Game.VFX;
 
@@ -10,8 +11,8 @@ namespace Game.Systems.InteractionSystem
 		[SerializeField] protected DecalVFX decal;
 		[SerializeField] protected InteractionZone interactionZone;
 
-		protected Player lastPlayer;
-		protected Player player;
+		protected Character.Character lastPlayer;
+		protected Character.Character player;
 
 		protected virtual void Start()
 		{
@@ -51,38 +52,38 @@ namespace Game.Systems.InteractionSystem
 			decal.ScaleTo(1f, callback: decal.StartIdleAnimation);
 		}
 
-		protected virtual void OnPlayerEnter(Player player) { }
+		protected virtual void OnPlayerEnter(Character.Character player) { }
 
-		protected virtual void OnPlayerExit(Player player) { }
+		protected virtual void OnPlayerExit(Character.Character player) { }
 
 		protected virtual void OnEnterChanged(Collider other)
 		{
-			var p = other.GetComponentInParent<Player>();
+			//var p = other.GetComponentInParent<Character>();
 
-			if(p != null)
-			{
-				player = p;
-				lastPlayer = player;
+			//if(p != null)
+			//{
+			//	player = p;
+			//	lastPlayer = player;
 
-				EnterAnimation();
+			//	EnterAnimation();
 
-				OnPlayerEnter(player);
-			}
+			//	OnPlayerEnter(player);
+			//}
 		}
 
 		protected virtual void OnExitChanged(Collider other)
 		{
-			var p = other.GetComponentInParent<Player>();
+			//var p = other.GetComponentInParent<Character>();
 
-			if(p == player)
-			{
-				ResetAnimation();
+			//if(p == player)
+			//{
+			//	ResetAnimation();
 
-				lastPlayer = player;
-				player = null;
+			//	lastPlayer = player;
+			//	player = null;
 
-				OnPlayerExit(lastPlayer);
-			}
+			//	OnPlayerExit(lastPlayer);
+			//}
 		}
 
 		protected virtual void OnZoneCollectionChanged() { }

@@ -1,6 +1,15 @@
 using Sirenix.OdinInspector;
+
 using UnityEngine;
+
 using StarSmithGames.Core;
+
+using Game.Character;
+using Game.Systems.GameSystem;
+
+using Zenject;
+
+using Game.Managers.CharacterManager;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -10,8 +19,26 @@ namespace Game.Systems.SpawnSystem
 {
 	public class SpawnPoint : MonoBehaviour
 	{
+		[Inject] private DiContainer diContainer;
+		[Inject] private GameData gameData;
+		[Inject] private CharacterManager characterManager;
+		[Inject] private CameraSystem.CameraSystem cameraSystem;
+
 		[OnValueChanged("OnChanged", true)]
 		[SerializeField] private Settings settings;
+
+		public void Spawn()
+		{
+			var character = diContainer.InstantiatePrefab(gameData.GameplayConfig.characterPrefab).GetComponent<AbstractCharacter>();
+
+			character.transform.position = GetRootPosition();
+			character.model.rotation = GetModelRotation();
+
+			characterManager.Registrate(character);
+			cameraSystem
+				.SetTarget(character)
+				.SetTracketOffsetDirection(GetTracketObjectOffset());
+		}
 
 		public Vector3 GetFollowPosition()
 		{

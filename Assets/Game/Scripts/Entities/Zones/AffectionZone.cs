@@ -1,3 +1,4 @@
+using Game.Character;
 using Game.Entities;
 using Game.Systems.SheetSystem;
 using Game.Systems.SheetSystem.Effects;
@@ -12,45 +13,45 @@ namespace Game.Entities
 	{
 		[SerializeField] private EffectData data;
 
-		private IEffect effect;
+		//private IEffect effect;
 
-		private EffectConverter effectConverter;
+		//private EffectConverter effectConverter;
 
-		[Inject]
-		private void Construct(EffectConverter effectConverter)
-		{
-			this.effectConverter = effectConverter;
-		}
+		//[Inject]
+		//private void Construct(EffectConverter effectConverter)
+		//{
+		//	this.effectConverter = effectConverter;
+		//}
 
-		protected override void OnEnter(Collider other)
-		{
-			if (data == null) return;
+		//protected override void OnEnter(Collider other)
+		//{
+		//	if (data == null) return;
 
-			var character = other.GetComponentInParent<ICharacter>();
-			if(character != null)
-			{
-				if(effect == null)
-				{
-					effect = effectConverter.Convert(data);
-				}
+		//	var character = other.GetComponentInParent<ICharacterModel>();
+		//	if(character != null)
+		//	{
+		//		if(effect == null)
+		//		{
+		//			effect = effectConverter.Convert(data);
+		//		}
 
-				character.Sheet.Effects.Registrate(effect);
-			}
+		//		character.Sheet.Effects.Registrate(effect);
+		//	}
 
-			base.OnEnter(other);
-		}
+		//	base.OnEnter(other);
+		//}
 
-		protected override void OnExit(Collider other)
-		{
-			if (data == null) return;
+		//protected override void OnExit(Collider other)
+		//{
+		//	if (data == null) return;
 
-			var character = other.GetComponentInParent<ICharacter>();
-			if (character != null)
-			{
-				character.Sheet.Effects.UnRegistrate(effect);
-			}
+		//	var character = other.GetComponentInParent<ICharacterModel>();
+		//	if (character != null)
+		//	{
+		//		character.Sheet.Effects.UnRegistrate(effect);
+		//	}
 
-			base.OnExit(other);
-		}
+		//	base.OnExit(other);
+		//}
 	}
 }

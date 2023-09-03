@@ -4,6 +4,8 @@ using StarSmithGames.IoC.AsyncManager;
 
 using System;
 using System.Collections;
+using UnityEditor;
+
 using UnityEngine;
 
 using Zenject;
@@ -26,23 +28,20 @@ namespace Game.Managers.TransitionManager
 			asyncManager.StartCoroutine(LoaderFict(fictProgressHandler, onShowed, onHided, callback));
 		}
 
-		public void StartInfinityLoading(Func<IProgressHandler> progressHandler, float waitTime = 0f, Action onShowed = null, Action onHided = null, Action callback = null)
+		public void StartInfinityLoading(Transition transition, Action onShowed = null, Action onHided = null, Action callback = null)
 		{
-			asyncManager.StartCoroutine(LoaderProgress(progressHandler, waitTime, onShowed, onHided, callback));
+			asyncManager.StartCoroutine(LoaderProgress(transition, onShowed, onHided, callback));
 		}
 
-		private IEnumerator LoaderProgress(Func<IProgressHandler> progressHandler, float waitTime = 0f, Action onShowed = null, Action onHided = null, Action callback = null)
+		private IEnumerator LoaderProgress(Transition transition, Action onShowed = null, Action onHided = null, Action callback = null)
 		{
 			infinityLoading.Show(onShowed);
 			yield return infinityLoading.WaitUntilProcessDone();
 			yield return new WaitForSeconds(0.16f);
-			var progress = progressHandler.Invoke();
-			yield return Loop(progress);
-			yield return progress.WaitUntilDone();
-			if (waitTime > 0f)
-			{
-				yield return new WaitForSeconds(waitTime);
-			}
+			transition.Invoke();
+			yield return Loop(transition.Progress);
+			yield return transition.WaitUntilDone();
+			yield return new WaitForSeconds(0.16f);
 			infinityLoading.Hide(onHided);
 			callback?.Invoke();
 		}
@@ -74,6 +73,40 @@ namespace Game.Managers.TransitionManager
 			}
 
 			infinityLoading.progress.text = "100%";
+		}
+	}
+
+	public class Transition
+	{
+		public IProgressHandler Progress => progress;
+		private IProgressHandler progress;
+
+		private event Action onProgressCompleted;
+		private Func<IProgressHandler> progressHandler;
+		private bool isAllowed;
+
+		public Transition(Func<IProgressHandler> progressHandler, bool allow = true, Action onProgressCompleted = null)
+		{
+			this.progressHandler = progressHandler;
+			this.isAllowed = allow;
+			this.onProgressCompleted = onProgressCompleted;
+		}
+
+		public void Invoke()
+		{
+			progress = progressHandler.Invoke();
+		}
+
+		public void Allow()
+		{
+			isAllowed = true;
+		}
+
+		public IEnumerator WaitUntilDone()
+		{
+			yield return progress.WaitUntilDone();
+			onProgressCompleted?.Invoke();
+			yield return new WaitUntil(() => isAllowed);
 		}
 	}
 }

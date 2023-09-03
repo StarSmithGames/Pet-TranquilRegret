@@ -1,5 +1,6 @@
 using Cinemachine;
 
+using Game.Character;
 using Game.Managers.CharacterManager;
 
 using Sirenix.OdinInspector;
@@ -67,35 +68,34 @@ namespace Game.Systems.CameraSystem
 
 		private void Start()
 		{
-			signalBus?.Subscribe<SignalPlayerChanged>(OnPlayerChanged);
-
 			outputCamera = brain.OutputCamera.transform;
-
-			SetTarget(characterManager.CurrentPlayer.PlayerAvatar.CameraFollowPivot, characterManager.CurrentPlayer.PlayerAvatar.CameraLookAtPivot);
 		}
 
-		private void OnDestroy()
+		public CameraSystem SetTarget(AbstractCharacter character)
 		{
-			signalBus?.Unsubscribe<SignalPlayerChanged>(OnPlayerChanged);
+			return SetTarget(character.facade.cameraFollowPivot, character.facade.cameraLookAtPivot);
 		}
 
-
-		public void SetTarget(Transform target)
+		public CameraSystem SetTarget(Transform target)
 		{
 			camers.ForEach((x) =>
 			{
 				x.Follow = target;
 				x.LookAt = target;
 			});
+
+			return this;
 		}
 
-		public void SetTarget(Transform follow, Transform lookAt)
+		public CameraSystem SetTarget(Transform follow, Transform lookAt)
 		{
 			camers.ForEach((x) =>
 			{
 				x.Follow = follow;
 				x.LookAt = lookAt;
 			});
+
+			return this;
 		}
 
 		public void SetTracketOffsetDirection(Vector3 tracketObjectOffset)
@@ -109,11 +109,6 @@ namespace Game.Systems.CameraSystem
 			yield return new WaitWhile(() => !brain.ActiveBlend?.IsComplete ?? false);
 
 			CurrentTransposer = (brain.ActiveVirtualCamera as CinemachineVirtualCamera).GetCinemachineComponent<CinemachineFramingTransposer>();
-		}
-
-		private void OnPlayerChanged(SignalPlayerChanged signal)
-		{
-			SetTarget(signal.player?.PlayerAvatar.CameraFollowPivot, signal.player?.PlayerAvatar.CameraLookAtPivot);
 		}
 	}
 }

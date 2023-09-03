@@ -34,7 +34,7 @@ namespace Game.Systems.LockpickingSystem
 				t += Time.deltaTime;
 				progress = t / settings.unlockTime;
 
-				player.PlayerCanvas.Lockpick.FillAmount = progress;
+				//player.PlayerCanvas.Lockpick.FillAmount = progress;
 
 				if (progress >= 1f)
 				{
@@ -55,20 +55,20 @@ namespace Game.Systems.LockpickingSystem
 		private void UnlockAnimation()
 		{
 			decal.ScaleTo(0f);
-			player.PlayerCanvas.Lockpick.Unlock();
+			//player.PlayerCanvas.Lockpick.Unlock();
 		}
 
 		#region Override
 		protected override void EnterAnimation()
 		{
 			base.EnterAnimation();
-			player.PlayerCanvas.Lockpick.Show();
+			//player.PlayerCanvas.Lockpick.Show();
 		}
 
 		protected override void ResetAnimation()
 		{
 			base.ResetAnimation();
-			lastPlayer.PlayerCanvas.Lockpick.Hide();
+			//lastPlayer.PlayerCanvas.Lockpick.Hide();
 		}
 
 		protected override void OnEnterChanged(Collider other)

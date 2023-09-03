@@ -1,3 +1,5 @@
+using Game.Character;
+
 using Sirenix.OdinInspector;
 
 using System.Collections.Generic;
@@ -17,6 +19,9 @@ namespace Game.Systems.GameSystem
 		public List<AudioClip> taps = new List<AudioClip>();
 
 		public LocalizationSettins localizationSettins;
+
+		[Header("Prefabs")]
+		public AbstractCharacter characterPrefab;
 	}
 
 	[System.Serializable]
