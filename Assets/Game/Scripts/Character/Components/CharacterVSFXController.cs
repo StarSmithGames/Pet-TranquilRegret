@@ -1,9 +1,8 @@
-using Game.Character;
 using Game.VFX;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Entities
+namespace Game.Character
 {
 	public class CharacterVSFXController : MonoBehaviour
 	{

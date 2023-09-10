@@ -59,6 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba993562e2bd8c148ac7ed7af42763a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  decal: {fileID: 6094570128961057517}
   settings:
     layer:
       serializedVersion: 2

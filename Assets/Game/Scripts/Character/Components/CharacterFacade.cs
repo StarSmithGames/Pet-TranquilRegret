@@ -1,9 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterFacade : MonoBehaviour
+using Zenject;
+
+namespace Game.Character
 {
-	public Transform cameraFollowPivot;
-	public Transform cameraLookAtPivot;
+	public class CharacterFacade : MonoBehaviour
+	{
+		public Transform cameraFollowPivot;
+		public Transform cameraLookAtPivot;
+
+		[Inject, HideInInspector] public CharacterCanvas characterCanvas;
+		[Inject] public CharacterGroundImplementation groundImplementation;
+	}
 }

@@ -1,10 +1,12 @@
-using Game.Systems.LockpickingSystem;
+using System.Linq;
+
 using UnityEngine;
 
-namespace Game.Entities
+namespace Game.Systems.LockpickingSystem
 {
-    public class Door : LockpickableObject
+    public class Door : LockpickableGroup
 	{
+		[Space]
 		[SerializeField] private Rigidbody rigidbody;
         [SerializeField] private HingeJoint hingeJoint;
         [SerializeField] private Collider collider;
@@ -12,17 +14,17 @@ namespace Game.Entities
 
 		private float breakForce;
 
-		protected override void Start()
+		protected override void Awake()
 		{
+			base.Awake();
+
 			breakForce = hingeJoint.breakForce;
 
-			if (settings.isLocked)
+			if (base.settings.isLocked)
 			{
 				rigidbody.freezeRotation = true;
 				hingeJoint.breakForce = Mathf.Infinity;
 			}
-
-			base.Start();
 		}
 
 		private void OnJointBreak(float breakForce)
@@ -30,9 +32,16 @@ namespace Game.Entities
 			collider.material = null;
 		}
 
-		protected override void OnLockChanged()
+		protected override void OnLockChanged(LockpickableObject locker)
 		{
-			base.OnLockChanged();
+			locker.DoUnlock();
+			for (int i = 0; i < locks.Count; i++)
+			{
+				if (locks[i] != locker)
+				{
+					locks[i].Hide();
+				}
+			}
 
 			hingeJoint.breakForce = doorSettings.isBreakable ? breakForce : Mathf.Infinity;
 			rigidbody.freezeRotation = false;
@@ -42,7 +51,6 @@ namespace Game.Entities
         public class Settings
         {
             public bool isBreakable = true;
-            [HideInInspector] public bool isBreaked = false;
         }
     }
 }

@@ -1,5 +1,6 @@
 using Game.Entities;
 using Game.Managers.LevelManager;
+using Game.Systems.FloatingSystem;
 using Game.Systems.InteractionSystem;
 
 using Sirenix.OdinInspector;
@@ -14,7 +15,7 @@ using UnityEngine;
 
 using Zenject;
 
-namespace Game.Systems.FloatingSystem
+namespace Game.Systems.NavigationSystem
 {
 	[RequireComponent(typeof(InteractionZone))]
 	public class LightContainer : MonoBehaviour
@@ -25,10 +26,10 @@ namespace Game.Systems.FloatingSystem
 
 		private Transform currentTarget;
 
-		private FloatingSystem floatingSystem;
+		private FloatingSystem.FloatingSystem floatingSystem;
 
 		[Inject]
-		private void Construct(FloatingSystem floatingSystem)
+		private void Construct(FloatingSystem.FloatingSystem floatingSystem)
 		{
 			this.floatingSystem = floatingSystem;
 
@@ -45,12 +46,12 @@ namespace Game.Systems.FloatingSystem
 				StartCoroutine(Observable());
 			}
 
-			interactionZone.onCollectionChanged += OnZoneCollectionChanged;
+			//interactionZone.onCollectionChanged += OnZoneCollectionChanged;
 		}
 
 		private void OnDestroy()
 		{
-			interactionZone.onCollectionChanged -= OnZoneCollectionChanged;
+			//interactionZone.onCollectionChanged -= OnZoneCollectionChanged;
 		}
 
 		private IEnumerator Observable()
@@ -103,7 +104,7 @@ namespace Game.Systems.FloatingSystem
 
 		private void OnZoneCollectionChanged()
 		{
-			currentTarget = interactionZone.GetCollection().FirstOrDefault()?.transform;
+			//currentTarget = interactionZone.GetCollection().FirstOrDefault()?.transform;
 		}
 
 		private void OnAnimationCompleted(Floating3DObject obj)

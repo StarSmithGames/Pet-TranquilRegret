@@ -1,4 +1,15 @@
+using Game.Character;
 using Game.Systems.InteractionSystem;
+using Game.Systems.NavigationSystem;
+
+using Sirenix.OdinInspector;
+
+using System;
+using System.Linq;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 using UnityEngine;
 
@@ -6,35 +17,43 @@ namespace Game.Systems.LockpickingSystem
 {
 	public class LockpickableObject : InteractableObject
 	{
-		[SerializeField] protected Settings settings;
+		public Action<LockpickableObject> onLockChanged;
+
+		[InfoBox("Overrided by Group Parent", InfoMessageType.Error, VisibleIf = "IsHasLockpickableGroup")]
+		public LockpickableSettings settings;
+		[SerializeField, ReadOnly] private LockpickableGroup group;
+
+		private AbstractCharacter currentCharacter;
 
 		private float t;
 		private float progress;
 
-		protected override void Start()
+		protected override void Awake()
 		{
-			decal.Enable(settings.isLocked);
+			base.Awake();
 
-			if (settings.isLocked)
+			if(group != null)
 			{
-				IdleAnimation();
+				settings = group.settings;
 			}
 
-			interactionZone.onEnterChanged += OnEnterChanged;
-			interactionZone.onExitChanged += OnExitChanged;
-			interactionZone.onCollectionChanged += OnZoneCollectionChanged;
+			interactionZone.decal.Enable(settings.isLocked);
+			if (settings.isLocked)
+			{
+				interactionZone.DoIdle();
+			}
 		}
 
 		private void Update()
 		{
 			if (!settings.isLocked) return;
 
-			if(player != null)
+			if(currentCharacter != null)
 			{
 				t += Time.deltaTime;
 				progress = t / settings.unlockTime;
 
-				//player.PlayerCanvas.Lockpick.FillAmount = progress;
+				currentCharacter.facade.characterCanvas.lockpick.FillAmount = progress;
 
 				if (progress >= 1f)
 				{
@@ -52,58 +71,60 @@ namespace Game.Systems.LockpickingSystem
 			}
 		}
 
-		private void UnlockAnimation()
+		public void Hide()
 		{
-			decal.ScaleTo(0f);
-			//player.PlayerCanvas.Lockpick.Unlock();
+			interactionZone.Enable(false);
+			interactionZone.decal.ScaleTo(0f, callback: () =>
+			{
+				interactionZone.gameObject.SetActive(false);
+			});
 		}
 
-		#region Override
-		protected override void EnterAnimation()
+		public void DoUnlock()
 		{
-			base.EnterAnimation();
-			//player.PlayerCanvas.Lockpick.Show();
+			Hide();
+			currentCharacter.facade.characterCanvas.lockpick.Unlock();
 		}
-
-		protected override void ResetAnimation()
-		{
-			base.ResetAnimation();
-			//lastPlayer.PlayerCanvas.Lockpick.Hide();
-		}
-
-		protected override void OnEnterChanged(Collider other)
-		{
-			if (!settings.isLocked) return;
-
-			base.OnEnterChanged(other);
-		}
-
-		protected override void OnExitChanged(Collider other)
-		{
-			if (!settings.isLocked) return;
-
-			base.OnExitChanged(other);
-		}
-
-		protected override void OnZoneCollectionChanged()
-		{
-			if (!settings.isLocked) return;
-
-			base.OnZoneCollectionChanged();
-		}
-		#endregion
 
 		protected virtual void OnLockChanged()
 		{
-			UnlockAnimation();
+			onLockChanged?.Invoke(this);
 		}
 
-		[System.Serializable]
-		public class Settings
+		protected override void OnListChanged()
 		{
-			public bool isLocked = true;
-			public float unlockTime = 2.5f;
-			public float decreaseSpeed = 1f;
+			var character = characters.LastOrDefault();
+
+			if (currentCharacter != null)
+			{
+				if (character != currentCharacter)
+				{
+					currentCharacter.facade.characterCanvas.lockpick.Hide();
+				}
+			}
+
+			currentCharacter = character;
+
+			if (currentCharacter != null)
+			{
+				currentCharacter.facade.characterCanvas.lockpick.Show();
+			}
 		}
+
+
+#if UNITY_EDITOR
+		private bool IsHasLockpickableGroup()
+		{
+			var group = GetComponentInParent<LockpickableGroup>();
+
+			if(group != this.group)
+			{
+				this.group = group;
+				EditorUtility.SetDirty(gameObject);
+			}
+
+			return group != null;
+		}
+#endif
 	}
 }

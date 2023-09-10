@@ -38,7 +38,7 @@ namespace Game.VFX
 			masterProjector.enabled = IsEnabled;
 		}
 
-		public void StartIdleAnimation()
+		public Tween DoIdle()
 		{
 			idleSequence = DOTween.Sequence();
 
@@ -46,6 +46,8 @@ namespace Game.VFX
 				.AppendCallback(() => masterProjector.DORewind())
 				.Append(DOTween.Punch(() => originalSize, (x) => SetScale(new Vector3(x.x, x.y, depth)), new Vector3(0.25f, 0.25f, 0), 0.25f))
 				.SetLoops(-1);
+
+			return idleSequence;
 		}
 
 		#region Scale
@@ -140,7 +142,7 @@ namespace Game.VFX
 		}
 		#endregion
 
-		public void Kill()
+		public void DoKill()
 		{
 			idleSequence.Kill(true);
 			idleSequence = null;

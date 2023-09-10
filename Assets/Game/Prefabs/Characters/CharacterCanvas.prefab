@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 9162097694774945618}
   - component: {fileID: 5198518144662913795}
   m_Layer: 5
-  m_Name: PlayerCanvas
+  m_Name: CharacterCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -349,7 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8427e320d953a64ab4f05a2d647751c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Lockpick>k__BackingField: {fileID: 5541188150571300503}
+  lockpick: {fileID: 5541188150571300503}
 --- !u!1 &3910129723540708308
 GameObject:
   m_ObjectHideFlags: 0

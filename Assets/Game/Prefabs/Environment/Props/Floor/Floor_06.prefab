@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5818299088473089774}
   - component: {fileID: 5818299088474186798}
   - component: {fileID: 5818299088473089775}
-  - component: {fileID: 93815143756115215}
+  - component: {fileID: 4427077893609458005}
   m_Layer: 3
   m_Name: Floor_06
   m_TagString: Untagged
@@ -98,7 +98,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.500002, y: 0.11787953, z: 2.500002}
   m_Center: {x: 0, y: 0.05893975, z: 0}
---- !u!114 &93815143756115215
+--- !u!114 &4427077893609458005
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,6 +107,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5818299088471931630}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae53e26107f1cf24c9c34e9ccff2f120, type: 3}
+  m_Script: {fileID: 11500000, guid: 3a89f5aad10700249bdd70c9c76b7368, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

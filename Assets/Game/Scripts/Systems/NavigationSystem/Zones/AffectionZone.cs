@@ -7,7 +7,7 @@ using UnityEngine;
 
 using Zenject;
 
-namespace Game.Entities
+namespace Game.Systems.NavigationSystem
 {
 	public class AffectionZone : InteractionZone
 	{

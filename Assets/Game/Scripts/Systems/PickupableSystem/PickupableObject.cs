@@ -2,6 +2,7 @@ using EPOOutline;
 
 using Game.Character;
 using Game.Entities;
+using Game.Systems.NavigationSystem;
 
 using Sirenix.OdinInspector;
 
@@ -41,20 +42,20 @@ namespace Game.Systems.PickupableSystem
 		//	this.pickupFactory = pickupFactory;
 		//}
 
-		private void Start()
-		{
-			interactionZone.onEnterChanged += OnEnterChanged;
-			interactionZone.onExitChanged += OnExitChanged;
-		}
+		//private void Start()
+		//{
+		//	interactionZone.onEnterChanged += OnEnterChanged;
+		//	interactionZone.onExitChanged += OnExitChanged;
+		//}
 
-		private void OnDestroy()
-		{
-			if (interactionZone != null)
-			{
-				interactionZone.onEnterChanged -= OnEnterChanged;
-				interactionZone.onExitChanged -= OnExitChanged;
-			}
-		}
+		//private void OnDestroy()
+		//{
+		//	if (interactionZone != null)
+		//	{
+		//		interactionZone.onEnterChanged -= OnEnterChanged;
+		//		interactionZone.onExitChanged -= OnExitChanged;
+		//	}
+		//}
 
 		private void FixedUpdate()
 		{

@@ -4,6 +4,7 @@ using Game.Systems.NavigationSystem;
 using Game.UI;
 
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Events;
 
 using Zenject;
@@ -22,10 +23,9 @@ namespace Game.Character
 
 		public float MovingMagnitude => directionVector.magnitude;
 		
-		[SerializeField] private Settings settings;
-
 		[Inject] private AbstractCharacter character;
 		[Inject] private Rigidbody rb;
+		[Inject] private CharacterConfig config;
 
 		private Vector3 directionVector;
 		private Vector3 moveVector;
@@ -91,23 +91,30 @@ namespace Game.Character
 		{
 			if (rb.velocity.y < 0)
 			{
-				rb.velocity += Vector3.up * Physics.gravity.y * settings.fallMultipier * Time.fixedDeltaTime;
+				rb.velocity += Vector3.up * Physics.gravity.y * config.controllSettings.fallMultipier * Time.fixedDeltaTime;
 			}
 		}
 
 		public bool IsMoving()
 		{
-			return directionVector.x != 0 || directionVector.z != 0;
+			return Mathf.Abs(directionVector.x) > config.controllSettings.thresholdIdle || Mathf.Abs(directionVector.z) > config.controllSettings.thresholdIdle;
 		}
 
 		public bool IsIdling()
 		{
-			return directionVector.x == 0 && directionVector.z == 0;
+			return Mathf.Abs(directionVector.x) < config.controllSettings.thresholdIdle && Mathf.Abs(directionVector.z) < config.controllSettings.thresholdIdle;
 		}
 
 		private Vector3 GetDirection()
 		{
-			return new Vector3(subCanvas.Joystick.Horizontal, 0, subCanvas.Joystick.Vertical);
+			Vector3 direction = new Vector3(subCanvas.Joystick.Horizontal, 0, subCanvas.Joystick.Vertical);
+
+			if(direction == Vector3.zero)
+			{
+				direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+			}
+
+			return direction;
 		}
 
 		private Vector3 GetRelativeToCamera(Vector3 direction)
@@ -123,7 +130,7 @@ namespace Game.Character
 
 		private void CheckGround()
 		{
-			if (Physics.Raycast(new Ray(transform.position, Vector3.down), out RaycastHit hit, settings.disstanceToGround, settings.groundLayer))
+			if (Physics.Raycast(new Ray(transform.position, Vector3.down), out RaycastHit hit, config.controllSettings.disstanceToGround, config.controllSettings.groundLayer))
 			{
 				CurrentGroundLayer = hit.collider.GetComponent<GroundLayer>();
 
@@ -157,14 +164,19 @@ namespace Game.Character
 			}
 		}
 
-		private void OnDrawGizmos()
+		private void OnDrawGizmosSelected()
 		{
-			Gizmos.DrawLine(transform.position, transform.position + Vector3.down * (settings.disstanceToGround));
+			var c = GetComponentInParent<CharacterInstaller>().config;
+			Assert.IsNotNull(c);
+			Gizmos.DrawLine(transform.position, transform.position + Vector3.down * (c.controllSettings.disstanceToGround));
 		}
 
 		[System.Serializable]
 		public class Settings
 		{
+			public float thresholdIdle = 0.05f;
+
+			[Header("Gravity")]
 			public float fallMultipier = 1f;
 			[Space]
 			public LayerMask groundLayer;
