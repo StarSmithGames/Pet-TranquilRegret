@@ -1,4 +1,4 @@
-using Game.Managers.LevelManager;
+using Game.Systems.LevelSystem;
 
 using StarSmithGames.IoC;
 
@@ -11,13 +11,13 @@ namespace Game.UI
 {
 	public class UIGoalItem : PoolableObject
 	{
-		[field: SerializeField] public Image Icon { get; private set; }
-		[field: SerializeField] public TMPro.TextMeshProUGUI Count { get; private set; }
+		public Image icon;
+		public TMPro.TextMeshProUGUI count;
 
-		public void SetGoal(CountableGoalConfig goal)
+		public void SetGoal(GoalItem item)
 		{
-			Icon.sprite = goal.information.portrait;
-			Count.text = goal.count.ToString();
+			icon.sprite = item.config.information.portrait;
+			count.text = item.count.ToString();
 		}
 
 		public class Factory : PlaceholderFactory<UIGoalItem> { }

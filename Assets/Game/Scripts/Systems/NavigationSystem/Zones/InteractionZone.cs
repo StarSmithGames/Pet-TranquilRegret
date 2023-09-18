@@ -58,18 +58,18 @@ namespace Game.Systems.NavigationSystem
 
 		public virtual void DoIdle()
 		{
-			decal.DoIdle();
+			decal?.DoIdle();
 		}
 
 		public virtual void DoEnter()
 		{
-			decal.DoKill();
-			decal.ScaleTo(1.2f);
+			decal?.DoKill();
+			decal?.ScaleTo(1.2f);
 		}
 
 		public virtual void ResetAnimation()
 		{
-			decal.ScaleTo(1f, callback: () => decal.DoIdle());
+			decal?.ScaleTo(1f, callback: () => decal.DoIdle());
 		}
 
 #if UNITY_EDITOR

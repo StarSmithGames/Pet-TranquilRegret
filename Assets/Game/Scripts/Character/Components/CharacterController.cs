@@ -107,7 +107,7 @@ namespace Game.Character
 
 		private Vector3 GetDirection()
 		{
-			Vector3 direction = new Vector3(subCanvas.Joystick.Horizontal, 0, subCanvas.Joystick.Vertical);
+			Vector3 direction = new Vector3(subCanvas.joystick.Horizontal, 0, subCanvas.joystick.Vertical);
 
 			if(direction == Vector3.zero)
 			{

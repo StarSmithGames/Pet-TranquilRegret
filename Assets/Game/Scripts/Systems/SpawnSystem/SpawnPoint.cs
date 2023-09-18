@@ -5,11 +5,11 @@ using UnityEngine;
 using StarSmithGames.Core;
 
 using Game.Character;
-using Game.Systems.GameSystem;
 
 using Zenject;
 
 using Game.Managers.CharacterManager;
+using Game.Systems.StorageSystem;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -33,7 +33,7 @@ namespace Game.Systems.SpawnSystem
 
 		public void Spawn()
 		{
-			var character = diContainer.InstantiatePrefab(gameData.GameplayConfig.characterPrefab).GetComponent<AbstractCharacter>();
+			var character = diContainer.InstantiatePrefab(gameData.IntermediateData.GameplayConfig.characterPrefab).GetComponent<AbstractCharacter>();
 
 			character.root.position = transform.position;
 			character.model.rotation = transform.rotation;

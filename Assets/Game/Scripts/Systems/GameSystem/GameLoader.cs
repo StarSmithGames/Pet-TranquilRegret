@@ -1,7 +1,8 @@
 using Game.Extensions;
 using Game.Managers.GameManager;
 using Game.Managers.TransitionManager;
-using Game.Systems.SpawnSystem;
+using Game.Systems.LevelSystem;
+using Game.Systems.StorageSystem;
 
 using StarSmithGames.Go.SceneManager;
 using StarSmithGames.IoC.AsyncManager;
@@ -10,6 +11,7 @@ using System.Collections;
 using System.IO;
 
 using UnityEngine;
+using UnityEngine.Assertions;
 
 using Zenject;
 
@@ -19,9 +21,9 @@ namespace Game.Systems.GameSystem
 	{
 		[Inject] private AsyncManager asyncManager;
 		[Inject] private GameManager gameManager;
+		[Inject] private GameData gameData;
 		[Inject] private SceneManager sceneManager;
 		[Inject] private TransitionManager transitionManager;
-		[Inject] private SpawnSystem.SpawnSystem spawnSystem;
 
 		private Transition startLevelTransition;
 
@@ -37,6 +39,8 @@ namespace Game.Systems.GameSystem
 
 		public void LoadMenu()
 		{
+			gameData.IntermediateData.Level = null;
+
 			gameManager.ChangeState(GameState.Loading);
 
 			var transition = new Transition(
@@ -54,7 +58,7 @@ namespace Game.Systems.GameSystem
 			startLevelTransition = new Transition(
 			() =>
 			{
-				var name = Path.GetFileNameWithoutExtension(levelConfig.scene.ScenePath);
+				var name = gameData.IntermediateData.Level.config.scene.SceneName;
 				sceneManager.LoadSceneAsyncFromAddressables(name, name);
 				return sceneManager.ProgressHandler;
 			}, false,
@@ -62,13 +66,24 @@ namespace Game.Systems.GameSystem
 			{
 				asyncManager.StartCoroutine(GamePipeline());
 			});
-			transitionManager.StartInfinityLoading(startLevelTransition, onHided: () => Debug.LogError("Load Completed!") );
+			transitionManager.StartInfinityLoading(startLevelTransition, onShowed: () =>
+			{
+				gameData.IntermediateData.Level = new Level(levelConfig);
+			},
+			onHided: () => Debug.LogError("Load Completed!") );
 		}
 
 		private IEnumerator GamePipeline()
 		{
-			gameManager.ChangeState(GameState.PreGameplay);
-			spawnSystem.SpawnPlayer();
+#if UNITY_EDITOR
+			if(gameData.IntermediateData.Level == null)
+			{
+				var config = gameData.IntermediateData.GetLevelConfig(sceneManager.GetActiveScene());
+				Assert.IsNotNull(config);
+				gameData.IntermediateData.Level = new Level(config);
+			}
+#endif
+			gameData.IntermediateData.Level.Start();
 
 			yield return null;
 			startLevelTransition?.Allow();

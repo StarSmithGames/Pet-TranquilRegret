@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Game.Extensions;
-using Game.Managers.LevelManager;
 
 using Sirenix.OdinInspector;
 
@@ -12,7 +11,7 @@ using StarSmithGames.Core;
 
 using UnityEngine;
 
-namespace Game.Systems.GameSystem
+namespace Game.Systems.LevelSystem
 {
 	[InlineEditor]
 	[CreateAssetMenu(fileName = "LevelConfig", menuName = "Game/LevelConfig")]
@@ -35,9 +34,8 @@ namespace Game.Systems.GameSystem
 		[Min(0)]
 		public int remainingTime = 30;//redZone
 		[Space]
-		[AssetSelector]
-		public List<CountableGoalConfig> primaryGoals = new List<CountableGoalConfig>();
-		[SerializeReference] public List<AbstractGoalConfig> secondaryGoals = new List<AbstractGoalConfig>();
+		public List<GoalItem> primaryGoals = new();
+		//[SerializeReference] public List<AbstractGoalConfig> secondaryGoals = new List<AbstractGoalConfig>();
 
 		private string Title => $"{id}_{name}";
 
@@ -47,29 +45,6 @@ namespace Game.Systems.GameSystem
 			return TimeExtensions.GetTimerFormat(TimeSpan.FromSeconds(t));
 
 		}
-
-#if UNITY_EDITOR
-		[SerializeField, HideInInspector] private bool hasBeenInitialised = false;
-
-		public void Awake()
-		{
-			if (!hasBeenInitialised)
-			{
-				var list = AssetDatabaseExtensions.LoadAssets<LevelConfig>(false).ToList();
-
-				if (list.Contains(this))
-				{
-					id = list.IndexOf(this) + 1;
-				}
-				else
-				{
-					id = list.Count + 1;
-				}
-
-				hasBeenInitialised = true;
-			}
-		}
-#endif
 	}
 
 	[InlineProperty]

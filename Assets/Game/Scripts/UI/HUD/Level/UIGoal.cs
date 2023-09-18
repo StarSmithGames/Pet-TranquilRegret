@@ -1,58 +1,59 @@
 using DG.Tweening;
 
-using Game.Managers.LevelManager;
-
-using StarSmithGames.IoC;
+using Game.Systems.LevelSystem;
 
 using UnityEngine;
 using UnityEngine.UI;
 
-using Zenject;
-
 namespace Game.HUD.Gameplay
 {
-	public class UIGoal : PoolableObject
+	public class UIGoal : MonoBehaviour
 	{
-		[field: SerializeField] public Image Icon { get; private set; }
-		[field: SerializeField] public TMPro.TextMeshProUGUI Text { get; private set; }
-		[field: SerializeField] public TMPro.TextMeshProUGUI Count { get; private set; }
-
+		public Image icon;
+		public TMPro.TextMeshProUGUI text;
+		public TMPro.TextMeshProUGUI count;
 		[Space]
-		[SerializeField] private PunchData punch;
+		public PunchData punch;
 
-		public GoalBar CurrentGoal { get; private set; }
+		private IGoal currentGoal;
 
-		public void SetGoal(GoalBar goal)
+		private void OnDestroy()
 		{
-			this.CurrentGoal = goal;
+			if(currentGoal != null)
+			{
+				currentGoal.onChanged -= UpdateCount;
+			}
+		}
 
-			CurrentGoal.onChanged += UpdateCount;
+		public void SetGoal(IGoal goal)
+		{
+			currentGoal = goal;
+
+			currentGoal.onChanged += UpdateCount;
 			UpdateUI();
 		}
 
 		private void UpdateUI()
 		{
-			Icon.sprite = CurrentGoal.Data.information.portrait;
-			Text.text = CurrentGoal.Data.information.name;
+			icon.sprite = currentGoal.Config.information.portrait;
+			text.text = currentGoal.Config.information.name;
 
 			UpdateCount();
 		}
 
 		private void UpdateCount()
 		{
-			Count.text = CurrentGoal.Output;
+			count.text = currentGoal.CurrentValue + " / " + currentGoal.MaxValue;
 
 			Punch();
 		}
 
 		public void Punch()
 		{
-			Icon.transform.DORewind();
-			Count.transform.DORewind();
-			Icon.transform.DOPunchScale(punch.settings.GetPunch(), punch.settings.duration, punch.settings.vibrato, punch.settings.elasticity);
-			Count.transform.DOPunchScale(punch.settings.GetPunch(), punch.settings.duration, punch.settings.vibrato, punch.settings.elasticity);
+			icon.transform.DORewind();
+			count.transform.DORewind();
+			icon.transform.DOPunchScale(punch.settings.GetPunch(), punch.settings.duration, punch.settings.vibrato, punch.settings.elasticity);
+			count.transform.DOPunchScale(punch.settings.GetPunch(), punch.settings.duration, punch.settings.vibrato, punch.settings.elasticity);
 		}
-
-		public class Factory : PlaceholderFactory<UIGoal> { }
 	}
 }

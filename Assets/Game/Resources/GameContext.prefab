@@ -519,7 +519,6 @@ MonoBehaviour:
   _scriptableObjectInstallers:
   - {fileID: 11400000, guid: 0316f4f9fe1890e49b67115692901602, type: 2}
   - {fileID: 11400000, guid: 7ad0c571db82a07498d3444672919ea0, type: 2}
-  - {fileID: 11400000, guid: 81655efbb2f35d84daef7ba83a6d7f15, type: 2}
   _monoInstallers:
   - {fileID: 2802870694795667563}
   - {fileID: 1865050009513248611}
@@ -1099,9 +1098,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   windows: {fileID: 4382914728207592595}
   vfx: {fileID: 4382914727788082157}
-  <GoalContent>k__BackingField: {fileID: 8336709408422471019}
-  <Joystick>k__BackingField: {fileID: 1984189012587172244}
-  <Drop>k__BackingField: {fileID: 5437159451087285282}
+  goalContent: {fileID: 8336709408422471019}
+  goalPrefab: {fileID: 16312574267014373, guid: c1f47e87bde362e46a4e2dfa8497cefe, type: 3}
+  joystick: {fileID: 1984189012587172244}
+  drop: {fileID: 5437159451087285282}
 --- !u!1 &4928079377231855629
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,15 +1,20 @@
+using Game.Systems.GameSystem;
+using Game.Systems.LevelSystem;
+
 using StarSmithGames.Core;
 using StarSmithGames.Core.StorageSystem;
 
+using System.IO;
+
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
 using Zenject;
 
-namespace Game.Systems.GameSystem
+namespace Game.Systems.StorageSystem
 {
 	public class GameData
 	{
-		[Inject]
-		public GameplayConfig GameplayConfig { get; private set; }
-
 		#region FastData
 		public bool IsGDPRApplied
 		{
@@ -49,26 +54,16 @@ namespace Game.Systems.GameSystem
 		#endregion
 
 		#region Data
-		public ISaveLoadStorage<Storage> StorageKeeper { get; private set; }
+		public ISaveLoadStorage<Storage> StorageData { get; private set; } = new PlayerPrefsStorageWrapper<Storage>("data");
+
+		public GameProgress GameProgressData => StorageData.GetStorage().GameProgress.GetData();
+		public GameplayProgress GameplayProgress;
 		#endregion
 
-		#region IntermediateData
-		#endregion
+		public IntermediateData IntermediateData { get; private set; } = new IntermediateData();
 
 		#region Tutorials
 		#endregion
-
-		public GameData()
-		{
-			StorageKeeper = new PlayerPrefsStorageWrapper<Storage>("data");
-		}
-
-		public LevelConfig GetLevelConfig(int number)
-		{
-			return GameplayConfig.levels[number - 1];
-		}
-
-		public GameProgress GameProgress => StorageKeeper.GetStorage().GameProgress.GetData();
 	}
 
 	public class Storage : StarSmithGames.Core.StorageSystem.Storage
@@ -91,5 +86,37 @@ namespace Game.Systems.GameSystem
 	public class GameProgress
 	{
 		public int progressMainIndex;
+	}
+
+	public class GameplayProgress
+	{
+		public void Reset()
+		{
+
+		}
+	}
+
+	public class IntermediateData
+	{
+		[Inject]
+		public GameplayConfig GameplayConfig { get; private set; }
+
+		public Level Level { get; set; }
+		public LevelConfig CurrentLevelConfig => Level?.config;
+
+		public IntermediateData()
+		{
+			ProjectContext.Instance.Container.Inject(this);
+		}
+
+		public LevelConfig GetLevelConfig(Scene scene)
+		{
+			return GameplayConfig.levels.Find((x) => x.scene.SceneName == scene.name);
+		}
+
+		public LevelConfig GetLevelConfig(int number)
+		{
+			return GameplayConfig.levels[number - 1];
+		}
 	}
 }

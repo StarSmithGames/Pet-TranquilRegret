@@ -1,5 +1,7 @@
 using Game.HUD.Gameplay;
+using Game.Managers.GameManager;
 using Game.Systems.NavigationSystem;
+using Game.Systems.StorageSystem;
 
 using StarSmithGames.Core;
 
@@ -13,48 +15,46 @@ namespace Game.UI
 {
 	public class UIGameCanvas : UICanvas
     {
-		[field: SerializeField] public Transform GoalContent { get; private set; }
-		[field: Header("Control")]
-		[field: SerializeField] public UIJoystick Joystick { get; private set; }
-		[field: SerializeField] public UIDropButton Drop { get; private set; }
-
+		[Space]
+		public Transform goalContent;
+		public UIGoal goalPrefab;
+		[Header("Control")]
+		public UIJoystick joystick;
+		public UIDropButton drop;
 
 		private List<UIGoal> goals = new List<UIGoal>();
 
+		[Inject] private GameData gameData;
 		private SignalBus signalBus;
-		private UIGoal.Factory goalFactory;
 
 		[Inject]
-		private void Construct(SignalBus signalBus, UIGoal.Factory goalFactory)
+		private void Construct(SignalBus signalBus)
 		{
 			this.signalBus = signalBus;
-			this.goalFactory = goalFactory;
+
+			signalBus.Subscribe<SignalGameStateChanged>(OnGameStateChanged);
 		}
 
-		private void Start()
+		private void OnDestroy()
 		{
-			GoalContent.DestroyChildren();
+			signalBus.Unsubscribe<SignalGameStateChanged>(OnGameStateChanged);
+		}
 
-			//StarSmithGames.Core.CollectionExtensions.Resize(levelManager.CurrentLevel.PrimaryGoals, goals,
-			//() =>
-			//{
-			//	var goal = goalFactory.Create();
-			//	goal.transform.SetParent(GoalContent);
-			//	goal.transform.localScale = Vector3.one;
-			//	return goal;
-			//},
-			//() =>
-			//{
-			//	var goal = goals.Last();
-			//	goal.DespawnIt();
+		private void OnGameStateChanged(SignalGameStateChanged signal)
+		{
+			if(signal.newGameState == GameState.PreGameplay)
+			{
+				var registrator = gameData.IntermediateData.Level.GoalRegistrator;
 
-			//	return goal;
-			//});
-
-			//for (int i = 0; i < goals.Count; i++)
-			//{
-			//	goals[i].SetGoal(levelManager.CurrentLevel.PrimaryGoals[i]);
-			//}
+				goalContent.DestroyChildren();
+				registrator.GoalsPrimary.ForEach((x) =>
+				{
+					var goal = SceneContext.Instantiate(goalPrefab);
+					goal.transform.SetParent(goalContent);
+					goal.transform.localScale = Vector3.one;
+					goal.SetGoal(x);
+				});
+			}
 		}
 	}
 }

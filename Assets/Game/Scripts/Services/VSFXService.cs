@@ -1,4 +1,4 @@
-using Game.Systems.GameSystem;
+using Game.Systems.StorageSystem;
 
 using StarSmithGames.Core;
 using StarSmithGames.Go.AudioService;
@@ -16,7 +16,7 @@ namespace Game.Services
 
         public void PlayUIButton()
         {
-            audioService.PlaySound(gameData.GameplayConfig.taps.RandomItem());
+            audioService.PlaySound(gameData.IntermediateData.GameplayConfig.taps.RandomItem());
             vibrationService.Vibrate();
         }
     }

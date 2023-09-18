@@ -3,6 +3,7 @@ using Game.Managers.GameManager;
 using Game.Services;
 using Game.Systems.GameSystem;
 using Game.Systems.SpawnSystem;
+using Game.Systems.StorageSystem;
 
 using StarSmithGames.Go.ApplicationHandler;
 using StarSmithGames.Go.SceneManager;
@@ -21,8 +22,8 @@ namespace Game.Installers
 			Container.BindInterfacesAndSelfTo<SceneManager>().AsSingle().NonLazy();
 			Container.BindInterfacesAndSelfTo<ViewService>().AsSingle().NonLazy();
 			Container.BindInterfacesAndSelfTo<VSFXService>().AsSingle().NonLazy();
-			
-			Container.BindInstance(gameplayConfig).WhenInjectedInto<GameData>();
+
+			Container.BindInstance(gameplayConfig).AsSingle();
 			Container.BindInterfacesAndSelfTo<GameData>().AsSingle().NonLazy();
 
 			SignalBusInstaller.Install(Container);

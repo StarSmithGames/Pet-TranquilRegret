@@ -1,6 +1,6 @@
 using DG.Tweening;
 
-using Game.Systems.GameSystem;
+using Game.Systems.StorageSystem;
 using Game.UI;
 using Game.VFX;
 
@@ -59,19 +59,19 @@ namespace Game.HUD.Menu
 			if (gameData.IsFirstTime)
 			{
 				gameData.IsFirstTime = false;
-				gameData.StorageKeeper.GetStorage().GameProgress.SetData(new GameProgress()
+				gameData.StorageData.GetStorage().GameProgress.SetData(new GameProgress()
 				{
 					progressMainIndex = 0,
 				});
-				gameProgress = gameData.StorageKeeper.GetStorage().GameProgress.GetData();
+				gameProgress = gameData.StorageData.GetStorage().GameProgress.GetData();
 				lastIndex = gameProgress.progressMainIndex;
-				gameData.StorageKeeper.Save();
+				gameData.StorageData.Save();
 
 				OpenRoadMap(true);
 			}
 			else
 			{
-				gameProgress = gameData.StorageKeeper.GetStorage().GameProgress.GetData();
+				gameProgress = gameData.StorageData.GetStorage().GameProgress.GetData();
 				lastIndex = gameProgress.progressMainIndex;
 
 				OpenRoadMap(false);
@@ -109,7 +109,7 @@ namespace Game.HUD.Menu
 
 		private void LevelsRefresh()
 		{
-			var config = gameData.GameplayConfig;
+			var config = gameData.IntermediateData.GameplayConfig;
 			Assert.AreEqual(config.levels.Count, levels.Count);
 
 			for (int i = 0; i < levels.Count; i++)
@@ -158,7 +158,7 @@ namespace Game.HUD.Menu
 		private void ShowLevelWindow()
 		{
 			var window = menuCanvas.ViewRegistrator.GetAs<LevelDialog>();
-			window.SetLevel(gameData.GetLevelConfig(lastIndex + 1));
+			window.SetLevel(gameData.IntermediateData.GetLevelConfig(lastIndex + 1));
 			window.Show();
 		}
 

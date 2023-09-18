@@ -1,11 +1,14 @@
 using Game.Character;
+using Game.Systems.LevelSystem;
 
 using Sirenix.OdinInspector;
 
 using System.Collections.Generic;
+using System.IO;
 
 using UnityEngine;
 using UnityEngine.Localization;
+using UnityEngine.SceneManagement;
 
 namespace Game.Systems.GameSystem
 {
@@ -22,6 +25,11 @@ namespace Game.Systems.GameSystem
 
 		[Header("Prefabs")]
 		public AbstractCharacter characterPrefab;
+	
+		public LevelConfig GetLevelByScene(Scene scene)
+		{
+			return levels.Find((x) => x.scene.SceneName == scene.name);
+		}
 	}
 
 	[System.Serializable]

@@ -1,4 +1,5 @@
 using Game.Systems.GameSystem;
+using Game.Systems.StorageSystem;
 
 using StarSmithGames.Go.LocalizationSystem;
 
@@ -26,7 +27,7 @@ namespace Game.Systems.SettingsSystem
 
 		private void Awake()
 		{
-			settins = gameData.GameplayConfig.localizationSettins;
+			settins = gameData.IntermediateData.GameplayConfig.localizationSettins;
 
 			localizationSystem.onLocalizationChanged += OnLocalizationChanged;
 			OnLocalizationChanged();

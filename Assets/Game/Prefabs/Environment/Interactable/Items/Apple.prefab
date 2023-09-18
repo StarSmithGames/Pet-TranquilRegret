@@ -87,9 +87,9 @@ MonoBehaviour:
       axisYMinMax: {x: 0, y: 0}
       axisZMinMax: {x: 1, y: 1}
     pathSpeed: 0.1
-    pathAccelaration: 1
-  data: {fileID: 11400000, guid: fde70720d6218db44a142385e8e51c63, type: 2}
-  count: 1
+  goal:
+    config: {fileID: 11400000, guid: fde70720d6218db44a142385e8e51c63, type: 2}
+    count: 1
 --- !u!1 &7406990798705141556
 GameObject:
   m_ObjectHideFlags: 0

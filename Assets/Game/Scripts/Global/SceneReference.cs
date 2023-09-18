@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using System.IO;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -55,6 +56,14 @@ namespace StarSmithGames
 #if UNITY_EDITOR
                 sceneAsset = GetSceneAssetFromPath();
 #endif
+            }
+        }
+
+        public string SceneName
+        {
+            get
+            {
+                return Path.GetFileNameWithoutExtension(ScenePath);
             }
         }
 
