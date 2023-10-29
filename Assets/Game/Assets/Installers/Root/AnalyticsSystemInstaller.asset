@@ -13,10 +13,8 @@ MonoBehaviour:
   m_Name: AnalyticsSystemInstaller
   m_EditorClassIdentifier: 
   enableUnity: 1
-  enableAmplitude: 1
+  enableAmplitude: 0
   enableAppsFlyer: 1
-  amplitudeSettings:
-    apiKey: 
   appsFlyerSettings:
     devKey: 
     appID: 

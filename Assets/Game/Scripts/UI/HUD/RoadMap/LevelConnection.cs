@@ -1,8 +1,6 @@
 using BansheeGz.BGSpline.Curve;
 using System.Linq;
 
-using UnityEditor.MemoryProfiler;
-
 using UnityEngine;
 
 namespace Game.HUD.Menu

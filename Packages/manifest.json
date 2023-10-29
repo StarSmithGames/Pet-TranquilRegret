@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.starsmithgames.analytics": "0.2.8",
     "com.starsmithgames.core": "0.2.7",
     "com.starsmithgames.go": "0.5.0",
     "com.starsmithgames.ioc": "1.0.1",

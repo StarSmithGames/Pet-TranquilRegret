@@ -1,12 +1,5 @@
 {
   "dependencies": {
-    "com.starsmithgames.analytics": {
-      "version": "0.2.8",
-      "depth": 0,
-      "source": "registry",
-      "dependencies": {},
-      "url": "https://registry.npmjs.org"
-    },
     "com.starsmithgames.core": {
       "version": "0.2.7",
       "depth": 0,

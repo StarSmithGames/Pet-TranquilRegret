@@ -1,11 +1,13 @@
-using Sirenix.OdinInspector.Editor;
-
 using System.Collections.Generic;
 using System.Linq;
 
-using UnityEditor;
 
 using UnityEngine;
+
+#if UNITY_EDITOR
+using Sirenix.OdinInspector.Editor;
+using UnityEditor;
+#endif
 
 namespace Game.Systems.LockpickingSystem
 {
