@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e812ce0ed6986f48aec6bed7f6a3c95, type: 3}
+  m_Name: Builder
+  m_EditorClassIdentifier: 
+  Setting:
+    ProductName: Billowing Boundary
+    CompanyName: StarSmith Games
+    PackageName: com.StarSmithGames.BillowingBoundary
+    Version: 0.0.1
+    VersionCode: 1
+    KeystorePath: starsmith.keystore
+    KeystorePassword: Star2l0Dr52M
+    AliasName: starsmith
+    AliasPassword: Star2l0Dr52M
+  IsCustomPath: 0
+  IsClearBuild: 0
+  UseR8: 0
+  Target: 13
+  TargetGroup: 7
+  Backend: 1
