@@ -32,8 +32,8 @@ namespace Game.Systems.InfinityRoadSystem
 		public Transform backgroundsContent;
 		[Header("Levels")]
 		public Transform levelsContent;
-		public List<UIRoadLevel> levels = new List<UIRoadLevel>();
-		public List<LevelConnection> connections = new List<LevelConnection>();
+		public List<UIRoadLevel> levels = new();
+		public List<LevelConnection> connections = new();
 		public CloudsSettings cloudsSettings;
 
 		[Inject] private VerticalCamera verticalCamera;

@@ -6,40 +6,31 @@ using UnityEngine.UI;
 
 namespace Game.Systems.InfinityRoadSystem
 {
+#if UNITY_EDITOR
 	[ExecuteInEditMode]
+#endif
 	public class UIRoadLevel : MonoBehaviour
 	{
-		public bool IsEnable { get; private set; } = true;
-
 		public event UnityAction<UIRoadLevel> onClicked;
 
-		[SerializeField] private TMPro.TextMeshProUGUI text;
-		[SerializeField] private Image background;
-		[SerializeField] private Button button;
-		[SerializeField] private Image star0;
-		[SerializeField] private Image star1;
-		[SerializeField] private Image star2;
+		public bool IsEnable { get; private set; } = true;
+
+		public TMPro.TextMeshProUGUI text;
+		public Image background;
+		public Image foreground;
+		public Button button;
 		[Space]
-		[SerializeField] private LevelType levelType = LevelType.Basic;
-		[SerializeField] private Color disabled;
-		[SerializeField] private Color enabled;
-		[SerializeField] private Color passed;
+		public LevelType levelType = LevelType.Basic;
+		public Color disabledForeground;
+		public Color enabledForeground;
 
 		public LevelConfig levelConfig;
-
-		private void Start()
-		{
-			button.onClick.AddListener(OnClicked);
-		}
-
-		private void OnDestroy()
-		{
-			button.onClick.RemoveAllListeners();
-		}
 
 #if UNITY_EDITOR
 		private void Update()
 		{
+			if (Application.isPlaying) return;
+
 			text.text = gameObject.name.Split("_")[1];
 		}
 #endif
@@ -48,7 +39,7 @@ namespace Game.Systems.InfinityRoadSystem
 		{
 			levelConfig = config;
 
-			EnableStars(0);
+			//EnableStars(0);
 
 			return this;
 		}
@@ -57,42 +48,41 @@ namespace Game.Systems.InfinityRoadSystem
 		{
 			IsEnable = trigger;
 
-			text.color = trigger ? enabled : disabled;
-			background.color = trigger ? enabled : disabled;
+			foreground.color = trigger ? enabledForeground : disabledForeground;
 
 			return this;
 		}
 
 		/// <param name="count">[0-3]</param>
-		public void EnableStars(int count)
-		{
-			if(count == 0)
-			{
-				star0.gameObject.SetActive(false);
-				star1.gameObject.SetActive(false);
-				star2.gameObject.SetActive(false);
-			}
-			else if(count == 1)
-			{
-				star0.gameObject.SetActive(true);
-				star1.gameObject.SetActive(false);
-				star2.gameObject.SetActive(false);
-			}
-			else if (count == 2)
-			{
-				star0.gameObject.SetActive(true);
-				star1.gameObject.SetActive(false);
-				star2.gameObject.SetActive(true);
-			}
-			else if (count == 3)
-			{
-				star0.gameObject.SetActive(true);
-				star1.gameObject.SetActive(true);
-				star2.gameObject.SetActive(true);
-			}
-		}
+		//public void EnableStars(int count)
+		//{
+		//	if(count == 0)
+		//	{
+		//		star0.gameObject.SetActive(false);
+		//		star1.gameObject.SetActive(false);
+		//		star2.gameObject.SetActive(false);
+		//	}
+		//	else if(count == 1)
+		//	{
+		//		star0.gameObject.SetActive(true);
+		//		star1.gameObject.SetActive(false);
+		//		star2.gameObject.SetActive(false);
+		//	}
+		//	else if (count == 2)
+		//	{
+		//		star0.gameObject.SetActive(true);
+		//		star1.gameObject.SetActive(false);
+		//		star2.gameObject.SetActive(true);
+		//	}
+		//	else if (count == 3)
+		//	{
+		//		star0.gameObject.SetActive(true);
+		//		star1.gameObject.SetActive(true);
+		//		star2.gameObject.SetActive(true);
+		//	}
+		//}
 		
-		private void OnClicked()
+		public void OnClicked()
 		{
 			onClicked?.Invoke(this);
 		}
