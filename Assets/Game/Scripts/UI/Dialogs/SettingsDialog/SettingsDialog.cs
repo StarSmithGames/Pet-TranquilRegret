@@ -12,8 +12,8 @@ using Zenject;
 
 namespace Game.UI
 {
-	public class SettingsDialog : ViewBase
-    {
+	public class SettingsDialog : ViewPopupBase
+	{
 		public event Action<SettingsDialog> onShowingChanged;
 
 		public TMPro.TextMeshProUGUI title;
@@ -55,7 +55,6 @@ namespace Game.UI
 
 		public override void Show(Action callback = null)
 		{
-			backButton.gameObject.SetActive(gameManager.IsGame);
 			backButton.interactable = true;
 
 			OnLocalizationChanged();
