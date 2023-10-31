@@ -1,37 +1,15 @@
-using Game.Managers.GameManager;
 using Zenject;
 
 namespace Game.UI
 {
     public class HUDPauseButton : ViewHUD
 	{
-		private SettingsDialog settingsDialog;
-
 		[Inject]
 		private UICanvas subCanvas;
 
-		private void Start()
-		{
-			settingsDialog = subCanvas.ViewRegistrator.GetAs<SettingsDialog>();
-			settingsDialog.onShowingChanged += OnShowingChanged;
-		}
-
-		private void OnDestroy()
-		{
-			if (settingsDialog != null)
-			{
-				settingsDialog.onShowingChanged -= OnShowingChanged;
-			}
-		}
-
 		public void OnClick()
 		{
-			settingsDialog.Show();
-		}
-
-		private void OnShowingChanged(SettingsDialog dialog)
-		{
-			Enable(!dialog.IsShowing);
+			subCanvas.ViewRegistrator.Show<SettingsDialog>();
 		}
 	}
 }

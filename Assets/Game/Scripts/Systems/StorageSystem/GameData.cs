@@ -51,13 +51,14 @@ namespace Game.Systems.StorageSystem
 			get => InputOutput.PlayerPrefsGet("language").CastObject<int>(0);
 			set => InputOutput.PlayerPrefsSet("language", value);
 		}
+
+		public FastData<PreferencesData> PreferencesParams { get; private set; } = new("player_preferences");
 		#endregion
 
 		#region Data
 		public ISaveLoadStorage<Storage> StorageData { get; private set; } = new PlayerPrefsStorageWrapper<Storage>("data");
+		public Storage Storage => StorageData.GetStorage();
 
-		public GameProgress GameProgressData => StorageData.GetStorage().GameProgress.GetData();
-		public GameplayProgress GameplayProgress;
 		#endregion
 
 		public IntermediateData IntermediateData { get; private set; } = new IntermediateData();
@@ -74,7 +75,7 @@ namespace Game.Systems.StorageSystem
 		{
 			base.Initialize();
 
-			GameProgress = new StorageData<GameProgress>(Database, "game_progress");
+			GameProgress = new(Database, "game_progress");
 		}
 
 		public override void Purge()
@@ -82,6 +83,14 @@ namespace Game.Systems.StorageSystem
 
 		}
 	}
+
+	public struct PreferencesData
+	{
+		public bool music;
+		public bool sound;
+		public bool vibration;
+	}
+
 
 	public class GameProgress
 	{

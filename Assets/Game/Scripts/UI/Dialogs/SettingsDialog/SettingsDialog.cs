@@ -1,11 +1,13 @@
 using Game.Managers.GameManager;
 using Game.Systems.GameSystem;
+using Game.Systems.StorageSystem;
 
 using StarSmithGames.Go;
 using StarSmithGames.Go.LocalizationSystem;
 
 using System;
 
+using UnityEngine;
 using UnityEngine.UI;
 
 using Zenject;
@@ -14,62 +16,93 @@ namespace Game.UI
 {
 	public class SettingsDialog : ViewPopupBase
 	{
-		public event Action<SettingsDialog> onShowingChanged;
-
 		public TMPro.TextMeshProUGUI title;
 		public Button backButton;
+		[Space]
+		public PreferencesRadioButton music;
+		public PreferencesRadioButton sound;
+		public PreferencesRadioButton vibration;
 
-		private UICanvas subCanvas;
-		private GameManager gameManager;
-		private LocalizationSystem localizationSystem;
+		[Inject] private UICanvas subCanvas;
+		[Inject] private GameManager gameManager;
 		[Inject] private GameLoader gameLoader;
-
-		[Inject]
-		private void Construct(
-			UICanvas subCanvas,
-			GameManager gameManager,
-			LocalizationSystem localizationSystem)
-		{
-			this.subCanvas = subCanvas;
-			this.gameManager = gameManager;
-			this.localizationSystem = localizationSystem;
-		}
+		[Inject] private GameData gameData;
 
 		private void Awake()
 		{
-			localizationSystem.onLocalizationChanged += OnLocalizationChanged;
-
 			subCanvas.ViewRegistrator.Registrate(this);
 			Enable(false);
+
+			AssignData();
 		}
 
 		private void OnDestroy()
 		{
 			subCanvas.ViewRegistrator.UnRegistrate(this);
-
-			if(localizationSystem != null)
-			{
-				localizationSystem.onLocalizationChanged -= OnLocalizationChanged;
-			}
 		}
 
 		public override void Show(Action callback = null)
 		{
 			backButton.interactable = true;
 
-			OnLocalizationChanged();
-
 			base.Show(callback);
-			onShowingChanged?.Invoke(this);
 		}
 
 		public override void Hide(Action callback = null)
 		{
 			base.Hide(() =>
 			{
-				onShowingChanged?.Invoke(this);
 				callback?.Invoke();
 			});
+		}
+
+		private void AssignData()
+		{
+			var data = gameData.PreferencesParams.GetData();
+
+			if (gameData.IsFirstTime)
+			{
+				var settings = gameData.IntermediateData.GameplayConfig.preferences;
+
+				music.Enable(settings.music);
+				sound.Enable(settings.sound);
+				vibration.Enable(settings.vibration);
+
+				data.music = settings.music;
+				data.sound = settings.sound;
+				data.vibration = settings.vibration;
+				gameData.PreferencesParams.SetData(data);
+			}
+			else
+			{
+				music.Enable(data.music);
+				sound.Enable(data.sound);
+				vibration.Enable(data.vibration);
+			}
+		}
+
+		public void OnMusicClick()
+		{
+			var data = gameData.PreferencesParams.GetData();
+			data.music = !data.music;
+			music.Enable(data.music);
+			gameData.PreferencesParams.SetData(data);
+		}
+
+		public void OnSoundClick()
+		{
+			var data = gameData.PreferencesParams.GetData();
+			data.sound = !data.sound;
+			sound.Enable(data.sound);
+			gameData.PreferencesParams.SetData(data);
+		}
+
+		public void OnVibrationClick()
+		{
+			var data = gameData.PreferencesParams.GetData();
+			data.vibration = !data.vibration;
+			vibration.Enable(data.vibration);
+			gameData.PreferencesParams.SetData(data);
 		}
 
 		public void OnBackClick()
@@ -86,11 +119,6 @@ namespace Game.UI
 			backButton.interactable = false;
 
 			gameLoader.LoadMenu();
-		}
-
-		private void OnLocalizationChanged()
-		{
-			title.text = gameManager.IsGame ? localizationSystem.Translate("ui.settings_dialog.title_game") : localizationSystem.Translate("ui.settings_dialog.title_menu");
 		}
 	}
 }

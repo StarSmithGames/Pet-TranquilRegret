@@ -23,6 +23,9 @@ namespace Game.Systems.GameSystem
 
 		public LocalizationSettins localizationSettins;
 
+		[Header("Settings")]
+		public PreferencesSettings preferences;
+
 		[Header("Prefabs")]
 		public AbstractCharacter characterPrefab;
 	
@@ -37,7 +40,6 @@ namespace Game.Systems.GameSystem
 	{
 		public List<Flag> flags = new List<Flag>();
 	}
-
 
 	[System.Serializable]
 	public class Flag
