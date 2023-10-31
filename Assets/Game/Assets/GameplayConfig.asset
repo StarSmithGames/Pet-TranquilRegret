@@ -36,4 +36,13 @@ MonoBehaviour:
     - sprite: {fileID: 21300000, guid: c0c2d0e893821bf4a93d648ce4cb4a6d, type: 3}
       locale: {fileID: 11400000, guid: 69024ca5d42a1e04280713d507d1106f, type: 2}
       country: Deutsch
+  preferences:
+    music: 1
+    sound: 1
+    vibration: 1
+  uiSettings:
+    frame_enable: {r: 0.5647059, g: 0.49019608, b: 0.38431373, a: 1}
+    body_enable: {r: 1, g: 0.827451, b: 0.5647059, a: 1}
+    body_disable: {r: 0.8509804, g: 0.8509804, b: 0.8509804, a: 1}
+    frame_disable: {r: 0.5647059, g: 0.49019608, b: 0.38431373, a: 1}
   characterPrefab: {fileID: 7834858090861041472, guid: 181ebc7adbc190445a881e74c320b8c3, type: 3}

@@ -14,18 +14,15 @@ using Zenject;
 
 namespace Game.UI
 {
-	public class SettingsDialog : ViewPopupBase
+	public sealed class SettingsDialog : ViewPopupBase
 	{
-		public TMPro.TextMeshProUGUI title;
 		public Button backButton;
 		[Space]
-		public PreferencesRadioButton music;
-		public PreferencesRadioButton sound;
-		public PreferencesRadioButton vibration;
+		public UIRadioButton music;
+		public UIRadioButton sound;
+		public UIRadioButton vibration;
 
 		[Inject] private UICanvas subCanvas;
-		[Inject] private GameManager gameManager;
-		[Inject] private GameLoader gameLoader;
 		[Inject] private GameData gameData;
 
 		private void Awake()
@@ -41,21 +38,6 @@ namespace Game.UI
 			subCanvas.ViewRegistrator.UnRegistrate(this);
 		}
 
-		public override void Show(Action callback = null)
-		{
-			backButton.interactable = true;
-
-			base.Show(callback);
-		}
-
-		public override void Hide(Action callback = null)
-		{
-			base.Hide(() =>
-			{
-				callback?.Invoke();
-			});
-		}
-
 		private void AssignData()
 		{
 			var data = gameData.PreferencesParams.GetData();
@@ -64,21 +46,15 @@ namespace Game.UI
 			{
 				var settings = gameData.IntermediateData.GameplayConfig.preferences;
 
-				music.Enable(settings.music);
-				sound.Enable(settings.sound);
-				vibration.Enable(settings.vibration);
-
 				data.music = settings.music;
 				data.sound = settings.sound;
 				data.vibration = settings.vibration;
 				gameData.PreferencesParams.SetData(data);
 			}
-			else
-			{
-				music.Enable(data.music);
-				sound.Enable(data.sound);
-				vibration.Enable(data.vibration);
-			}
+
+			music.Enable(data.music);
+			sound.Enable(data.sound);
+			vibration.Enable(data.vibration);
 		}
 
 		public void OnMusicClick()
@@ -107,18 +83,7 @@ namespace Game.UI
 
 		public void OnBackClick()
 		{
-			if(gameManager.CurrentGameState != GameState.Menu)
-			{
-				gameManager.ChangeState(gameManager.PreviousGameState);//PreGameplay, Gameplay
-			}
 			Hide();
-		}
-
-		public void OnBackToMenuClick()
-		{
-			backButton.interactable = false;
-
-			gameLoader.LoadMenu();
 		}
 	}
 }

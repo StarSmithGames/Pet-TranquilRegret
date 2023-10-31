@@ -26,6 +26,9 @@ namespace Game.Systems.GameSystem
 		[Header("Settings")]
 		public PreferencesSettings preferences;
 
+		[Header("UI")]
+		public UISettings uiSettings;
+
 		[Header("Prefabs")]
 		public AbstractCharacter characterPrefab;
 	
@@ -33,6 +36,15 @@ namespace Game.Systems.GameSystem
 		{
 			return levels.Find((x) => x.scene.SceneName == scene.name);
 		}
+	}
+	
+	[System.Serializable]
+	public class UISettings
+	{
+		public Color frame_enable;
+		public Color body_enable;
+		public Color body_disable;
+		public Color frame_disable;
 	}
 
 	[System.Serializable]
