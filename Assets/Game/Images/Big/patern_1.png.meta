@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 577ac6eb2f3a72a469f34a42b1acf7db
+guid: f8f09c3b1a411474e9aaca6f86826a1d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -51,7 +51,7 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
@@ -115,7 +115,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: patern_1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 270
+        width: 126
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ade9216bd7cae4846a18a01334529b6a
+      internalID: 280595970
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: patern_1_3
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 269
+        width: 126
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76341d1fe9435594687bf2b8880c8c59
+      internalID: 750914227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: patern_1_25
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 0
+        width: 126
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8915110d0d603b4a9514e1f63954d90
+      internalID: 369134003
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: patern_1_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 126
+        height: 126
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 496b3087bc174ae4ab9887aa664052c4
+      internalID: -239983357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -126,7 +210,37 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      patern_1_0: 280595970
+      patern_1_1: 1332661082
+      patern_1_10: 363398788
+      patern_1_11: -1826659857
+      patern_1_12: -890175464
+      patern_1_13: -1705060985
+      patern_1_14: -800000255
+      patern_1_15: 673345094
+      patern_1_16: 1410934707
+      patern_1_17: 1820367475
+      patern_1_18: 28881937
+      patern_1_19: 694546196
+      patern_1_2: -212732396
+      patern_1_20: -653887545
+      patern_1_21: 330517227
+      patern_1_22: 287265381
+      patern_1_23: 97584164
+      patern_1_24: 470866629
+      patern_1_25: 369134003
+      patern_1_26: -1442184491
+      patern_1_27: -239983357
+      patern_1_28: -1401532183
+      patern_1_29: -73913172
+      patern_1_3: 750914227
+      patern_1_4: 459804464
+      patern_1_5: 72374474
+      patern_1_6: 1600992717
+      patern_1_7: -681040283
+      patern_1_8: -92897270
+      patern_1_9: -1791960037
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

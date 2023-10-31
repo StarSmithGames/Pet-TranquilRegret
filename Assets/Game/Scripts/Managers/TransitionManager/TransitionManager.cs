@@ -63,16 +63,16 @@ namespace Game.Managers.TransitionManager
 
 		private IEnumerator Loop(IProgressHandler progress)
 		{
-			infinityLoading.progress.text = "0%";
+			infinityLoading.SetProgress(0);
 
 			while (!progress.IsDone)
 			{
-				infinityLoading.progress.text = $"{Math.Round(progress.GetProgress() * 100f)}%";
+				infinityLoading.SetProgress(progress.GetProgress());
 
 				yield return null;
 			}
 
-			infinityLoading.progress.text = "100%";
+			infinityLoading.SetProgress(100);
 		}
 	}
 
