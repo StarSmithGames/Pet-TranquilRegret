@@ -18,7 +18,7 @@ namespace Game.Systems.GameSystem
 
 		private GDPRDialog window;
 
-		private IEnumerator Start()
+		private void Start()
 		{
 			gameData.SessionsCount++;
 
@@ -26,7 +26,6 @@ namespace Game.Systems.GameSystem
 			{
 				window = viewService.DialogViewRegistrator.GetAs<GDPRDialog>();
 				window.onAgreeClicked += OnAgreeClicked;
-				yield return new WaitForSeconds(1f);
 				window.Show();
 			}
 			else
