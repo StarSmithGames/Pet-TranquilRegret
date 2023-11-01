@@ -4,9 +4,8 @@ using Game.Systems.LevelSystem;
 using StarSmithGames.Core;
 using StarSmithGames.Core.StorageSystem;
 
-using System.IO;
-
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
 using Zenject;
@@ -58,13 +57,35 @@ namespace Game.Systems.StorageSystem
 		#region Data
 		public ISaveLoadStorage<Storage> StorageData { get; private set; } = new PlayerPrefsStorageWrapper<Storage>("data");
 		public Storage Storage => StorageData.GetStorage();
-
 		#endregion
 
 		public IntermediateData IntermediateData { get; private set; } = new IntermediateData();
 
 		#region Tutorials
 		#endregion
+
+		public GameData()
+		{
+			var storage = StorageData.GetStorage();
+			if (IsFirstTime)
+			{
+				storage.GameProgress.SetData(new GameProgress()
+				{
+					progressMainIndex = 0,
+				});
+			}
+			else
+			{
+
+			}
+
+			StorageData.Save();
+		}
+
+		public void Save()
+		{
+			StorageData.Save();
+		}
 	}
 
 	public class Storage : StarSmithGames.Core.StorageSystem.Storage

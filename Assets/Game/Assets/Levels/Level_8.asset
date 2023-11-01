@@ -21,6 +21,6 @@ MonoBehaviour:
   penaltyTime: 15
   addTime: 60
   remainingTime: 30
-  primaryGoals: []
-  secondaryGoals: []
-  hasBeenInitialised: 1
+  primaryGoals:
+  - config: {fileID: 11400000, guid: fde70720d6218db44a142385e8e51c63, type: 2}
+    count: 5

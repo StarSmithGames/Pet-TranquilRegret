@@ -2,6 +2,7 @@ using Game.Managers.CharacterManager;
 using Game.Managers.GameManager;
 using Game.Services;
 using Game.Systems.GameSystem;
+using Game.Systems.LevelSystem;
 using Game.Systems.SpawnSystem;
 using Game.Systems.StorageSystem;
 
@@ -19,6 +20,10 @@ namespace Game.Installers
 
 		public override void InstallBindings()
 		{
+#if !DISABLE_SRDEBUGGER
+			Container.DeclareSignal<SignalOnLevelChangedCheat>();
+#endif
+
 			Container.BindInterfacesAndSelfTo<SceneManager>().AsSingle().NonLazy();
 			Container.BindInterfacesAndSelfTo<ViewService>().AsSingle().NonLazy();
 			Container.BindInterfacesAndSelfTo<VSFXService>().AsSingle().NonLazy();

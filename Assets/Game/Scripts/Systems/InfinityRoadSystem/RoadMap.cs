@@ -5,6 +5,7 @@ using Game.HUD.Menu;
 using Game.Installers;
 using Game.Systems.CameraSystem;
 using Game.Systems.GameSystem;
+using Game.Systems.LevelSystem;
 using Game.Systems.StorageSystem;
 using Game.UI;
 using Game.VFX;
@@ -40,6 +41,9 @@ namespace Game.Systems.InfinityRoadSystem
 		public CloudsSettings cloudsSettings;
 
 		[Inject] private VerticalCamera verticalCamera;
+#if !DISABLE_SRDEBUGGER
+		[Inject] private SignalBus signalBus;
+#endif
 
 		private UIRoadPin Pin => menuCanvas.Pin;
 
@@ -63,42 +67,23 @@ namespace Game.Systems.InfinityRoadSystem
 			this.pawStepFactory = pawStepFactory;
 		}
 
-		private void Start()
+		private void Awake()
 		{
+			gameProgress = gameData.Storage.GameProgress.GetData();
+			lastIndex = gameProgress.progressMainIndex;
+
 			cloudsSettings.clouds.SetLerp(0);
 			BackgroundRefresh();
-
-			if (gameData.IsFirstTime)
-			{
-				gameData.IsFirstTime = false;
-				gameData.StorageData.GetStorage().GameProgress.SetData(new GameProgress()
-				{
-					progressMainIndex = 0,
-				});
-				gameProgress = gameData.StorageData.GetStorage().GameProgress.GetData();
-				lastIndex = gameProgress.progressMainIndex;
-				gameData.StorageData.Save();
-
-				OpenRoadMap(true);
-			}
-			else
-			{
-				gameProgress = gameData.StorageData.GetStorage().GameProgress.GetData();
-				lastIndex = gameProgress.progressMainIndex;
-
-				OpenRoadMap(false);
-			}
-
+			OpenRoadMap(gameData.IsFirstTime);
+			RefreshLevels();
 			AssignLevels();
+		}
 
-			void AssignLevels()
-			{
-				for (int i = 0; i < levels.Count; i++)
-				{
-					levels[i].Enable(i <= gameProgress.progressMainIndex);
-					levels[i].onClicked += OnLevelClicked;
-				}
-			}
+		private void Start()
+		{
+#if !DISABLE_SRDEBUGGER
+			signalBus?.Subscribe<SignalOnLevelChangedCheat>(OnLevelChangedCheat);
+#endif
 		}
 
 		private void Update()
@@ -113,6 +98,56 @@ namespace Game.Systems.InfinityRoadSystem
 			sprites = backgroundsContent.GetComponentsInChildren<SpriteRenderer>().ToList();
 
 			return sprites;
+		}
+
+		private void OpenRoadMap(bool isFirstTime)
+		{
+			if (isFirstTime)
+			{
+				StartCoroutine(FirstTime());
+			}
+			else
+			{
+				Vector3 position = levels[gameProgress.progressMainIndex].transform.position;
+				verticalCamera.SetPosition(position);
+				Pin.transform.position = position;
+			}
+
+			IEnumerator FirstTime()
+			{
+				IsInProcess = true;
+
+				Pin.transform.position = new Vector3(0, -100, 0);
+
+				yield return new WaitForSeconds(0.5f);
+
+				var points = connections.First().GetPoints();
+
+				Pin.transform
+					.DOPath(points, 1.5f)
+					.OnUpdate(() =>
+					{
+						Step(pawStepFactory);
+					})
+					.OnComplete(() => IsInProcess = false);
+			}
+		}
+
+		private void RefreshLevels()
+		{
+			for (int i = 0; i < levels.Count; i++)
+			{
+				levels[i].Enable(i <= gameProgress.progressMainIndex);
+
+			}
+		}
+
+		private void AssignLevels()
+		{
+			for (int i = 0; i < levels.Count; i++)
+			{
+				levels[i].onClicked += OnLevelClicked;
+			}
 		}
 
 		private void BackgroundRefresh()
@@ -141,46 +176,12 @@ namespace Game.Systems.InfinityRoadSystem
 			}
 		}
 
-		private void OpenRoadMap(bool isFirstTime)
-		{
-			if (isFirstTime)
-			{
-				StartCoroutine(FirstTime());
-			}
-			else
-			{
-				Vector3 position = levels[gameProgress.progressMainIndex].transform.position;
-				verticalCamera.SetPosition(position);
-				Pin.transform.position = position;
-			}
-		}
-
-		private IEnumerator FirstTime()
-		{
-			IsInProcess = true;
-
-			Pin.transform.position = new Vector3(0, -100, 0);
-
-			yield return new WaitForSeconds(0.5f);
-
-			var points = connections.First().GetPoints();
-
-			Pin.transform
-				.DOPath(points, 1.5f)
-				.OnUpdate(() =>
-				{
-					Step(pawStepFactory);
-				})
-				.OnComplete(() => IsInProcess = false);
-		}
-
 		private void ShowLevelWindow()
 		{
 			var window = menuCanvas.ViewRegistrator.GetAs<LevelDialog>();
 			window.SetLevel(gameData.IntermediateData.GetLevelConfig(lastIndex + 1));
 			window.Show();
 		}
-
 
 
 		private void OnLevelClicked(UIRoadLevel level)
@@ -245,6 +246,14 @@ namespace Game.Systems.InfinityRoadSystem
 			//	//disabled
 			//}
 		}
+
+#if !DISABLE_SRDEBUGGER
+		private void OnLevelChangedCheat(SignalOnLevelChangedCheat signal)
+		{
+			RefreshLevels();
+			OpenRoadMap(false);
+		}
+#endif
 
 #if UNITY_EDITOR
 		[Button(DirtyOnClick = true)]
