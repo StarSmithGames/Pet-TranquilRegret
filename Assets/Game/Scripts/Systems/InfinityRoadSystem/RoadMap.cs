@@ -4,11 +4,14 @@ using Game.Entities;
 using Game.HUD.Menu;
 using Game.Installers;
 using Game.Systems.CameraSystem;
+using Game.Systems.GameSystem;
 using Game.Systems.StorageSystem;
 using Game.UI;
 using Game.VFX;
 
 using Sirenix.OdinInspector;
+
+using StarSmithGames.Core;
 
 using System.Collections;
 using System.Collections.Generic;
@@ -86,7 +89,16 @@ namespace Game.Systems.InfinityRoadSystem
 				OpenRoadMap(false);
 			}
 
-			LevelsRefresh();
+			AssignLevels();
+
+			void AssignLevels()
+			{
+				for (int i = 0; i < levels.Count; i++)
+				{
+					levels[i].Enable(i <= gameProgress.progressMainIndex);
+					levels[i].onClicked += OnLevelClicked;
+				}
+			}
 		}
 
 		private void Update()
@@ -129,20 +141,6 @@ namespace Game.Systems.InfinityRoadSystem
 			}
 		}
 
-		private void LevelsRefresh()
-		{
-			var config = gameData.IntermediateData.GameplayConfig;
-			Assert.AreEqual(config.levels.Count, levels.Count);
-
-			for (int i = 0; i < levels.Count; i++)
-			{
-				levels[i]
-					.SetLevel(config.levels[i])
-					.Enable(i <= gameProgress.progressMainIndex)
-					.onClicked += OnLevelClicked;
-			}
-		}
-
 		private void OpenRoadMap(bool isFirstTime)
 		{
 			if (isFirstTime)
@@ -182,6 +180,8 @@ namespace Game.Systems.InfinityRoadSystem
 			window.SetLevel(gameData.IntermediateData.GetLevelConfig(lastIndex + 1));
 			window.Show();
 		}
+
+
 
 		private void OnLevelClicked(UIRoadLevel level)
 		{
@@ -246,12 +246,27 @@ namespace Game.Systems.InfinityRoadSystem
 			//}
 		}
 
+#if UNITY_EDITOR
 		[Button(DirtyOnClick = true)]
-		private void Fill()
+		private void Refresh()
 		{
 			levels = levelsContent.GetComponentsInChildren<UIRoadLevel>().ToList();
 			connections = levelsContent.GetComponentsInChildren<LevelConnection>().ToList();
+
+			RefreshLevels();
+
+			void RefreshLevels()
+			{
+				var config = AssetDatabaseExtensions.LoadAssets<GameplayConfig>().First();
+				Assert.IsTrue(config.levels.Count >= levels.Count);
+
+				for (int i = 0; i < levels.Count; i++)
+				{
+					levels[i].SetLevel(config.levels[i]);
+				}
+			}
 		}
+#endif
 
 		private void OnDrawGizmosSelected()
 		{
