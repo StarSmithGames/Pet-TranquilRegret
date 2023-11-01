@@ -15,7 +15,6 @@ namespace Game.Systems.LevelSystem
 		[Inject] private GameManager gameManager;
 		[Inject] private SpawnSystem.SpawnSystem spawnSystem;
 
-
 		public GoalRegistrator GoalRegistrator { get; private set; }
 
 		public LevelConfig config;
