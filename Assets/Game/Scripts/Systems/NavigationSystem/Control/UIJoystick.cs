@@ -1,9 +1,5 @@
-﻿using Game.Managers.GameManager;
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
-
-using Zenject;
 
 namespace Game.Systems.NavigationSystem
 {
@@ -47,14 +43,6 @@ namespace Game.Systems.NavigationSystem
 
         private Vector2 input = Vector2.zero;
 
-        private GameManager gameManager;
-
-		[Inject]
-        private void Construct(GameManager gameManager)
-        {
-            this.gameManager = gameManager;
-		}
-
         protected virtual void Start()
         {
             HandleRange = handleRange;
@@ -74,11 +62,7 @@ namespace Game.Systems.NavigationSystem
 
         public virtual void OnPointerDown(PointerEventData eventData)
         {
-            if(gameManager.CurrentGameState != GameState.Gameplay)
-            {
-                gameManager.ChangeState(GameState.Gameplay);
-			}
-
+            
             OnDrag(eventData);
         }
 

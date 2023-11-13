@@ -138,7 +138,6 @@ namespace Game.Systems.InfinityRoadSystem
 			for (int i = 0; i < levels.Count; i++)
 			{
 				levels[i].Enable(i <= gameProgress.progressMainIndex);
-
 			}
 		}
 

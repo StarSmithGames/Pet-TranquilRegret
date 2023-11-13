@@ -44,7 +44,7 @@ namespace Game.UI
 		{
 			if(signal.newGameState == GameState.PreGameplay)
 			{
-				var registrator = gameData.IntermediateData.Level.GoalRegistrator;
+				var registrator = gameData.IntermediateData.LevelPresenter.Model.GoalRegistrator;
 
 				goalContent.DestroyChildren();
 				registrator.GoalsPrimary.ForEach((x) =>

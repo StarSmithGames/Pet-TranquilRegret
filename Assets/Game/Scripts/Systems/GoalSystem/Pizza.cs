@@ -1,4 +1,4 @@
-namespace Game.Systems.LevelSystem
+namespace Game.Systems.GoalSystem
 {
 	public class Pizza : GoalModel { }
 }

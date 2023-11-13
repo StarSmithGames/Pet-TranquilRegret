@@ -4,7 +4,7 @@ using System;
 
 using UnityEngine;
 
-namespace Game.Systems.LevelSystem
+namespace Game.Systems.GoalSystem
 {
 	public interface IGoal : IValue<float>, IReadOnlyValue<float>, IObservableValue, IBar
 	{

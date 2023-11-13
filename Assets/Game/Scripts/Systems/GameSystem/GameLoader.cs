@@ -39,7 +39,7 @@ namespace Game.Systems.GameSystem
 
 		public void LoadMenu()
 		{
-			gameData.IntermediateData.Level = null;
+			gameData.IntermediateData.LevelPresenter = null;
 
 			gameManager.ChangeState(GameState.Loading);
 
@@ -68,25 +68,35 @@ namespace Game.Systems.GameSystem
 			});
 			transitionManager.StartInfinityLoading(startLevelTransition, onShowed: () =>
 			{
-				gameData.IntermediateData.Level = new Level(levelConfig);
+				gameData.IntermediateData.LevelPresenter = new(levelConfig);
 			});
 		}
 
 		private IEnumerator GamePipeline()
 		{
 #if UNITY_EDITOR
-			if(gameData.IntermediateData.Level == null)
+			if (gameData.IntermediateData.LevelPresenter == null)
 			{
 				var config = gameData.IntermediateData.GetLevelConfig(sceneManager.GetActiveScene());
 				Assert.IsNotNull(config);
-				gameData.IntermediateData.Level = new Level(config);
+				gameData.IntermediateData.LevelPresenter = new(config);
 			}
 #endif
-			gameData.IntermediateData.Level.Start();
+			gameManager.ChangeState(GameState.PreGameplay);
+			gameData.IntermediateData.LevelPresenter.Start();
+			OnDragChanged();
 
 			yield return null;
 			startLevelTransition?.Allow();
 			startLevelTransition = null;
+		}
+
+		private void OnDragChanged()
+		{
+			if (gameManager.CurrentGameState != GameState.Gameplay)
+			{
+				gameManager.ChangeState(GameState.Gameplay);
+			}
 		}
 	}
 }

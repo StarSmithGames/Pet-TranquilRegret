@@ -2,7 +2,7 @@ using Game.Systems.FloatingSystem;
 
 using UnityEngine;
 
-namespace Game.Systems.LevelSystem
+namespace Game.Systems.GoalSystem
 {
 	public abstract class GoalModel : Floating3DObject
 	{

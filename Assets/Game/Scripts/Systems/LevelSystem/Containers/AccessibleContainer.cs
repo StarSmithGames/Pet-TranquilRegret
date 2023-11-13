@@ -1,4 +1,5 @@
 using Game.Systems.FloatingSystem;
+using Game.Systems.GoalSystem;
 using Game.Systems.NavigationSystem;
 using Game.Systems.StorageSystem;
 
@@ -138,7 +139,7 @@ namespace Game.Systems.LevelSystem
 				if (obj is GoalModel model)
 				{
 					floatingSystem.CreateText(obj.CurrentTarget.position, $"+{model.goal.count}", model.goal.config.information.portrait);
-					gameData.IntermediateData.Level.GoalRegistrator.AccumulatePrimaryGoal(model.goal);
+					gameData.IntermediateData.LevelPresenter.Model.GoalRegistrator.AccumulatePrimaryGoal(model.goal);
 				}
 				//else if (obj is Coin coin)
 				//{

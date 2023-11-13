@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.Systems.LevelSystem
+namespace Game.Systems.GoalSystem
 {
 	[CreateAssetMenu(fileName = "FoodGoalData", menuName = "Game/Levels/Food Goal")]
 	public class FoodGoalConfig : GoalConfig

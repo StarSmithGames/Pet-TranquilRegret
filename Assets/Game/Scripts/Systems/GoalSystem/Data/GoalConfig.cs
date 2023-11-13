@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Game.Systems.LevelSystem
+namespace Game.Systems.GoalSystem
 {
 	public abstract class GoalConfig : ScriptableObject
 	{

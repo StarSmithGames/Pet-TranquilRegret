@@ -39,12 +39,6 @@ namespace Game.Systems.StorageSystem
 			set => InputOutput.PlayerPrefsSet("sessions_count", value);
 		}
 
-		public int LevelNumber
-		{
-			get => InputOutput.PlayerPrefsGet("level_number").CastObject<int>(1);
-			set => InputOutput.PlayerPrefsSet("level_number", value);
-		}
-
 		public int LanguageIndex
 		{
 			get => InputOutput.PlayerPrefsGet("language").CastObject<int>(0);
@@ -59,7 +53,7 @@ namespace Game.Systems.StorageSystem
 		public Storage Storage => StorageData.GetStorage();
 		#endregion
 
-		public IntermediateData IntermediateData { get; private set; } = new IntermediateData();
+		public IntermediateData IntermediateData { get; private set; } = new();
 
 		#region Tutorials
 		#endregion
@@ -69,7 +63,7 @@ namespace Game.Systems.StorageSystem
 			var storage = StorageData.GetStorage();
 			if (IsFirstTime)
 			{
-				storage.GameProgress.SetData(new GameProgress()
+				storage.GameProgress.SetData(new()
 				{
 					progressMainIndex = 0,
 				});
@@ -85,6 +79,11 @@ namespace Game.Systems.StorageSystem
 		public void Save()
 		{
 			StorageData.Save();
+		}
+
+		public int GetLevelNumber()
+		{
+			return Storage.GameProgress.GetData().progressMainIndex + 1;
 		}
 	}
 
@@ -121,11 +120,10 @@ namespace Game.Systems.StorageSystem
 
 	public class IntermediateData
 	{
-		[Inject]
-		public GameplayConfig GameplayConfig { get; private set; }
+		[Inject] public GameplayConfig GameplayConfig { get; private set; }
 
-		public Level Level { get; set; }
-		public LevelConfig CurrentLevelConfig => Level?.config;
+		public LevelFacade LevelPresenter { get; set; }
+		public LevelConfig CurrentLevelConfig => LevelPresenter?.Model.Config;
 
 		public IntermediateData()
 		{

@@ -1,5 +1,6 @@
 using DG.Tweening;
 
+using Game.Systems.GoalSystem;
 using Game.Systems.LevelSystem;
 
 using UnityEngine;

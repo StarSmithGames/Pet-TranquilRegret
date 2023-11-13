@@ -25,7 +25,10 @@ public partial class SROptions
 	[Sort(4)]
 	public void CompleteLevel()
 	{
-		 //App.Instance.Dispatch(new SignalLevelCompleteCheat());
+		var level = gameData.IntermediateData.LevelPresenter;
+		if (level == null) return;
+
+		level.Complete();
 	}
 
 	[Category("Level")]

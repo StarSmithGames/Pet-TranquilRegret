@@ -1,54 +1,11 @@
-using Game.Managers.GameManager;
-using Game.Systems.StorageSystem;
+﻿using Game.Systems.LevelSystem;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using Zenject;
-
-namespace Game.Systems.LevelSystem
+namespace Game.Systems.GoalSystem
 {
-	public class Level
-	{
-		[Inject] private GameData gameData;
-		[Inject] private GameManager gameManager;
-		[Inject] private SpawnSystem.SpawnSystem spawnSystem;
-
-		public GoalRegistrator GoalRegistrator { get; private set; }
-
-		public LevelConfig config;
-
-		public Level(LevelConfig config)
-		{
-			ProjectContext.Instance.Container.Inject(this);
-
-			this.config = config;
-			GoalRegistrator = new GoalRegistrator(config);
-		}
-
-		public void Start()
-		{
-			gameManager.ChangeState(GameState.PreGameplay);
-			spawnSystem.SpawnPlayer();
-		}
-
-		public void Complete()
-		{
-
-		}
-
-		public void Lose()
-		{
-
-		}
-
-		public void Leave()
-		{
-
-		}
-	}
-
 	public class GoalRegistrator
 	{
 		public event Action onAccumulatedPrimary;
