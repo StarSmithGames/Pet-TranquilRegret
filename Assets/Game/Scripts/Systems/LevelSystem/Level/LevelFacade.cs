@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Game.Systems.LevelSystem
 {
-	public class LevelFacade
+	public partial class LevelFacade
 	{
 		public LevelModel Model { get; private set; }
 
@@ -20,11 +20,13 @@ namespace Game.Systems.LevelSystem
 			ProjectContext.Instance.Container.Inject(this);
 
 			Model = new(config);
+
+			Subscribe();
 		}
 
 		public void Dispose()
 		{
-
+			Unsubscribe();
 		}
 
 		public void Start()
@@ -51,6 +53,27 @@ namespace Game.Systems.LevelSystem
 		{
 			Dispose();
 			gameLoader.LoadMenu();
+		}
+
+		private void OnGoalsChanged()
+		{
+			if (Model.IsCompleted())
+			{
+				Complete();
+			}
+		}
+	}
+
+	public partial class LevelFacade
+	{
+		private void Subscribe()
+		{
+			Model.GoalRegistrator.onAccumulatedPrimary += OnGoalsChanged;
+		}
+
+		private void Unsubscribe()
+		{
+			Model.GoalRegistrator.onAccumulatedPrimary -= OnGoalsChanged;
 		}
 	}
 }

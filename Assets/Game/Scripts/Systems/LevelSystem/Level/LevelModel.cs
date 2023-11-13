@@ -13,9 +13,9 @@ namespace Game.Systems.LevelSystem
 			GoalRegistrator = new GoalRegistrator(config);
 		}
 
-		public bool IsComplete()
+		public bool IsCompleted()
 		{
-			return true;
+			return GoalRegistrator.IsPrimaryGoalsCompleted();
 		}
 	}
 }

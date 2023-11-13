@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 6149550773705564496}
   - component: {fileID: 7131533906037042933}
   - component: {fileID: 4980060915948657215}
-  m_Layer: 0
-  m_Name: Midel
+  - component: {fileID: 2683153101388274544}
+  m_Layer: 3
+  m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,6 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2683153101388274544
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6781373703667235818}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 8.871164, y: 0.5065611, z: 14.277027}
+  m_Center: {x: 0, y: -0.14638186, z: 0}
 --- !u!1 &7610001826286780381
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4016743210383369793}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Road
   m_TagString: Untagged
   m_Icon: {fileID: 0}
