@@ -261,19 +261,6 @@ namespace Game.Systems.InfinityRoadSystem
 		{
 			levels = levelsContent.GetComponentsInChildren<UIRoadLevel>().ToList();
 			connections = levelsContent.GetComponentsInChildren<LevelConnection>().ToList();
-
-			RefreshLevels();
-
-			void RefreshLevels()
-			{
-				var config = AssetDatabaseExtensions.LoadAssets<GameplayConfig>().First();
-				Assert.IsTrue(config.levels.Count >= levels.Count);
-
-				for (int i = 0; i < levels.Count; i++)
-				{
-					levels[i].SetLevel(config.levels[i]);
-				}
-			}
 		}
 #endif
 

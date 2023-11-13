@@ -35,6 +35,7 @@ namespace Game.Managers.TransitionManager
 
 		private IEnumerator LoaderProgress(Transition transition, Action onShowed = null, Action onHided = null, Action callback = null)
 		{
+			infinityLoading.SetProgress(0);
 			infinityLoading.Show(onShowed);
 			yield return infinityLoading.WaitUntilProcessDone();
 			yield return new WaitForSeconds(0.16f);
@@ -63,8 +64,6 @@ namespace Game.Managers.TransitionManager
 
 		private IEnumerator Loop(IProgressHandler progress)
 		{
-			infinityLoading.SetProgress(0);
-
 			while (!progress.IsDone)
 			{
 				infinityLoading.SetProgress(progress.GetProgress());

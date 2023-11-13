@@ -24,8 +24,6 @@ namespace Game.Systems.InfinityRoadSystem
 		public Color disabledForeground;
 		public Color enabledForeground;
 
-		public LevelConfig levelConfig;
-
 #if UNITY_EDITOR
 		private void Update()
 		{
@@ -34,15 +32,6 @@ namespace Game.Systems.InfinityRoadSystem
 			text.text = gameObject.name.Split("_")[1];
 		}
 #endif
-
-		public UIRoadLevel SetLevel(LevelConfig config)
-		{
-			levelConfig = config;
-
-			//EnableStars(0);
-
-			return this;
-		}
 
 		public UIRoadLevel Enable(bool trigger)
 		{

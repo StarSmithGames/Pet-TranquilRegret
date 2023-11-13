@@ -6,6 +6,7 @@ namespace Game.Managers.GameManager
 {
 	public class GameManager
 	{
+		public bool IsMenu => CurrentGameState == GameState.Menu;
 		public bool IsGame => CurrentGameState == GameState.PreGameplay || CurrentGameState == GameState.Gameplay;
 
 		public GameState CurrentGameState { get; private set; } = GameState.Empty;

@@ -21,9 +21,12 @@ namespace Game.UI
 		public UIRadioButton music;
 		public UIRadioButton sound;
 		public UIRadioButton vibration;
+		public Button exitButton;
 
 		[Inject] private UICanvas subCanvas;
 		[Inject] private GameData gameData;
+		[Inject] private GameManager gameManager;
+		[Inject] private GameLoader gameLoader;
 
 		private void Awake()
 		{
@@ -36,6 +39,13 @@ namespace Game.UI
 		private void OnDestroy()
 		{
 			subCanvas.ViewRegistrator.UnRegistrate(this);
+		}
+
+		public override void Show(Action callback = null)
+		{
+			exitButton.gameObject.SetActive(!gameManager.IsMenu);
+
+			base.Show(callback);
 		}
 
 		private void AssignData()
@@ -84,6 +94,11 @@ namespace Game.UI
 		public void OnBackClick()
 		{
 			Hide();
+		}
+
+		public void OnExitClick()
+		{
+			gameLoader.LoadMenu();
 		}
 	}
 }

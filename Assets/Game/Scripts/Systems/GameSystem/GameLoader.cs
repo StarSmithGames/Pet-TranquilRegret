@@ -58,7 +58,7 @@ namespace Game.Systems.GameSystem
 			startLevelTransition = new Transition(
 			() =>
 			{
-				var name = gameData.IntermediateData.Level.config.scene.SceneName;
+				var name = levelConfig.scene.SceneName;
 				sceneManager.LoadSceneAsyncFromAddressables(name, name);
 				return sceneManager.ProgressHandler;
 			}, false,
@@ -69,8 +69,7 @@ namespace Game.Systems.GameSystem
 			transitionManager.StartInfinityLoading(startLevelTransition, onShowed: () =>
 			{
 				gameData.IntermediateData.Level = new Level(levelConfig);
-			},
-			onHided: () => Debug.LogError("Load Completed!") );
+			});
 		}
 
 		private IEnumerator GamePipeline()
