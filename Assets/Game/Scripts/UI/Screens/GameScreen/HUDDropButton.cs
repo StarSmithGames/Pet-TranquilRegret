@@ -2,7 +2,7 @@ using UnityEngine.Events;
 
 namespace Game.UI
 {
-    public class UIDropButton : ViewHUD
+    public class HUDDropButton : ViewHUD
     {
 		public event UnityAction onClicked;
 

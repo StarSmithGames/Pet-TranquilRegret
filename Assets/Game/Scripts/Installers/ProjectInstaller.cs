@@ -35,7 +35,6 @@ namespace Game.Installers
 			AsyncManagerInstaller.Install(Container);
 			ApplicationHandlerInstaller.Install(Container);
 			GameManagerInstaller.Install(Container);
-			CharacterManagerInstaller.Install(Container);
 			SpawnSystemInstaller.Install(Container);
 
 			Container.BindInstance(Container.InstantiateComponentOnNewGameObject<GameController>());

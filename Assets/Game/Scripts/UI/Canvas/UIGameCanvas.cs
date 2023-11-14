@@ -20,7 +20,8 @@ namespace Game.UI
 		public UIGoal goalPrefab;
 		[Header("Control")]
 		public UIJoystick joystick;
-		public UIDropButton drop;
+		public HUDDropButton drop;
+		public HUDJumpButton jump;
 
 		private List<UIGoal> goals = new List<UIGoal>();
 

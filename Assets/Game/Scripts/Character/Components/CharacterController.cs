@@ -13,8 +13,8 @@ namespace Game.Character
 {
 	public class CharacterController : MonoBehaviour
 	{
-		public UnityAction onJumped;
-		public UnityAction onLanded;
+		public event UnityAction onJumped;
+		public event UnityAction onLanded;
 
 		public bool IsJumping { get; private set; }
 		public bool IsFalling => rb.velocity.y < 0;
@@ -64,24 +64,14 @@ namespace Game.Character
 			}
 
 			//Movement
-			moveVector = Vector3.zero;
+			moveVector = GetRelativeToCamera(GetDirection()) * character.sheet.MoveSpeed.TotalValue * Time.deltaTime;
 
 			if (IsGrounded)
 			{
-				moveVector = GetRelativeToCamera(GetDirection()) * character.sheet.MoveSpeed.TotalValue * Time.deltaTime;
-
 				if (Input.GetButtonDown("Jump"))
 				{
-					rb.AddForce(GetJumpImpulse(), ForceMode.Impulse);
-
-					IsJumping = true;
-
-					onJumped?.Invoke();
+					Jump();
 				}
-			}
-			else
-			{
-				moveVector = GetRelativeToCamera(GetDirection()) * character.sheet.MoveSpeed.TotalValue * Time.deltaTime;
 			}
 
 			rb.MovePosition(rb.position + moveVector);
@@ -93,6 +83,15 @@ namespace Game.Character
 			{
 				rb.velocity += Vector3.up * Physics.gravity.y * config.controllSettings.fallMultipier * Time.fixedDeltaTime;
 			}
+		}
+
+		public void Jump()
+		{
+			rb.AddForce(GetJumpImpulse(), ForceMode.Impulse);
+
+			IsJumping = true;
+
+			onJumped?.Invoke();
 		}
 
 		public bool IsMoving()

@@ -12,6 +12,8 @@ namespace Game.Systems.NavigationSystem
     {
 		public override void InstallBindings()
 		{
+			Container.Bind<ControlPresenter>().AsSingle().NonLazy();
+
 			//Container.BindFactory<Player, PlayerGroundImplementation, PlayerGroundImplementation.Factory>().NonLazy();
 
 			//Container

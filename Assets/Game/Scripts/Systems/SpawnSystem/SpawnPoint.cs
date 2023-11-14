@@ -42,7 +42,7 @@ namespace Game.Systems.SpawnSystem
 			character.facade.cameraFollowPivot.position = FollowPosition;
 			character.facade.cameraLookAtPivot.position = LookPosition;
 
-			characterManager.Registrate(character);
+			characterManager.Registrate(character, settings.isPlayer);
 			cameraSystem
 				.SetTarget(character)
 				.SetTracketOffsetDirection(TracketObjectOffset);
@@ -164,7 +164,7 @@ namespace Game.Systems.SpawnSystem
 			[HideIf("isCustom")]
 			public SpawnPlace spawnPlace = SpawnPlace.Forward;
 
-			public SpawnType spawnType;
+			public bool isPlayer = true;
 		}
 	}
 
@@ -174,10 +174,5 @@ namespace Game.Systems.SpawnSystem
 		Right,
 		Forward,
 		Backward,
-	}
-
-	public enum SpawnType
-	{
-		Player,
 	}
 }

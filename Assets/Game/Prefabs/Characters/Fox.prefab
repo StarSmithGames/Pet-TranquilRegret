@@ -10457,6 +10457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b39166c75c498b4790f4d99adfdc474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  installer: {fileID: 3572570929318607996}
   facade: {fileID: 4896812693219093095}
   root: {fileID: 7834858090861041475}
   model: {fileID: 3410461041638132046}
@@ -10474,7 +10475,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraFollowPivot: {fileID: 1400353893836363256}
   cameraLookAtPivot: {fileID: 7593025609839594518}
-  characerCanvas: {fileID: 0}
+  characterCanvas: {fileID: 0}
 --- !u!114 &3619111434604853016
 MonoBehaviour:
   m_ObjectHideFlags: 0

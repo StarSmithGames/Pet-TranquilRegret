@@ -6,6 +6,7 @@ namespace Game.Character
 {
 	public abstract class AbstractCharacter : MonoBehaviour
 	{
+		public CharacterInstaller installer;
 		public CharacterFacade facade;
 		public Transform root;
 		public Transform model;
