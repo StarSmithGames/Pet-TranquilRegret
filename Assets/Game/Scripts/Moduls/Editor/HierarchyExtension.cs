@@ -1,37 +1,37 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-[ InitializeOnLoad ]
-public class HierarchyExtension
+namespace Game
 {
-    /// <summary>
-    ///     Initializer <see cref="HierarchyExtension" /> class.
-    /// </summary>
-    static HierarchyExtension() => EditorApplication.hierarchyWindowItemOnGUI += HierarchWindowOnGui;
-
-    /// <summary>
-    ///     Editor delegate callback
-    /// </summary>
-    /// <param name="instanceID">İnstance id.</param>
-    /// <param name="selectionRect">Selection rect.</param>
-    private static void HierarchWindowOnGui( int instanceID, Rect selectionRect )
+    [InitializeOnLoad]
+    public class HierarchyExtension
     {
-        // make rectangle
-        var r = new Rect( selectionRect );
-        r.x = 35;
-        r.width = 18;
+        static HierarchyExtension() => EditorApplication.hierarchyWindowItemOnGUI += HierarchWindowOnGui;
 
-        // get objects
-        Object o = EditorUtility.InstanceIDToObject( instanceID );
-        var g = o as GameObject;
-
-        // drag toggle gui
-        if ( g != null )
+        private static void HierarchWindowOnGui(int instanceID, Rect selectionRect)
         {
-            bool prev = g.activeSelf;
-            g.SetActive( GUI.Toggle( r, g.activeSelf, string.Empty ) );
+            // make rectangle
+            var r = new Rect(selectionRect);
+            r.x = 35;
+            r.width = 18;
 
-            if ( g.activeSelf != prev ) EditorUtility.SetDirty( g );
+            // get objects
+            Object o = EditorUtility.InstanceIDToObject(instanceID);
+            var obj = o as GameObject;
+
+            // drag toggle gui
+            if (obj != null)
+            {
+                bool prev = obj.activeSelf;
+                bool next = GUI.Toggle(r, obj.activeSelf, string.Empty);
+
+                if (next != prev)
+                {
+					Undo.RecordObject(obj, $"Record {obj.name}");
+					obj.SetActive(next);
+					EditorUtility.SetDirty(obj);
+				}
+			}
         }
     }
 }
