@@ -1,4 +1,7 @@
+using UnityEngine;
+
 namespace Game.Systems.NavigationSystem
 {
-    public class GroundLayerSoft : GroundLayer { }
+	[AddComponentMenu("AGame/Navigation/Layer Soft")]
+	public class GroundLayerSoft : GroundLayer { }
 }

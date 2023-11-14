@@ -18,6 +18,7 @@ using UnityEditor;
 namespace Game.Systems.SpawnSystem
 {
 	[ExecuteInEditMode]
+	[AddComponentMenu("AGame/Spawn/Spawn Point")]
 	public class SpawnPoint : MonoBehaviour
 	{
 		public Vector3 FollowPosition => transform.position + settings.followPoint;
@@ -116,10 +117,20 @@ namespace Game.Systems.SpawnSystem
 
 		private void OnDrawGizmos()
 		{
+			var position = transform.position;
+
+			position.y = 0f;
+			if (Physics.Raycast(position + Vector3.up * 2f, Vector3.down, out var hit))
+			{
+				position.y = hit.point.y;
+				Gizmos.color = Color.white;
+				Gizmos.DrawLine(position + Vector3.up * 2f, position + Vector3.down * hit.point.y);
+			}
+
 			Gizmos.color = Color.blue;
-			DrawArrow.ForGizmo(transform.position, transform.forward);
+			DrawArrow.ForGizmo(position, transform.forward);
 			Gizmos.color = Color.green;
-			Gizmos.DrawSphere(transform.position, 0.15f);
+			Gizmos.DrawSphere(position, 0.15f);
 
 			Gizmos.color = Color.red;
 			Gizmos.DrawSphere(FollowPosition, 0.15f);
@@ -130,6 +141,9 @@ namespace Game.Systems.SpawnSystem
 			Gizmos.color = Color.blue;
 			DrawArrow.ForGizmo(FollowPosition, settings.tracketObjectOffset);
 			DrawArrow.ForGizmo(LookPosition, settings.tracketObjectOffset);
+
+
+			transform.position = position;
 		}
 #endif
 
