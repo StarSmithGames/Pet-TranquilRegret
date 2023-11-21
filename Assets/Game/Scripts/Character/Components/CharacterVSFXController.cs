@@ -15,7 +15,9 @@ namespace Game.Character
 		private Vector3 lastStepEmit;
 		private int stepDir = 1;
 
-		[Inject] private AbstractCharacter character;
+		[Inject] private CharacterPresenter presenter;
+
+		private CharacterView View => presenter.View;
 
 		private ParticalVFXPoofEffect.Factory poofEffectFactory;
 		private ParticalVFXPoofEffect.Factory smallPoofEffectFactory;
@@ -37,7 +39,7 @@ namespace Game.Character
 
 		private void Start()
 		{
-			lastStepEmit = character.root.position;
+			lastStepEmit = View.root.position;
 		}
 
 		public void FootStep()
@@ -79,18 +81,18 @@ namespace Game.Character
 
 		private void Step(ParticalVFXFootStep.Factory factory)
 		{
-			if (Vector3.Distance(lastStepEmit, character.root.position) > stepDelta)
+			if (Vector3.Distance(lastStepEmit, View.root.position) > stepDelta)
 			{
 				var step = factory.Create();
 				stepDir *= -1;
 
 				step.Play(new ParticleSystem.EmitParams()
 				{
-					position = character.root.position + (character.model.right * stepGap * stepDir),
-					rotation = character.model.rotation.eulerAngles.y,
+					position = View.root.position + (View.model.right * stepGap * stepDir),
+					rotation = View.model.rotation.eulerAngles.y,
 				});
 
-				lastStepEmit = character.root.position;
+				lastStepEmit = View.root.position;
 			}
 		}
 
@@ -101,17 +103,17 @@ namespace Game.Character
 
 			stepLeft.Play(new ParticleSystem.EmitParams()
 			{
-				position = character.root.position + (character.model.right * stepGap),
-				rotation = character.model.rotation.eulerAngles.y,
+				position = View.root.position + (View.model.right * stepGap),
+				rotation = View.model.rotation.eulerAngles.y,
 			});
 
 			stepRight.Play(new ParticleSystem.EmitParams()
 			{
-				position = character.root.position + (character.model.right * stepGap * -1),
-				rotation = character.model.rotation.eulerAngles.y,
+				position = View.root.position + (View.model.right * stepGap * -1),
+				rotation = View.model.rotation.eulerAngles.y,
 			});
 
-			lastStepEmit = character.root.position;
+			lastStepEmit = View.root.position;
 		}
 	}
 }

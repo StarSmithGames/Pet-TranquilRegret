@@ -45,4 +45,4 @@ MonoBehaviour:
     body_enable: {r: 1, g: 0.827451, b: 0.5647059, a: 1}
     body_disable: {r: 0.8509804, g: 0.8509804, b: 0.8509804, a: 1}
     frame_disable: {r: 0.5647059, g: 0.49019608, b: 0.38431373, a: 1}
-  characterPrefab: {fileID: 7834858090861041472, guid: 181ebc7adbc190445a881e74c320b8c3, type: 3}
+  characterPrefab: {fileID: 5075788677129601735, guid: 181ebc7adbc190445a881e74c320b8c3, type: 3}

@@ -28,7 +28,7 @@ namespace Game.Systems.NavigationSystem
 
 		private void OnJumped()
 		{
-			characterManager.Player.installer.characterController.Jump();
+			//characterManager.Player.installer.characterController.Jump();
 		}
 	}
 }

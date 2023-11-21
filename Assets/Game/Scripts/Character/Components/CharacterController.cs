@@ -23,15 +23,15 @@ namespace Game.Character
 
 		public float MovingMagnitude => directionVector.magnitude;
 		
-		[Inject] private AbstractCharacter character;
+		[Inject] private CharacterPresenter presenter;
 		[Inject] private Rigidbody rb;
-		[Inject] private CharacterConfig config;
+
+		private Settings ControllSettings => presenter.Model.Config.controllSettings;
 
 		private Vector3 directionVector;
 		private Vector3 moveVector;
 		private float turnSmoothTime = 0.1f;
 		private float smoothVelocity;
-
 
 		private UIGameCanvas subCanvas;
 		private CameraSystem cameraSystem;
@@ -58,13 +58,13 @@ namespace Game.Character
 			if (directionVector.x != 0 || directionVector.z != 0)
 			{
 				float targetAngle = Mathf.Atan2(directionVector.x, directionVector.z) * Mathf.Rad2Deg + cameraSystem.EulerAngleY;
-				float angle = Mathf.SmoothDampAngle(character.model.eulerAngles.y, targetAngle, ref smoothVelocity, turnSmoothTime);
+				float angle = Mathf.SmoothDampAngle(presenter.View.model.eulerAngles.y, targetAngle, ref smoothVelocity, turnSmoothTime);
 
-				character.model.rotation = Quaternion.Euler(0, angle, 0);
+				presenter.View.model.rotation = Quaternion.Euler(0, angle, 0);
 			}
 
 			//Movement
-			moveVector = GetRelativeToCamera(GetDirection()) * character.sheet.MoveSpeed.TotalValue * Time.deltaTime;
+			moveVector = GetRelativeToCamera(GetDirection()) * presenter.Model.Sheet.MoveSpeed.TotalValue * Time.deltaTime;
 
 			if (IsGrounded)
 			{
@@ -81,7 +81,7 @@ namespace Game.Character
 		{
 			if (rb.velocity.y < 0)
 			{
-				rb.velocity += Vector3.up * Physics.gravity.y * config.controllSettings.fallMultipier * Time.fixedDeltaTime;
+				rb.velocity += Vector3.up * Physics.gravity.y * ControllSettings.fallMultipier * Time.fixedDeltaTime;
 			}
 		}
 
@@ -96,12 +96,12 @@ namespace Game.Character
 
 		public bool IsMoving()
 		{
-			return Mathf.Abs(directionVector.x) > config.controllSettings.thresholdIdle || Mathf.Abs(directionVector.z) > config.controllSettings.thresholdIdle;
+			return Mathf.Abs(directionVector.x) > ControllSettings.thresholdIdle || Mathf.Abs(directionVector.z) > ControllSettings.thresholdIdle;
 		}
 
 		public bool IsIdling()
 		{
-			return Mathf.Abs(directionVector.x) < config.controllSettings.thresholdIdle && Mathf.Abs(directionVector.z) < config.controllSettings.thresholdIdle;
+			return Mathf.Abs(directionVector.x) < ControllSettings.thresholdIdle && Mathf.Abs(directionVector.z) < ControllSettings.thresholdIdle;
 		}
 
 		private Vector3 GetDirection()
@@ -129,7 +129,7 @@ namespace Game.Character
 
 		private void CheckGround()
 		{
-			if (Physics.Raycast(new Ray(transform.position, Vector3.down), out RaycastHit hit, config.controllSettings.disstanceToGround, config.controllSettings.groundLayer))
+			if (Physics.Raycast(new Ray(transform.position, Vector3.down), out RaycastHit hit, ControllSettings.disstanceToGround, ControllSettings.groundLayer))
 			{
 				CurrentGroundLayer = hit.collider.GetComponent<GroundLayer>();
 
@@ -147,7 +147,7 @@ namespace Game.Character
 
 		private Vector3 GetJumpImpulse()
 		{
-			return new Vector3(0, character.sheet.JumpImpulse.TotalValue, 0);
+			return new Vector3(0, presenter.Model.Sheet.JumpImpulse.TotalValue, 0);
 		}
 
 		private void OnGroundedChanged()

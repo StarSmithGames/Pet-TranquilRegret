@@ -1,5 +1,3 @@
-using Game.Character;
-
 using StarSmithGames.Core;
 
 using UnityEngine.Assertions;
@@ -8,24 +6,20 @@ namespace Game.Managers.CharacterManager
 {
 	public class CharacterManager
 	{
-		public AbstractCharacter Player { get; private set; }
+		public Character.Character Player { get; private set; }
+		public Registrator<Character.Character> Registrator { get; } = new();
 
-		private Registrator<AbstractCharacter> registrator = new();
-
-		public void Registrate(AbstractCharacter character, bool isPlayer)
+		public void RegistratePlayer(Character.Character character)
 		{
-			if (isPlayer)
-			{
-				Assert.IsNull(Player);
-				Player = character;
-			}
+			Assert.IsNull(Player);
+			Player = character;
 
-			registrator.Registrate(character);
+			Registrator.Registrate(character);
 		}
 
-		public void UnRegistrate(AbstractCharacter character)
+		public void UnRegistrate(Character.Character character)
 		{
-			registrator.UnRegistrate(character);
+			Registrator.UnRegistrate(character);
 		}
 	}
 }

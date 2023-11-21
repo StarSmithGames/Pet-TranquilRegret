@@ -64,9 +64,9 @@ namespace Game.Systems.CameraSystem
 			outputCamera = brain.OutputCamera.transform;
 		}
 
-		public CameraSystem SetTarget(AbstractCharacter character)
+		public CameraSystem SetTarget(Character.Character character)
 		{
-			return SetTarget(character.facade.cameraFollowPivot, character.facade.cameraLookAtPivot);
+			return SetTarget(character.Presenter.View.cameraFollowPivot, character.Presenter.View.cameraLookAtPivot);
 		}
 
 		public CameraSystem SetTarget(Transform target)

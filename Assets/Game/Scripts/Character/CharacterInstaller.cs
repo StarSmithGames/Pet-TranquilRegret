@@ -11,7 +11,7 @@ namespace Game.Character
 
 		[Space]
 		public CharacterConfig config;
-		public AbstractCharacter character;
+		public CharacterView view;
 		public CharacterController characterController;
 		public CharacterVSFXController vsfxController;
 		[Space]
@@ -22,13 +22,14 @@ namespace Game.Character
 			Container.BindInstance(rigidbody);
 			Container.BindInstance(animator);
 
-			Container.BindInstance(config);
-			Container.BindInstance(character);
 			Container.BindInstance(characterController);
 			Container.BindInstance(vsfxController);
 			Container.BindInstance(characerCanvas);
 
-			Container.BindInterfacesAndSelfTo<CharacterGroundImplementation>().WhenInjectedInto<CharacterFacade>();
+			Container.Bind<CharacterPresenter>().AsSingle().NonLazy();
+			Container.BindInstance(config).WhenInjectedInto<CharacterPresenter>();
+			Container.BindInstance(view).WhenInjectedInto<CharacterPresenter>();
+			Container.BindInterfacesAndSelfTo<CharacterGroundImplementation>().WhenInjectedInto<CharacterPresenter>();
 		}
 	}
 }

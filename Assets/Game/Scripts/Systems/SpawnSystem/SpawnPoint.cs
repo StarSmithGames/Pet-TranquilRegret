@@ -34,15 +34,22 @@ namespace Game.Systems.SpawnSystem
 
 		public void Spawn()
 		{
-			var character = diContainer.InstantiatePrefab(gameData.IntermediateData.GameplayConfig.characterPrefab).GetComponent<AbstractCharacter>();
+			var character = diContainer.InstantiatePrefab(gameData.IntermediateData.GameplayConfig.characterPrefab).GetComponent<Character.Character>();
 
-			character.root.position = transform.position;
-			character.model.rotation = transform.rotation;
+			character.Presenter.View.root.position = transform.position;
+			character.Presenter.View.model.rotation = transform.rotation;
 
-			character.facade.cameraFollowPivot.position = FollowPosition;
-			character.facade.cameraLookAtPivot.position = LookPosition;
+			character.Presenter.View.cameraFollowPivot.position = FollowPosition;
+			character.Presenter.View.cameraLookAtPivot.position = LookPosition;
 
-			characterManager.Registrate(character, settings.isPlayer);
+			if (settings.isPlayer)
+			{
+				characterManager.RegistratePlayer(character);
+			}
+			else
+			{
+				characterManager.Registrator.Registrate(character);
+			}
 			cameraSystem
 				.SetTarget(character)
 				.SetTracketOffsetDirection(TracketObjectOffset);

@@ -1,15 +1,16 @@
-using Game.Entities;
-using Game.Systems.SheetSystem.Effects;
-
-using UnityEngine;
-
-using Zenject;
-
 namespace Game.Character
 {
-	//public abstract class CharacterModel : MonoBehaviour
-	//{
-	//}
+	public class CharacterModel
+	{
+		public CharacterConfig Config { get; }
+		public CharacterSheet Sheet { get; }
+
+		public CharacterModel(CharacterConfig config)
+		{
+			Config = config;
+			Sheet = new CharacterSheet(config.sheet);
+		}
+	}
 
 	//public class CharacterSheet
 	//{

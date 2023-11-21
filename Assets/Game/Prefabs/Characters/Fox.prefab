@@ -4447,7 +4447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b694a0a65f9c544bc313c39281849f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterProjector: {fileID: 0}
+  projector: {fileID: 0}
   projectors: []
   depth: 10
   size: {x: 1, y: 1}
@@ -10361,10 +10361,10 @@ GameObject:
   m_Component:
   - component: {fileID: 7834858090861041475}
   - component: {fileID: 7556629589435806289}
-  - component: {fileID: 3572570929318607996}
   - component: {fileID: 7721312390031984499}
+  - component: {fileID: 3572570929318607996}
+  - component: {fileID: 5075788677129601735}
   - component: {fileID: 7834858090861041472}
-  - component: {fileID: 4896812693219093095}
   - component: {fileID: 3619111434604853016}
   m_Layer: 7
   m_Name: Fox
@@ -10410,25 +10410,6 @@ MonoBehaviour:
   _installerPrefabs: []
   _autoRun: 1
   _kernel: {fileID: 0}
---- !u!114 &3572570929318607996
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7834858090861041474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7d981889c64a4f94cbd71f2e94e59b19, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rigidbody: {fileID: 7721312390031984499}
-  animator: {fileID: 7536155167521231925}
-  config: {fileID: 11400000, guid: dc4c74dbf8443bb489639bf325b99692, type: 2}
-  character: {fileID: 7834858090861041472}
-  characterController: {fileID: 3619111434604853016}
-  vsfxController: {fileID: 1829516488092622016}
-  characerCanvas: {fileID: 8025597471232736764}
 --- !u!54 &7721312390031984499
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10445,6 +10426,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &3572570929318607996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7834858090861041474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d981889c64a4f94cbd71f2e94e59b19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rigidbody: {fileID: 7721312390031984499}
+  animator: {fileID: 7536155167521231925}
+  config: {fileID: 11400000, guid: dc4c74dbf8443bb489639bf325b99692, type: 2}
+  view: {fileID: 7834858090861041472}
+  characterController: {fileID: 3619111434604853016}
+  vsfxController: {fileID: 1829516488092622016}
+  characerCanvas: {fileID: 8025597471232736764}
+--- !u!114 &5075788677129601735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7834858090861041474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e31b39c69fca0543a567761cde2dc5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7834858090861041472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10454,28 +10466,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7834858090861041474}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b39166c75c498b4790f4d99adfdc474, type: 3}
+  m_Script: {fileID: 11500000, guid: 525f9debf4fd49441b56d09487ab797a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  installer: {fileID: 3572570929318607996}
-  facade: {fileID: 4896812693219093095}
   root: {fileID: 7834858090861041475}
   model: {fileID: 3410461041638132046}
---- !u!114 &4896812693219093095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7834858090861041474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b762b9805e7ed1641a77d094daa21b48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   cameraFollowPivot: {fileID: 1400353893836363256}
   cameraLookAtPivot: {fileID: 7593025609839594518}
-  characterCanvas: {fileID: 0}
 --- !u!114 &3619111434604853016
 MonoBehaviour:
   m_ObjectHideFlags: 0

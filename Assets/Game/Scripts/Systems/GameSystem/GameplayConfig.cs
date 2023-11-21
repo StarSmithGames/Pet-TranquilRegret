@@ -30,7 +30,7 @@ namespace Game.Systems.GameSystem
 		public UISettings uiSettings;
 
 		[Header("Prefabs")]
-		public AbstractCharacter characterPrefab;
+		public Character.Character characterPrefab;
 	
 		public LevelConfig GetLevelByScene(Scene scene)
 		{
