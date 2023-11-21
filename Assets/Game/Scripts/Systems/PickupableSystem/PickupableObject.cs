@@ -25,13 +25,11 @@ namespace Game.Systems.PickupableSystem
 
 		public Rigidbody Rigidbody => rigidbody;
 		[SerializeField] protected Rigidbody rigidbody;
-		[SerializeField] protected InteractionZone interactionZone;
+		[SerializeField] protected CharacterInteractionZone interactionZone;
 		[SerializeField] protected Outlinable outlinable;
 		[SerializeField] protected List<Collider> colliders = new List<Collider>();
 		[SerializeField] protected Settings settings;
 
-		private Character.Character lastPlayer;
-		private Character.Character player;
 		private UIPickup currentPickup;
 
 		//private UIPickup.Factory pickupFactory;
@@ -76,7 +74,7 @@ namespace Game.Systems.PickupableSystem
 
 		public void EnableInteract(bool trigger)
 		{
-			interactionZone.Enable(trigger);
+			//interactionZone.Enable(trigger);
 			IsInteractable = trigger;
 		}
 
@@ -107,9 +105,6 @@ namespace Game.Systems.PickupableSystem
 			PickupAnimation();
 			ResetAnimation();
 
-			//lastPlayer.Pickup(this);
-			lastPlayer = player;
-			player = null;
 		}
 	
 		protected virtual void OnEnterChanged(Collider other)

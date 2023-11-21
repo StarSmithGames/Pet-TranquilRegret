@@ -1,16 +1,23 @@
+using Game.Character;
+using Game.Extensions;
+using Game.Systems.NavigationSystem;
+
+using System.Collections.Generic;
 using System.Linq;
+
+using UnityEditor;
 
 using UnityEngine;
 
 namespace Game.Systems.LockpickingSystem
 {
-    public class Door : LockpickableGroup
+    public partial class Door : LockpickableObject
 	{
+		public Settings doorSettings;
 		[Space]
-		[SerializeField] private Rigidbody rigidbody;
-        [SerializeField] private HingeJoint hingeJoint;
-        [SerializeField] private Collider collider;
-		[SerializeField] private Settings doorSettings;
+		public Rigidbody rigidbody;
+        public HingeJoint hingeJoint;
+        public Collider collider;
 
 		private float breakForce;
 
@@ -27,25 +34,30 @@ namespace Game.Systems.LockpickingSystem
 			}
 		}
 
+		protected void OnDestroy()
+		{
+
+		}
+
 		private void OnJointBreak(float breakForce)
 		{
 			collider.material = null;
 		}
 
-		protected override void OnLockChanged(LockpickableObject locker)
-		{
-			locker.DoUnlock();
-			for (int i = 0; i < locks.Count; i++)
-			{
-				if (locks[i] != locker)
-				{
-					locks[i].Hide();
-				}
-			}
+		//protected override void OnLockChanged(LockpickableObject locker)
+		//{
+		//	locker.DoUnlock();
+		//	for (int i = 0; i < locks.Count; i++)
+		//	{
+		//		if (locks[i] != locker)
+		//		{
+		//			locks[i].Hide();
+		//		}
+		//	}
 
-			hingeJoint.breakForce = doorSettings.isBreakable ? breakForce : Mathf.Infinity;
-			rigidbody.freezeRotation = false;
-		}
+		//	hingeJoint.breakForce = doorSettings.isBreakable ? breakForce : Mathf.Infinity;
+		//	rigidbody.freezeRotation = false;
+		//}
 
 		[System.Serializable]
         public class Settings

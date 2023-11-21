@@ -74,8 +74,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasGroup: {fileID: 7285937656478143652}
   window: {fileID: 3718957800438658805}
-  <Icon>k__BackingField: {fileID: 6385200317245151826}
-  <Bar>k__BackingField: {fileID: 1107892023617011468}
+  icon: {fileID: 6385200317245151826}
+  bar: {fileID: 1107892023617011468}
   lockSprite: {fileID: 21300000, guid: 4b4af9e02aef25e43ab1133045c4bc73, type: 3}
   unlockSprite: {fileID: 21300000, guid: d4d6cd150ea86c645a18d2de1c4d75a6, type: 3}
   settigns:

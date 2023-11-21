@@ -59,11 +59,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba993562e2bd8c148ac7ed7af42763a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collider: {fileID: 9001697916305278405}
   decal: {fileID: 6094570128961057517}
-  settings:
-    layer:
-      serializedVersion: 2
-      m_Bits: 128
 --- !u!1 &6094570128961057526
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,11 +106,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33b694a0a65f9c544bc313c39281849f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterProjector: {fileID: 6094570128961057513}
+  projector: {fileID: 6094570128961057513}
   projectors:
   - {fileID: 6094570128961057513}
   depth: 10
-  size: {x: 2, y: 2}
+  size: {x: 1, y: 1}
 --- !u!114 &6094570128961057513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,5 +132,5 @@ MonoBehaviour:
   m_UVBias: {x: 0, y: 0}
   m_ScaleMode: 0
   m_Offset: {x: 0, y: 0, z: 0.5}
-  m_Size: {x: 2, y: 2, z: 10}
+  m_Size: {x: 1, y: 1, z: 10}
   m_FadeFactor: 1

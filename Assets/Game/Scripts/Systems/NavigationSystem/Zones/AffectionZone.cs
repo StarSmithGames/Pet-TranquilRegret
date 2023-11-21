@@ -9,7 +9,7 @@ using Zenject;
 
 namespace Game.Systems.NavigationSystem
 {
-	public class AffectionZone : InteractionZone
+	public class AffectionZone : CharacterInteractionZone
 	{
 		[SerializeField] private EffectData data;
 

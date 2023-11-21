@@ -14,37 +14,42 @@ namespace Game.Systems.LockpickingSystem
 	{
 		public float FillAmount
 		{
-			get => Bar.fillAmount;
-			set => Bar.fillAmount = value;
+			get => bar.fillAmount;
+			set => bar.fillAmount = value;
 		}
 
-		[field: SerializeField] public Image Icon { get; private set; }
-		[field: SerializeField] public Image Bar { get; private set; }
-
+		public Image icon;
+		public Image bar;
 		[Space]
-		[SerializeField] private Sprite lockSprite;
-		[SerializeField] private Sprite unlockSprite;
-		[SerializeField] private Settigns settigns;
-
-		private RectTransform icon;
+		public Sprite lockSprite;
+		public Sprite unlockSprite;
+		public Settigns settigns;
 
 		private void Start()
 		{
 			Enable(false);
-
-			icon = (Icon.transform as RectTransform);
 		}
 
 		public override void Show(Action callback = null)
 		{
-			icon.anchoredPosition = Vector3.zero;
-			Icon.sprite = lockSprite;
+			icon.rectTransform.anchoredPosition = Vector3.zero;
+			icon.sprite = lockSprite;
 
 			base.Show(() =>
 			{
 				StartLockAnimation();
 				callback?.Invoke();
 			});
+
+			void StartLockAnimation()
+			{
+				DOTween.Sequence()
+					.AppendCallback(() => icon.DORewind())
+					.Append(icon.rectTransform.DOPunchScale(settigns.lockPunchStrength, settigns.lockPunchDuration))
+					.Append(icon.rectTransform.DOShakePosition(settigns.lockShakeDuration, settigns.lockShakeStrength))
+					.AppendInterval(0.35f)
+					.SetLoops(-1);
+			}
 		}
 
 		public override void Hide(Action callback = null)
@@ -59,30 +64,18 @@ namespace Game.Systems.LockpickingSystem
 
 			Sequence sequence = DOTween.Sequence();
 
-			Vector2 start = icon.anchoredPosition;
-			Vector2 end = icon.anchoredPosition + new Vector2(0, 30f);
+			Vector2 start = icon.rectTransform.anchoredPosition;
+			Vector2 end = icon.rectTransform.anchoredPosition + new Vector2(0, 30f);
 			sequence
-				.Append(icon.DOAnchorPos(end, 0.2f))
-				.Append(icon.DOPunchScale(settigns.lockPunchStrength, settigns.lockPunchDuration))
-				.AppendCallback(() => { Icon.sprite = unlockSprite; })
-				.Append(icon.DOAnchorPos(start, 0.15f))
+				.Append(icon.rectTransform.DOAnchorPos(end, 0.2f))
+				.Append(icon.rectTransform.DOPunchScale(settigns.lockPunchStrength, settigns.lockPunchDuration))
+				.AppendCallback(() => { icon.sprite = unlockSprite; })
+				.Append(icon.rectTransform.DOAnchorPos(start, 0.15f))
 				.AppendInterval(0.25f)
 				.OnComplete(() =>
 				{
 					Hide(callback);
 				});
-		}
-
-		private void StartLockAnimation()
-		{
-			Sequence sequence = DOTween.Sequence();
-
-			sequence
-				.AppendCallback(() => icon.DORewind())
-				.Append(icon.DOPunchScale(settigns.lockPunchStrength, settigns.lockPunchDuration))
-				.Append(icon.DOShakePosition(settigns.lockShakeDuration, settigns.lockShakeStrength))
-				.AppendInterval(0.35f)
-				.SetLoops(-1);
 		}
 
 		private void Kill()

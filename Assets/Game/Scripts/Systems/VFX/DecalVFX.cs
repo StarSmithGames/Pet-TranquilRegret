@@ -15,12 +15,12 @@ namespace Game.VFX
 	{
 		public bool IsEnabled { get; private set; } = true;
 
-		[SerializeField] private DecalProjector masterProjector;
-		[SerializeField] private List<DecalProjector> projectors = new List<DecalProjector>();
+		public DecalProjector projector;
+		public List<DecalProjector> projectors = new List<DecalProjector>();
 		[OnValueChanged("UpdateSize")]
-		[SerializeField] private float depth = 10;
+		public float depth = 10;
 		[OnValueChanged("UpdateSize")]
-		[SerializeField] private Vector2 size = Vector2.one;
+		public Vector2 size = Vector2.one;
 
 		private float sizeFactor = 1f;
 		private Vector2 originalSize;
@@ -35,7 +35,7 @@ namespace Game.VFX
 		public void Enable(bool trigger)
 		{
 			IsEnabled = trigger;
-			masterProjector.enabled = IsEnabled;
+			projector.enabled = IsEnabled;
 		}
 
 		public Tween DoIdle()
@@ -43,7 +43,7 @@ namespace Game.VFX
 			idleSequence = DOTween.Sequence();
 
 			idleSequence
-				.AppendCallback(() => masterProjector.DORewind())
+				.AppendCallback(() => projector.DORewind())
 				.Append(DOTween.Punch(() => originalSize, (x) => SetScale(new Vector3(x.x, x.y, depth)), new Vector3(0.25f, 0.25f, 0), 0.25f))
 				.SetLoops(-1);
 
@@ -110,7 +110,7 @@ namespace Game.VFX
 			if (end == 0)
 			{
 				DOTween
-					.To(() => masterProjector.fadeFactor, x => SetFade(x), 0f, duration)
+					.To(() => projector.fadeFactor, x => SetFade(x), 0f, duration)
 					.OnComplete(() =>
 					{
 						Enable(false);
@@ -120,7 +120,7 @@ namespace Game.VFX
 			else
 			{
 				DOTween
-					.To(() => masterProjector.fadeFactor, x => SetFade(x), end, duration)
+					.To(() => projector.fadeFactor, x => SetFade(x), end, duration)
 					.OnComplete(() =>
 					{
 						callback?.Invoke();
@@ -134,8 +134,8 @@ namespace Game.VFX
 		{
 			if(sharedMaterial == null)
 			{
-				sharedMaterial = new Material(masterProjector.material);
-				masterProjector.material = sharedMaterial;
+				sharedMaterial = new Material(projector.material);
+				projector.material = sharedMaterial;
 			}
 
 			sharedMaterial.color = color;
@@ -147,7 +147,7 @@ namespace Game.VFX
 			idleSequence.Kill(true);
 			idleSequence = null;
 
-			masterProjector.DOKill(true);
+			projector.DOKill(true);
 			transform.DOKill(true);
 		}
 

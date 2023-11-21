@@ -1,130 +1,83 @@
-using Game.Character;
-using Game.Systems.InteractionSystem;
-using Game.Systems.NavigationSystem;
-
-using Sirenix.OdinInspector;
-
-using System;
+using System.Collections.Generic;
 using System.Linq;
 
+
+using UnityEngine;
+using Game.Systems.NavigationSystem;
+using Game.Systems.InteractionSystem;
+using Game.Character;
+using Cysharp.Threading.Tasks;
+using System;
+using System.Threading;
+
 #if UNITY_EDITOR
+using Sirenix.OdinInspector.Editor;
 using UnityEditor;
 #endif
 
-using UnityEngine;
-
 namespace Game.Systems.LockpickingSystem
 {
-	public class LockpickableObject : InteractableObject
+	public abstract partial class LockpickableObject : InteractableObject
 	{
-		public Action<LockpickableObject> onLockChanged;
-
-		[InfoBox("Overrided by Group Parent", InfoMessageType.Error, VisibleIf = "IsHasLockpickableGroup")]
 		public LockpickableSettings settings;
-		[SerializeField, ReadOnly] private LockpickableGroup group;
 
-		private AbstractCharacter currentCharacter;
+		public List<CharacterInteractionZone> zones = new();
 
 		private float t;
 		private float progress;
 
-		protected override void Awake()
+		protected virtual void Awake()
 		{
-			base.Awake();
-
-			if(group != null)
-			{
-				settings = group.settings;
-			}
-
-			interactionZone.decal.Enable(settings.isLocked);
 			if (settings.isLocked)
 			{
-				interactionZone.DoIdle();
+				Lock();
 			}
 		}
 
-		private void Update()
+		private void OnDestroy()
 		{
-			if (!settings.isLocked) return;
 
-			if(currentCharacter != null)
-			{
-				t += Time.deltaTime;
-				progress = t / settings.unlockTime;
-
-				currentCharacter.facade.characterCanvas.lockpick.FillAmount = progress;
-
-				if (progress >= 1f)
-				{
-					settings.isLocked = false;
-					OnLockChanged();
-				}
-			}
-			else
-			{
-				if (progress != 0)
-				{
-					t -= Time.deltaTime * settings.decreaseSpeed;
-					progress = Mathf.Max(t, 0) / settings.unlockTime;
-				}
-			}
 		}
 
-		public void Hide()
+		private void Lock()
 		{
-			interactionZone.Enable(false);
-			interactionZone.decal.ScaleTo(0f, callback: () =>
-			{
-				interactionZone.gameObject.SetActive(false);
-			});
+			Subscribe();
 		}
 
-		public void DoUnlock()
+		private void UnLock()
 		{
-			Hide();
-			currentCharacter.facade.characterCanvas.lockpick.Unlock();
+			UnSubscribe();
 		}
 
-		protected virtual void OnLockChanged()
+		protected virtual void OnCharacterAdded(Character.Character character) 
 		{
-			onLockChanged?.Invoke(this);
+			character.Presenter.DoLockpickAsync();
 		}
 
-		protected override void OnListChanged()
+		protected virtual void OnCharacterRemoved(Character.Character character)
 		{
-			var character = characters.LastOrDefault();
+			character.Presenter.BreakLockpick();
+		}
+	}
 
-			if (currentCharacter != null)
+	public partial class LockpickableObject
+	{
+		private void Subscribe()
+		{
+			for (int i = 0; i < zones.Count; i++)
 			{
-				if (character != currentCharacter)
-				{
-					currentCharacter.facade.characterCanvas.lockpick.Hide();
-				}
-			}
-
-			currentCharacter = character;
-
-			if (currentCharacter != null)
-			{
-				currentCharacter.facade.characterCanvas.lockpick.Show();
+				zones[i].onItemAdded += OnCharacterAdded;
+				zones[i].onItemRemoved += OnCharacterRemoved;
 			}
 		}
 
-
-#if UNITY_EDITOR
-		private bool IsHasLockpickableGroup()
+		private void UnSubscribe()
 		{
-			var group = GetComponentInParent<LockpickableGroup>();
-
-			if(group != this.group)
+			for (int i = 0; i < zones.Count; i++)
 			{
-				this.group = group;
-				EditorUtility.SetDirty(gameObject);
+				zones[i].onItemAdded -= OnCharacterAdded;
+				zones[i].onItemRemoved -= OnCharacterRemoved;
 			}
-
-			return group != null;
 		}
-#endif
 	}
 }

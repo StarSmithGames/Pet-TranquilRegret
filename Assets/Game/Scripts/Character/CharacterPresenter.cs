@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using System.Threading.Tasks;
 
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace Game.Character
 		public CharacterView View { get; private set; }
 		public CharacterModel Model { get; private set; }
 
+		[Inject] private CharacterCanvas characterCanvas;
 		[Inject] private CharacterGroundImplementation groundImplementation;
 
 		public CharacterPresenter(CharacterView view, CharacterConfig config)
@@ -37,17 +39,58 @@ namespace Game.Character
 		//	subCanvas.Drop.onClicked += OnDropClicked;
 		//}
 
+		private UniTask lockpickTask;
+		private CancellationTokenSource lockpickCancellation;
 
-		//public async void StartLockpickAsync()
-		//{
-		//	await Lockpickable(this.GetCancellationTokenOnDestroy());
-		//}
-
-		private async UniTask Lockpickable(CancellationToken cancellation)
+		public async void DoLockpickAsync()
 		{
-			await UniTask.Delay(TimeSpan.FromSeconds(0.33f), cancellationToken: cancellation);
+			//try
+			//{
+				lockpickCancellation?.Dispose();
+				lockpickCancellation = new();
+				if (await Lockpickable(lockpickCancellation.Token))
+				{
+					Debug.LogError("TRUE");
+				}
+				else
+				{
+					Debug.LogError("False");
+				}
+			//}catch(OperationCanceledException _) { }
+		}
 
-			Debug.LogError("HERER");
+		public void BreakLockpick()
+		{
+			lockpickCancellation?.Cancel();
+			lockpickCancellation?.Dispose();
+			lockpickCancellation = null;
+		}
+
+		private async UniTask<bool> Lockpickable(CancellationToken cancellation)
+		{
+			characterCanvas.lockpick.Show();
+
+			float t = 0;
+
+			while (t < 10f)
+			{
+				t += Time.deltaTime;
+
+				await UniTask.NextFrame();
+
+				if (cancellation.IsCancellationRequested)
+				{
+					characterCanvas.lockpick.Hide();
+
+					return false;
+				}
+			}
+
+			//await UniTask.Delay(TimeSpan.FromSeconds(0.33f));
+
+			characterCanvas.lockpick.Hide();
+
+			return true;
 
 			//if (!settings.isLocked) return;
 

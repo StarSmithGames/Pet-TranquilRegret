@@ -18,10 +18,10 @@ using Zenject;
 
 namespace Game.Systems.LevelSystem
 {
-	[RequireComponent(typeof(InteractionZone))]
+	[RequireComponent(typeof(CharacterInteractionZone))]
 	public class AccessibleContainer : MonoBehaviour
 	{
-		public InteractionZone interactionZone;
+		public CharacterInteractionZone interactionZone;
 		public List<Floating3DObject> floatingObjects = new List<Floating3DObject>();
 		public Settings settings;
 
