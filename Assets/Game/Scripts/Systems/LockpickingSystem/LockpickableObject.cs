@@ -28,6 +28,7 @@ namespace Game.Systems.LockpickingSystem
 
 		protected virtual void Awake()
 		{
+
 			if (settings.isLocked)
 			{
 				Lock();
@@ -42,11 +43,23 @@ namespace Game.Systems.LockpickingSystem
 		private void Lock()
 		{
 			Subscribe();
+
+			EnableZones(true);
 		}
 
 		private void UnLock()
 		{
 			UnSubscribe();
+
+			EnableZones(false);
+		}
+
+		private void EnableZones(bool trigger)
+		{
+			for (int i = 0; i < zones.Count; i++)
+			{
+				zones[i].gameObject.SetActive(trigger);
+			}
 		}
 
 		protected virtual void OnCharacterAdded(Character.Character character) 

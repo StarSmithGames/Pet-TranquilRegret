@@ -17,32 +17,34 @@ namespace Game.Systems.LockpickingSystem
 		[Space]
 		public Rigidbody rigidbody;
         public HingeJoint hingeJoint;
-        public Collider collider;
-
-		private float breakForce;
+		public JointComponent joint;
+		public Collider collider;
 
 		protected override void Awake()
 		{
 			base.Awake();
 
-			breakForce = hingeJoint.breakForce;
-
 			if (base.settings.isLocked)
 			{
-				rigidbody.freezeRotation = true;
 				hingeJoint.breakForce = Mathf.Infinity;
+				rigidbody.freezeRotation = true;
 			}
+			else
+			{
+				hingeJoint.breakForce = doorSettings.isBreakable ? doorSettings.breakForce : Mathf.Infinity;
+			}
+
+			joint.onJointBreaked += OnJointBreaked;
 		}
 
 		protected void OnDestroy()
 		{
-
+			joint.onJointBreaked -= OnJointBreaked;
 		}
 
-		private void OnJointBreak(float breakForce)
+		private void OnJointBreaked(float breakForce)
 		{
-			Debug.LogError("BREAKED");
-			//collider.material = null;
+			Debug.LogError("Joint Breaked " + breakForce);
 		}
 
 		//protected override void OnLockChanged(LockpickableObject locker)
@@ -64,6 +66,7 @@ namespace Game.Systems.LockpickingSystem
         public class Settings
         {
             public bool isBreakable = true;
-        }
+			public float breakForce = 100f;
+		}
     }
 }

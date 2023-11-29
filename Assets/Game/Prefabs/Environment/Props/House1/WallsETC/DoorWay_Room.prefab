@@ -76,6 +76,7 @@ MonoBehaviour:
     isBreakable: 1
   rigidbody: {fileID: 1405292334267681144}
   hingeJoint: {fileID: 1405292334267681145}
+  joint: {fileID: 4612746395249824113}
   collider: {fileID: 4820974279070752453}
 --- !u!1 &1405292334267681151
 GameObject:
@@ -88,6 +89,7 @@ GameObject:
   - component: {fileID: 1405292334267681150}
   - component: {fileID: 1405292334267681144}
   - component: {fileID: 1405292334267681145}
+  - component: {fileID: 4612746395249824113}
   m_Layer: 0
   m_Name: DoorAnchor
   m_TagString: Untagged
@@ -163,6 +165,18 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &4612746395249824113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1405292334267681151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe0082ad6367b64498e4d7e95b1e9b84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1405292334053644474
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -357,11 +371,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9001697916305278405, guid: d187b1be1769fad4b8fe53f075b89c89, type: 3}
       propertyPath: m_Center.x
-      value: -0.00000035762787
+      value: 0.00000035762787
       objectReference: {fileID: 0}
     - target: {fileID: 9001697916305278405, guid: d187b1be1769fad4b8fe53f075b89c89, type: 3}
       propertyPath: m_Center.y
-      value: -0.00000035762787
+      value: -0.0000012516975
       objectReference: {fileID: 0}
     - target: {fileID: 9001697916305278405, guid: d187b1be1769fad4b8fe53f075b89c89, type: 3}
       propertyPath: m_Center.z
@@ -466,11 +480,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9001697916305278405, guid: d187b1be1769fad4b8fe53f075b89c89, type: 3}
       propertyPath: m_Center.x
-      value: 0.000002503395
+      value: -0.00000059604645
       objectReference: {fileID: 0}
     - target: {fileID: 9001697916305278405, guid: d187b1be1769fad4b8fe53f075b89c89, type: 3}
       propertyPath: m_Center.y
-      value: -0.00000059604645
+      value: -0.0000015497208
       objectReference: {fileID: 0}
     - target: {fileID: 9001697916305278405, guid: d187b1be1769fad4b8fe53f075b89c89, type: 3}
       propertyPath: m_Center.z

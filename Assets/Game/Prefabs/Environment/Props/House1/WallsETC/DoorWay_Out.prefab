@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3564260212875899284}
   - component: {fileID: 3564260212875899306}
   - component: {fileID: 3564260212875899307}
+  - component: {fileID: 1517977429143087219}
   m_Layer: 0
   m_Name: DoorAnchor
   m_TagString: Untagged
@@ -86,6 +87,18 @@ HingeJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &1517977429143087219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3564260212875899285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe0082ad6367b64498e4d7e95b1e9b84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3564260214580207888
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,6 +175,7 @@ MonoBehaviour:
     isBreakable: 1
   rigidbody: {fileID: 3564260212875899306}
   hingeJoint: {fileID: 3564260212875899307}
+  joint: {fileID: 1517977429143087219}
   collider: {fileID: 4891698894711183683}
 --- !u!1001 &537992688665441670
 PrefabInstance:
@@ -248,11 +262,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9001697916305278405, guid: d187b1be1769fad4b8fe53f075b89c89, type: 3}
       propertyPath: m_Center.y
-      value: -0.008197218
+      value: 0.00000023841858
       objectReference: {fileID: 0}
     - target: {fileID: 9001697916305278405, guid: d187b1be1769fad4b8fe53f075b89c89, type: 3}
       propertyPath: m_Center.z
-      value: 0
+      value: -0.0000011324883
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d187b1be1769fad4b8fe53f075b89c89, type: 3}
@@ -337,15 +351,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9001697916305278405, guid: d187b1be1769fad4b8fe53f075b89c89, type: 3}
       propertyPath: m_Center.x
-      value: 0
+      value: 0.0000009536743
       objectReference: {fileID: 0}
     - target: {fileID: 9001697916305278405, guid: d187b1be1769fad4b8fe53f075b89c89, type: 3}
       propertyPath: m_Center.y
-      value: -0.15586287
+      value: -0.14766541
       objectReference: {fileID: 0}
     - target: {fileID: 9001697916305278405, guid: d187b1be1769fad4b8fe53f075b89c89, type: 3}
       propertyPath: m_Center.z
-      value: 0
+      value: 0.0000007748604
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d187b1be1769fad4b8fe53f075b89c89, type: 3}
@@ -486,6 +500,10 @@ PrefabInstance:
     - target: {fileID: 6493912666896998903, guid: 19c879197a1535e45836a93e3b265282, type: 3}
       propertyPath: m_Name
       value: WallPass_3Out
+      objectReference: {fileID: 0}
+    - target: {fileID: 6493912666896998903, guid: 19c879197a1535e45836a93e3b265282, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19c879197a1535e45836a93e3b265282, type: 3}
