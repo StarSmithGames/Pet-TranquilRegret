@@ -1,5 +1,6 @@
 using Game.Systems.GameSystem;
 using Game.Systems.LevelSystem;
+using Game.UI;
 
 using StarSmithGames.Core;
 using StarSmithGames.Core.StorageSystem;
@@ -121,6 +122,8 @@ namespace Game.Systems.StorageSystem
 	public class IntermediateData
 	{
 		[Inject] public GameplayConfig GameplayConfig { get; private set; }
+
+		public UIRootMenu RootMenu { get; set; }
 
 		public LevelFacade LevelPresenter { get; set; }
 		public LevelConfig CurrentLevelConfig => LevelPresenter?.Model.Config;

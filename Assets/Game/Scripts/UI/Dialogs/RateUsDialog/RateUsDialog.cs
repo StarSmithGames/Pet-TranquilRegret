@@ -1,3 +1,5 @@
+using Game.Services;
+
 using StarSmithGames.Go;
 
 using System;
@@ -14,20 +16,19 @@ namespace Game.UI
         public List<UIRadioButton> stars = new();
 		public UISimpleButton simpleButton;
 
-		[Inject] private UICanvas subCanvas;
+		[Inject] private ViewService viewService;
 
 		private int currentRate = 0;
 
 		private void Awake()
 		{
-			subCanvas.ViewRegistrator.Registrate(this);
 			//Enable(false);
 			UpdateUI();
 		}
 
 		private void OnDestroy()
 		{
-			subCanvas.ViewRegistrator.UnRegistrate(this);
+			viewService.ViewDialogRegistrator.UnRegistrate(this);
 		}
 
 		private void UpdateUI()

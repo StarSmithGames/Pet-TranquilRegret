@@ -1,3 +1,4 @@
+using Game.Services;
 using Game.Systems.GameSystem;
 using Game.Systems.LevelSystem;
 
@@ -20,40 +21,48 @@ namespace Game.UI
 		public TMPro.TextMeshProUGUI title;
 		public Transform goalContent;
 		public Button startButton;
+		public Button leftButton;
+		public Button rightButton;
+		public Button closeButton;
+		[Space]
+		public List<UILevelStar> stars = new();
 
 		private List<UIGoalItem> goals = new List<UIGoalItem>();
 		private LevelConfig levelConfig;
 
 		[Inject] private GameLoader gameLoader;
-		private UICanvas subCanvas;
-		private UIGoalItem.Factory goalFactory;
+		[Inject] private ViewService viewService;
 		private LocalizationSystem localizationSystem;
-
+		//private UIGoalItem.Factory goalFactory;
+		//UIGoalItem.Factory goalFactory,
 		[Inject]
 		private void Construct(
-			UICanvas subCanvas,
-			UIGoalItem.Factory goalFactory,
 			LocalizationSystem localizationSystem)
 		{
-			this.subCanvas = subCanvas;
-			this.goalFactory = goalFactory;
 			this.localizationSystem = localizationSystem;
 		}
 
 		private void Awake()
 		{
-			subCanvas.ViewRegistrator.Registrate(this);
 			goalContent.DestroyChildren();
 		}
 
 		private void OnDestroy()
 		{
-			subCanvas.ViewRegistrator.UnRegistrate(this);
+			viewService.ViewDialogRegistrator.UnRegistrate(this);
 		}
 
 		public override void Show(Action callback = null)
 		{
-			startButton.interactable = true;
+			leftButton.gameObject.SetActive(false);
+			rightButton.gameObject.SetActive(false);
+
+			for (int i = 0; i < stars.Count; i++)
+			{
+				stars[i].Activate(false);
+			}
+
+			Interactable(true);
 
 			base.Show(callback);
 		}
@@ -69,26 +78,46 @@ namespace Game.UI
 
 			for (int i = 0; i < levelConfig.primaryGoals.Count; i++)
 			{
-				var goal = goalFactory.Create();
-				goal.transform.SetParent(goalContent);
-				goal.transform.localScale = Vector3.one;
-				goal.transform.localPosition = Vector3.zero;
+				//var goal = goalFactory.Create();
+				//goal.transform.SetParent(goalContent);
+				//goal.transform.localScale = Vector3.one;
+				//goal.transform.localPosition = Vector3.zero;
 
-				goal.SetGoal(levelConfig.primaryGoals[i]);
+				//goal.SetGoal(levelConfig.primaryGoals[i]);
 
-				goals.Add(goal);
+				//goals.Add(goal);
 			}
+		}
+
+		private void Interactable(bool trigger)
+		{
+			startButton.interactable = trigger;
+			leftButton.interactable = trigger;
+			rightButton.interactable = trigger;
+			closeButton.interactable = trigger;
 		}
 
 		public void OnStartClick()
 		{
-			startButton.interactable = false;
+			Interactable(false);
 
 			gameLoader.LoadLevel(levelConfig);
 		}
 
+		public void OnLeftClick()
+		{
+			//Interactable(false);
+		}
+
+		public void OnRightClick()
+		{
+			//Interactable(false);
+		}
+
 		public void OnBackClick()
 		{
+			Interactable(false);
+
 			Hide();
 		}
 	}

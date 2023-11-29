@@ -1,4 +1,5 @@
 using Game.Managers.GameManager;
+using Game.Services;
 using Game.Systems.GameSystem;
 using Game.Systems.StorageSystem;
 
@@ -23,14 +24,13 @@ namespace Game.UI
 		public UIRadioButton vibration;
 		public Button exitButton;
 
-		[Inject] private UICanvas subCanvas;
+		[Inject] private ViewService viewService;
 		[Inject] private GameData gameData;
 		[Inject] private GameManager gameManager;
 		[Inject] private GameLoader gameLoader;
 
 		private void Awake()
 		{
-			subCanvas.ViewRegistrator.Registrate(this);
 			Enable(false);
 
 			AssignData();
@@ -38,7 +38,7 @@ namespace Game.UI
 
 		private void OnDestroy()
 		{
-			subCanvas.ViewRegistrator.UnRegistrate(this);
+			viewService.ViewDialogRegistrator.UnRegistrate(this);
 		}
 
 		public override void Show(Action callback = null)

@@ -1,10 +1,8 @@
-using Game.HUD.Menu;
 using Game.Managers.GameManager;
+using Game.Services;
 using Game.Systems.CameraSystem;
 using Game.Systems.InfinityRoadSystem;
 using Game.UI;
-
-using UnityEngine;
 
 using Zenject;
 
@@ -12,7 +10,7 @@ namespace Game.Installers
 {
 	public class MenuInstaller : MonoInstaller
     {
-		public UIMenuCanvas menuCanvas;
+		public UIRootMenu menuRoot;
 
 		public VerticalCamera verticalCamera;
 		public RoadMap roadMap;
@@ -26,7 +24,7 @@ namespace Game.Installers
 				.FromComponentInNewPrefab(goalPrefab)
 				.AsSingle();
 
-			Container.Bind<UICanvas>().FromInstance(menuCanvas);
+			Container.Bind<UIRootMenu>().FromInstance(menuRoot);
 
 			Container.BindInstance(verticalCamera);
 			Container.BindInstance(roadMap);

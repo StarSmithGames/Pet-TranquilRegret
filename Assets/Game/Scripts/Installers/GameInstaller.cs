@@ -22,7 +22,6 @@ namespace Game.Installers
 		public override void InstallBindings()
 		{
 			Container.BindInstance(FindObjectOfType<CameraSystem>());
-			Container.Bind<UICanvas>().FromInstance(subCanvas);
 
 			//Container.BindFactory<UIPickup, UIPickup.Factory>()
 			//	.FromMonoPoolableMemoryPool(

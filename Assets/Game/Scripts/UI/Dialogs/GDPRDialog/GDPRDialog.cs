@@ -16,12 +16,12 @@ namespace Game.UI
 
 		private void Awake()
 		{
-            viewService.DialogViewRegistrator.Registrate(this);
+            viewService.ViewDialogRegistrator.Registrate(this);
 		}
 
 		private void OnDestroy()
 		{
-            viewService?.DialogViewRegistrator.UnRegistrate(this);
+            viewService?.ViewDialogRegistrator.UnRegistrate(this);
 		}
 
 		public void OnTermsClick()

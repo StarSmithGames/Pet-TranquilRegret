@@ -795,6 +795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundsContent: {fileID: 1953000498395046850}
+  roadPin: {fileID: 5500626491624576075}
   levelsContent: {fileID: 1953000498911193113}
   levels:
   - {fileID: 4779496268597302680}

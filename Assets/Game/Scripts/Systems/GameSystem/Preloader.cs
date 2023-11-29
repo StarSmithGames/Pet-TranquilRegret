@@ -24,7 +24,7 @@ namespace Game.Systems.GameSystem
 
 			if (!gameData.IsGDPRApplied)
 			{
-				window = viewService.DialogViewRegistrator.GetAs<GDPRDialog>();
+				window = viewService.ViewDialogRegistrator.GetAs<GDPRDialog>();
 				window.onAgreeClicked += OnAgreeClicked;
 				window.Show();
 			}

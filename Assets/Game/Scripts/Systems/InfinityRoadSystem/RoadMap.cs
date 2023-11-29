@@ -3,6 +3,7 @@ using DG.Tweening;
 using Game.Entities;
 using Game.HUD.Menu;
 using Game.Installers;
+using Game.Services;
 using Game.Systems.CameraSystem;
 using Game.Systems.GameSystem;
 using Game.Systems.LevelSystem;
@@ -34,6 +35,7 @@ namespace Game.Systems.InfinityRoadSystem
 
 		[Header("Background")]
 		public Transform backgroundsContent;
+		public UIRoadPin roadPin;
 		[Header("Levels")]
 		public Transform levelsContent;
 		public List<UIRoadLevel> levels = new();
@@ -41,17 +43,15 @@ namespace Game.Systems.InfinityRoadSystem
 		public CloudsSettings cloudsSettings;
 
 		[Inject] private VerticalCamera verticalCamera;
+		[Inject] private ViewService viewService;
 #if !DISABLE_SRDEBUGGER
 		[Inject] private SignalBus signalBus;
 #endif
-
-		private UIRoadPin Pin => menuCanvas.Pin;
 
 		private int lastIndex = -1;
 		private GameProgress gameProgress;
 
 		private GameData gameData;
-		private UIMenuCanvas menuCanvas;
 		private ParticalVFXFootStep.Factory pawStepFactory;
 
 		private List<SpriteRenderer> sprites = new();
@@ -59,11 +59,9 @@ namespace Game.Systems.InfinityRoadSystem
 		[Inject]
 		private void Construct(
 			GameData gameData,
-			UICanvas menuCanvas,
 			[Inject(Id = "StepPawVerticalPrint")] ParticalVFXFootStep.Factory pawStepFactory)
 		{
 			this.gameData = gameData;
-			this.menuCanvas = menuCanvas as UIMenuCanvas;
 			this.pawStepFactory = pawStepFactory;
 		}
 
@@ -110,20 +108,20 @@ namespace Game.Systems.InfinityRoadSystem
 			{
 				Vector3 position = levels[gameProgress.progressMainIndex].transform.position;
 				verticalCamera.SetPosition(position);
-				Pin.transform.position = position;
+				roadPin.transform.position = position;
 			}
 
 			IEnumerator FirstTime()
 			{
 				IsInProcess = true;
 
-				Pin.transform.position = new Vector3(0, -100, 0);
+				roadPin.transform.position = new Vector3(0, -100, 0);
 
 				yield return new WaitForSeconds(0.5f);
 
 				var points = connections.First().GetPoints();
 
-				Pin.transform
+				roadPin.transform
 					.DOPath(points, 1.5f)
 					.OnUpdate(() =>
 					{
@@ -177,9 +175,9 @@ namespace Game.Systems.InfinityRoadSystem
 
 		private void ShowLevelWindow()
 		{
-			var window = menuCanvas.ViewRegistrator.GetAs<LevelDialog>();
-			window.SetLevel(gameData.IntermediateData.GetLevelConfig(lastIndex + 1));
-			window.Show();
+			var dialog = viewService.CreateDialogIfNotExist<LevelDialog>();
+			dialog.SetLevel(gameData.IntermediateData.GetLevelConfig(lastIndex + 1));
+			dialog.Show();
 		}
 
 
@@ -187,7 +185,7 @@ namespace Game.Systems.InfinityRoadSystem
 		{
 			if (IsInProcess) return;
 
-			Pin.transform.DOKill(true);
+			roadPin.transform.DOKill(true);
 
 			if (level.IsEnable)
 			{
@@ -207,7 +205,7 @@ namespace Game.Systems.InfinityRoadSystem
 						Sequence sequence = DOTween.Sequence();
 
 						sequence
-							.Append(Pin.transform.DOPath(points, 1.5f)
+							.Append(roadPin.transform.DOPath(points, 1.5f)
 								.OnUpdate(() =>
 								{
 									Step(pawStepFactory);
@@ -224,9 +222,9 @@ namespace Game.Systems.InfinityRoadSystem
 						Sequence sequence = DOTween.Sequence();
 
 						sequence
-							.Append(Pin.transform.DOScale(0, 0.2f))
-							.AppendCallback(() => Pin.transform.position = level.transform.position)
-							.Append(Pin.transform.DOScale(1, 0.25f).SetEase(Ease.OutBounce))
+							.Append(roadPin.transform.DOScale(0, 0.2f))
+							.AppendCallback(() => roadPin.transform.position = level.transform.position)
+							.Append(roadPin.transform.DOScale(1, 0.25f).SetEase(Ease.OutBounce))
 							.OnComplete(() =>
 							{
 								IsInProcess = false;
@@ -299,21 +297,21 @@ namespace Game.Systems.InfinityRoadSystem
 
 		private void Step(ParticalVFXFootStep.Factory factory)
 		{
-			if (Vector3.Distance(lastStepEmit, menuCanvas.Pin.transform.position) > stepDelta)
+			if (Vector3.Distance(lastStepEmit, roadPin.transform.position) > stepDelta)
 			{
 				var step = factory.Create();
 				stepDir *= -1;
 
-				Vector3 toPosition = (menuCanvas.Pin.transform.position - lastStepEmit).normalized;
+				Vector3 toPosition = (roadPin.transform.position - lastStepEmit).normalized;
 				float angleToPosition = Vector3.Angle(Vector3.up, toPosition);
 
 				step.Play(new ParticleSystem.EmitParams()
 				{
-					position = menuCanvas.Pin.transform.position + (menuCanvas.Pin.transform.right * stepGap * stepDir),
+					position = roadPin.transform.position + (roadPin.transform.right * stepGap * stepDir),
 					rotation = angleToPosition,
 				});
 
-				lastStepEmit = menuCanvas.Pin.transform.position;
+				lastStepEmit = roadPin.transform.position;
 			}
 		}
 	}

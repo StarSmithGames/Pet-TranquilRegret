@@ -1,3 +1,5 @@
+using Game.Services;
+
 using Zenject;
 
 namespace Game.UI
@@ -5,11 +7,11 @@ namespace Game.UI
     public class HUDPauseButton : ViewHUD
 	{
 		[Inject]
-		private UICanvas subCanvas;
+		private ViewService viewService;
 
 		public void OnClick()
 		{
-			subCanvas.ViewRegistrator.Show<SettingsDialog>();
+			viewService.CreateDialogIfNotExist<SettingsDialog>().Show();
 		}
 	}
 }

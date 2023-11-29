@@ -25,7 +25,6 @@ namespace Game.Installers
 #endif
 
 			Container.BindInterfacesAndSelfTo<SceneManager>().AsSingle().NonLazy();
-			Container.BindInterfacesAndSelfTo<ViewService>().AsSingle().NonLazy();
 			Container.BindInterfacesAndSelfTo<VSFXService>().AsSingle().NonLazy();
 
 			Container.BindInstance(gameplayConfig).AsSingle();
