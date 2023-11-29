@@ -1,6 +1,5 @@
 using Game.Managers.GameManager;
 using Game.Systems.StorageSystem;
-using Game.UI;
 
 using StarSmithGames.Go;
 
@@ -62,12 +61,17 @@ namespace Game.Services
 
 		private Transform GetCurrentUIParent()
 		{
-			return gameManager.IsMenu ? GetMenuRoot() : null;
+			return gameManager.IsMenu ? GetMenuRoot() : GetGameRoot();
 		}
 
 		private Transform GetMenuRoot()
 		{
 			return gameData.IntermediateData.RootMenu.dynamicCanvas.dialogsRoot;
+		}
+
+		private Transform GetGameRoot()
+		{
+			return gameData.IntermediateData.RootGame.gameCanvas.dialogsRoot;
 		}
 	}
 }

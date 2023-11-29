@@ -12,13 +12,13 @@ namespace Game.Systems.NavigationSystem
 
 		private UIGameCanvas gameCanvas;
 
-		public ControlPresenter(UICanvas subCanvas)
+		public ControlPresenter()
 		{
-			gameCanvas = subCanvas as UIGameCanvas;
+			//gameCanvas = subCanvas as UIGameCanvas;
 			
 			//gameCanvas.joystick.onDragChanged
-			gameCanvas.drop.onClicked += OnDropped;
-			gameCanvas.jump.onClicked += OnJumped;
+			//gameCanvas.drop.onClicked += OnDropped;
+			//gameCanvas.jump.onClicked += OnJumped;
 		}
 
 		private void OnDropped()

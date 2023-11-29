@@ -41,7 +41,8 @@ namespace Game.Systems.LockpickingSystem
 
 		private void OnJointBreak(float breakForce)
 		{
-			collider.material = null;
+			Debug.LogError("BREAKED");
+			//collider.material = null;
 		}
 
 		//protected override void OnLockChanged(LockpickableObject locker)

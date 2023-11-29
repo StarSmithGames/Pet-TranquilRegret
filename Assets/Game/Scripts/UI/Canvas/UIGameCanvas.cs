@@ -13,8 +13,9 @@ using Zenject;
 
 namespace Game.UI
 {
-	public class UIGameCanvas : UICanvas
-    {
+	public class UIGameCanvas : MonoBehaviour
+	{
+		public Transform dialogsRoot;
 		[Space]
 		public Transform goalContent;
 		public UIGoal goalPrefab;

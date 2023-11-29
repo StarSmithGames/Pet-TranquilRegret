@@ -124,6 +124,7 @@ namespace Game.Systems.StorageSystem
 		[Inject] public GameplayConfig GameplayConfig { get; private set; }
 
 		public UIRootMenu RootMenu { get; set; }
+		public UIRootGame RootGame { get; set; }
 
 		public LevelFacade LevelPresenter { get; set; }
 		public LevelConfig CurrentLevelConfig => LevelPresenter?.Model.Config;

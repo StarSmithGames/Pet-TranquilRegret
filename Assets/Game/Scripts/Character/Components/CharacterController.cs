@@ -1,4 +1,5 @@
 using Game.Entities;
+using Game.Services;
 using Game.Systems.CameraSystem;
 using Game.Systems.NavigationSystem;
 using Game.UI;
@@ -22,25 +23,23 @@ namespace Game.Character
 		public GroundLayer CurrentGroundLayer { get; private set; }
 
 		public float MovingMagnitude => directionVector.magnitude;
-		
-		[Inject] private CharacterPresenter presenter;
-		[Inject] private Rigidbody rb;
-
 		private Settings ControllSettings => presenter.Model.Config.controllSettings;
 
+		private UIJoystick jostick;
 		private Vector3 directionVector;
 		private Vector3 moveVector;
 		private float turnSmoothTime = 0.1f;
 		private float smoothVelocity;
 
-		private UIGameCanvas subCanvas;
-		private CameraSystem cameraSystem;
+		[Inject] private CharacterPresenter presenter;
+		[Inject] private Rigidbody rb;
 
-		[Inject]
-		private void Construct(UICanvas subCanvas, CameraSystem cameraSystem)
+		[Inject] private UIRootGame uiRoot;
+		[Inject] private CameraSystem cameraSystem;
+
+		private void Awake()
 		{
-			this.subCanvas = subCanvas as UIGameCanvas;
-			this.cameraSystem = cameraSystem;
+			jostick = uiRoot.gameCanvas.joystick;
 		}
 
 		private void Start()
@@ -106,7 +105,7 @@ namespace Game.Character
 
 		private Vector3 GetDirection()
 		{
-			Vector3 direction = new Vector3(subCanvas.joystick.Horizontal, 0, subCanvas.joystick.Vertical);
+			Vector3 direction = new Vector3(jostick.Horizontal, 0, jostick.Vertical);
 
 			if(direction == Vector3.zero)
 			{

@@ -14,7 +14,7 @@ namespace Game.Installers
 {
 	public class GameInstaller : MonoInstaller<GameInstaller>
 	{
-		public UIGameCanvas subCanvas;
+		public UIRootGame uiRoot;
 		[Header("UI")]
 		public UIGoal goalPrefab;
 		public UIPickup pickupPrefab;
@@ -22,6 +22,8 @@ namespace Game.Installers
 		public override void InstallBindings()
 		{
 			Container.BindInstance(FindObjectOfType<CameraSystem>());
+
+			Container.BindInstance(uiRoot);
 
 			//Container.BindFactory<UIPickup, UIPickup.Factory>()
 			//	.FromMonoPoolableMemoryPool(
