@@ -773,6 +773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e4b5c4888f7a8469e63de03676e7d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  physicsSettings: {fileID: 11400000, guid: 2e2528e0b0829b6499e3415d5dfffd37, type: 2}
   uiRoot: {fileID: 820579199623444111}
   goalPrefab: {fileID: 16312574267014373, guid: c1f47e87bde362e46a4e2dfa8497cefe, type: 3}
 --- !u!114 &1865050009513248611

@@ -1,6 +1,7 @@
 using Game.HUD.Gameplay;
 using Game.Managers.CharacterManager;
 using Game.Systems.CameraSystem;
+using Game.Systems.PhysicsSystem;
 using Game.Systems.PickupableSystem;
 using Game.Systems.SheetSystem.Effects;
 using Game.Systems.SpawnSystem;
@@ -14,14 +15,18 @@ namespace Game.Installers
 {
 	public class GameInstaller : MonoInstaller<GameInstaller>
 	{
-		public UIRootGame uiRoot;
+		public PhysicsSettings physicsSettings;
+
 		[Header("UI")]
+		public UIRootGame uiRoot;
 		public UIGoal goalPrefab;
 		public UIPickup pickupPrefab;
 
 		public override void InstallBindings()
 		{
 			Container.BindInstance(FindObjectOfType<CameraSystem>());
+
+			Container.BindInstance(physicsSettings);
 
 			Container.BindInstance(uiRoot);
 

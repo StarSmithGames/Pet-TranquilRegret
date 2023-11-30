@@ -28,16 +28,19 @@ namespace Game.Systems.LockpickingSystem
 
 		protected virtual void Awake()
 		{
-
 			if (settings.isLocked)
 			{
 				Lock();
+			}
+			else
+			{
+				UnLock();
 			}
 		}
 
 		private void OnDestroy()
 		{
-
+			UnSubscribe();
 		}
 
 		private void Lock()

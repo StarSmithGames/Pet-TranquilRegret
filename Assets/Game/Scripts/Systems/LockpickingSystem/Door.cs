@@ -1,6 +1,7 @@
 using Game.Character;
 using Game.Extensions;
 using Game.Systems.NavigationSystem;
+using Game.Systems.PhysicsSystem;
 
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,8 @@ using System.Linq;
 using UnityEditor;
 
 using UnityEngine;
+
+using Zenject;
 
 namespace Game.Systems.LockpickingSystem
 {
@@ -19,6 +22,8 @@ namespace Game.Systems.LockpickingSystem
         public HingeJoint hingeJoint;
 		public JointComponent joint;
 		public Collider collider;
+
+		[Inject] private PhysicsSettings physicsSettings;
 
 		protected override void Awake()
 		{
@@ -44,7 +49,7 @@ namespace Game.Systems.LockpickingSystem
 
 		private void OnJointBreaked(float breakForce)
 		{
-			Debug.LogError("Joint Breaked " + breakForce);
+			collider.material = physicsSettings.frictionMax;
 		}
 
 		//protected override void OnLockChanged(LockpickableObject locker)

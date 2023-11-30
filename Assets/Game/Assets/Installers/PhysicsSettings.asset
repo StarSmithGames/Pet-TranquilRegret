@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51f1086d0372d164cb87db8854b8a34e, type: 3}
+  m_Name: PhysicsSettings
+  m_EditorClassIdentifier: 
+  frictionMin: {fileID: 13400000, guid: 81e9c29f32a2044409ed207561c812af, type: 2}
+  frictionMax: {fileID: 13400000, guid: 22166d7e83e08494a9dc05221d283332, type: 2}
+  bouncinessSmall: {fileID: 13400000, guid: 4396bdf11a4019f4e82ab4bc33babb20, type: 2}
