@@ -553,8 +553,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 1487485838498425659}
   m_AABB:
-    m_Center: {x: 0.00072910916, y: 0.0025441325, z: 0.011520345}
-    m_Extent: {x: 0.014961208, y: 0.015637094, z: 0.024593804}
+    m_Center: {x: 0.00014227815, y: 0.003537232, z: 0.012587357}
+    m_Extent: {x: 0.014103532, y: 0.014643995, z: 0.02280454}
   m_DirtyAABB: 0
 --- !u!114 &7548838468250037535
 MonoBehaviour:
@@ -1058,6 +1058,7 @@ GameObject:
   - component: {fileID: 3410461041638132046}
   - component: {fileID: 5727312153632613360}
   - component: {fileID: 2148333568362932408}
+  - component: {fileID: 1715526395646123925}
   m_Layer: 7
   m_Name: Model
   m_TagString: Untagged
@@ -1149,13 +1150,26 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 555356864071977094}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 4fedd24b7a455714ab446b2f39702589, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.2249065
-  m_Height: 1.64
+  m_Height: 1.2222298
   m_Direction: 1
-  m_Center: {x: 0.007985711, y: 0.8, z: 0.0012127757}
+  m_Center: {x: 0.007985711, y: 0.6411136, z: 0.0012127757}
+--- !u!135 &1715526395646123925
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555356864071977094}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.1128629
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!1 &573248905480779584
 GameObject:
   m_ObjectHideFlags: 0
@@ -5581,7 +5595,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3836558127732249845}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.02, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5603,7 +5617,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 3c03dff4b56be5e4584b9c6b64720fc4, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -10418,7 +10432,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7834858090861041474}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 20
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1

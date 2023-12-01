@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sheet:
     defaultMoveSpeed: 4.25
-    defaultJumpImpulse: 5
+    defaultJumpImpulse: 100
   controllSettings:
     thresholdIdle: 0.05
     fallMultipier: 3

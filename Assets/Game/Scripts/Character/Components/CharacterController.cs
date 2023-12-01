@@ -76,13 +76,13 @@ namespace Game.Character
 			rb.MovePosition(rb.position + moveVector);
 		}
 
-		private void FixedUpdate()
-		{
-			if (rb.velocity.y < 0)
-			{
-				rb.velocity += Vector3.up * Physics.gravity.y * ControllSettings.fallMultipier * Time.fixedDeltaTime;
-			}
-		}
+		//private void FixedUpdate()
+		//{
+		//	if (rb.velocity.y < 0)
+		//	{
+		//		rb.velocity += Vector3.up * Physics.gravity.y * ControllSettings.fallMultipier * Time.fixedDeltaTime;
+		//	}
+		//}
 
 		public void Jump()
 		{
