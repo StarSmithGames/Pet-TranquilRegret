@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7786162922562499525}
   - component: {fileID: 5470455886742243087}
   - component: {fileID: 3191688448120942529}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4179723796346158138}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fridge
   m_TagString: Untagged
   m_Icon: {fileID: 0}

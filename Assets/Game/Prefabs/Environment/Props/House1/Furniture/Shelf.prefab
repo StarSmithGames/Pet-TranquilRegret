@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 2177981911892955760}
   - component: {fileID: 4169568319181678266}
   - component: {fileID: 1246054162874817711}
-  m_Layer: 0
+  - component: {fileID: 3152237254594291326}
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,6 +98,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5075005, y: 0.11430417, z: 1.6540754}
   m_Center: {x: 0, y: 0.0000000018626451, z: 0}
+--- !u!114 &3152237254594291326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2512362335677728623}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b559b8267a07b494e8fac4dbd117c431, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4843271767771679013
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,7 +119,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6634976709813238667}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shelf
   m_TagString: Untagged
   m_Icon: {fileID: 0}

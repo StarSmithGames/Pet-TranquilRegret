@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 5908989310779680918}
   - component: {fileID: 7327121220205635379}
   - component: {fileID: 4777156626761487353}
-  m_Layer: 0
+  - component: {fileID: 7926656945819582506}
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,6 +84,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &7926656945819582506
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6434274786694279724}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1958086, y: 0.547078, z: 2.0854113}
+  m_Center: {x: 0.008247256, y: 0.03392835, z: -0.245947}
 --- !u!1 &7506273486050471977
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4394784671690518262}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trolley
   m_TagString: Untagged
   m_Icon: {fileID: 0}

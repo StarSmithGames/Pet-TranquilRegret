@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 3050577046112383926}
   - component: {fileID: 986610341140875132}
   - component: {fileID: 3978944649652588963}
-  m_Layer: 0
+  - component: {fileID: 4386996329200665404}
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,6 +98,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.69588315, y: 0.66961575, z: 2.3955178}
   m_Center: {x: 0.00031477222, y: -0.055084646, z: 0.0005583168}
+--- !u!114 &4386996329200665404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635326256822249129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b559b8267a07b494e8fac4dbd117c431, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2382669061987103258
 GameObject:
   m_ObjectHideFlags: 0
@@ -106,7 +119,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2937039243787430024}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TVTable
   m_TagString: Untagged
   m_Icon: {fileID: 0}

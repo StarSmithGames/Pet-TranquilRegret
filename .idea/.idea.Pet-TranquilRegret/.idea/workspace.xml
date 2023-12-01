@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f4614d04-f3b4-4406-bb28-eaa9a7c3f4c7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Fonts/BalsamiqSans-Bold SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Fonts/BalsamiqSans-Bold SDF.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Fonts/BalsamiqSans-Bold SDF_outline.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Fonts/BalsamiqSans-Bold SDF_outline.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Environment/Props/House1/WallsETC/DoorWay_Out.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Environment/Props/House1/WallsETC/DoorWay_Out.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Environment/Props/House1/WallsETC/DoorWay_Room.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Environment/Props/House1/WallsETC/DoorWay_Room.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Environment/Props/House1/WallsETC/Door_1Room.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Environment/Props/House1/WallsETC/Door_1Room.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/Environment/Props/House1/WallsETC/Door_2Out.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/Environment/Props/House1/WallsETC/Door_2Out.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Prefabs/VFX/Smoke/ToonDustTrail/ToonDustTrail.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Prefabs/VFX/Smoke/ToonDustTrail/ToonDustTrail.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scenes/Levels/Level_1/Level_1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scenes/Levels/Level_1/Level_1.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scenes/Levels/Level_1/Level_1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scenes/Levels/Level_1/Level_1.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Game/Scripts/Systems/LockpickingSystem/Door.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Game/Scripts/Systems/LockpickingSystem/Door.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/OtherPlugins/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/OtherPlugins/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/URPProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/default-2021.dwlt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2Yqtd0lm1mdHWyQumdMjtzbSMzL" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "develop",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f4614d04-f3b4-4406-bb28-eaa9a7c3f4c7" name="Changes" comment="" />
+      <created>1701265025360</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1701265025360</updated>
+      <workItem from="1701265025362" duration="1000" />
+      <workItem from="1701268277365" duration="11000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>

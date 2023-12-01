@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2415810451032648669}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: KitchenFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 7514705303028071785}
   - component: {fileID: 5741368114150082979}
   - component: {fileID: 2016119973191229739}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
