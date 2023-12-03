@@ -21,24 +21,24 @@ namespace Game.Systems.GoalSystem
 			}
 		}
 
-		public void AccumulatePrimaryGoal(GoalItem item)
-		{
-			var goal = GoalsPrimary.Find((x) => x.Config == item.config);
-			goal.CurrentValue += item.count;
+		//public void AccumulatePrimaryGoal(GoalItem item)
+		//{
+		//	var goal = GoalsPrimary.Find((x) => x.ConfigWrapper == item.config);
+		//	goal.CurrentValue += item.count;
 
-			onAccumulatedPrimary?.Invoke();
-		}
+		//	onAccumulatedPrimary?.Invoke();
+		//}
 
-		public void AccumulatePrimaryGoals(GoalItem[] items)
-		{
-			for (int i = 0; i < items.Length; i++)
-			{
-				var goal = GoalsPrimary.Find((x) => x.Config == items[i].config);
-				goal.CurrentValue += items[i].count;
-			}
+		//public void AccumulatePrimaryGoals(GoalItem[] items)
+		//{
+		//	for (int i = 0; i < items.Length; i++)
+		//	{
+		//		var goal = GoalsPrimary.Find((x) => x.ConfigWrapper == items[i].config);
+		//		goal.CurrentValue += items[i].count;
+		//	}
 
-			onAccumulatedPrimary?.Invoke();
-		}
+		//	onAccumulatedPrimary?.Invoke();
+		//}
 
 		public bool IsPrimaryGoalsCompleted()
 		{

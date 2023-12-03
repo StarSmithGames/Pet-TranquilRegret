@@ -74,6 +74,7 @@ MonoBehaviour:
   - {fileID: 3001408687684522668}
   doorSettings:
     isBreakable: 1
+    breakForce: 50
   rigidbody: {fileID: 1405292334267681144}
   hingeJoint: {fileID: 1405292334267681145}
   joint: {fileID: 4612746395249824113}
@@ -359,7 +360,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4451528397172230278, guid: d187b1be1769fad4b8fe53f075b89c89, type: 3}
       propertyPath: m_Name
-      value: InteractionZone
+      value: CharacterZone
       objectReference: {fileID: 0}
     - target: {fileID: 9001697916305278405, guid: d187b1be1769fad4b8fe53f075b89c89, type: 3}
       propertyPath: m_Radius
@@ -375,7 +376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9001697916305278405, guid: d187b1be1769fad4b8fe53f075b89c89, type: 3}
       propertyPath: m_Center.y
-      value: -0.0000012516975
+      value: -0.0000013113022
       objectReference: {fileID: 0}
     - target: {fileID: 9001697916305278405, guid: d187b1be1769fad4b8fe53f075b89c89, type: 3}
       propertyPath: m_Center.z
@@ -452,7 +453,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4451528397172230278, guid: d187b1be1769fad4b8fe53f075b89c89, type: 3}
       propertyPath: m_Name
-      value: InteractionZone
+      value: CharacterZone
       objectReference: {fileID: 0}
     - target: {fileID: 4451528397172230278, guid: d187b1be1769fad4b8fe53f075b89c89, type: 3}
       propertyPath: m_IsActive

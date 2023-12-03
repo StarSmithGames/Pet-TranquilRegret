@@ -49,7 +49,7 @@ namespace Game.Systems.LockpickingSystem
 
 		private void OnJointBreaked(float breakForce)
 		{
-			collider.material = physicsSettings.frictionMax;
+			//collider.material = physicsSettings.frictionMax;
 		}
 
 		//protected override void OnLockChanged(LockpickableObject locker)

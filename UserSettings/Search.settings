@@ -10,6 +10,9 @@ scopes = {
 	"last_search.DA94955A" = ""
 	"OpenInspectorPreview.DA94955A" = "0"
 	"currentGroup.DA94955A" = "all"
+	"last_search.21382318" = "InteractionZone"
+	"OpenInspectorPreview.21382318" = "0"
+	"currentGroup.21382318" = "asset"
 }
 providers = {
 	at = {
@@ -66,6 +69,7 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"InteractionZone"
 ]
 searchItemFavorites = [
 ]

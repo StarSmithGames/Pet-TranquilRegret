@@ -1,19 +1,7 @@
 using System.Collections.Generic;
-using System.Linq;
-
-
-using UnityEngine;
 using Game.Systems.NavigationSystem;
 using Game.Systems.InteractionSystem;
-using Game.Character;
-using Cysharp.Threading.Tasks;
-using System;
-using System.Threading;
-
-#if UNITY_EDITOR
-using Sirenix.OdinInspector.Editor;
-using UnityEditor;
-#endif
+using Game.Systems.ZoneSystem;
 
 namespace Game.Systems.LockpickingSystem
 {
@@ -65,14 +53,14 @@ namespace Game.Systems.LockpickingSystem
 			}
 		}
 
-		protected virtual void OnCharacterAdded(Character.Character character) 
+		protected virtual void OnCharacterAdded(IZonable item) 
 		{
-			character.Presenter.DoLockpickAsync();
+			(item as Character.Character).Presenter.DoLockpickAsync();
 		}
 
-		protected virtual void OnCharacterRemoved(Character.Character character)
+		protected virtual void OnCharacterRemoved(IZonable item)
 		{
-			character.Presenter.BreakLockpick();
+			(item as Character.Character).Presenter.BreakLockpick();
 		}
 	}
 

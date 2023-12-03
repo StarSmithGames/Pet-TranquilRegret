@@ -190,27 +190,27 @@ namespace Game.Systems.LevelSystem
 
 			var config = levelAssetField.value as LevelConfig;
 			
-			var goals = FindObjectsByType<GoalModel>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID);
-			var groups = goals.GroupBy((x) => x.goal.config);
+			//var goals = FindObjectsByType<InteractableItem>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID);
+			//var groups = goals.GroupBy((x) => x.goal.config);
 
-			List<GoalItem> items = new();
-			foreach (var group in groups)
-			{
-				int count = 0;
+			//List<GoalItem> items = new();
+			//foreach (var group in groups)
+			//{
+			//	int count = 0;
 
-				foreach (var item in group)
-				{
-					count += item.goal.count;
-				}
+			//	foreach (var item in group)
+			//	{
+			//		count += item.goal.count;
+			//	}
 
-				items.Add(new GoalItem()
-				{
-					config = group.Key,
-					count = count,
-				});
-			}
+			//	items.Add(new GoalItem()
+			//	{
+			//		config = group.Key,
+			//		count = count,
+			//	});
+			//}
 
-			config.primaryGoals = items;
+			//config.primaryGoals = items;
 
 			EditorUtility.SetDirty(config);
 			AssetDatabase.Refresh();

@@ -44,19 +44,19 @@ namespace Game.UI
 
 		private void OnGameStateChanged(SignalGameStateChanged signal)
 		{
-			if(signal.newGameState == GameState.PreGameplay)
-			{
-				var registrator = gameData.IntermediateData.LevelPresenter.Model.GoalRegistrator;
+			//if(signal.newGameState == GameState.PreGameplay)
+			//{
+			//	var registrator = gameData.IntermediateData.LevelPresenter.Model.GoalRegistrator;
 
-				goalContent.DestroyChildren();
-				registrator.GoalsPrimary.ForEach((x) =>
-				{
-					var goal = SceneContext.Instantiate(goalPrefab);
-					goal.transform.SetParent(goalContent);
-					goal.transform.localScale = Vector3.one;
-					goal.SetGoal(x);
-				});
-			}
+			//	goalContent.DestroyChildren();
+			//	registrator.GoalsPrimary.ForEach((x) =>
+			//	{
+			//		var goal = SceneContext.Instantiate(goalPrefab);
+			//		goal.transform.SetParent(goalContent);
+			//		goal.transform.localScale = Vector3.one;
+			//		goal.SetGoal(x);
+			//	});
+			//}
 		}
 	}
 }

@@ -36,8 +36,8 @@ namespace Game.HUD.Gameplay
 
 		private void UpdateUI()
 		{
-			icon.sprite = currentGoal.Config.information.portrait;
-			text.text = currentGoal.Config.information.name;
+			//icon.sprite = currentGoal.ConfigWrapper.Value.information.portrait;
+			//text.text = currentGoal.ConfigWrapper.Value.information.name;
 
 			UpdateCount();
 		}

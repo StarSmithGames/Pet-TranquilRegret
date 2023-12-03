@@ -1,10 +1,12 @@
+using Game.Systems.ZoneSystem;
+
 using UnityEngine;
 
 using Zenject;
 
 namespace Game.Character
 {
-	public class Character : MonoBehaviour
+	public class Character : MonoBehaviour, IZonable
 	{
 		public CharacterPresenter Presenter { get; private set; }
 
