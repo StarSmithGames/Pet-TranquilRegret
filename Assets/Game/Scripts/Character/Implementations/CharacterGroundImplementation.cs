@@ -33,6 +33,18 @@ namespace Game.Character
 			vsfxController.DustTrailEffect.Enable(trigger);
 		}
 
+		private void DoPawSteps(bool isOne)
+		{
+			if (isOne)
+			{
+				vsfxController.PawStep();
+			}
+			else
+			{
+				vsfxController.PawSteps();
+			}
+		}
+
 		private void CheckGround(GroundLayer groundLayer)
 		{
 			if (groundLayer == null)
@@ -60,7 +72,7 @@ namespace Game.Character
 					}
 				}
 
-				vsfxController.PawStep();
+				DoPawSteps(true);
 			}
 			else
 			{
@@ -85,7 +97,7 @@ namespace Game.Character
 				vsfxController.SmallPoof();
 			}
 
-			vsfxController.PawSteps();
+			DoPawSteps(false);
 		}
 	}
 }

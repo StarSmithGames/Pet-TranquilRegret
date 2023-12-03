@@ -1,4 +1,4 @@
 namespace Game.Systems.GoalSystem
 {
-	public class Apple : GoalItem { }
+	public class Apple : GoalView { }
 }

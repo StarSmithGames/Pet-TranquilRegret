@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.28729475, g: 0.5125356, b: 0.77236664, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: b9e1bea7fa52ca84c8aa465cac36b9b8, type: 2}
+  m_LightingDataAsset: {fileID: 112000000, guid: d56999c5a11949e40a502e6702648f5a, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -361,7 +361,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5105999991763592077, guid: 890d700e865345b44bf5dc8d97b09c1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.181074
+      value: 14.181069
       objectReference: {fileID: 0}
     - target: {fileID: 5105999991763592077, guid: 890d700e865345b44bf5dc8d97b09c1f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -377,11 +377,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5105999991763592077, guid: 890d700e865345b44bf5dc8d97b09c1f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.27059802
+      value: 0.270598
       objectReference: {fileID: 0}
     - target: {fileID: 5105999991763592077, guid: 890d700e865345b44bf5dc8d97b09c1f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.6532815
+      value: -0.65328145
       objectReference: {fileID: 0}
     - target: {fileID: 5105999991763592077, guid: 890d700e865345b44bf5dc8d97b09c1f, type: 3}
       propertyPath: m_LocalRotation.z
@@ -389,7 +389,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5105999992554466799, guid: 890d700e865345b44bf5dc8d97b09c1f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 14.181074
+      value: 14.181069
       objectReference: {fileID: 0}
     - target: {fileID: 5105999992554466799, guid: 890d700e865345b44bf5dc8d97b09c1f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -405,11 +405,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5105999992554466799, guid: 890d700e865345b44bf5dc8d97b09c1f, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.27059802
+      value: 0.270598
       objectReference: {fileID: 0}
     - target: {fileID: 5105999992554466799, guid: 890d700e865345b44bf5dc8d97b09c1f, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.6532815
+      value: -0.65328145
       objectReference: {fileID: 0}
     - target: {fileID: 5105999992554466799, guid: 890d700e865345b44bf5dc8d97b09c1f, type: 3}
       propertyPath: m_LocalRotation.z
@@ -821,67 +821,6 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
---- !u!1001 &2046107198
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 237621235569285674, guid: 23804f2807e4551499580d97fc583bc3, type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 237621235569285674, guid: 23804f2807e4551499580d97fc583bc3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -10.89
-      objectReference: {fileID: 0}
-    - target: {fileID: 237621235569285674, guid: 23804f2807e4551499580d97fc583bc3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 237621235569285674, guid: 23804f2807e4551499580d97fc583bc3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -15.52
-      objectReference: {fileID: 0}
-    - target: {fileID: 237621235569285674, guid: 23804f2807e4551499580d97fc583bc3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 237621235569285674, guid: 23804f2807e4551499580d97fc583bc3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 237621235569285674, guid: 23804f2807e4551499580d97fc583bc3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 237621235569285674, guid: 23804f2807e4551499580d97fc583bc3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 237621235569285674, guid: 23804f2807e4551499580d97fc583bc3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 237621235569285674, guid: 23804f2807e4551499580d97fc583bc3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 237621235569285674, guid: 23804f2807e4551499580d97fc583bc3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 237621235569285675, guid: 23804f2807e4551499580d97fc583bc3, type: 3}
-      propertyPath: m_Name
-      value: BasketApplex5
-      objectReference: {fileID: 0}
-    - target: {fileID: 237621235569285675, guid: 23804f2807e4551499580d97fc583bc3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 23804f2807e4551499580d97fc583bc3, type: 3}
 --- !u!135 &1482318711468342776
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -941,7 +880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b1dce701714f84192270869c89415e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
+  itemViews: []
   interactionZone: {fileID: 6354820725283870821}
   settings:
     selectionType: 0
@@ -960,6 +899,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 1482318711468342776}
+  isDebugSetup: 1
 --- !u!1001 &8124686931227456669
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -20,6 +20,9 @@ namespace Game.Systems.InteractionSystem
 
 		public override Collider Collider => collider;
 		public SphereCollider collider;
+#if UNITY_EDITOR
+		public bool isDebugSetup = true;
+#endif
 
 		protected override void OnItemAdded(IZonable item)
 		{
@@ -37,6 +40,8 @@ namespace Game.Systems.InteractionSystem
 			if (Application.isPlaying) return;
 
 			if (collider == null) return;
+
+			if (!isDebugSetup) return;
 
 			Ray ray = new(transform.position + Vector3.up * 10, Vector3.down);
 			if (Physics.Raycast(ray, out var hit, 100, Layers.LAYER_GROUND))

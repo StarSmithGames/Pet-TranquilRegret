@@ -1,4 +1,4 @@
 namespace Game.Systems.GoalSystem
 {
-	public class Pizza : GoalItem { }
+	public class Pizza : GoalView { }
 }
