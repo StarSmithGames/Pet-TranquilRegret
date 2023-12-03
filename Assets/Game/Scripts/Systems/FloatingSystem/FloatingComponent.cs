@@ -41,35 +41,17 @@ namespace Game.Systems.FloatingSystem
 
 			await UniTask.WaitForSeconds(settings.impulseTime);
 
-			int pointIndex = 0;
-			float a = 1;
-			var path = GetCatmullRomPath();
+			Vector3 velocity = Vector3.zero;
 
-			while (pointIndex < path.Length)
+			while (Vector3.Distance(transform.position, target.position) > 0.66f)
 			{
-				while (Vector3.Distance(transform.position, path[pointIndex]) > 0.1f)
-				{
-					path = GetCatmullRomPath();
-
-					transform.position = Vector3.MoveTowards(transform.position, path[pointIndex], settings.pathSpeed * a);
-
-					a += settings.pathSpeed * Time.deltaTime;
-					await UniTask.Yield();
-				}
-
-				pointIndex++;
-
+				transform.position = Vector3.SmoothDamp(transform.position, target.position, ref velocity, Time.deltaTime * Random.Range(5f, 10f));
 				await UniTask.Yield();
 			}
 
 			await UniTask.Yield();
 
 			gameObject.SetActive(false);
-
-			Vector3[] GetCatmullRomPath()
-			{
-				return new Path(PathType.CatmullRom, new Vector3[] { transform.position, target.position }, 10).wps;
-			}
 		}
 
 
@@ -85,8 +67,6 @@ namespace Game.Systems.FloatingSystem
 			[Space]
 			public Force rotationForce;
 			public Direction rotationDirecion;
-			[Header("Path")]
-			public float pathSpeed = 0.1f;
 
 			public Vector3 GetForce()
 			{

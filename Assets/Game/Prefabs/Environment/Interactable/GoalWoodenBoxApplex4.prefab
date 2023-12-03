@@ -217,7 +217,11 @@ PrefabInstance:
       objectReference: {fileID: 4452130792378599224}
     - target: {fileID: 5795885445061458703, guid: ab3727a4c4ba8b3478f42231b0a88feb, type: 3}
       propertyPath: settings.isOneByOne
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5795885445061458703, guid: ab3727a4c4ba8b3478f42231b0a88feb, type: 3}
+      propertyPath: settings.waitBetween
+      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: 5795885445061458703, guid: ab3727a4c4ba8b3478f42231b0a88feb, type: 3}
       propertyPath: settings.selectionType
