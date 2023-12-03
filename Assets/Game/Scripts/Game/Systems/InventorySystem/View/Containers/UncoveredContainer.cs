@@ -20,6 +20,7 @@ using Zenject;
 
 namespace Game.Systems.InventorySystem
 {
+	[AddComponentMenu("AGame/Inventory/Uncovered Container")]
 	public partial class UncoveredContainer : ContainerView
 	{
 		public List<ItemView> itemViews = new();

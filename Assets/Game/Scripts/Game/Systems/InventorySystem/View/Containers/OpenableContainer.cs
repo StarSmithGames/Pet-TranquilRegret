@@ -2,8 +2,11 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
 
+using UnityEngine;
+
 namespace Game.Systems.InventorySystem
 {
+	[AddComponentMenu("AGame/Inventory/Openable Container")]
 	public class OpenableContainer : ContainerView
 	{
 		public bool isPhysical = false;
