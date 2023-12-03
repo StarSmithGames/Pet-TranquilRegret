@@ -43,9 +43,10 @@ namespace Game.Systems.InventorySystem
 			}
 
 			Initialize();
-			Subsctibe();
 
 			floating = new(this);
+
+			Subsctibe();
 		}
 
 		private void OnDestroy()
@@ -151,9 +152,9 @@ namespace Game.Systems.InventorySystem
 		[System.Serializable]
 		public class Settings
 		{
-			public SelectionType selectionType = SelectionType.Forward;
+			public SelectionType selectionType = SelectionType.Random;
 			public bool isOneByOne = false;
-			public float waitBetween = 0.25f;
+			public float waitBetween = 0.16f;
 		}
 	}
 
