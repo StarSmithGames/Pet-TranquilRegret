@@ -1,3 +1,5 @@
+using Company.Module.Services.DelayedCallService;
+
 using Game.Managers.CharacterManager;
 using Game.Managers.GameManager;
 using Game.Services;
@@ -35,6 +37,7 @@ namespace Game.Installers
 			ApplicationHandlerInstaller.Install(Container);
 			GameManagerInstaller.Install(Container);
 			SpawnSystemInstaller.Install(Container);
+			DelayedCallServiceInstaller.Install(Container);
 
 			Container.BindInstance(Container.InstantiateComponentOnNewGameObject<GameController>());
 			Container.BindInterfacesAndSelfTo<GameLoader>().AsSingle().NonLazy();

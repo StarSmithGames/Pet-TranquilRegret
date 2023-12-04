@@ -126,7 +126,7 @@ namespace Game.Systems.StorageSystem
 		public UIRootMenu RootMenu { get; set; }
 		public UIRootGame RootGame { get; set; }
 
-		public LevelFacade LevelPresenter { get; set; }
+		public LevelPresenter LevelPresenter { get; set; }
 		public LevelConfig CurrentLevelConfig => LevelPresenter?.Model.Config;
 
 		public IntermediateData()

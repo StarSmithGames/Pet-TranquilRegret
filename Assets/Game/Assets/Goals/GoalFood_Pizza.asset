@@ -14,3 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   name: Pizza
+  information:
+    portrait: {fileID: 21300000, guid: 2f555b302d825614183568e46d601559, type: 3}
+    name: Pizza
+    isNameId: 0
+    description: 
+    isDescriptionId: 1

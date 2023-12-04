@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 
 using Game.Systems.FloatingSystem;
 using Game.Systems.NavigationSystem;
+using Game.Systems.StorageSystem;
 
 using ModestTree;
 
@@ -13,6 +14,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+
+using Unity.VisualScripting;
 
 using UnityEngine;
 
@@ -30,6 +33,8 @@ namespace Game.Systems.InventorySystem
 
 		private Character.Character currentTarget;
 		private ItemViewFloating floating;
+
+		[Inject] private GameData gameData;
 
 		[Inject]
 		private void Construct()
@@ -52,24 +57,7 @@ namespace Game.Systems.InventorySystem
 
 		private void OnDestroy()
 		{
-			Unsubscribe();
-		}
-
-		public override ItemModel[] GetItems()
-		{
-			return itemViews.Select((x) => x.model).ToArray();
-		}
-
-		private void Subsctibe()
-		{
-			interactionZone.onItemAdded += OnCharacterAdded;
-			interactionZone.onItemRemoved += OnCharacterRemoved;
-		}
-
-		private void Unsubscribe()
-		{
-			interactionZone.onItemAdded -= OnCharacterAdded;
-			interactionZone.onItemRemoved -= OnCharacterRemoved;
+			Dispose();
 		}
 
 		private void Dispose()
@@ -78,13 +66,24 @@ namespace Game.Systems.InventorySystem
 			currentTarget = null;
 		}
 
+		public override ItemModel[] GetItems()
+		{
+			return itemViews.Select((x) => x.model).ToArray();
+		}
+
 		private void OnCharacterAdded(Character.Character character)
 		{
 			if (currentTarget != null) return;
 
 			currentTarget = character;
 
-			floating.DoFloatAsync(currentTarget.transform, () => Dispose());
+			_ = floating.DoFloatAsync(currentTarget.transform,
+			(item) =>
+			{
+				var goal = item.model.config as GoalItemConfig;
+				gameData.IntermediateData.LevelPresenter.Model.GoalRegistrator.AccumulatePrimaryGoal(goal);
+			},
+			() => Dispose());
 		}
 
 		private void OnCharacterRemoved(Character.Character character)
@@ -159,6 +158,23 @@ namespace Game.Systems.InventorySystem
 		}
 	}
 
+	public partial class UncoveredContainer
+	{
+		private void Subsctibe()
+		{
+			interactionZone.onItemAdded += OnCharacterAdded;
+			interactionZone.onItemRemoved += OnCharacterRemoved;
+		}
+
+		private void Unsubscribe()
+		{
+			interactionZone.onItemAdded -= OnCharacterAdded;
+			interactionZone.onItemRemoved -= OnCharacterRemoved;
+		}
+	}
+
+
+
 	public sealed class ItemViewFloating
 	{
 		private CancellationTokenSource floatCancellation;
@@ -174,13 +190,13 @@ namespace Game.Systems.InventorySystem
 			this.container = container;
 		}
 
-		public async UniTask DoFloatAsync(Transform target, Action callback = null)
+		public async UniTask DoFloatAsync(Transform target, Action<ItemView> onItemPopped = null, Action callback = null)
 		{
 			this.target = target;
 
 			floatCancellation?.Dispose();
 			floatCancellation = new();
-			await FloatAsync(floatCancellation.Token);
+			await FloatAsync(floatCancellation.Token, onItemPopped, callback);
 		}
 
 		public void BreakFloat()
@@ -190,11 +206,13 @@ namespace Game.Systems.InventorySystem
 			floatCancellation = null;
 		}
 
-		private async UniTask FloatAsync(CancellationToken cancellation, Action callback = null)
+		private async UniTask FloatAsync(CancellationToken cancellation, Action<ItemView> onItemPopped = null, Action callback = null)
 		{
 			while (container.itemViews.Count != 0 && !cancellation.IsCancellationRequested)
 			{
 				var item = Pop();
+
+				onItemPopped?.Invoke(item);
 
 				//Animation
 				if (container.settings.isOneByOne)

@@ -8,7 +8,7 @@ namespace Game.Systems.GoalSystem
 	{
 		public event Action onChanged;
 
-		public GoalConfigWrapper ConfigWrapper { get; protected set; }
+		public GoalItemModel Model { get; protected set; }
 
 		public bool IsCompleted => CurrentValue == MaxValue;
 
@@ -27,12 +27,12 @@ namespace Game.Systems.GoalSystem
 		public float MaxValue { get; protected set; }
 		public float PercentValue => CurrentValue / MaxValue;
 
-		public Goal(GoalConfigWrapper wrapper)
+		public Goal(GoalItemModel model)
 		{
-			ConfigWrapper = wrapper;
+			Model = model;
 
 			MinValue = 0;
-			MaxValue = 1;
+			MaxValue = model.count;
 
 			CurrentValue = 0;
 		}

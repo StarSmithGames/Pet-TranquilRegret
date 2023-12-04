@@ -14,8 +14,6 @@ public class Information
 	[HideLabel]
 	public Sprite portrait;
 
-	public bool isIconSimple = true;
-
 	[VerticalGroup("Information/Split/Right")]
 	[HorizontalGroup("Information/Split/Right/SplitName")]
 	[LabelText("@NameLabel")]
@@ -35,36 +33,6 @@ public class Information
 	public bool isDescriptionId = true;
 
 	public bool IsHasPortrait => portrait != null;
-
-
-	//public string GetName(LocalizationSystem localizationSystem)
-	//{
-	//	return isNameId ? localizationSystem.Translate(name) : name;
-	//}
-
-	//public string GetDescription(LocalizationSystem localizationSystem)
-	//{
-	//	return isDescriptionId ? localizationSystem.Translate(description) : description;
-	//}
-
-//#if UNITY_EDITOR
-//	public virtual string GetName()
-//	{
-//		if (isNameId)
-//		{
-//			return (!name.IsEmpty() ? LocalizationSystem.TranslateStatic(name, LocalizationSystem.CurrentLocaleStatic) : "NULL Name");
-//		}
-//		return name;
-//	}
-//	public virtual string GetDescription()
-//	{
-//		if (isNameId)
-//		{
-//			return (!description.IsEmpty() ? LocalizationSystem.TranslateStatic(description, LocalizationSystem.CurrentLocaleStatic) : "NULL Description");
-//		}
-//		return description;
-//	}
-//#endif
 
 	private string NameLabel => isNameId ? "Name Id" : "Name";
 	private string DescriptionLabel => isDescriptionId ? "Description Id" : "Description";

@@ -10,8 +10,8 @@ using Zenject;
 
 namespace Game.UI
 {
-    public class UIRootMenu : MonoBehaviour
-    {
+    public class UIRootMenu : UIRoot
+	{
         public Camera camera;
 
         public UIDynamicCanvas dynamicCanvas;
@@ -28,6 +28,11 @@ namespace Game.UI
 		private void OnDestroy()
 		{
             gameData.IntermediateData.RootMenu = null;
+		}
+
+		public override Transform GetDialogsRoot()
+		{
+            return dynamicCanvas.dialogsRoot;
 		}
 
 		[Button(DirtyOnClick = true)]

@@ -1,21 +1,25 @@
+using Company.Module.Services.DelayedCallService;
+
 using Game.Managers.GameManager;
 using Game.Systems.GameSystem;
 using Game.Systems.StorageSystem;
+
+using UnityEngine;
 
 using Zenject;
 
 namespace Game.Systems.LevelSystem
 {
-	public partial class LevelFacade
+	public partial class LevelPresenter
 	{
 		public LevelModel Model { get; private set; }
 
 		[Inject] private GameLoader gameLoader;
 		[Inject] private GameData gameData;
-		[Inject] private GameManager gameManager;
 		[Inject] private SpawnSystem.SpawnSystem spawnSystem;
+		[Inject] private IDelayedCallService delayedCallService;
 
-		public LevelFacade(LevelConfig config)
+		public LevelPresenter(LevelConfig config)
 		{
 			ProjectContext.Instance.Container.Inject(this);
 
@@ -34,13 +38,33 @@ namespace Game.Systems.LevelSystem
 			spawnSystem.SpawnPlayer();
 		}
 
+		public float GetProgress01()
+		{
+			var goals = Model.GoalRegistrator.GoalsPrimary;
+			float percents = 0;
+			for (int i = 0; i < goals.Count; i++)
+			{
+				percents += goals[i].PercentValue;
+			}
+
+			return percents / goals.Count;
+		}
+
+		public float GetProgress()
+		{
+			return Mathf.Round(GetProgress01() * 100f);
+		}
+
 		public void Complete()
 		{
 			var data = gameData.Storage.GameProgress.GetData();
 			data.progressMainIndex++;
 
-			Dispose();
-			gameLoader.LoadMenu();
+			delayedCallService.DelayedCallAsync(1.69f, () =>
+			{
+				Dispose();
+				gameLoader.LoadMenu();
+			});
 		}
 
 		public void Lose()
@@ -64,7 +88,7 @@ namespace Game.Systems.LevelSystem
 		}
 	}
 
-	public partial class LevelFacade
+	public partial class LevelPresenter
 	{
 		private void Subscribe()
 		{

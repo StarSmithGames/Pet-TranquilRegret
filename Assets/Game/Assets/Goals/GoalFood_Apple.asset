@@ -14,3 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   name: Apple
+  information:
+    portrait: {fileID: 21300000, guid: 0bc8dfc1d805bc145acad5abd2c0fc2c, type: 3}
+    name: Apple
+    isNameId: 0
+    description: 
+    isDescriptionId: 1

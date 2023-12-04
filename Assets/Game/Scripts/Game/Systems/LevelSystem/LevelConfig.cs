@@ -33,7 +33,7 @@ namespace Game.Systems.LevelSystem
 		[Min(0)]
 		public int remainingTime = 30;//redZone
 		[Space]
-		public List<GoalConfigWrapper> primaryGoals = new();
+		public List<GoalItemModel> primaryGoals = new();
 		//[SerializeReference] public List<AbstractGoalConfig> secondaryGoals = new List<AbstractGoalConfig>();
 
 		private string Title => $"{id}_{name}";

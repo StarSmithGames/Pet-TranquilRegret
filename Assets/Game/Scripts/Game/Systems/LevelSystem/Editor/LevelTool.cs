@@ -1,5 +1,6 @@
 using Game.Systems.GameSystem;
 using Game.Systems.GoalSystem;
+using Game.Systems.InventorySystem;
 
 using ModestTree;
 
@@ -9,8 +10,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+using Unity.VisualScripting;
+
 using UnityEditor;
 using UnityEditor.EditorTools;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEditor.UIElements;
 
 using UnityEngine;
@@ -189,28 +193,41 @@ namespace Game.Systems.LevelSystem
 			Assert.IsNotNull(levelAssetField.value);
 
 			var config = levelAssetField.value as LevelConfig;
-			
-			//var goals = FindObjectsByType<InteractableItem>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID);
-			//var groups = goals.GroupBy((x) => x.goal.config);
 
-			//List<GoalItem> items = new();
-			//foreach (var group in groups)
-			//{
-			//	int count = 0;
+			var goals = FindObjectsByType<GoalView>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID).ToList();
+			var configs = goals
+				.Where((x) => x.GetComponent<PickableFloatingItem>() != null)
+				.Select((goal) => goal.model.config).ToList();
 
-			//	foreach (var item in group)
-			//	{
-			//		count += item.goal.count;
-			//	}
+			var containers = FindObjectsByType<ContainerView>(FindObjectsInactive.Include, FindObjectsSortMode.InstanceID).ToList();
+			foreach (var container in containers)
+			{
+				configs.AddRange(container.GetItems().Select((y) => y.config));
+			}
 
-			//	items.Add(new GoalItem()
-			//	{
-			//		config = group.Key,
-			//		count = count,
-			//	});
-			//}
+			var groups = configs.GroupBy((x) => x);
 
-			//config.primaryGoals = items;
+			List<GoalItemModel> items = new();
+			foreach (var group in groups)
+			{
+				int count = 0;
+
+				foreach (var item in group)
+				{
+					count += 1;
+				}
+
+				var goal = group.Key as GoalItemConfig;
+				Assert.IsNotNull(goal);
+
+				items.Add(new GoalItemModel()
+				{
+					config = goal,
+					count = count,
+				});
+			}
+
+			config.primaryGoals = items;
 
 			EditorUtility.SetDirty(config);
 			AssetDatabase.Refresh();

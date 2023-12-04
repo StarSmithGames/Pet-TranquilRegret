@@ -14,3 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   name: Soda
+  information:
+    portrait: {fileID: 21300000, guid: 280baeca098fd1c49aa28b470669c5de, type: 3}
+    name: Soda
+    isNameId: 0
+    description: 
+    isDescriptionId: 1

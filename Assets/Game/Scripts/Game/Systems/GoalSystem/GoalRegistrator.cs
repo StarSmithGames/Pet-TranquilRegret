@@ -1,4 +1,7 @@
-﻿using Game.Systems.LevelSystem;
+﻿using Game.Systems.InventorySystem;
+using Game.Systems.LevelSystem;
+
+using ModestTree;
 
 using System;
 using System.Collections.Generic;
@@ -10,35 +13,25 @@ namespace Game.Systems.GoalSystem
 	{
 		public event Action onAccumulatedPrimary;
 
-		public List<IGoal> GoalsPrimary { get; private set; }
+		public List<IGoal> GoalsPrimary { get; }
 
 		public GoalRegistrator(LevelConfig config)
 		{
-			GoalsPrimary = new List<IGoal>();
+			GoalsPrimary = new();
 			for (int i = 0; i < config.primaryGoals.Count; i++)
 			{
 				GoalsPrimary.Add(new Goal(config.primaryGoals[i]));
 			}
 		}
 
-		//public void AccumulatePrimaryGoal(GoalItem item)
-		//{
-		//	var goal = GoalsPrimary.Find((x) => x.ConfigWrapper == item.config);
-		//	goal.CurrentValue += item.count;
+		public void AccumulatePrimaryGoal(GoalItemConfig config)
+		{
+			var goal = GoalsPrimary.Find((x) => x.Model.config == config);
+			Assert.IsNotNull(goal, $"[GoalRegistrator] Goal Not Exist for {config.BaseName}");
+			goal.CurrentValue++;
 
-		//	onAccumulatedPrimary?.Invoke();
-		//}
-
-		//public void AccumulatePrimaryGoals(GoalItem[] items)
-		//{
-		//	for (int i = 0; i < items.Length; i++)
-		//	{
-		//		var goal = GoalsPrimary.Find((x) => x.ConfigWrapper == items[i].config);
-		//		goal.CurrentValue += items[i].count;
-		//	}
-
-		//	onAccumulatedPrimary?.Invoke();
-		//}
+			onAccumulatedPrimary?.Invoke();
+		}
 
 		public bool IsPrimaryGoalsCompleted()
 		{

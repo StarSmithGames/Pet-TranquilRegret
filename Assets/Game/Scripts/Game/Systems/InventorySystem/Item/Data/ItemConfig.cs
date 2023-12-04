@@ -1,7 +1,10 @@
+using Sirenix.OdinInspector;
+
 using UnityEngine;
 
 namespace Game.Systems.InventorySystem
 {
+	[InlineEditor]
 	public abstract class ItemConfig : ScriptableObject
 	{
 		public int id;

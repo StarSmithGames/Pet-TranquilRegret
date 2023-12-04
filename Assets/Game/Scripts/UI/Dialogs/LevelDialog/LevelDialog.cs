@@ -32,15 +32,8 @@ namespace Game.UI
 
 		[Inject] private GameLoader gameLoader;
 		[Inject] private ViewService viewService;
-		private LocalizationSystem localizationSystem;
-		//private UIGoalItem.Factory goalFactory;
-		//UIGoalItem.Factory goalFactory,
-		[Inject]
-		private void Construct(
-			LocalizationSystem localizationSystem)
-		{
-			this.localizationSystem = localizationSystem;
-		}
+		[Inject] private LocalizationSystem localizationSystem;
+		[Inject] private UIGoalItem.Factory goalFactory;
 
 		private void Awake()
 		{
@@ -76,16 +69,18 @@ namespace Game.UI
 			goals.Clear();
 			goalContent.DestroyChildren();
 
+			if (levelConfig.primaryGoals.Count == 0) return;
+
 			for (int i = 0; i < levelConfig.primaryGoals.Count; i++)
 			{
-				//var goal = goalFactory.Create();
-				//goal.transform.SetParent(goalContent);
-				//goal.transform.localScale = Vector3.one;
-				//goal.transform.localPosition = Vector3.zero;
+				var goal = goalFactory.Create();
+				goal.transform.SetParent(goalContent);
+				goal.transform.localScale = Vector3.one;
+				goal.transform.localPosition = Vector3.zero;
 
-				//goal.SetGoal(levelConfig.primaryGoals[i]);
+				goal.SetGoal(levelConfig.primaryGoals[i]);
 
-				//goals.Add(goal);
+				goals.Add(goal);
 			}
 		}
 
