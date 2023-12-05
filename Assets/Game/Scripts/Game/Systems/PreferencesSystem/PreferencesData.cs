@@ -1,4 +1,4 @@
-﻿namespace Game.Systems.StorageSystem
+﻿namespace Game.Systems.PreferencesSystem
 {
 	public struct PreferencesData
 	{

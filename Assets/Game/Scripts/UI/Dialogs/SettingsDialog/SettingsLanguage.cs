@@ -1,9 +1,7 @@
 using Game.Systems.GameSystem;
-using Game.Systems.StorageSystem;
 
 using StarSmithGames.Go.LocalizationSystem;
 
-using System.Collections.Generic;
 using System.Linq;
 
 using UnityEngine;
@@ -20,14 +18,14 @@ namespace Game.Systems.SettingsSystem
 		public Button left;
 		public Button right;
 
-		[Inject] private GameData gameData;
+		[Inject] private StorageSystem.StorageSystem storageSystem;
 		[Inject] private LocalizationSystem localizationSystem;
 
 		private LocalizationSettins settins;
 
 		private void Awake()
 		{
-			settins = gameData.IntermediateData.GameplayConfig.localizationSettins;
+			settins = storageSystem.IntermediateData.GameplayConfig.localizationSettins;
 
 			localizationSystem.onLocalizationChanged += OnLocalizationChanged;
 			OnLocalizationChanged();
@@ -46,7 +44,7 @@ namespace Game.Systems.SettingsSystem
 			left.interactable = false;
 			right.interactable = false;
 
-			gameData.LanguageIndex = (gameData.LanguageIndex - 1 + settins.flags.Count) % settins.flags.Count;
+			storageSystem.GameFastData.LanguageIndex = (storageSystem.GameFastData.LanguageIndex - 1 + settins.flags.Count) % settins.flags.Count;
 			UpdateLocalization();
 		}
 
@@ -55,13 +53,13 @@ namespace Game.Systems.SettingsSystem
 			left.interactable = false;
 			right.interactable = false;
 
-			gameData.LanguageIndex = (gameData.LanguageIndex + 1) % settins.flags.Count;
+			storageSystem.GameFastData.LanguageIndex = (storageSystem.GameFastData.LanguageIndex + 1) % settins.flags.Count;
 			UpdateLocalization();
 		}
 
 		private void UpdateLocalization()
 		{
-			localizationSystem.ChangeLocale(gameData.LanguageIndex);
+			localizationSystem.ChangeLocale(storageSystem.GameFastData.LanguageIndex);
 		}
 
 		private void OnLocalizationChanged()

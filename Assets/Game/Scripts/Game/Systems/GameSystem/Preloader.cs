@@ -12,7 +12,7 @@ namespace Game.Systems.GameSystem
 {
 	public class Preloader : MonoBehaviour
     {
-		[Inject] private GameData gameData;
+		[Inject] private StorageSystem.StorageSystem gameData;
 		[Inject] private ViewService viewService;
 		[Inject] private GameLoader gameLoader;
 
@@ -20,9 +20,9 @@ namespace Game.Systems.GameSystem
 
 		private void Start()
 		{
-			gameData.SessionsCount++;
+			gameData.GameFastData.SessionsCount++;
 
-			if (!gameData.IsGDPRApplied)
+			if (!gameData.GameFastData.IsGDPRApplied)
 			{
 				window = viewService.ViewDialogRegistrator.GetAs<GDPRDialog>();
 				window.onAgreeClicked += OnAgreeClicked;
@@ -49,7 +49,7 @@ namespace Game.Systems.GameSystem
 
 		private void OnAgreeClicked()
 		{
-			gameData.IsGDPRApplied = true;
+			gameData.GameFastData.IsGDPRApplied = true;
 
 			if (window != null)
 			{

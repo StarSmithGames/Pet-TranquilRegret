@@ -33,7 +33,7 @@ namespace Game.Services
 		[Inject] private DiContainer container;
 		[Inject] private List<ViewBase> dialogs;
 		[Inject] private GameManager gameManager;
-		[Inject] private GameData gameData;
+		[Inject] private StorageSystem gameData;
 
 		public T CreateDialogIfNotExist<T>(Transform customParent = null)
 			where T : MonoBehaviour, IView
@@ -59,6 +59,11 @@ namespace Game.Services
 			where T : MonoBehaviour, IView
 		{
 			CreateDialogIfNotExist<T>().Show();
+		}
+
+		public bool IsSafeDialogShowig()
+		{
+			return false;
 		}
 
 		private UIRoot GetCurrentUIParent()

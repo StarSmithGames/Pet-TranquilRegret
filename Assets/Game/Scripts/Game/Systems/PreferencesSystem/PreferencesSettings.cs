@@ -1,4 +1,4 @@
-﻿namespace Game.Systems.GameSystem
+﻿namespace Game.Systems.PreferencesSystem
 {
 	[System.Serializable]
 	public class PreferencesSettings

@@ -1,6 +1,7 @@
 using Game.Services;
 using Game.Systems.GameSystem;
 using Game.Systems.LevelSystem;
+using Game.Systems.StorageSystem;
 
 using StarSmithGames.Core;
 using StarSmithGames.Go;
@@ -18,6 +19,12 @@ namespace Game.UI
 {
 	public class LevelDialog : ViewPopupBase
 	{
+		public event Action onStartClicked;
+		public event Action onLeftClicked;
+		public event Action onRightClicked;
+		public event Action onClosed;
+
+
 		public TMPro.TextMeshProUGUI title;
 		public Transform goalContent;
 		public Button startButton;
@@ -29,6 +36,7 @@ namespace Game.UI
 
 		private List<UIGoalItem> goals = new List<UIGoalItem>();
 		private LevelConfig levelConfig;
+		private RegularLevelData levelData;
 
 		[Inject] private GameLoader gameLoader;
 		[Inject] private ViewService viewService;
@@ -50,22 +58,36 @@ namespace Game.UI
 			leftButton.gameObject.SetActive(false);
 			rightButton.gameObject.SetActive(false);
 
+			title.text = $"{localizationSystem.Translate("ui.level_dialog.title")} {levelConfig.id}";
+
 			for (int i = 0; i < stars.Count; i++)
 			{
-				stars[i].Activate(false);
+				stars[i].Activate((i + 1) <= levelData.stars);
 			}
+
+			RerfreshGoals();
 
 			Interactable(true);
 
 			base.Show(callback);
 		}
 
-		public void SetLevel(LevelConfig levelConfig)
+		public void SetLevel(LevelConfig levelConfig, RegularLevelData levelData)
 		{
 			this.levelConfig = levelConfig;
+			this.levelData = levelData;
+		}
 
-			title.text = $"{localizationSystem.Translate("ui.level_dialog.title")} {levelConfig.id}";
+		private void Interactable(bool trigger)
+		{
+			startButton.interactable = trigger;
+			leftButton.interactable = trigger;
+			rightButton.interactable = trigger;
+			closeButton.interactable = trigger;
+		}
 
+		private void RerfreshGoals()
+		{
 			goals.Clear();
 			goalContent.DestroyChildren();
 
@@ -84,19 +106,13 @@ namespace Game.UI
 			}
 		}
 
-		private void Interactable(bool trigger)
-		{
-			startButton.interactable = trigger;
-			leftButton.interactable = trigger;
-			rightButton.interactable = trigger;
-			closeButton.interactable = trigger;
-		}
-
 		public void OnStartClick()
 		{
 			Interactable(false);
 
 			gameLoader.LoadLevel(levelConfig);
+
+			onStartClicked?.Invoke();
 		}
 
 		public void OnLeftClick()
@@ -114,6 +130,8 @@ namespace Game.UI
 			Interactable(false);
 
 			Hide();
+
+			onClosed?.Invoke();
 		}
 	}
 }

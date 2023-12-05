@@ -30,11 +30,11 @@ namespace Game.Installers
 			Container.BindInterfacesAndSelfTo<VSFXService>().AsSingle().NonLazy();
 
 			Container.BindInstance(gameplayConfig).AsSingle();
-			Container.BindInterfacesAndSelfTo<GameData>().AsSingle().NonLazy();
 
 			SignalBusInstaller.Install(Container);
 			AsyncManagerInstaller.Install(Container);
 			ApplicationHandlerInstaller.Install(Container);
+			StorageSystemInstaller.Install(Container);
 			GameManagerInstaller.Install(Container);
 			SpawnSystemInstaller.Install(Container);
 			DelayedCallServiceInstaller.Install(Container);

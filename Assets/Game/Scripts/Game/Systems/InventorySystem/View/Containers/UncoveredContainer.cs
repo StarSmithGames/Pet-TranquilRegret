@@ -34,7 +34,7 @@ namespace Game.Systems.InventorySystem
 		private Character.Character currentTarget;
 		private ItemViewFloating floating;
 
-		[Inject] private GameData gameData;
+		[Inject] private StorageSystem.StorageSystem gameData;
 
 		[Inject]
 		private void Construct()

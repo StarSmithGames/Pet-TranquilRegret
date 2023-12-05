@@ -15,7 +15,7 @@ namespace Game.Systems.LevelSystem
 		public LevelModel Model { get; private set; }
 
 		[Inject] private GameLoader gameLoader;
-		[Inject] private GameData gameData;
+		[Inject] private StorageSystem.StorageSystem storageSystem;
 		[Inject] private SpawnSystem.SpawnSystem spawnSystem;
 		[Inject] private IDelayedCallService delayedCallService;
 
@@ -57,8 +57,11 @@ namespace Game.Systems.LevelSystem
 
 		public void Complete()
 		{
-			var data = gameData.Storage.GameProgress.GetData();
-			data.progressMainIndex++;
+			var data = storageSystem.GamePlayData.Storage.GameProgress.GetData();
+			var level = data.regularLevels[storageSystem.GameFastData.LastRegularIndex];
+			level.completed = 1;
+			level.stars = 3;
+			storageSystem.Save();
 
 			delayedCallService.DelayedCallAsync(1.69f, () =>
 			{

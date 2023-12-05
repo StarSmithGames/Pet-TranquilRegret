@@ -18,7 +18,7 @@ namespace Game.UI
 
         public List<Canvas> canvases = new();
 
-        [Inject] private GameData gameData;
+        [Inject] private StorageSystem gameData;
 
 		private void Awake()
 		{

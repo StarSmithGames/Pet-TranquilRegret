@@ -1,10 +1,9 @@
-using Game.Character;
 using Game.Systems.LevelSystem;
+using Game.Systems.PreferencesSystem;
 
 using Sirenix.OdinInspector;
 
 using System.Collections.Generic;
-using System.IO;
 
 using UnityEngine;
 using UnityEngine.Localization;
@@ -13,7 +12,7 @@ using UnityEngine.SceneManagement;
 namespace Game.Systems.GameSystem
 {
 	[CreateAssetMenu(fileName = "GameplayConfig", menuName = "Game/GameplayConfig")]
-	public class GameplayConfig : ScriptableObject
+	public sealed class GameplayConfig : ScriptableObject
 	{
 		[ListDrawerSettings(ShowIndexLabels = true, ListElementLabelName = "Title")]
 		public List<LevelConfig> levels = new List<LevelConfig>();

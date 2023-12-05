@@ -10,7 +10,7 @@ namespace Game.Services
 {
     public class VSFXService
     {
-        [Inject] private GameData gameData;
+        [Inject] private StorageSystem gameData;
         [Inject] private IAudioService audioService;
         [Inject] private IVibrationService vibrationService;
 

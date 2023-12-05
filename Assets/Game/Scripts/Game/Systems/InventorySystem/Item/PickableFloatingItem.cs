@@ -10,7 +10,7 @@ namespace Game.Systems.InventorySystem
 	{
 		public CharacterInteractionZone interactionZone;
 
-		[Inject] private GameData gameData;
+		[Inject] private StorageSystem.StorageSystem gameData;
 
 		private void Awake()
 		{

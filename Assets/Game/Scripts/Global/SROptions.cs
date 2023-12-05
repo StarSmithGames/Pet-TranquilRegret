@@ -12,7 +12,7 @@ using Zenject;
 
 public partial class SROptions
 {
-	[Inject] private GameData gameData;
+	[Inject] private StorageSystem storageSystem;
 	[Inject] private SignalBus signalBus;
 
 	public SROptions()
@@ -25,7 +25,7 @@ public partial class SROptions
 	[Sort(4)]
 	public void CompleteLevel()
 	{
-		var level = gameData.IntermediateData.LevelPresenter;
+		var level = storageSystem.IntermediateData.LevelPresenter;
 		if (level == null) return;
 
 		level.Complete();
@@ -45,7 +45,7 @@ public partial class SROptions
 		get => fastTravel;
 		set
 		{
-			fastTravel = Mathf.Clamp(value, 1, gameData.IntermediateData.GameplayConfig.levels.Count);
+			fastTravel = Mathf.Clamp(value, 1, storageSystem.IntermediateData.GameplayConfig.levels.Count);
 
 			OnFastTraveled();
 		}
@@ -54,16 +54,16 @@ public partial class SROptions
 
 	private void OnFastTraveled()
 	{
-		var data = gameData.Storage.GameProgress.GetData();
-		data.progressMainIndex = fastTravel - 1;
-		gameData.Save();
+		//var data = storageSystem.GamePlayData.Storage.GameProgress.GetData();
+		//data.progressMainIndex = fastTravel - 1;
+		storageSystem.Save();
 
 		RefreshLevel();
 	}
 
 	private void RefreshLevel()
 	{
-		fastTravel = gameData.Storage.GameProgress.GetData().progressMainIndex + 1;
+		//fastTravel = storageSystem.GamePlayData.Storage.GameProgress.GetData().progressMainIndex + 1;
 
 		signalBus?.Fire(new SignalOnLevelChangedCheat());
 	}

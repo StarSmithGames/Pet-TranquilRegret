@@ -15,7 +15,7 @@ namespace Game.UI
         public Image frame;
         public Image body;
 
-        [Inject] private GameData gameData; 
+        [Inject] private StorageSystem gameData; 
 
         public void Enable(bool trigger)
         {

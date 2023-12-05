@@ -25,7 +25,7 @@ namespace Game.UI
 		public Button exitButton;
 
 		[Inject] private ViewService viewService;
-		[Inject] private GameData gameData;
+		[Inject] private StorageSystem storageSystem;
 		[Inject] private GameManager gameManager;
 		[Inject] private GameLoader gameLoader;
 
@@ -50,16 +50,16 @@ namespace Game.UI
 
 		private void AssignData()
 		{
-			var data = gameData.PreferencesParams.GetData();
+			var data = storageSystem.GameFastData.PreferencesParams.GetData();
 
-			if (gameData.IsFirstTime)
+			if (storageSystem.GameFastData.IsFirstTime)
 			{
-				var settings = gameData.IntermediateData.GameplayConfig.preferences;
+				var settings = storageSystem.IntermediateData.GameplayConfig.preferences;
 
 				data.music = settings.music;
 				data.sound = settings.sound;
 				data.vibration = settings.vibration;
-				gameData.PreferencesParams.SetData(data);
+				storageSystem.GameFastData.PreferencesParams.SetData(data);
 			}
 
 			music.Enable(data.music);
@@ -69,26 +69,26 @@ namespace Game.UI
 
 		public void OnMusicClick()
 		{
-			var data = gameData.PreferencesParams.GetData();
+			var data = storageSystem.GameFastData.PreferencesParams.GetData();
 			data.music = !data.music;
 			music.Enable(data.music);
-			gameData.PreferencesParams.SetData(data);
+			storageSystem.GameFastData.PreferencesParams.SetData(data);
 		}
 
 		public void OnSoundClick()
 		{
-			var data = gameData.PreferencesParams.GetData();
+			var data = storageSystem.GameFastData.PreferencesParams.GetData();
 			data.sound = !data.sound;
 			sound.Enable(data.sound);
-			gameData.PreferencesParams.SetData(data);
+			storageSystem.GameFastData.PreferencesParams.SetData(data);
 		}
 
 		public void OnVibrationClick()
 		{
-			var data = gameData.PreferencesParams.GetData();
+			var data = storageSystem.GameFastData.PreferencesParams.GetData();
 			data.vibration = !data.vibration;
 			vibration.Enable(data.vibration);
-			gameData.PreferencesParams.SetData(data);
+			storageSystem.GameFastData.PreferencesParams.SetData(data);
 		}
 
 		public void OnBackClick()

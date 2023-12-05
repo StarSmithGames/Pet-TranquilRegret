@@ -4,6 +4,8 @@ namespace Game.Systems.LevelSystem
 {
 	public class LevelModel
 	{
+		public bool UseLives => false;
+
 		public LevelConfig Config { get; private set; }
 		public GoalRegistrator GoalRegistrator { get; private set; }
 

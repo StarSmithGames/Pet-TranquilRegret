@@ -21,7 +21,7 @@ namespace Game.Systems.GameSystem
 	{
 		[Inject] private AsyncManager asyncManager;
 		[Inject] private GameManager gameManager;
-		[Inject] private GameData gameData;
+		[Inject] private StorageSystem.StorageSystem gameData;
 		[Inject] private SceneManager sceneManager;
 		[Inject] private TransitionManager transitionManager;
 

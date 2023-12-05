@@ -50,29 +50,30 @@ namespace Game.Systems.InfinityRoadSystem
 
 		private int lastIndex = -1;
 		private GameProgress gameProgress;
+		private LevelDialog levelDialog;
 
-		private GameData gameData;
+		private StorageSystem.StorageSystem storageSystem;
 		private ParticalVFXFootStep.Factory pawStepFactory;
 
 		private List<SpriteRenderer> sprites = new();
 
 		[Inject]
 		private void Construct(
-			GameData gameData,
+			StorageSystem.StorageSystem storageSystem,
 			[Inject(Id = "StepPawVerticalPrint")] ParticalVFXFootStep.Factory pawStepFactory)
 		{
-			this.gameData = gameData;
+			this.storageSystem = storageSystem;
 			this.pawStepFactory = pawStepFactory;
 		}
 
 		private void Awake()
 		{
-			gameProgress = gameData.Storage.GameProgress.GetData();
-			lastIndex = gameProgress.progressMainIndex;
+			gameProgress = storageSystem.GamePlayData.Storage.GameProgress.GetData();
+			lastIndex = storageSystem.GameFastData.LastRegularIndex;
 
 			cloudsSettings.clouds.SetLerp(0);
 			BackgroundRefresh();
-			OpenRoadMap(gameData.IsFirstTime);
+			OpenRoadMap(storageSystem.GameFastData.IsFirstTime);
 			RefreshLevels();
 			AssignLevels();
 		}
@@ -106,7 +107,7 @@ namespace Game.Systems.InfinityRoadSystem
 			}
 			else
 			{
-				Vector3 position = levels[gameProgress.progressMainIndex].transform.position;
+				Vector3 position = levels[lastIndex].transform.position;
 				verticalCamera.SetPosition(position);
 				roadPin.transform.position = position;
 			}
@@ -133,9 +134,10 @@ namespace Game.Systems.InfinityRoadSystem
 
 		private void RefreshLevels()
 		{
+			int index = gameProgress.GetCurrentRegularIndex();
 			for (int i = 0; i < levels.Count; i++)
 			{
-				levels[i].Enable(i <= gameProgress.progressMainIndex);
+				levels[i].Enable(i <= index);
 			}
 		}
 
@@ -175,11 +177,12 @@ namespace Game.Systems.InfinityRoadSystem
 
 		private void ShowLevelWindow()
 		{
-			var dialog = viewService.CreateDialogIfNotExist<LevelDialog>();
-			dialog.SetLevel(gameData.IntermediateData.GetLevelConfig(lastIndex + 1));
-			dialog.Show();
+			levelDialog = viewService.CreateDialogIfNotExist<LevelDialog>();
+			levelDialog.onStartClicked += OnLevelStartClicked;
+			levelDialog.onClosed += OnLevelDialogClosed;
+			levelDialog.SetLevel(storageSystem.IntermediateData.GetLevelConfig(lastIndex + 1), gameProgress.regularLevels[lastIndex]);
+			levelDialog.Show();
 		}
-
 
 		private void OnLevelClicked(UIRoadLevel level)
 		{
@@ -242,6 +245,18 @@ namespace Game.Systems.InfinityRoadSystem
 			//{
 			//	//disabled
 			//}
+		}
+
+		private void OnLevelStartClicked()
+		{
+			OnLevelDialogClosed();
+			storageSystem.GameFastData.LastRegularIndex = lastIndex;
+		}
+
+		private void OnLevelDialogClosed()
+		{
+			levelDialog.onStartClicked -= OnLevelStartClicked;
+			levelDialog.onClosed -= OnLevelDialogClosed;
 		}
 
 #if !DISABLE_SRDEBUGGER

@@ -10,7 +10,7 @@ namespace Game.UI
 	{
 		public UIGameCanvas gameCanvas;
 
-		[Inject] private GameData gameData;
+		[Inject] private StorageSystem gameData;
 
 		private void Awake()
 		{

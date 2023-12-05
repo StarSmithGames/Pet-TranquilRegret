@@ -26,7 +26,7 @@ namespace Game.UI
 
 		private List<UIGoal> goals = new List<UIGoal>();
 
-		[Inject] private GameData gameData;
+		[Inject] private StorageSystem gameData;
 		private SignalBus signalBus;
 
 		[Inject]
