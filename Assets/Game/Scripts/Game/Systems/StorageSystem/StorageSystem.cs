@@ -1,3 +1,5 @@
+using Company.Module.Utils;
+
 using Game.Systems.GameSystem;
 using Game.Systems.LevelSystem;
 using Game.UI;

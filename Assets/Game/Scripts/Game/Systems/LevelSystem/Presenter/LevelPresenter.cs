@@ -4,6 +4,8 @@ using Game.Managers.GameManager;
 using Game.Systems.GameSystem;
 using Game.Systems.StorageSystem;
 
+using System;
+
 using UnityEngine;
 
 using Zenject;
@@ -13,6 +15,8 @@ namespace Game.Systems.LevelSystem
 	public partial class LevelPresenter
 	{
 		public LevelModel Model { get; private set; }
+		public LevelTimer LevelTimer { get; }
+
 
 		[Inject] private GameLoader gameLoader;
 		[Inject] private StorageSystem.StorageSystem storageSystem;
@@ -24,18 +28,21 @@ namespace Game.Systems.LevelSystem
 			ProjectContext.Instance.Container.Inject(this);
 
 			Model = new(config);
+			LevelTimer = new();
 
 			Subscribe();
 		}
 
 		public void Dispose()
 		{
+			LevelTimer.Stop();
 			Unsubscribe();
 		}
 
 		public void Start()
 		{
 			spawnSystem.SpawnPlayer();
+			LevelTimer.Start();
 		}
 
 		public float GetProgress01()
@@ -57,11 +64,15 @@ namespace Game.Systems.LevelSystem
 
 		public void Complete()
 		{
+			LevelTimer.Stop();
+
 			var data = storageSystem.GamePlayData.Storage.GameProgress.GetData();
 			var level = data.regularLevels[storageSystem.GameFastData.LastRegularIndex];
 			level.completed = 1;
 			level.stars = 3;
+			level.timestamp = LevelTimer.Ticks;
 			storageSystem.Save();
+
 
 			delayedCallService.DelayedCallAsync(1.69f, () =>
 			{

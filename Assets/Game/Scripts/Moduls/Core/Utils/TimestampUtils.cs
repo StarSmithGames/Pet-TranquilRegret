@@ -1,6 +1,6 @@
 using System;
 
-namespace Game
+namespace Company.Module.Utils
 {
     public class TimestampUtils
     {

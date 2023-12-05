@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Level_1
   m_EditorClassIdentifier: 
   id: 1
-  name: 
+  name: jerry_house
   scene:
     sceneAsset: {fileID: 102900000, guid: 85f692a92ceca664c92b2fcb991d3017, type: 3}
     scenePath: Assets/Game/Scenes/Levels/Level_1/Level_1.unity
