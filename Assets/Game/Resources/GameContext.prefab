@@ -2203,21 +2203,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8582657862468088198}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b04291abd4265274d8722aed6aed9f12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <TimeMinutes>k__BackingField: {fileID: 1650060832720774478}
-  <TimeSeconds>k__BackingField: {fileID: 2622901283176298360}
-  <TimeMilliseconds>k__BackingField: {fileID: 6402267926210385897}
-  <RemainingTime>k__BackingField: {fileID: 0}
-  <Slider>k__BackingField: {fileID: 0}
-  <SliderFill>k__BackingField: {fileID: 0}
-  <SliderBackground>k__BackingField: {fileID: 0}
-  <SliderRect>k__BackingField: {fileID: 0}
-  <Separator0>k__BackingField: {fileID: 0}
-  <Separator1>k__BackingField: {fileID: 0}
+  timeMinutes: {fileID: 1650060832720774478}
+  timeSeconds: {fileID: 2622901283176298360}
+  timeMilliseconds: {fileID: 6402267926210385897}
   gold:
     fill: {r: 0.99607843, g: 0.83137256, b: 0.22745098, a: 1}
     background: {r: 0.67058825, g: 0.27058825, b: 0.13333334, a: 1}
