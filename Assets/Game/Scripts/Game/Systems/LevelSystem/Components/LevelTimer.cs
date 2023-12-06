@@ -3,8 +3,6 @@ using Company.Module.Utils;
 using Cysharp.Threading.Tasks;
 
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading;
 
 using UnityEngine;
@@ -24,6 +22,21 @@ namespace Game.Systems.LevelSystem
 		public string GetTime()
 		{
 			return TimeUtils.GetTimerFormatHMS(TimeSpan.FromSeconds(ticks));
+		}
+
+		public int GetMinutes()
+		{
+			return TimeSpan.FromSeconds(ticks).Minutes;
+		}
+
+		public int GetSeconds()
+		{
+			return TimeSpan.FromSeconds(ticks).Seconds;
+		}
+
+		public int GetMilliseconds()
+		{
+			return TimeSpan.FromSeconds(ticks).Milliseconds / 10;
 		}
 
 		public void StartEstimatedTimer(float estimatedTime)

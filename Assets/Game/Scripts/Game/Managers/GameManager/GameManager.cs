@@ -1,11 +1,15 @@
+using System;
+
 using UnityEngine;
 
 using Zenject;
 
 namespace Game.Managers.GameManager
 {
-	public class GameManager
+	public sealed class GameManager
 	{
+		public event Action onGameStateChanged;
+
 		public bool IsMenu => CurrentGameState == GameState.Menu;
 		public bool IsGame => CurrentGameState == GameState.PreGameplay || CurrentGameState == GameState.Gameplay;
 
@@ -25,6 +29,8 @@ namespace Game.Managers.GameManager
 			{
 				PreviousGameState = CurrentGameState;
 				CurrentGameState = gameState;
+
+				onGameStateChanged?.Invoke();
 
 				signalBus?.Fire(new SignalGameStateChanged
 				{
