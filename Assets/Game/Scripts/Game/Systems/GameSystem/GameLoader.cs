@@ -7,6 +7,7 @@ using Game.Systems.StorageSystem;
 using StarSmithGames.Go.SceneManager;
 using StarSmithGames.IoC.AsyncManager;
 
+using System;
 using System.Collections;
 using System.IO;
 
@@ -17,30 +18,16 @@ using Zenject;
 
 namespace Game.Systems.GameSystem
 {
-	public class GameLoader : IInitializable
+	public class GameLoader
 	{
-		[Inject] private AsyncManager asyncManager;
 		[Inject] private GameManager gameManager;
-		[Inject] private StorageSystem.StorageSystem gameData;
 		[Inject] private SceneManager sceneManager;
 		[Inject] private TransitionManager transitionManager;
 
 		private Transition startLevelTransition;
 
-		public void Initialize()
+		public void LoadMenu(Action onShowed = null, Action onCompleted = null, Action onHided = null, Action callback = null)
 		{
-#if UNITY_EDITOR
-			if (sceneManager.IsLevel())
-			{
-				asyncManager.StartCoroutine(GamePipeline());
-			}
-#endif
-		}
-
-		public void LoadMenu()
-		{
-			gameData.IntermediateData.LevelPresenter = null;
-
 			gameManager.ChangeState(GameState.Loading);
 
 			var transition = new Transition(
@@ -48,11 +35,16 @@ namespace Game.Systems.GameSystem
 			{
 				sceneManager.LoadSceneAsyncFromBuild(1, true);//Menu
 				return sceneManager.ProgressHandler;
-			});
-			transitionManager.StartInfinityLoading(transition, onHided: () => gameManager.ChangeState(GameState.Menu));
+			}, true, onCompleted);
+			transitionManager.StartInfinityLoading(transition, onShowed,
+			onHided: () =>
+			{
+				gameManager.ChangeState(GameState.Menu);
+				onHided?.Invoke();
+			}, callback);
 		}
 
-		public void LoadLevel(LevelConfig levelConfig)
+		public void LoadLevel(LevelConfig levelConfig, bool allow, Action onShowed = null, Action onCompleted = null, Action onHided = null, Action callback = null)
 		{
 			gameManager.ChangeState(GameState.Loading);
 			startLevelTransition = new Transition(
@@ -61,42 +53,14 @@ namespace Game.Systems.GameSystem
 				var name = levelConfig.scene.SceneName;
 				sceneManager.LoadSceneAsyncFromAddressables(name, name);
 				return sceneManager.ProgressHandler;
-			}, false,
-			() =>
-			{
-				asyncManager.StartCoroutine(GamePipeline());
-			});
-			transitionManager.StartInfinityLoading(startLevelTransition, onShowed: () =>
-			{
-				gameData.IntermediateData.LevelPresenter = new(levelConfig);
-			});
+			}, allow, onCompleted);
+			transitionManager.StartInfinityLoading(startLevelTransition, onShowed, onHided, callback);
 		}
 
-		private IEnumerator GamePipeline()
+		public void Allow()
 		{
-#if UNITY_EDITOR
-			if (gameData.IntermediateData.LevelPresenter == null)
-			{
-				var config = gameData.IntermediateData.GetLevelConfig(sceneManager.GetActiveScene());
-				Assert.IsNotNull(config);
-				gameData.IntermediateData.LevelPresenter = new(config);
-			}
-#endif
-			gameManager.ChangeState(GameState.PreGameplay);
-			gameData.IntermediateData.LevelPresenter.Start();
-			OnDragChanged();
-
-			yield return null;
 			startLevelTransition?.Allow();
 			startLevelTransition = null;
-		}
-
-		private void OnDragChanged()
-		{
-			if (gameManager.CurrentGameState != GameState.Gameplay)
-			{
-				gameManager.ChangeState(GameState.Gameplay);
-			}
 		}
 	}
 }

@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 
 using Game.Systems.FloatingSystem;
+using Game.Systems.LevelSystem;
 using Game.Systems.NavigationSystem;
 using Game.Systems.StorageSystem;
 
@@ -34,7 +35,7 @@ namespace Game.Systems.InventorySystem
 		private Character.Character currentTarget;
 		private ItemViewFloating floating;
 
-		[Inject] private StorageSystem.StorageSystem gameData;
+		[Inject] private LevelManager levelManager;
 
 		[Inject]
 		private void Construct()
@@ -81,7 +82,7 @@ namespace Game.Systems.InventorySystem
 			(item) =>
 			{
 				var goal = item.model.config as GoalItemConfig;
-				gameData.IntermediateData.LevelPresenter.Model.GoalRegistrator.AccumulatePrimaryGoal(goal);
+				levelManager.CurrentLevel.Model.GoalRegistrator.AccumulatePrimaryGoal(goal);
 			},
 			() => Dispose());
 		}

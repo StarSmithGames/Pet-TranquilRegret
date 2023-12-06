@@ -30,7 +30,6 @@ namespace Game.Services
 		}
 		private ViewRegistrator viewDialogRegistrator;
 
-		[Inject] private DiContainer container;
 		[Inject] private List<ViewBase> dialogs;
 		[Inject] private GameManager gameManager;
 		[Inject] private StorageSystem gameData;
@@ -45,7 +44,6 @@ namespace Game.Services
 				{
 					var root = GetCurrentUIParent();
 					var dialog = root.Container.InstantiatePrefabForComponent<T>(prefab, customParent ? customParent : root.GetDialogsRoot());
-					ViewDialogRegistrator.Registrate(dialog);
 					return dialog;
 				}
 

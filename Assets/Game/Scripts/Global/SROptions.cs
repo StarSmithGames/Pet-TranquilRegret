@@ -13,6 +13,7 @@ using Zenject;
 public partial class SROptions
 {
 	[Inject] private StorageSystem storageSystem;
+	[Inject] private LevelManager levelManager;
 	[Inject] private SignalBus signalBus;
 
 	public SROptions()
@@ -25,7 +26,7 @@ public partial class SROptions
 	[Sort(4)]
 	public void CompleteLevel()
 	{
-		var level = storageSystem.IntermediateData.LevelPresenter;
+		var level = levelManager.CurrentLevel;
 		if (level == null) return;
 
 		level.Complete();

@@ -1,10 +1,9 @@
 using Company.Module.Services.DelayedCallService;
 
 using Game.Managers.GameManager;
+using Game.Services;
 using Game.Systems.GameSystem;
-using Game.Systems.StorageSystem;
-
-using System;
+using Game.UI;
 
 using UnityEngine;
 
@@ -17,10 +16,11 @@ namespace Game.Systems.LevelSystem
 		public LevelModel Model { get; private set; }
 		public LevelTimer LevelTimer { get; }
 
-
 		[Inject] private GameLoader gameLoader;
+		[Inject] private GameManager gameManager;
 		[Inject] private StorageSystem.StorageSystem storageSystem;
 		[Inject] private SpawnSystem.SpawnSystem spawnSystem;
+		[Inject] private ViewService viewService;
 		[Inject] private IDelayedCallService delayedCallService;
 
 		public LevelPresenter(LevelConfig config)
@@ -41,8 +41,18 @@ namespace Game.Systems.LevelSystem
 
 		public void Start()
 		{
-			spawnSystem.SpawnPlayer();
-			LevelTimer.Start();
+			gameLoader.LoadLevel(Model.Config, false,
+			onCompleted: () =>
+			{
+				gameManager.ChangeState(GameState.PreGameplay);
+				spawnSystem.SpawnPlayer();
+				gameLoader.Allow();
+			},
+			callback: () =>
+			{
+				LevelTimer.Start();
+				gameManager.ChangeState(GameState.Gameplay);
+			});
 		}
 
 		public float GetProgress01()
@@ -73,12 +83,7 @@ namespace Game.Systems.LevelSystem
 			level.timestamp = LevelTimer.Ticks;
 			storageSystem.Save();
 
-
-			delayedCallService.DelayedCallAsync(1.69f, () =>
-			{
-				Dispose();
-				gameLoader.LoadMenu();
-			});
+			viewService.TryShowDialog<LevelFinishDialog>();
 		}
 
 		public void Lose()

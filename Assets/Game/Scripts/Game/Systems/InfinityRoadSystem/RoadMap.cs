@@ -57,6 +57,8 @@ namespace Game.Systems.InfinityRoadSystem
 
 		private List<SpriteRenderer> sprites = new();
 
+		[Inject] private LevelManager levelManager;
+
 		[Inject]
 		private void Construct(
 			StorageSystem.StorageSystem storageSystem,
@@ -180,7 +182,7 @@ namespace Game.Systems.InfinityRoadSystem
 			levelDialog = viewService.CreateDialogIfNotExist<LevelDialog>();
 			levelDialog.onStartClicked += OnLevelStartClicked;
 			levelDialog.onClosed += OnLevelDialogClosed;
-			levelDialog.SetLevel(storageSystem.IntermediateData.GetLevelConfig(lastIndex + 1), gameProgress.regularLevels[lastIndex]);
+			levelDialog.SetLevel(levelManager.GetLevelConfig(lastIndex + 1), gameProgress.regularLevels[lastIndex]);
 			levelDialog.Show();
 		}
 

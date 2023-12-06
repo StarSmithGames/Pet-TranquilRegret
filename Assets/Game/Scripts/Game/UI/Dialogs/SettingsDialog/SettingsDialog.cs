@@ -31,6 +31,8 @@ namespace Game.UI
 
 		private void Awake()
 		{
+			viewService.ViewDialogRegistrator.Registrate(this);
+
 			Enable(false);
 
 			AssignData();

@@ -38,13 +38,15 @@ namespace Game.UI
 		private LevelConfig levelConfig;
 		private RegularLevelData levelData;
 
-		[Inject] private GameLoader gameLoader;
+		[Inject] private LevelManager levelManager;
 		[Inject] private ViewService viewService;
 		[Inject] private LocalizationSystem localizationSystem;
 		[Inject] private UIGoalItem.Factory goalFactory;
 
 		private void Awake()
 		{
+			viewService.ViewDialogRegistrator.Registrate(this);
+
 			goalContent.DestroyChildren();
 		}
 
@@ -110,7 +112,7 @@ namespace Game.UI
 		{
 			Interactable(false);
 
-			gameLoader.LoadLevel(levelConfig);
+			levelManager.StartRegularLevel(levelConfig);
 
 			onStartClicked?.Invoke();
 		}

@@ -79,22 +79,9 @@ namespace Game.Systems.StorageSystem
 		public UIRootMenu RootMenu { get; set; }
 		public UIRootGame RootGame { get; set; }
 
-		public LevelPresenter LevelPresenter { get; set; }
-		public LevelConfig CurrentLevelConfig => LevelPresenter?.Model.Config;
-
 		public IntermediateData()
 		{
 			ProjectContext.Instance.Container.Inject(this);
-		}
-
-		public LevelConfig GetLevelConfig(Scene scene)
-		{
-			return GameplayConfig.levels.Find((x) => x.scene.SceneName == scene.name);
-		}
-
-		public LevelConfig GetLevelConfig(int number)
-		{
-			return GameplayConfig.levels[number - 1];
 		}
 	}
 }

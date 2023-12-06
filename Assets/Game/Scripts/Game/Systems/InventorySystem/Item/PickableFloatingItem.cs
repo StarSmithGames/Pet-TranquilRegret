@@ -1,4 +1,5 @@
 using Game.Systems.FloatingSystem;
+using Game.Systems.LevelSystem;
 using Game.Systems.NavigationSystem;
 using Game.Systems.StorageSystem;
 
@@ -10,7 +11,7 @@ namespace Game.Systems.InventorySystem
 	{
 		public CharacterInteractionZone interactionZone;
 
-		[Inject] private StorageSystem.StorageSystem gameData;
+		[Inject] private LevelManager levelManager;
 
 		private void Awake()
 		{
@@ -32,7 +33,7 @@ namespace Game.Systems.InventorySystem
 			Unsubscribe();
 
 			var goal = GetComponent<ItemView>().model.config as GoalItemConfig;
-			gameData.IntermediateData.LevelPresenter.Model.GoalRegistrator.AccumulatePrimaryGoal(goal);
+			levelManager.CurrentLevel.Model.GoalRegistrator.AccumulatePrimaryGoal(goal);
 
 			DoAnimationAsync(character.transform);
 		}

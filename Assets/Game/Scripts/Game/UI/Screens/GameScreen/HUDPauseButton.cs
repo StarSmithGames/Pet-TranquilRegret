@@ -11,7 +11,7 @@ namespace Game.UI
 
 		public void OnClick()
 		{
-			viewService.CreateDialogIfNotExist<SettingsDialog>().Show();
+			viewService.TryShowDialog<SettingsDialog>();
 		}
 	}
 }
