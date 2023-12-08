@@ -37,11 +37,16 @@ namespace Game.Systems.StorageSystem
 			set => InputOutput.PlayerPrefsSet("language", value);
 		}
 
-		public int LastRegularIndex
+		public int LastRegularLevelIndex
 		{
 			get => InputOutput.PlayerPrefsGet("last_regular_level").CastObject<int>(0);
 			set => InputOutput.PlayerPrefsSet("last_regular_level", value);
 		}
+
+		public FastData<int> SoftCoins { get; private set; } = new("soft_coins", 0);
+
+		public FastData<int> HardDiamonds { get; private set; } = new("hard_diamonds", 0);
+
 
 		public FastData<PreferencesData> PreferencesParams { get; private set; } = new("player_preferences");
 

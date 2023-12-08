@@ -1,4 +1,5 @@
 using Game.Entities;
+using Game.Managers.PauseManager;
 using Game.Services;
 using Game.Systems.CameraSystem;
 using Game.Systems.NavigationSystem;
@@ -12,7 +13,7 @@ using Zenject;
 
 namespace Game.Character
 {
-	public class CharacterController : MonoBehaviour
+	public class CharacterController : MonoBehaviour, IPausable
 	{
 		public event UnityAction onJumped;
 		public event UnityAction onLanded;
@@ -25,6 +26,7 @@ namespace Game.Character
 		public float MovingMagnitude => directionVector.magnitude;
 		private Settings ControllSettings => presenter.Model.Config.controllSettings;
 
+		private bool isPaused;
 		private UIJoystick jostick;
 		private Vector3 directionVector;
 		private Vector3 moveVector;
@@ -36,20 +38,26 @@ namespace Game.Character
 
 		[Inject] private UIRootGame uiRoot;
 		[Inject] private CameraSystem cameraSystem;
-
-		private void Awake()
-		{
-			jostick = uiRoot.gameCanvas.joystick;
-		}
+		[Inject] private PauseManager pauseManager;
 
 		private void Start()
 		{
+			pauseManager.Registrate(this);
+
+			jostick = uiRoot.gameCanvas.joystick;
 			CheckGround();
+		}
+
+		private void OnDestroy()
+		{
+			pauseManager.UnRegistrate(this);
 		}
 
 		private void Update()
 		{
 			CheckGround();
+
+			if (isPaused) return;
 
 			//Rotation
 			directionVector = GetDirection();
@@ -76,13 +84,15 @@ namespace Game.Character
 			rb.MovePosition(rb.position + moveVector);
 		}
 
-		//private void FixedUpdate()
-		//{
-		//	if (rb.velocity.y < 0)
-		//	{
-		//		rb.velocity += Vector3.up * Physics.gravity.y * ControllSettings.fallMultipier * Time.fixedDeltaTime;
-		//	}
-		//}
+		public void Pause()
+		{
+			isPaused = true;
+		}
+
+		public void UnPause()
+		{
+			isPaused = false;
+		}
 
 		public void Jump()
 		{

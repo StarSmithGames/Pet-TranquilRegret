@@ -28,3 +28,6 @@ MonoBehaviour:
     count: 5
   - config: {fileID: 11400000, guid: bc30708f0a36a304cbf01d24e7a1f8e5, type: 2}
     count: 2
+  awards:
+  - data: {fileID: 11400000, guid: ab0a4ee3f47d8c545a66390b6af0c42b, type: 2}
+    count: 300

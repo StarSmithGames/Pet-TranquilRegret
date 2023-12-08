@@ -1,10 +1,10 @@
 using Game.Managers.GameManager;
+using Game.Managers.PauseManager;
 using Game.Services;
 using Game.Systems.GameSystem;
 using Game.Systems.StorageSystem;
 
 using StarSmithGames.Go;
-using StarSmithGames.Go.LocalizationSystem;
 
 using System;
 
@@ -28,6 +28,7 @@ namespace Game.UI
 		[Inject] private StorageSystem storageSystem;
 		[Inject] private GameManager gameManager;
 		[Inject] private GameLoader gameLoader;
+		[Inject] private PauseManager pauseManager;
 
 		private void Awake()
 		{
@@ -45,9 +46,18 @@ namespace Game.UI
 
 		public override void Show(Action callback = null)
 		{
+			pauseManager.Pause();
+
 			exitButton.gameObject.SetActive(!gameManager.IsMenu);
 
 			base.Show(callback);
+		}
+
+		public override void Hide(Action callback = null)
+		{
+			pauseManager.UnPause();
+
+			base.Hide(callback);
 		}
 
 		private void AssignData()

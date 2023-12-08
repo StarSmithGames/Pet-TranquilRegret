@@ -71,7 +71,7 @@ namespace Game.Systems.InfinityRoadSystem
 		private void Awake()
 		{
 			gameProgress = storageSystem.GamePlayData.Storage.GameProgress.GetData();
-			lastIndex = storageSystem.GameFastData.LastRegularIndex;
+			lastIndex = storageSystem.GameFastData.LastRegularLevelIndex;
 
 			cloudsSettings.clouds.SetLerp(0);
 			BackgroundRefresh();
@@ -252,7 +252,7 @@ namespace Game.Systems.InfinityRoadSystem
 		private void OnLevelStartClicked()
 		{
 			OnLevelDialogClosed();
-			storageSystem.GameFastData.LastRegularIndex = lastIndex;
+			storageSystem.GameFastData.LastRegularLevelIndex = lastIndex;
 		}
 
 		private void OnLevelDialogClosed()

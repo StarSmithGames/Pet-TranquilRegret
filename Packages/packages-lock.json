@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.starsmithgames.core": {
-      "version": "0.2.7",
+      "version": "0.2.8",
       "depth": 0,
       "source": "registry",
       "dependencies": {

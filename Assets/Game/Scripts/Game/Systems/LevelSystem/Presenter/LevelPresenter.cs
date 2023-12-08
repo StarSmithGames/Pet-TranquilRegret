@@ -1,6 +1,10 @@
 using Company.Module.Services.DelayedCallService;
 
+using DG.Tweening.Core.Easing;
+
 using Game.Managers.GameManager;
+using Game.Managers.PauseManager;
+using Game.Managers.RewardManager;
 using Game.Services;
 using Game.Systems.GameSystem;
 using Game.UI;
@@ -21,7 +25,8 @@ namespace Game.Systems.LevelSystem
 		[Inject] private StorageSystem.StorageSystem storageSystem;
 		[Inject] private SpawnSystem.SpawnSystem spawnSystem;
 		[Inject] private ViewService viewService;
-		[Inject] private IDelayedCallService delayedCallService;
+		[Inject] private PauseManager pauseManager;
+		[Inject] private RewardManager rewardManager;
 
 		public LevelPresenter(LevelConfig config)
 		{
@@ -30,12 +35,18 @@ namespace Game.Systems.LevelSystem
 			Model = new(config);
 			LevelTimer = new();
 
+			pauseManager.Registrate(LevelTimer);
+
 			Subscribe();
 		}
 
 		public void Dispose()
 		{
 			LevelTimer.Stop();
+
+			pauseManager.UnRegistrate(LevelTimer);
+			pauseManager.UnPause();
+
 			Unsubscribe();
 		}
 
@@ -74,16 +85,24 @@ namespace Game.Systems.LevelSystem
 
 		public void Complete()
 		{
+			pauseManager.Pause();
+
 			LevelTimer.Stop();
 
 			var data = storageSystem.GamePlayData.Storage.GameProgress.GetData();
-			var level = data.regularLevels[storageSystem.GameFastData.LastRegularIndex];
+			var level = data.regularLevels[storageSystem.GameFastData.LastRegularLevelIndex];
 			level.completed = 1;
 			level.stars = 3;
 			level.timestamp = LevelTimer.Ticks;
+
+			Model.Config.awards.ForEach((award) =>
+			{
+				rewardManager.Award(award);
+			});
+
 			storageSystem.Save();
 
-			viewService.TryShowDialog<LevelFinishDialog>();
+			viewService.TryShowDialog<FinishLevelDialog>();
 		}
 
 		public void Lose()

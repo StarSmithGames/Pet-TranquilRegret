@@ -1,4 +1,5 @@
 using Game.Extensions;
+using Game.Managers.RewardManager;
 using Game.Systems.GoalSystem;
 
 using Sirenix.OdinInspector;
@@ -35,6 +36,8 @@ namespace Game.Systems.LevelSystem
 		[Space]
 		public List<GoalItemModel> primaryGoals = new();
 		//[SerializeReference] public List<AbstractGoalConfig> secondaryGoals = new List<AbstractGoalConfig>();
+		[Space]
+		public List<AwardItem> awards = new();
 
 		private string Title => $"{id}_{name}";
 

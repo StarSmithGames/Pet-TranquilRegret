@@ -2,6 +2,8 @@ using Company.Module.Services.DelayedCallService;
 
 using Game.Managers.CharacterManager;
 using Game.Managers.GameManager;
+using Game.Managers.PauseManager;
+using Game.Managers.RewardManager;
 using Game.Services;
 using Game.Systems.GameSystem;
 using Game.Systems.LevelSystem;
@@ -36,7 +38,9 @@ namespace Game.Installers
 			ApplicationHandlerInstaller.Install(Container);
 			StorageSystemInstaller.Install(Container);
 			GameManagerInstaller.Install(Container);
+			PauseManagerInstaller.Install(Container);
 			SpawnSystemInstaller.Install(Container);
+			RewardManagerInstaller.Install(Container);
 			DelayedCallServiceInstaller.Install(Container);
 
 			Container.BindInstance(Container.InstantiateComponentOnNewGameObject<GameController>());

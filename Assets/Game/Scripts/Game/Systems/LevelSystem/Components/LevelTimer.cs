@@ -2,6 +2,8 @@ using Company.Module.Utils;
 
 using Cysharp.Threading.Tasks;
 
+using Game.Managers.PauseManager;
+
 using System;
 using System.Threading;
 
@@ -9,8 +11,8 @@ using UnityEngine;
 
 namespace Game.Systems.LevelSystem
 {
-    public class LevelTimer
-    {
+    public class LevelTimer : IPausable
+	{
 		public event Action onTimeOut;
 
 		public float Ticks => ticks;
