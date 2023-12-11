@@ -1,8 +1,8 @@
-using Company.Module.Utils;
-
 using Cysharp.Threading.Tasks;
 
 using Game.Managers.PauseManager;
+
+using StarSmithGames.Core.Utils;
 
 using System;
 using System.Threading;

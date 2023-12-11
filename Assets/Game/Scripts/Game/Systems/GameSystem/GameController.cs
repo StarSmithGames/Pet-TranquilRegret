@@ -1,10 +1,9 @@
-using Company.Module.Utils;
-
 using Game.Managers.GameManager;
 using Game.Services;
 using Game.Systems.LevelSystem;
 using Game.Systems.StorageSystem;
 
+using StarSmithGames.Core.Utils;
 using StarSmithGames.Go.ApplicationHandler;
 using StarSmithGames.Go.LocalizationSystem;
 
@@ -18,6 +17,8 @@ namespace Game.Systems.GameSystem
 {
     public class GameController : MonoBehaviour
     {
+		private bool isFirstTime;
+
 		[Inject] private GameManager gameManager;
 		[Inject] private LevelManager levelManager;
 		[Inject] private ViewService viewService;
@@ -27,6 +28,8 @@ namespace Game.Systems.GameSystem
 
 		private void Awake()
 		{
+			isFirstTime = storageSystem.GameFastData.IsFirstTime;
+
 			CheckInterruptGameProcess();
 
 			signalBus?.Subscribe<SignalOnApplicationFocusChanged>(OnApplicationChanged);
@@ -63,10 +66,10 @@ namespace Game.Systems.GameSystem
 
 		private void OnApplicationChanged(SignalOnApplicationFocusChanged signal)
 		{
-			storageSystem.GameFastData.IsFirstTime = false;
-
 			if (!signal.trigger)
 			{
+				storageSystem.GameFastData.IsFirstTime = false;
+
 				var data = new CloseData
 				{
 					//appCloseTimestampUTC = TimestampUtils.GetTimestamp(_ntpDateTimeService.Now.ToUniversalTime()),
@@ -91,6 +94,13 @@ namespace Game.Systems.GameSystem
 				storageSystem.GameFastData.CloseParams.SetData(data);
 
 				storageSystem.Save(); //required
+			}
+			else
+			{
+				if (isFirstTime)
+				{
+					storageSystem.GameFastData.IsFirstTime = true;
+				}
 			}
 		}
 	}

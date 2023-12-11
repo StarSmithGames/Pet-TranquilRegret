@@ -1,6 +1,6 @@
-using Company.Module.Utils;
-
 using Cysharp.Threading.Tasks;
+
+using StarSmithGames.Core.Utils;
 
 using System;
 using System.Threading;

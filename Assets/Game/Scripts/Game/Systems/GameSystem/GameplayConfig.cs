@@ -3,6 +3,7 @@ using Game.Systems.PreferencesSystem;
 
 using Sirenix.OdinInspector;
 
+using System;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -14,6 +15,8 @@ namespace Game.Systems.GameSystem
 	[CreateAssetMenu(fileName = "GameplayConfig", menuName = "Game/GameplayConfig")]
 	public sealed class GameplayConfig : ScriptableObject
 	{
+		public LevelConfig firstTimeTutorialLevel;
+
 		[ListDrawerSettings(ShowIndexLabels = true, ListElementLabelName = "Title")]
 		public List<LevelConfig> levels = new List<LevelConfig>();
 
@@ -30,10 +33,26 @@ namespace Game.Systems.GameSystem
 
 		[Header("Prefabs")]
 		public Character.Character characterPrefab;
-	
+
+		[NonSerialized] private List<LevelConfig> allLevels;
+
 		public LevelConfig GetLevelByScene(Scene scene)
 		{
 			return levels.Find((x) => x.scene.SceneName == scene.name);
+		}
+
+		public List<LevelConfig> GetAllLevels()
+		{
+			if(allLevels == null)
+			{
+				allLevels = new()
+				{
+					firstTimeTutorialLevel
+				};
+				allLevels.AddRange(levels);
+			}
+
+			return allLevels;
 		}
 	}
 	

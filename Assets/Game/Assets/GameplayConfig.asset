@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7de27b9dd44c0324f9a0ace83ff09a9f, type: 3}
   m_Name: GameplayConfig
   m_EditorClassIdentifier: 
+  firstTimeTutorialLevel: {fileID: 11400000, guid: 5308e60200df16c40a93909e1c951a45, type: 2}
   levels:
   - {fileID: 11400000, guid: 64a17ff8bbf85bd4a9dc7ad5de910e39, type: 2}
   - {fileID: 11400000, guid: ba574f80dda72a149b0ac84feae6d97e, type: 2}

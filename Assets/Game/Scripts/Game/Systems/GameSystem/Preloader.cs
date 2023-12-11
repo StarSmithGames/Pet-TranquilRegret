@@ -10,23 +10,26 @@ using Zenject;
 
 namespace Game.Systems.GameSystem
 {
-	public class Preloader : MonoBehaviour
+	public sealed class Preloader : MonoBehaviour
     {
+		private GDPRDialog dialog;
+
 		[Inject] private StorageSystem.StorageSystem gameData;
+		[Inject] private GameplayConfig gameplayConfig;
 		[Inject] private ViewService viewService;
 		[Inject] private GameLoader gameLoader;
 
-		private GDPRDialog window;
-
 		private void Start()
 		{
+			Debug.LogError(gameData.GameFastData.IsFirstTime);
+
 			gameData.GameFastData.SessionsCount++;
 
 			if (!gameData.GameFastData.IsGDPRApplied)
 			{
-				window = viewService.ViewDialogRegistrator.GetAs<GDPRDialog>();
-				window.onAgreeClicked += OnAgreeClicked;
-				window.Show();
+				dialog = viewService.ViewDialogRegistrator.GetAs<GDPRDialog>();
+				dialog.onAgreeClicked += OnAgreeClicked;
+				dialog.Show();
 			}
 			else
 			{
@@ -36,25 +39,34 @@ namespace Game.Systems.GameSystem
 
 		private void OnDestroy()
 		{
-			if(window != null)
+			if(dialog != null)
 			{
-				window.onAgreeClicked -= OnAgreeClicked;
+				dialog.onAgreeClicked -= OnAgreeClicked;
 			}
 		}
 
 		private void LoadGame()
 		{
-			gameLoader.LoadMenu();
+			Debug.LogError(gameData.GameFastData.IsFirstTime);
+
+			if (gameData.GameFastData.IsFirstTime)
+			{
+				gameLoader.LoadLevel(gameplayConfig.firstTimeTutorialLevel, true);
+			}
+			else
+			{
+				gameLoader.LoadMenu();
+			}
 		}
 
 		private void OnAgreeClicked()
 		{
 			gameData.GameFastData.IsGDPRApplied = true;
 
-			if (window != null)
+			if (dialog != null)
 			{
-				window.onAgreeClicked -= OnAgreeClicked;
-				window.Hide(() =>
+				dialog.onAgreeClicked -= OnAgreeClicked;
+				dialog.Hide(() =>
 				{
 					LoadGame();
 				});

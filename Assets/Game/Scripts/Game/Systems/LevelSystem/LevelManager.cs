@@ -29,15 +29,14 @@ namespace Game.Systems.LevelSystem
 		public LevelPresenter CurrentLevel { get; private set; }
 
 		[Inject] private StarSmithGames.Go.SceneManager.SceneManager sceneManager;
-		[Inject] private StorageSystem.StorageSystem storageSystem;
+		[Inject] private GameplayConfig gameplayConfig;
 
 		public void Initialize()
 		{
 #if UNITY_EDITOR
 			if (sceneManager.IsLevel())
 			{
-				var config = GetLevelConfig(sceneManager.GetActiveScene());
-				Assert.IsNotNull(config);
+				var config = GetLevelConfigFull(sceneManager.GetActiveScene());
 				CurrentLevel = new(config);
 				CurrentLevel.Start();
 			}
@@ -61,14 +60,19 @@ namespace Game.Systems.LevelSystem
 			OnLevelLeaved?.Invoke();
 		}
 
-		public LevelConfig GetLevelConfig(Scene scene)
+		public LevelConfig GetLevelConfigFull(Scene scene)
 		{
-			return storageSystem.IntermediateData.GameplayConfig.levels.Find((x) => x.scene.SceneName == scene.name);
+			return gameplayConfig.GetAllLevels().Find((x) =>
+			{
+				Debug.LogError(x.scene.SceneName + " " + scene.name);
+
+				return x.scene.SceneName == scene.name;
+			});
 		}
 
 		public LevelConfig GetLevelConfig(int number)
 		{
-			return storageSystem.IntermediateData.GameplayConfig.levels[number - 1];
+			return gameplayConfig.levels[number - 1];
 		}
 	}
 }

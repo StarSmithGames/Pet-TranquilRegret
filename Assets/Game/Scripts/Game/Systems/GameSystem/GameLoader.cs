@@ -47,6 +47,7 @@ namespace Game.Systems.GameSystem
 		public void LoadLevel(LevelConfig levelConfig, bool allow, Action onShowed = null, Action onCompleted = null, Action onHided = null, Action callback = null)
 		{
 			gameManager.ChangeState(GameState.Loading);
+
 			startLevelTransition = new Transition(
 			() =>
 			{
