@@ -16,10 +16,10 @@ MonoBehaviour:
     punch:
       isPunchRandom: 0
       stretchingAxis: 0
-      punch: {x: 0.4, y: 0.4, z: 1}
+      punch: {x: 0.33, y: 0.33, z: 1}
       randomXLimits: {x: 0, y: 0.7}
       randomYLimits: {x: 0, y: 0.8}
       randomZLimits: {x: 0, y: 0.8}
-    duration: 0.25
-    vibrato: 10
+    duration: 0.33
+    vibrato: 5
     elasticity: 1

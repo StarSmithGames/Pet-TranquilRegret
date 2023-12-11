@@ -1,7 +1,6 @@
 using Game.HUD.Gameplay;
-using Game.Managers.GameManager;
+using Game.Systems.LevelSystem;
 using Game.Systems.NavigationSystem;
-using Game.Systems.StorageSystem;
 
 using StarSmithGames.Core;
 
@@ -18,7 +17,6 @@ namespace Game.UI
 		public Transform dialogsRoot;
 		[Space]
 		public Transform goalContent;
-		public UIGoal goalPrefab;
 		[Header("Control")]
 		public UIJoystick joystick;
 		public HUDDropButton drop;
@@ -26,37 +24,25 @@ namespace Game.UI
 
 		private List<UIGoal> goals = new List<UIGoal>();
 
-		[Inject] private StorageSystem gameData;
-		private SignalBus signalBus;
+		[Inject] private UIGoal.Factory goalFactory;
+		[Inject] private LevelManager levelManager;
 
-		[Inject]
-		private void Construct(SignalBus signalBus)
+		private void Start()
 		{
-			this.signalBus = signalBus;
+			var registrator = levelManager.CurrentLevel.Model.GoalRegistrator;
+			
+			goals.Clear();
+			goalContent.DestroyChildren(true);
+			
+			registrator.GoalsPrimary.ForEach((x) =>
+			{
+				var goal = goalFactory.Create();
+				goal.transform.SetParent(goalContent);
+				goal.transform.localScale = Vector3.one;
+				goal.SetGoal(x);
 
-			signalBus.Subscribe<SignalGameStateChanged>(OnGameStateChanged);
-		}
-
-		private void OnDestroy()
-		{
-			signalBus.Unsubscribe<SignalGameStateChanged>(OnGameStateChanged);
-		}
-
-		private void OnGameStateChanged(SignalGameStateChanged signal)
-		{
-			//if(signal.newGameState == GameState.PreGameplay)
-			//{
-			//	var registrator = gameData.IntermediateData.LevelPresenter.Model.GoalRegistrator;
-
-			//	goalContent.DestroyChildren();
-			//	registrator.GoalsPrimary.ForEach((x) =>
-			//	{
-			//		var goal = SceneContext.Instantiate(goalPrefab);
-			//		goal.transform.SetParent(goalContent);
-			//		goal.transform.localScale = Vector3.one;
-			//		goal.SetGoal(x);
-			//	});
-			//}
+				goals.Add(goal);
+			});
 		}
 	}
 }

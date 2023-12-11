@@ -1,10 +1,12 @@
 using DG.Tweening;
 
+using Game.Extensions;
 using Game.Systems.GoalSystem;
-using Game.Systems.LevelSystem;
 
 using UnityEngine;
 using UnityEngine.UI;
+
+using Zenject;
 
 namespace Game.HUD.Gameplay
 {
@@ -36,8 +38,8 @@ namespace Game.HUD.Gameplay
 
 		private void UpdateUI()
 		{
-			//icon.sprite = currentGoal.ConfigWrapper.Value.information.portrait;
-			//text.text = currentGoal.ConfigWrapper.Value.information.name;
+			icon.sprite = currentGoal.Model.config.information.portrait;
+			text.text = currentGoal.Model.config.information.name;
 
 			UpdateCount();
 		}
@@ -51,10 +53,10 @@ namespace Game.HUD.Gameplay
 
 		public void Punch()
 		{
-			icon.transform.DORewind();
-			count.transform.DORewind();
-			icon.transform.DOPunchScale(punch.settings.GetPunch(), punch.settings.duration, punch.settings.vibrato, punch.settings.elasticity);
-			count.transform.DOPunchScale(punch.settings.GetPunch(), punch.settings.duration, punch.settings.vibrato, punch.settings.elasticity);
+			transform.DORewind();
+			transform.DOPunchScale(punch.settings);
 		}
+
+		public class Factory : PlaceholderFactory<UIGoal> { }
 	}
 }
