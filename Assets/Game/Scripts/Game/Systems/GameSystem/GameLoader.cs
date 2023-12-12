@@ -1,18 +1,10 @@
-using Game.Extensions;
 using Game.Managers.GameManager;
 using Game.Managers.TransitionManager;
 using Game.Systems.LevelSystem;
-using Game.Systems.StorageSystem;
 
 using StarSmithGames.Go.SceneManager;
-using StarSmithGames.IoC.AsyncManager;
 
 using System;
-using System.Collections;
-using System.IO;
-
-using UnityEngine;
-using UnityEngine.Assertions;
 
 using Zenject;
 

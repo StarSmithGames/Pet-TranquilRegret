@@ -10,6 +10,7 @@ using Zenject;
 
 using Game.Managers.CharacterManager;
 using Game.Systems.StorageSystem;
+using Game.Systems.GameSystem;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -31,10 +32,11 @@ namespace Game.Systems.SpawnSystem
 		[Inject] private StorageSystem.StorageSystem gameData;
 		[Inject] private CharacterManager characterManager;
 		[Inject] private CameraSystem.CameraSystem cameraSystem;
+		[Inject] private GameplayConfig gameplayConfig;
 
 		public void Spawn()
 		{
-			var character = diContainer.InstantiatePrefab(gameData.IntermediateData.GameplayConfig.characterPrefab).GetComponent<Character.Character>();
+			var character = diContainer.InstantiatePrefab(gameplayConfig.characterPrefab).GetComponent<Character.Character>();
 
 			character.Presenter.View.root.position = transform.position;
 			character.Presenter.View.model.rotation = transform.rotation;

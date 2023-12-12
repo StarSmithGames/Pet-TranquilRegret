@@ -1,5 +1,6 @@
 using Game.Systems.LevelSystem;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 using Zenject;
 
@@ -21,6 +22,8 @@ namespace Game.HUD.Gameplay
 
 		private void Start()
 		{
+			Debug.LogError("Start");
+
 			levelTimer = levelManager.CurrentLevel.LevelTimer;
 		}
 

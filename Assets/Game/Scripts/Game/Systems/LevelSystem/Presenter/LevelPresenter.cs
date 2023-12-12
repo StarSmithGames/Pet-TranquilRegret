@@ -20,8 +20,6 @@ namespace Game.Systems.LevelSystem
 		public LevelModel Model { get; private set; }
 		public LevelTimer LevelTimer { get; }
 
-		[Inject] private GameLoader gameLoader;
-		[Inject] private GameManager gameManager;
 		[Inject] private StorageSystem.StorageSystem storageSystem;
 		[Inject] private SpawnSystem.SpawnSystem spawnSystem;
 		[Inject] private ViewService viewService;
@@ -31,7 +29,6 @@ namespace Game.Systems.LevelSystem
 		public LevelPresenter(LevelConfig config)
 		{
 			ProjectContext.Instance.Container.Inject(this);
-
 			Model = new(config);
 			LevelTimer = new();
 
@@ -52,18 +49,8 @@ namespace Game.Systems.LevelSystem
 
 		public void Start()
 		{
-			gameLoader.LoadLevel(Model.Config, false,
-			onCompleted: () =>
-			{
-				gameManager.ChangeState(GameState.PreGameplay);
-				spawnSystem.SpawnPlayer();
-				gameLoader.Allow();
-			},
-			callback: () =>
-			{
-				LevelTimer.Start();
-				gameManager.ChangeState(GameState.Gameplay);
-			});
+			spawnSystem.SpawnPlayer();
+			LevelTimer.Start();
 		}
 
 		public float GetProgress01()
@@ -108,13 +95,13 @@ namespace Game.Systems.LevelSystem
 		public void Lose()
 		{
 			Dispose();
-			gameLoader.LoadMenu();
+			//gameLoader.LoadMenu();
 		}
 
 		public void Leave()
 		{
 			Dispose();
-			gameLoader.LoadMenu();
+			//gameLoader.LoadMenu();
 		}
 
 		private void OnGoalsChanged()

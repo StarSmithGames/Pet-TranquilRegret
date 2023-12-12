@@ -28,8 +28,8 @@ namespace Game.Installers
 			Container.DeclareSignal<SignalOnLevelChangedCheat>();
 #endif
 
-			Container.BindInterfacesAndSelfTo<SceneManager>().AsSingle().NonLazy();
-			Container.BindInterfacesAndSelfTo<VSFXService>().AsSingle().NonLazy();
+			Container.BindInterfacesAndSelfTo<SceneManager>().AsSingle();
+			Container.BindInterfacesAndSelfTo<VSFXService>().AsSingle();
 
 			Container.BindInstance(gameplayConfig).AsSingle();
 
@@ -39,12 +39,14 @@ namespace Game.Installers
 			StorageSystemInstaller.Install(Container);
 			GameManagerInstaller.Install(Container);
 			PauseManagerInstaller.Install(Container);
+			LevelSystemInstaller.Install(Container);
 			SpawnSystemInstaller.Install(Container);
 			RewardManagerInstaller.Install(Container);
 			DelayedCallServiceInstaller.Install(Container);
 
-			Container.BindInstance(Container.InstantiateComponentOnNewGameObject<GameController>());
-			Container.BindInterfacesAndSelfTo<GameLoader>().AsSingle().NonLazy();
+			Container.BindInterfacesAndSelfTo<GameController>().FromNewComponentOnNewGameObject().AsSingle().NonLazy();
+			//Container.BindInstance(Container.InstantiateComponentOnNewGameObject<GameController>()).AsSingle();
+			Container.BindInterfacesAndSelfTo<GameLoader>().AsSingle();
 		}
 	}
 }

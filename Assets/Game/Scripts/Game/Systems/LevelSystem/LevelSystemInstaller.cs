@@ -4,12 +4,11 @@ using Zenject;
 
 namespace Game.Systems.LevelSystem
 {
-	[CreateAssetMenu(fileName = "LevelSystemInstaller", menuName = "Installers/LevelSystemInstaller")]
-	public class LevelSystemInstaller : ScriptableObjectInstaller<LevelSystemInstaller>
+	public class LevelSystemInstaller : Installer<LevelSystemInstaller>
 	{
 		public override void InstallBindings()
 		{
-			Container.BindInterfacesAndSelfTo<LevelManager>().AsSingle().NonLazy();
+			Container.BindInterfacesAndSelfTo<LevelManager>().AsSingle();
 		}
 	}
 }

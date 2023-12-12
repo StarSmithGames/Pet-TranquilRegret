@@ -1,4 +1,5 @@
 using Game.Services;
+using Game.Systems.LevelSystem;
 using Game.Systems.StorageSystem;
 using Game.UI;
 
@@ -18,6 +19,7 @@ namespace Game.Systems.GameSystem
 		[Inject] private GameplayConfig gameplayConfig;
 		[Inject] private ViewService viewService;
 		[Inject] private GameLoader gameLoader;
+		[Inject] private LevelManager levelManager;
 
 		private void Start()
 		{
@@ -47,11 +49,9 @@ namespace Game.Systems.GameSystem
 
 		private void LoadGame()
 		{
-			Debug.LogError(gameData.GameFastData.IsFirstTime);
-
 			if (gameData.GameFastData.IsFirstTime)
 			{
-				gameLoader.LoadLevel(gameplayConfig.firstTimeTutorialLevel, true);
+				levelManager.StartRegularLevel(gameplayConfig.firstTimeTutorialLevel);
 			}
 			else
 			{
