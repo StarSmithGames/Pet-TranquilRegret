@@ -1,7 +1,5 @@
 using DG.Tweening;
 
-using Game.Entities;
-using Game.HUD.Menu;
 using Game.Installers;
 using Game.Services;
 using Game.Systems.CameraSystem;
@@ -13,16 +11,15 @@ using Game.VFX;
 
 using Sirenix.OdinInspector;
 
-using StarSmithGames.Core;
-
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 using UnityEngine;
-using UnityEngine.Assertions;
 using UnityEngine.UIElements;
 
 using Zenject;
@@ -276,7 +273,6 @@ namespace Game.Systems.InfinityRoadSystem
 			levels = levelsContent.GetComponentsInChildren<UIRoadLevel>().ToList();
 			connections = levelsContent.GetComponentsInChildren<LevelConnection>().ToList();
 		}
-#endif
 
 		private void OnDrawGizmosSelected()
 		{
@@ -298,6 +294,7 @@ namespace Game.Systems.InfinityRoadSystem
 
 			BackgroundRefresh();
 		}
+#endif
 	}
 
 	/// <summary>

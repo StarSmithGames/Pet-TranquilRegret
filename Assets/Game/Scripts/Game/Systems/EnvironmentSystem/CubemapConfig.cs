@@ -1,12 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-
-using UnityEditor;
 
 using UnityEngine;
-using UnityEngine.Rendering;
+using System.Linq;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Game.Systems.EnvironmentSystem
 {
@@ -16,6 +15,7 @@ namespace Game.Systems.EnvironmentSystem
 		[HideInInspector] public Texture2D[] textures = new Texture2D[6];
 	}
 
+#if UNITY_EDITOR
 	[CustomEditor(typeof(CubemapConfig))]
 	public class CubemapConfigEditor : Editor
 	{
@@ -149,4 +149,5 @@ namespace Game.Systems.EnvironmentSystem
 			}
 		}
 	}
+#endif
 }

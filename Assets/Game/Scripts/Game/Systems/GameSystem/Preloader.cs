@@ -23,8 +23,6 @@ namespace Game.Systems.GameSystem
 
 		private void Start()
 		{
-			Debug.LogError(gameData.GameFastData.IsFirstTime);
-
 			gameData.GameFastData.SessionsCount++;
 
 			if (!gameData.GameFastData.IsGDPRApplied)

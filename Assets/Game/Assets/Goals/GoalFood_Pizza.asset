@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283effccce48cb14abf94b89bd5ce7ed, type: 3}
   m_Name: GoalFood_Pizza
   m_EditorClassIdentifier: 
-  id: 0
+  id: 1
   name: Pizza
   information:
     portrait: {fileID: 21300000, guid: 2f555b302d825614183568e46d601559, type: 3}

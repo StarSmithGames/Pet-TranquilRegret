@@ -36,7 +36,6 @@ namespace Game.Systems.GameSystem
 
 			CheckInterruptGameProcess();
 
-			Debug.LogError("HERER");
 			if (sceneManager.IsLevel())
 			{
 				var config = GetLevelConfigFull(sceneManager.GetActiveScene());

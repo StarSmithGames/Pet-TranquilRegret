@@ -13,8 +13,6 @@ using UnityEngine.UI;
 
 using Zenject;
 
-using static UnityEditor.Progress;
-
 namespace Game.UI
 {
 	public class FinishLevelDialog : ViewBase

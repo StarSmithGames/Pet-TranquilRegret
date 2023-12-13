@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 283effccce48cb14abf94b89bd5ce7ed, type: 3}
   m_Name: GoalFood_Soda
   m_EditorClassIdentifier: 
-  id: 0
+  id: 2
   name: Soda
   information:
     portrait: {fileID: 21300000, guid: 280baeca098fd1c49aa28b470669c5de, type: 3}
