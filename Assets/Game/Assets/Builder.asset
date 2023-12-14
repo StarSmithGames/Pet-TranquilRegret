@@ -18,7 +18,7 @@ MonoBehaviour:
     PackageName: com.StarSmithGames.BillowingBoundary
     Version: 0.0.1
     VersionCode: 1
-    KeystorePath: starsmith.keystore
+    KeystorePath: user.keystore
     KeystorePassword: Star2l0Dr52M
     AliasName: starsmith
     AliasPassword: Star2l0Dr52M

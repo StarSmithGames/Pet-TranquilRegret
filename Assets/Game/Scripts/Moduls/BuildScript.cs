@@ -8,14 +8,12 @@ namespace Build
 {
     public static class BuildScript
     {
-        private const string PASS = "djdj46";
-        
         [ MenuItem( "Build/Build Andorid" ) ]
         public static void PerformAndoridBuild()
         {
             var fileName = $"{PlayerSettings.productName}_{PlayerSettings.bundleVersion}.apk";
             var fullPath = $"{GetProjectFolderPath()}/Builds/{fileName}";
-            BuidAndorid(fullPath , false );
+            BuidAndorid(fullPath, false );
         }
         
         [ MenuItem( "Build/Build Clear Andorid" ) ]
@@ -23,47 +21,43 @@ namespace Build
         {
             var fileName = $"{PlayerSettings.productName}_{PlayerSettings.bundleVersion}.aab";
             var fullPath = $"{GetProjectFolderPath()}/Builds/Release/{fileName}";
-            BuidAndorid(fullPath , true );
+            BuidAndorid(fullPath, true );
         }
 
         public static void BuidAndorid(string path, bool isClearBuild, bool useR8 = false, ScriptingImplementation Backend = ScriptingImplementation.IL2CPP)
         {
-            if ( path.IsEmpty() )
-            {
-                Debug.LogError( "[BuildScript] Path is Empty!" );
-                return;
-            }
-            
-            // PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.Android,"com.yourCompany.yourAppName");
-            // PlayerSettings.iOS.buildNumber = Setting.versionCode.ToString();
+			var asset = AssetDatabaseExtensions.LoadAsset<Builder>();
 
-            EditorUserBuildSettings.exportAsGoogleAndroidProject = false;
-            PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARMv7 | AndroidArchitecture.ARM64;
-            PlayerSettings.SetScriptingBackend( BuildTargetGroup.Android, Backend );
-            EditorUserBuildSettings.androidBuildSystem = AndroidBuildSystem.Gradle;
-            
-            EditorUserBuildSettings.buildAppBundle = isClearBuild;
-            EditorUserBuildSettings.androidCreateSymbols = isClearBuild ? AndroidCreateSymbols.Public : AndroidCreateSymbols.Disabled;
-            PlayerSettings.Android.minifyWithR8 = isClearBuild && useR8;
-            PlayerSettings.Android.minifyRelease = isClearBuild && useR8;
-            
-            PerformBuild( BuildTarget.Android, path );
+			BuidAndorid(path, asset.Setting, isClearBuild, useR8, Backend );
         }
         
-        private static void PerformBuild( BuildTarget buildTarget, string path )
-        {
-            Debug.LogError( "[BuildScript] BuildPlayer: " + buildTarget + " at " + path );
-            EditorUserBuildSettings.SwitchActiveBuildTarget( buildTarget );
-            ApplyBuildSettings();
-            BuildPipeline.BuildPlayer( GetScenePaths(), path, buildTarget, buildTarget == BuildTarget.StandaloneWindows ? BuildOptions.ShowBuiltPlayer : BuildOptions.None );
-            
-            void ApplyBuildSettings()
-            {
-                PlayerSettings.Android.useCustomKeystore = true;
-                PlayerSettings.Android.keystorePass = PASS;
-                PlayerSettings.Android.keyaliasPass = PASS;
-            }
-        }
+		public static void BuidAndorid(string path, BuildSetting setting, bool isClearBuild = false, bool useR8 = false, ScriptingImplementation Backend = ScriptingImplementation.IL2CPP)
+		{
+			if (path.IsEmpty())
+			{
+				Debug.LogError("[BuildScript] Path is Empty!");
+				return;
+			}
+
+			// PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.Android,"com.yourCompany.yourAppName");
+			// PlayerSettings.iOS.buildNumber = Setting.versionCode.ToString();
+
+			EditorUserBuildSettings.exportAsGoogleAndroidProject = false;
+			PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARMv7 | AndroidArchitecture.ARM64;
+			PlayerSettings.SetScriptingBackend(BuildTargetGroup.Android, Backend);
+			EditorUserBuildSettings.androidBuildSystem = AndroidBuildSystem.Gradle;
+
+			EditorUserBuildSettings.buildAppBundle = isClearBuild;
+			EditorUserBuildSettings.androidCreateSymbols = isClearBuild ? AndroidCreateSymbols.Public : AndroidCreateSymbols.Disabled;
+			PlayerSettings.Android.minifyWithR8 = isClearBuild && useR8;
+			PlayerSettings.Android.minifyRelease = isClearBuild && useR8;
+
+			var buildTarget = BuildTarget.Android;
+			Debug.LogError("[BuildScript] BuildPlayer: " + buildTarget + " at " + path);
+			EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTarget.Android);
+			setting.ApplySettings();
+			BuildPipeline.BuildPlayer(GetScenePaths(), path, buildTarget, buildTarget == BuildTarget.StandaloneWindows ? BuildOptions.ShowBuiltPlayer : BuildOptions.None);
+		}
         
         private static string[] GetScenePaths()
         {
