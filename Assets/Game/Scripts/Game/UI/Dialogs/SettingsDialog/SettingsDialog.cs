@@ -83,7 +83,7 @@ namespace Game.UI
 		{
 			var data = storageSystem.GameFastData.PreferencesParams.GetData();
 			data.music = !data.music;
-			music.Enable(data.music);
+			music.DoAnimation(data.music);
 			storageSystem.GameFastData.PreferencesParams.SetData(data);
 		}
 
@@ -91,7 +91,7 @@ namespace Game.UI
 		{
 			var data = storageSystem.GameFastData.PreferencesParams.GetData();
 			data.sound = !data.sound;
-			sound.Enable(data.sound);
+			sound.DoAnimation(data.sound);
 			storageSystem.GameFastData.PreferencesParams.SetData(data);
 		}
 
@@ -99,7 +99,7 @@ namespace Game.UI
 		{
 			var data = storageSystem.GameFastData.PreferencesParams.GetData();
 			data.vibration = !data.vibration;
-			vibration.Enable(data.vibration);
+			vibration.DoAnimation(data.vibration);
 			storageSystem.GameFastData.PreferencesParams.SetData(data);
 		}
 

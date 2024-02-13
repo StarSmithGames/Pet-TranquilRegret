@@ -6,6 +6,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Game.UI
@@ -14,7 +15,7 @@ namespace Game.UI
     public sealed class RateUsDialog : UIViewDialog
 	{
         public List<UIRadioButton> stars = new();
-		public UISimpleButton simpleButton;
+		public Button button;
 
 		[Inject] private ViewService viewService;
 
@@ -38,7 +39,7 @@ namespace Game.UI
 				stars[i].Enable(i < currentRate);
 			}
 
-			simpleButton.Enable(currentRate != 0);
+			button.interactable = currentRate != 0;
 		}
 
 		public void OnRated(int index)
