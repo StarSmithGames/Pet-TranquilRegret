@@ -11,7 +11,10 @@ GameObject:
   - component: {fileID: 2765479472600702505}
   - component: {fileID: 1283296614956454284}
   - component: {fileID: 3903451207848437062}
-  m_Layer: 0
+  - component: {fileID: 1867886988249365464}
+  - component: {fileID: 2794042870338477544}
+  - component: {fileID: 2063561873743439200}
+  m_Layer: 6
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 4079362192135711221, guid: 53af2d49f127b714ca5fae99e6724f02, type: 3}
+  - {fileID: 2100000, guid: b24544b7ba506034d89c4a54fd64dd6b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,6 +86,45 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1867886988249365464
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3254735017419441299}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.293886, y: 3.0422418, z: 0.32604074}
+  m_Center: {x: 0.00063049793, y: -0.35303342, z: -1.820565}
+--- !u!65 &2794042870338477544
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3254735017419441299}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.293886, y: 3.0422418, z: 0.32604074}
+  m_Center: {x: 0.00063049793, y: -0.35303342, z: 1.74}
+--- !u!65 &2063561873743439200
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3254735017419441299}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.26400566, y: 0.20689178, z: 4.003769}
+  m_Center: {x: -0.0027074814, y: 1.0646416, z: -0.04812765}
 --- !u!1 &7800761452817121129
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +134,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1545687720727082725}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Swing
   m_TagString: Untagged
   m_Icon: {fileID: 0}

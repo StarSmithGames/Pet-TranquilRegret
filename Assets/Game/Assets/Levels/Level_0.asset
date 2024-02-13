@@ -22,10 +22,10 @@ MonoBehaviour:
   addTime: 60
   remainingTime: 30
   primaryGoals:
-  - config: {fileID: 11400000, guid: bc30708f0a36a304cbf01d24e7a1f8e5, type: 2}
+  - config: {fileID: 11400000, guid: f2ffebda0f0639d4ead66456bf99d2d0, type: 2}
     count: 5
   - config: {fileID: 11400000, guid: 556172eef9695fc47900290672d91af9, type: 2}
     count: 5
-  - config: {fileID: 11400000, guid: f2ffebda0f0639d4ead66456bf99d2d0, type: 2}
+  - config: {fileID: 11400000, guid: bc30708f0a36a304cbf01d24e7a1f8e5, type: 2}
     count: 5
   awards: []
