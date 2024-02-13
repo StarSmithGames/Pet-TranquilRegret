@@ -1,14 +1,14 @@
-using UnityEngine;
-
 using Zenject;
 
 namespace Game.Systems.LevelSystem
 {
-	public class LevelSystemInstaller : Installer<LevelSystemInstaller>
+	public sealed class LevelSystemInstaller : Installer<LevelSystemInstaller>
 	{
 		public override void InstallBindings()
 		{
-			Container.BindInterfacesAndSelfTo<LevelManager>().AsSingle();
+			Container.BindInterfacesAndSelfTo< LevelRegularService >().AsSingle();
+			Container.BindInterfacesAndSelfTo< RegularLevelBuilder >().AsSingle();
+			Container.BindInterfacesAndSelfTo< LevelManager >().AsSingle();
 		}
 	}
 }

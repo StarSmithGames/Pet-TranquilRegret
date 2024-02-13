@@ -33,7 +33,7 @@ namespace Game.Systems.InventorySystem
 			Unsubscribe();
 
 			var goal = GetComponent<ItemView>().model.config as GoalItemConfig;
-			levelManager.CurrentLevel.Model.GoalRegistrator.AccumulatePrimaryGoal(goal);
+			levelManager.CurrentLevel.Presenter.Gameplay.GoalRegistrator.AccumulatePrimaryGoal(goal);
 
 			DoAnimationAsync(character.transform);
 		}

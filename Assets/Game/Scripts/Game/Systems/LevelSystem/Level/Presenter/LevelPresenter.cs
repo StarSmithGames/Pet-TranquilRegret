@@ -1,50 +1,42 @@
-using Company.Module.Services.DelayedCallService;
-
-using DG.Tweening.Core.Easing;
-
-using Game.Managers.GameManager;
 using Game.Managers.PauseManager;
 using Game.Managers.RewardManager;
 using Game.Services;
-using Game.Systems.GameSystem;
 using Game.UI;
-
+using System;
 using UnityEngine;
 
 using Zenject;
 
 namespace Game.Systems.LevelSystem
 {
-	public partial class LevelPresenter
+	public class LevelPresenter : IDisposable, IPausable
 	{
-		public LevelModel Model { get; private set; }
+		public LevelModel Model { get; }
+		public LevelViewModel ViewModel { get; }
+		public LevelGameplay Gameplay { get; }
 		public LevelTimer LevelTimer { get; }
 
 		[Inject] private StorageSystem.StorageSystem storageSystem;
 		[Inject] private SpawnSystem.SpawnSystem spawnSystem;
 		[Inject] private ViewService viewService;
-		[Inject] private PauseManager pauseManager;
 		[Inject] private RewardManager rewardManager;
 
-		public LevelPresenter(LevelConfig config)
+		public LevelPresenter(
+			LevelModel model,
+			LevelGameplay gameplay
+			)
 		{
-			ProjectContext.Instance.Container.Inject(this);
-			Model = new(config);
+			Model = model ?? throw new ArgumentNullException( nameof(model) );
+			ViewModel = new();
+			Gameplay = gameplay ?? throw new ArgumentNullException( nameof(gameplay) );
 			LevelTimer = new();
-
-			pauseManager.Registrate(LevelTimer);
-
-			Subscribe();
+			
+			ProjectContext.Instance.Container.Inject( this );
 		}
 
 		public void Dispose()
 		{
 			LevelTimer.Stop();
-
-			pauseManager.UnRegistrate(LevelTimer);
-			pauseManager.UnPause();
-
-			Unsubscribe();
 		}
 
 		public void Start()
@@ -55,7 +47,7 @@ namespace Game.Systems.LevelSystem
 
 		public float GetProgress01()
 		{
-			var goals = Model.GoalRegistrator.GoalsPrimary;
+			var goals = Gameplay.GoalRegistrator.GoalsPrimary;
 			float percents = 0;
 			for (int i = 0; i < goals.Count; i++)
 			{
@@ -72,8 +64,6 @@ namespace Game.Systems.LevelSystem
 
 		public void Complete()
 		{
-			pauseManager.Pause();
-
 			LevelTimer.Stop();
 
 			var data = storageSystem.GamePlayData.Storage.GameProgress.GetData();
@@ -104,25 +94,14 @@ namespace Game.Systems.LevelSystem
 			//gameLoader.LoadMenu();
 		}
 
-		private void OnGoalsChanged()
+		public void Pause()
 		{
-			if (Model.IsCompleted())
-			{
-				Complete();
-			}
-		}
-	}
-
-	public partial class LevelPresenter
-	{
-		private void Subscribe()
-		{
-			Model.GoalRegistrator.onAccumulatedPrimary += OnGoalsChanged;
+			LevelTimer.Pause();
 		}
 
-		private void Unsubscribe()
+		public void UnPause()
 		{
-			Model.GoalRegistrator.onAccumulatedPrimary -= OnGoalsChanged;
+			LevelTimer.UnPause();
 		}
 	}
 }

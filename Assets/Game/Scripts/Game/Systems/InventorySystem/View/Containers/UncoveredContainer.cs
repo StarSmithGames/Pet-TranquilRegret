@@ -82,7 +82,7 @@ namespace Game.Systems.InventorySystem
 			(item) =>
 			{
 				var goal = item.model.config as GoalItemConfig;
-				levelManager.CurrentLevel.Model.GoalRegistrator.AccumulatePrimaryGoal(goal);
+				levelManager.CurrentLevel.Presenter.Gameplay.GoalRegistrator.AccumulatePrimaryGoal(goal);
 			},
 			() => Dispose());
 		}

@@ -11,7 +11,7 @@ using Zenject;
 namespace Game.UI
 {
 
-    public sealed class RateUsDialog : ViewPopupBase
+    public sealed class RateUsDialog : UIViewDialog
 	{
         public List<UIRadioButton> stars = new();
 		public UISimpleButton simpleButton;

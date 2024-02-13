@@ -22,9 +22,7 @@ namespace Game.HUD.Gameplay
 
 		private void Start()
 		{
-			Debug.LogError("Start");
-
-			levelTimer = levelManager.CurrentLevel.LevelTimer;
+			levelTimer = levelManager.CurrentLevel.Presenter.LevelTimer;
 		}
 
 		private void Update()

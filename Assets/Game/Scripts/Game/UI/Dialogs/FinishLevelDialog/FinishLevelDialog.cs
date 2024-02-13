@@ -1,10 +1,10 @@
 using DG.Tweening;
 
 using Game.Services;
+using Game.Services.GameService;
 using Game.Systems.LevelSystem;
 
 using StarSmithGames.Core;
-using StarSmithGames.Go;
 
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ using Zenject;
 
 namespace Game.UI
 {
-	public class FinishLevelDialog : ViewBase
+	public class FinishLevelDialog : UIViewDialog
 	{
 		public Transform shineEffect;
 		public Transform ribbon;
@@ -27,7 +27,8 @@ namespace Game.UI
 		private List<Transform> awardsTransforms = new();
 
 		[Inject] private ViewService viewService;
-		[Inject] private LevelManager levelManager;
+		[Inject] private GameService _gameService;
+		[Inject] private LevelManager _levelManager;
 		[Inject] private UIAward.Factory factoryAward;
 
 		private void Awake()
@@ -40,7 +41,7 @@ namespace Game.UI
 			viewService.ViewDialogRegistrator.UnRegistrate(this);
 		}
 
-		public override async void Show(Action callback = null)
+		public override void Show(Action callback = null)
 		{
 			IsInProcess = true;
 			canvasGroup.alpha = 0f;
@@ -73,7 +74,7 @@ namespace Game.UI
 
 			var awardsSequence = DOTween.Sequence();
 
-			var awards = levelManager.CurrentLevel.Model.Config.awards;
+			var awards = _levelManager.CurrentLevel.Presenter.Model.Config.awards;
 			rewardsRoot.SetActive(awards.Count > 0);
 			rewardsContent.DestroyChildren();
 
@@ -122,7 +123,7 @@ namespace Game.UI
 		{
 			Interactable(false);
 
-			levelManager.LeaveLevel();
+			_gameService.LeaveLevel();
 		}
 	}
 }

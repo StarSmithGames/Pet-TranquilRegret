@@ -36,14 +36,14 @@ namespace Game.Systems.GameSystem
 			}, callback);
 		}
 
-		public void LoadLevel(LevelConfig levelConfig, bool allow, Action onShowed = null, Action onCompleted = null, Action onHided = null, Action callback = null)
+		public void LoadLevel( string sceneName, bool allow, Action onShowed = null, Action onCompleted = null, Action onHided = null, Action callback = null )
 		{
 			gameManager.ChangeState(GameState.Loading);
 
 			startLevelTransition = new Transition(
 			() =>
 			{
-				var name = levelConfig.scene.SceneName;
+				var name = sceneName;
 				sceneManager.LoadSceneAsyncFromAddressables(name, name);
 				return sceneManager.ProgressHandler;
 			}, allow, onCompleted);

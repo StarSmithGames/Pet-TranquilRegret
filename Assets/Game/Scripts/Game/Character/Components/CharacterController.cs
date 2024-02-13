@@ -96,11 +96,14 @@ namespace Game.Character
 
 		public void Jump()
 		{
-			rb.AddForce(GetJumpImpulse(), ForceMode.Impulse);
+			if (IsGrounded)
+			{
+				rb.AddForce(GetJumpImpulse(), ForceMode.Impulse);
 
-			IsJumping = true;
+				IsJumping = true;
 
-			onJumped?.Invoke();
+				onJumped?.Invoke();
+			}
 		}
 
 		public bool IsMoving()

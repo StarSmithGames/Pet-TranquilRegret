@@ -15,7 +15,7 @@ using Zenject;
 
 namespace Game.UI
 {
-	public sealed class SettingsDialog : ViewPopupBase
+	public sealed class SettingsDialog : UIViewDialog
 	{
 		public Button backButton;
 		[Space]

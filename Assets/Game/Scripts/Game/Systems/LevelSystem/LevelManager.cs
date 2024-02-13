@@ -1,60 +1,49 @@
-using Game.Extensions;
-using Game.Managers.GameManager;
 using Game.Systems.GameSystem;
-
 using System;
-
-using UnityEngine;
-using UnityEngine.SceneManagement;
-
-using Zenject;
 
 namespace Game.Systems.LevelSystem
 {
-	public class LevelManager
+	public sealed class LevelManager
 	{
-		public event Action OnLevelStarted;
-		public event Action OnLevelLeaved;
+		public ILevel CurrentLevel { get; private set; }
 
-		public LevelPresenter CurrentLevel { get; private set; }
+		private readonly GameLoader _gameLoader;
 
-		[Inject] private GameplayConfig gameplayConfig;
-		[Inject] private GameLoader gameLoader;
-		[Inject] private GameManager gameManager;
+		public LevelManager(
+			GameLoader gameLoader
+			)
+		{
+			_gameLoader = gameLoader ?? throw new ArgumentNullException( nameof(gameLoader) );
+		}
 
-		public void StartRegularLevel(LevelConfig levelConfig)
+		public void StartLevel( string sceneName, ILevelBuilder builder, Action onBuilded = null, Action onStarted = null, Action callback = null )
         {
 			CurrentLevel?.Dispose();
 
-			gameLoader.LoadLevel(levelConfig, true,
+			_gameLoader.LoadLevel( sceneName, true,
 			onShowed: () =>
 			{
-				CurrentLevel = new(levelConfig);
+				CurrentLevel = builder.Build();
+				onBuilded?.Invoke();
 			},
 			onCompleted: () =>
 			{
 				CurrentLevel.Start();
-				gameManager.ChangeState(GameState.PreGameplay);
+				onStarted?.Invoke();
 			},
-			callback: () =>
-			{
-				gameManager.ChangeState(GameState.Gameplay);
-			});
-
-			OnLevelStarted?.Invoke();
+			callback: callback );
 		}
 
-        public void LeaveLevel()
+        public void LeaveLevel( Action onDisposed = null, Action callback = null )
         {
-			CurrentLevel.Leave();
-			CurrentLevel = null;
-
-			OnLevelLeaved?.Invoke();
-		}
-
-		public LevelConfig GetLevelConfig(int number)
-		{
-			return gameplayConfig.levels[number - 1];
+			_gameLoader.LoadMenu(
+			onShowed: () =>
+			{
+				CurrentLevel.Stop();
+				CurrentLevel = null;
+				onDisposed?.Invoke();
+			},
+			callback: callback );
 		}
 	}
 }

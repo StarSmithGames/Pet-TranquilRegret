@@ -17,6 +17,8 @@ namespace Game.Character
 		public CharacterView View { get; private set; }
 		public CharacterModel Model { get; private set; }
 
+		[Inject] public CharacterController Controller { get; private set; }
+
 		[Inject] private CharacterCanvas characterCanvas;
 		[Inject] private CharacterGroundImplementation groundImplementation;
 

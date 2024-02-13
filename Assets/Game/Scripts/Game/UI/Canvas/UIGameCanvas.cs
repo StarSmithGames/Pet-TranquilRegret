@@ -29,7 +29,8 @@ namespace Game.UI
 
 		private void Start()
 		{
-			var registrator = levelManager.CurrentLevel.Model.GoalRegistrator;
+			///TODO REMOVE!
+			var registrator = levelManager.CurrentLevel.Presenter.Gameplay.GoalRegistrator;
 			
 			goals.Clear();
 			goalContent.DestroyChildren(true);

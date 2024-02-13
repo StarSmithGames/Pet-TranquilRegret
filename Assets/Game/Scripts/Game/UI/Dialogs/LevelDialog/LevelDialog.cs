@@ -1,4 +1,5 @@
 using Game.Services;
+using Game.Services.GameService;
 using Game.Systems.GameSystem;
 using Game.Systems.LevelSystem;
 using Game.Systems.StorageSystem;
@@ -17,7 +18,7 @@ using Zenject;
 
 namespace Game.UI
 {
-	public class LevelDialog : ViewPopupBase
+	public class LevelDialog : UIViewDialog
 	{
 		public event Action onStartClicked;
 		public event Action onLeftClicked;
@@ -38,7 +39,7 @@ namespace Game.UI
 		private LevelConfig levelConfig;
 		private RegularLevelData levelData;
 
-		[Inject] private LevelManager levelManager;
+		[Inject] private GameService _gameService;
 		[Inject] private ViewService viewService;
 		[Inject] private LocalizationSystem localizationSystem;
 		[Inject] private UIGoalItem.Factory goalFactory;
@@ -112,7 +113,7 @@ namespace Game.UI
 		{
 			Interactable(false);
 
-			levelManager.StartRegularLevel(levelConfig);
+			_gameService.StartRegularLevel(levelConfig);
 
 			onStartClicked?.Invoke();
 		}

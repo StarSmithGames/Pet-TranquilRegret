@@ -1,6 +1,7 @@
 using Game.Extensions;
 using Game.Managers.GameManager;
 using Game.Services;
+using Game.Services.GameService;
 using Game.Systems.LevelSystem;
 using Game.Systems.StorageSystem;
 
@@ -21,7 +22,7 @@ namespace Game.Systems.GameSystem
     {
 		private bool isFirstTime;
 
-		[Inject] private LevelManager levelManager;
+		[Inject] private GameService _gameService;
 		[Inject] private GameplayConfig gameplayConfig;
 		[Inject] private GameManager gameManager;
 		[Inject] private ViewService viewService;
@@ -39,7 +40,7 @@ namespace Game.Systems.GameSystem
 			if (sceneManager.IsLevel())
 			{
 				var config = GetLevelConfigFull(sceneManager.GetActiveScene());
-				levelManager.StartRegularLevel(config);
+				_gameService.StartRegularLevel(config);
 			}
 
 			signalBus?.Subscribe<SignalOnApplicationFocusChanged>(OnApplicationChanged);

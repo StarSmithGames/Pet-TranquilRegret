@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
+using UnityEngine;
+
 namespace Game.Systems.GoalSystem
 {
 	public class GoalRegistrator
@@ -15,17 +17,20 @@ namespace Game.Systems.GoalSystem
 
 		public List<IGoal> GoalsPrimary { get; }
 
-		public GoalRegistrator(LevelConfig config)
+		public GoalRegistrator( LevelConfig config )
 		{
 			GoalsPrimary = new();
-			for (int i = 0; i < config.primaryGoals.Count; i++)
+			for ( int i = 0; i < config.primaryGoals.Count; i++ )
 			{
-				GoalsPrimary.Add(new Goal(config.primaryGoals[i]));
+				Debug.LogError( config.primaryGoals[ i ].config.BaseName );
+				GoalsPrimary.Add( new Goal( config.primaryGoals[ i ] ) );
 			}
 		}
 
 		public void AccumulatePrimaryGoal(GoalItemConfig config)
 		{
+			Debug.LogError(config.BaseName);
+
 			var goal = GoalsPrimary.Find((x) => x.Model.config == config);
 			Assert.IsNotNull(goal, $"[GoalRegistrator] Goal Not Exist for {config.BaseName}");
 			goal.CurrentValue++;

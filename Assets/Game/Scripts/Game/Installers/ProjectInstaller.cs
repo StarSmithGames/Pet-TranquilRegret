@@ -5,6 +5,7 @@ using Game.Managers.GameManager;
 using Game.Managers.PauseManager;
 using Game.Managers.RewardManager;
 using Game.Services;
+using Game.Services.GameService;
 using Game.Systems.GameSystem;
 using Game.Systems.LevelSystem;
 using Game.Systems.SpawnSystem;
@@ -44,9 +45,9 @@ namespace Game.Installers
 			RewardManagerInstaller.Install(Container);
 			DelayedCallServiceInstaller.Install(Container);
 
-			Container.BindInterfacesAndSelfTo<GameController>().FromNewComponentOnNewGameObject().AsSingle().NonLazy();
-			//Container.BindInstance(Container.InstantiateComponentOnNewGameObject<GameController>()).AsSingle();
-			Container.BindInterfacesAndSelfTo<GameLoader>().AsSingle();
+			Container.BindInterfacesAndSelfTo< GameController >().FromNewComponentOnNewGameObject().AsSingle().NonLazy();
+			Container.BindInterfacesAndSelfTo< GameLoader >().AsSingle();
+			Container.BindInterfacesAndSelfTo< GameService >().AsSingle();
 		}
 	}
 }

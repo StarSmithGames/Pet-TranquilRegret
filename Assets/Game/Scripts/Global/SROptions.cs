@@ -29,7 +29,7 @@ public partial class SROptions
 		var level = levelManager.CurrentLevel;
 		if (level == null) return;
 
-		level.Complete();
+		level.Presenter.Complete();
 	}
 
 	[Category("Level")]
