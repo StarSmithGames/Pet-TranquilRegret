@@ -19,8 +19,6 @@ namespace Game.UI
 		public Transform goalContent;
 		[Header("Control")]
 		public UIJoystick joystick;
-		public HUDDropButton drop;
-		public HUDJumpButton jump;
 
 		private List<UIGoal> goals = new List<UIGoal>();
 

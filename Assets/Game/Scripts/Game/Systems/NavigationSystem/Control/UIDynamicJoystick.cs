@@ -9,18 +9,21 @@ namespace Game.Systems.NavigationSystem
     {
         public bool IsEnable => canvasGroup.alpha == 1f;
 
-		public float MoveThreshold { get { return moveThreshold; } set { moveThreshold = Mathf.Abs(value); } }
-
-        [SerializeField] private float moveThreshold = 1;
-        [SerializeField] private CanvasGroup canvasGroup;
+        public bool isMoving = false;
+        public float moveThreshold = 1;
+        public CanvasGroup canvasGroup;
 
         protected override void Start()
         {
-            MoveThreshold = moveThreshold;
             base.Start();
             background.gameObject.SetActive(false);
             canvasGroup.alpha = 1f;
 		}
+        
+        public void Enable(bool trigger)
+        {
+	        canvasGroup.alpha = trigger ? 1f : 0f;
+        }
 
         public override void OnPointerDown(PointerEventData eventData)
         {
@@ -37,18 +40,13 @@ namespace Game.Systems.NavigationSystem
 
         protected override void HandleInput(float magnitude, Vector2 normalised, Vector2 radius, Camera cam)
         {
+	        if( isMoving )
             if (magnitude > moveThreshold)
             {
                 Vector2 difference = normalised * (magnitude - moveThreshold) * radius;
                 background.anchoredPosition += difference;
             }
             base.HandleInput(magnitude, normalised, radius, cam);
-        }
-
-        [Button]
-        public void Enable(bool trigger)
-        {
-            canvasGroup.alpha = trigger ? 1f : 0f;
         }
 
         private void OnDrawGizmos()

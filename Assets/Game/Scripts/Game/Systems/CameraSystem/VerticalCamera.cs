@@ -1,15 +1,8 @@
 using Game.Extensions;
-using Game.HUD.Menu;
 using Game.Installers;
 using Game.Managers.SwipeManager;
 using Game.Systems.InfinityRoadSystem;
-
-using Sirenix.OdinInspector;
-
-using System;
 using System.Collections.Generic;
-using System.Linq;
-
 using UnityEngine;
 using UnityEngine.EventSystems;
 

@@ -136,7 +136,8 @@ namespace Game.Systems.InfinityRoadSystem
 			int index = gameProgress.GetCurrentRegularIndex();
 			for (int i = 0; i < levels.Count; i++)
 			{
-				levels[i].Enable(i <= index);
+				levels[ i ].Enable( i <= index );
+				levels[ i ].EnableStars( 0 );
 			}
 		}
 
