@@ -1,6 +1,4 @@
 using Game.Managers.SwipeManager;
-using Game.Systems.CameraSystem;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;

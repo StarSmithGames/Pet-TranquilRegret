@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99df78c3afa3a184994baeee3d7a6c51, type: 3}
   m_Name: UIInstaller
   m_EditorClassIdentifier: 
-  goalPrefab: {fileID: 16312574267014373, guid: c1f47e87bde362e46a4e2dfa8497cefe, type: 3}
-  awardPrefab: {fileID: 4176134242592844894, guid: dadca49fb21f8e049a9cc7cd8915a09e, type: 3}
-  dialogs:
-  - {fileID: 7773918690546248892, guid: 8f74944daeb1e114e8645ba194504551, type: 3}
-  - {fileID: 4922457146085144992, guid: 468153a813d079d4798f44b7e29b0936, type: 3}
-  - {fileID: 3711055595699338396, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
+  UISettings:
+    Dialogs:
+    - {fileID: 7773918690546248892, guid: 8f74944daeb1e114e8645ba194504551, type: 3}
+    - {fileID: 3711055595699338396, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}

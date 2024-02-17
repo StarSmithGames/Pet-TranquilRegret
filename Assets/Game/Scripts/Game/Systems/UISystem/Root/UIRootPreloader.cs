@@ -1,11 +1,9 @@
 using UnityEngine;
 
-namespace Game.UI
+namespace Game.Systems.UISystem
 {
 	public sealed class UIRootPreloader : UIRoot
 	{
 		public Transform DialogRoot;
-		
-		public override Transform GetDialogsRoot() => DialogRoot;
 	}
 }

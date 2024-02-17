@@ -19,7 +19,6 @@ namespace Game.Systems.StorageSystem
 
 		public GameFastData GameFastData { get; }
 		public GamePlayData GamePlayData { get; }
-		public IntermediateData IntermediateData { get; private set; } = new();
 
 		public StorageSystem(
 			GameFastData gameFastData,
@@ -68,19 +67,6 @@ namespace Game.Systems.StorageSystem
 		public void Reset()
 		{
 
-		}
-	}
-
-	public class IntermediateData
-	{
-		[Inject] public GameplayConfig GameplayConfig { get; private set; }
-
-		public UIRootMenu RootMenu { get; set; }
-		public UIRootGame RootGame { get; set; }
-
-		public IntermediateData()
-		{
-			ProjectContext.Instance.Container.Inject(this);
 		}
 	}
 }

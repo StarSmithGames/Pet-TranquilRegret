@@ -10,7 +10,7 @@ using UnityEngine;
 
 using Zenject;
 
-namespace Game.UI
+namespace Game.Systems.UISystem
 {
 	public class UIGameCanvas : MonoBehaviour
 	{

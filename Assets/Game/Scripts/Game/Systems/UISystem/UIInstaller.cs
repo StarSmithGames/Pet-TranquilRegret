@@ -1,30 +1,16 @@
-using Game.HUD.Gameplay;
-using Game.Services;
-
-using StarSmithGames.Go;
-
-using System.Collections.Generic;
-
 using UnityEngine;
 
 using Zenject;
 
-namespace Game.UI
+namespace Game.Systems.UISystem
 {
 	[CreateAssetMenu(fileName = "UIInstaller", menuName = "Installers/UIInstaller")]
 	public class UIInstaller : ScriptableObjectInstaller<UIInstaller>
 	{
-		public UIGoal goalPrefab;
-		public UIAward awardPrefab;
-
 		public UISettings UISettings;
-		public List<ViewBase> dialogs = new();
 
 		public override void InstallBindings()
 		{
-			Container.BindFactory<UIGoal, UIGoal.Factory>().FromComponentInNewPrefab(goalPrefab).AsSingle();
-			Container.BindFactory<UIAward, UIAward.Factory>().FromComponentInNewPrefab(awardPrefab).AsSingle();
-
 			Container.BindInstance( UISettings );
 		}
 	}

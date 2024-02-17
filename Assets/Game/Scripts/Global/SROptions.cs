@@ -1,4 +1,5 @@
 #if !DISABLE_SRDEBUGGER
+using Game.Systems.GameSystem;
 using Game.Systems.LevelSystem;
 using Game.Systems.StorageSystem;
 
@@ -14,6 +15,7 @@ public partial class SROptions
 {
 	[Inject] private StorageSystem storageSystem;
 	[Inject] private LevelManager levelManager;
+	[ Inject ] private GameplayConfig _gameplayConfig;
 	[Inject] private SignalBus signalBus;
 
 	public SROptions()
@@ -46,7 +48,7 @@ public partial class SROptions
 		get => fastTravel;
 		set
 		{
-			fastTravel = Mathf.Clamp(value, 1, storageSystem.IntermediateData.GameplayConfig.levels.Count);
+			fastTravel = Mathf.Clamp(value, 1, _gameplayConfig.levels.Count);
 
 			OnFastTraveled();
 		}

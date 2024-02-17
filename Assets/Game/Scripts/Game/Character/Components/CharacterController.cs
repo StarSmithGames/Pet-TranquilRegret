@@ -3,6 +3,7 @@ using Game.Managers.PauseManager;
 using Game.Services;
 using Game.Systems.CameraSystem;
 using Game.Systems.NavigationSystem;
+using Game.Systems.UISystem;
 using Game.UI;
 
 using UnityEngine;

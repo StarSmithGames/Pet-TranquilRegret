@@ -3,6 +3,7 @@ using Game.Managers.SwipeManager;
 using Game.Systems.InfinityRoadSystem;
 using Game.Systems.LevelSystem;
 using Game.Systems.StorageSystem;
+using Game.Systems.UISystem;
 using Game.UI;
 using UnityEngine;
 using Zenject;
@@ -64,7 +65,7 @@ namespace Game.Systems.MenuSystem
 			RoadCamera.SetBounds( RoadBackground.GetSprites().CalculateBounds(), StartPoint );
 
 			RoadMap.SetData( _storageSystem.GameFastData.LastRegularLevelIndex, _gameProgress.GetCurrentRegularIndex() );
-			RoadMap.Initialize( RoadPin );
+			RoadMap.Initialize( RoadPin, RoadCamera.Camera );
 			OpenRoadMap();
 
 			RoadMap.OnPinDestinated += ShowLevelWindow;
@@ -73,7 +74,10 @@ namespace Game.Systems.MenuSystem
 
 		public void OnDestroy()
 		{
-			_swipeManager.OnSwipeDetected -= SwipeDetectedHandler;
+			if ( _swipeManager != null )
+			{
+				_swipeManager.OnSwipeDetected -= SwipeDetectedHandler;
+			}
 		}
 
 		private void Update()
@@ -108,7 +112,7 @@ namespace Game.Systems.MenuSystem
 		
 		private void ShowLevelWindow()
 		{
-			_levelDialog = UIRootMenu.CreateDialogIfNotExist<LevelDialog>();
+			_levelDialog = _uiRootMenu.DialogAggregator.CreateIfNotExist< LevelDialog >();
 			_levelDialog.onStartClicked += LevelStartClickedHandler;
 			_levelDialog.onClosed += LevelDialogClosedHandler;
 			_levelDialog.SetLevel( _levelRegularService.GetLevelConfig( RoadMap.LastIndex + 1 ), _gameProgress.regularLevels[ RoadMap.LastIndex ] );

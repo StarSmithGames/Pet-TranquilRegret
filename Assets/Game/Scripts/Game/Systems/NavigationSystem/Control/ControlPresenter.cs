@@ -1,6 +1,5 @@
 using Game.Managers.CharacterManager;
-using Game.UI;
-using UnityEngine;
+using Game.Systems.UISystem;
 
 using Zenject;
 

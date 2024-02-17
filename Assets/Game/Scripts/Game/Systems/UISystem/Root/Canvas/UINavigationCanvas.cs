@@ -1,7 +1,7 @@
 using Game.Scripts.Extensions;
 using UnityEngine;
 
-namespace Game.UI
+namespace Game.Systems.UISystem
 {
 	public sealed class UINavigationCanvas : UICanvas
 	{

@@ -1,3 +1,4 @@
+using Game.Systems.GameSystem;
 using Game.Systems.StorageSystem;
 
 using StarSmithGames.Core;
@@ -10,13 +11,13 @@ namespace Game.Services
 {
     public class VSFXService
     {
-        [Inject] private StorageSystem gameData;
+        [ Inject ] private GameplayConfig _gameplayConfig;
         [Inject] private IAudioService audioService;
         [Inject] private IVibrationService vibrationService;
 
         public void PlayUIButton()
         {
-            audioService.PlaySound(gameData.IntermediateData.GameplayConfig.taps.RandomItem());
+            audioService.PlaySound(_gameplayConfig.taps.RandomItem());
             vibrationService.Vibrate();
         }
     }

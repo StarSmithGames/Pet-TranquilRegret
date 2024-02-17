@@ -1,7 +1,7 @@
 using StarSmithGames.Go;
 using System.Collections.Generic;
 
-namespace Game.UI
+namespace Game.Systems.UISystem
 {
 	[ System.Serializable ]
 	public sealed class UISettings

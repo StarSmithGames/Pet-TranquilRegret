@@ -1,8 +1,6 @@
-using StarSmithGames.Go;
-
 using UnityEngine;
 
-namespace Game.UI
+namespace Game.Systems.UISystem
 {
 	public abstract class UICanvas : MonoBehaviour
 	{

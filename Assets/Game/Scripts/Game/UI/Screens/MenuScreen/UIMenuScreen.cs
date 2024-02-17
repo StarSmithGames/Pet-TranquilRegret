@@ -1,5 +1,6 @@
 using Game.Services;
 using Game.Systems.StorageSystem;
+using Game.Systems.UISystem;
 using System;
 using UnityEngine;
 using Zenject;
@@ -12,13 +13,16 @@ namespace Game.UI
 		public TMPro.TextMeshProUGUI HardDiamondsText;
 		
 		private StorageSystem _storageSystem;
+		private UIRootMenu _uiRootMenu;
 
 		[ Inject ]
 		private void Construct(
-			StorageSystem storageSystem
+			StorageSystem storageSystem,
+			UIRootMenu uiRootMenu
 			)
 		{
 			_storageSystem = storageSystem ?? throw new ArgumentNullException( nameof(storageSystem) );
+			_uiRootMenu = uiRootMenu ?? throw new ArgumentNullException( nameof(uiRootMenu) );
 			
 			_storageSystem.GameFastData.SoftCoins.onChanged += CoinsChangedHandler;
 			_storageSystem.GameFastData.HardDiamonds.onChanged += DiamondsChangedHandler;
@@ -34,7 +38,7 @@ namespace Game.UI
 
 		public void OnSettingsButtonClick()
 		{
-			// _viewService.TryShowDialog< SettingsDialog >();
+			_uiRootMenu.DialogAggregator.ShowOrCreateIfNotExist< SettingsDialog >();
 		}
 		
 		public void OnCoinsButtonClick()

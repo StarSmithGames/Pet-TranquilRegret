@@ -3,9 +3,6 @@ using Game.Managers.PauseManager;
 using Game.Services;
 using Game.Systems.GameSystem;
 using Game.Systems.StorageSystem;
-
-using StarSmithGames.Go;
-
 using System;
 
 using UnityEngine;
@@ -25,6 +22,7 @@ namespace Game.UI
 		public Button exitButton;
 
 		[Inject] private StorageSystem storageSystem;
+		[ Inject ] private GameplayConfig _gameplayConfig;
 		[Inject] private GameManager gameManager;
 		[Inject] private GameLoader gameLoader;
 		[Inject] private PauseManager pauseManager;
@@ -58,7 +56,7 @@ namespace Game.UI
 
 			if (storageSystem.GameFastData.IsFirstTime)
 			{
-				var settings = storageSystem.IntermediateData.GameplayConfig.preferences;
+				var settings = _gameplayConfig.preferences;
 
 				data.music = settings.music;
 				data.sound = settings.sound;
@@ -97,7 +95,7 @@ namespace Game.UI
 
 		public void OnBackClick()
 		{
-			Hide();
+			HideAndDispose();
 		}
 
 		public void OnExitClick()

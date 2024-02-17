@@ -1,7 +1,6 @@
 using Game.Managers.GameManager;
-using Game.Services;
-using Game.Systems.CameraSystem;
 using Game.Systems.InfinityRoadSystem;
+using Game.Systems.UISystem;
 using Game.UI;
 using UnityEngine;
 using Zenject;

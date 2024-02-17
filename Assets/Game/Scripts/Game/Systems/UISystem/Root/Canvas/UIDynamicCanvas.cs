@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.UI
+namespace Game.Systems.UISystem
 {
     public class UIDynamicCanvas : UICanvas
     {

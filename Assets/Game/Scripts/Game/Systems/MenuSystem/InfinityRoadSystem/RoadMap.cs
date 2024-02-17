@@ -1,23 +1,10 @@
-using Cysharp.Threading.Tasks;
-using DG.Tweening;
-
-using Game.Systems.LevelSystem;
-using Game.UI;
-
-using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-
-
-
 using UnityEngine;
-
-using Zenject;
 
 namespace Game.Systems.InfinityRoadSystem
 {
-	public sealed class RoadMap : MonoBehaviour
+	public sealed class RoadMap : MonoBehaviour, IDisposable
 	{
 		public event Action OnPinDestinated;
 		
@@ -41,7 +28,8 @@ namespace Game.Systems.InfinityRoadSystem
 		}
 		
 		public void Initialize(
-			RoadPin RoadPin
+			RoadPin RoadPin,
+			Camera camera
 			)
 		{
 			_roadPin = RoadPin;
@@ -52,22 +40,32 @@ namespace Game.Systems.InfinityRoadSystem
 			{
 				for (int i = 0; i < levels.Count; i++)
 				{
-					levels[ i ].Enable( i <= CurrentIndex );
-					levels[ i ].EnableStars( 0 );
-					levels[ i ].onClicked += LevelClickedHandler;
+					UIRoadLevel level = levels[ i ];
+					level.Enable( i <= CurrentIndex );
+					level.EnableStars( 0 );
+					level.SetCamera( camera );
+					level.OnButtonClicked += LevelButtonClickedHandler;
 				}
 			}
 		}
-
+		
+		public void Dispose()
+		{
+			for (int i = 0; i < levels.Count; i++)
+			{
+				levels[ i ].OnButtonClicked -= LevelButtonClickedHandler;
+			}
+		}
+		
 		public Vector3 GetLastPosition()
 		{
 			return levels[ LastIndex ].transform.position;
 		}
 
-		private void LevelClickedHandler(UIRoadLevel level)
+		private void LevelButtonClickedHandler(UIRoadLevel level)
 		{
 			if ( _roadPin.IsInProcess ) return;
-
+			
 			_roadPin.Break();
 
 			if (level.IsEnable)

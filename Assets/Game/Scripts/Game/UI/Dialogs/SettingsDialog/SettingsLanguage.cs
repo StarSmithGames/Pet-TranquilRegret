@@ -20,12 +20,13 @@ namespace Game.Systems.SettingsSystem
 
 		[Inject] private StorageSystem.StorageSystem storageSystem;
 		[Inject] private LocalizationSystem localizationSystem;
+		[ Inject ] private GameplayConfig _gameplayConfig;
 
 		private LocalizationSettins settins;
 
 		private void Awake()
 		{
-			settins = storageSystem.IntermediateData.GameplayConfig.localizationSettins;
+			settins = _gameplayConfig.localizationSettins;
 
 			localizationSystem.onLocalizationChanged += OnLocalizationChanged;
 			OnLocalizationChanged();

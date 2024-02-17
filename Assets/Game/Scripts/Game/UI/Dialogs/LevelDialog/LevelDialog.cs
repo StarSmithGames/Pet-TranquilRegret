@@ -25,7 +25,6 @@ namespace Game.UI
 		public event Action onRightClicked;
 		public event Action onClosed;
 
-
 		public TMPro.TextMeshProUGUI title;
 		public Transform goalContent;
 		public Button startButton;
@@ -124,7 +123,7 @@ namespace Game.UI
 		{
 			Interactable(false);
 
-			Hide();
+			HideAndDispose();
 
 			onClosed?.Invoke();
 		}

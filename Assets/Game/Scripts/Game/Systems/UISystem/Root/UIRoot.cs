@@ -1,15 +1,6 @@
 using UnityEngine;
 
-using Zenject;
-
-namespace Game.UI
+namespace Game.Systems.UISystem
 {
-	public abstract class UIRoot : MonoBehaviour
-	{
-		public DiContainer Container => container;
-
-		[Inject] private DiContainer container;
-
-		public abstract Transform GetDialogsRoot();
-	}
+	public abstract class UIRoot : MonoBehaviour { }
 }

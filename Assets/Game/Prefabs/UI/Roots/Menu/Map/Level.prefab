@@ -130,7 +130,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 7999645889100495522}
         m_TargetAssemblyTypeName: Game.Systems.InfinityRoadSystem.UIRoadLevel, Assembly-CSharp
-        m_MethodName: OnClicked
+        m_MethodName: OnButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -511,6 +511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0da77f5d74c171643a60e21b6f623e43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Canvas: {fileID: 3820166446254239770}
   Text: {fileID: 9057135343427227953}
   On: {fileID: 3876209506850214680}
   Off: {fileID: 6715044042807468624}

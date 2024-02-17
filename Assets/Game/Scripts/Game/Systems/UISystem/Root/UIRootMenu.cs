@@ -1,15 +1,33 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
-namespace Game.UI
+namespace Game.Systems.UISystem
 {
     public sealed class UIRootMenu : UIRoot
 	{
+		public ViewAggregator DialogAggregator { get; private set; }
+		
 		public UINavigationCanvas NavigationCanvas;
         public UIDynamicCanvas DynamicCanvas;
         public UIFrontCanvas FrontCanvas;
 
         public List<Canvas> canvases = new();
+        
+        [ Inject ]
+        private void Construct(
+	        DiContainer container,
+	        UISettings uiSettings
+			)
+        {
+	        ViewCreator dialogCreator = new( container, DynamicCanvas.dialogsRoot );
+	        DialogAggregator = new( dialogCreator, uiSettings.Dialogs );
+        }
+
+        private void OnDestroy()
+        {
+	        DialogAggregator?.Dispose();
+        }
 
         public void ApplyCamera( Camera camera )
         {
@@ -18,7 +36,5 @@ namespace Game.UI
                 canvases[i].worldCamera = camera;
             }
         }
-
-        public override Transform GetDialogsRoot() => DynamicCanvas.dialogsRoot;
 	}
 }

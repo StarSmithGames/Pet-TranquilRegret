@@ -1,11 +1,9 @@
 using UnityEngine;
 
-namespace Game.UI
+namespace Game.Systems.UISystem
 {
 	public class UIRootGame : UIRoot
 	{
 		public UIGameCanvas gameCanvas;
-
-		public override Transform GetDialogsRoot() => gameCanvas.dialogsRoot;
 	}
 }

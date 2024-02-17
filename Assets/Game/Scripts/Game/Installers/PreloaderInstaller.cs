@@ -1,4 +1,4 @@
-using Game.UI;
+using Game.Systems.UISystem;
 using UnityEngine;
 using Zenject;
 

@@ -11,10 +11,11 @@ namespace Game.Systems.InfinityRoadSystem
 #endif
 	public class UIRoadLevel : MonoBehaviour
 	{
-		public event UnityAction<UIRoadLevel> onClicked;
+		public event UnityAction< UIRoadLevel > OnButtonClicked;
 
 		public bool IsEnable { get; private set; } = true;
 
+		public Canvas Canvas;
 		public TMPro.TextMeshProUGUI Text;
 		public Image On;
 		public Image Off;
@@ -46,10 +47,15 @@ namespace Game.Systems.InfinityRoadSystem
 				Stars[ i ].Activate( i <= count - 1 );
 			}
 		}
-		
-		public void OnClicked()
+
+		public void SetCamera( Camera camera )
 		{
-			onClicked?.Invoke(this);
+			Canvas.worldCamera = camera;
+		}
+		
+		public void OnButtonClick()
+		{
+			OnButtonClicked?.Invoke( this );
 		}
 	}
 }
