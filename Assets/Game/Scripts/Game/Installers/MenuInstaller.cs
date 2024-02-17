@@ -3,30 +3,29 @@ using Game.Services;
 using Game.Systems.CameraSystem;
 using Game.Systems.InfinityRoadSystem;
 using Game.UI;
-
+using UnityEngine;
 using Zenject;
 
 namespace Game.Installers
 {
-	public class MenuInstaller : MonoInstaller
+	public sealed class MenuInstaller : MonoInstaller< MenuInstaller >
     {
-		public UIRootMenu menuRoot;
-
-		public VerticalCamera verticalCamera;
 		public RoadMap roadMap;
 
 		public UIGoalItem goalPrefab;
+		
+		[ Header("UI") ]
+		public UIRootMenu UIRootMenu;
 
 		public override void InstallBindings()
 		{
+			Container.Bind< UIRootMenu >().FromComponentsInNewPrefab( UIRootMenu ).AsSingle().NonLazy();
+			
 			Container
 				.BindFactory<UIGoalItem, UIGoalItem.Factory>()
 				.FromComponentInNewPrefab(goalPrefab)
 				.AsSingle();
 
-			Container.Bind<UIRootMenu>().FromInstance(menuRoot);
-
-			Container.BindInstance(verticalCamera);
 			Container.BindInstance(roadMap);
 
 #if UNITY_EDITOR

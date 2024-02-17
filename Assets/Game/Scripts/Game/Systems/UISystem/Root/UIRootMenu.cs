@@ -30,11 +30,6 @@ namespace Game.UI
             gameData.IntermediateData.RootMenu = null;
 		}
 
-		public override Transform GetDialogsRoot()
-		{
-            return dynamicCanvas.dialogsRoot;
-		}
-
 		[Button(DirtyOnClick = true)]
         private void ApplyCamera()
         {

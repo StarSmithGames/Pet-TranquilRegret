@@ -1,6 +1,4 @@
 using Company.Module.Services.DelayedCallService;
-
-using Game.Managers.CharacterManager;
 using Game.Managers.GameManager;
 using Game.Managers.PauseManager;
 using Game.Managers.RewardManager;

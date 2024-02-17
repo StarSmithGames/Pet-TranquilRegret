@@ -1,65 +1,15 @@
 using Game.Extensions;
-using Game.Installers;
 using Game.Managers.SwipeManager;
 using Game.Systems.InfinityRoadSystem;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-using Zenject;
-
 namespace Game.Systems.CameraSystem
 {
-	public class VerticalCamera : MonoBehaviour
+	public sealed partial class VerticalCamera
 	{
-		public Vector3 TopPoint
-		{
-			get
-			{
-				if(roadMap == null)
-				{
-					roadMap = FindAnyObjectByType<MenuInstaller>().roadMap;
-				}
-
-				var bounds = roadMap.GetSprites().CalculateBounds();
-				var point = Vector3.zero;
-				point.y += bounds.size.y;
-				point.y += BottomPoint.y;
-
-				return point + topOffset;
-			}
-		}
-
-		public Vector3 TopPointCamera
-		{
-			get
-			{
-				var point = TopPoint;
-				point.y -= Camera.main.orthographicSize;
-
-				return point;
-			}
-		}
-
-		public Vector3 BottomPoint => startPoint;
-
-		public Vector3 BottomPointCamera
-		{
-			get
-			{
-				var point = BottomPoint;
-				point.y += Camera.main.orthographicSize;
-
-				return point;
-			}
-		}
-
-		public float mouseSensitivity = 1.0f;
-		public float dragDamping = 0.1f;
-		[Space]
-		public Vector3 startPoint;
-		public Vector3 topOffset;
-
 		private bool isSwiping = false;
 		private float swipeTime = 0.1f;
 		private float t = 0;
@@ -67,26 +17,24 @@ namespace Game.Systems.CameraSystem
 		private Vector3 lastPosition;
 		private Vector3 velocity;
 
-		public CameraOrtographics Ortographics
+		private readonly VerticalCameraSettings _settings;
+		private readonly Camera _camera;
+		private readonly Transform _transform;
+		private readonly RoadMap _roadMap;
+		
+		public VerticalCamera(
+			VerticalCameraSettings settings,
+			Camera camera,
+			Transform transform,
+			RoadMap roadMap
+			)
 		{
-			get
-			{
-				if(ortographics == null)
-				{
-					ortographics = new(Camera.main);
-				}
-				return ortographics;
-			}
-		}
-		private CameraOrtographics ortographics;
-
-		[Inject] private RoadMap roadMap;
-		[Inject] private SwipeManager swipeManager;
-
-		private void Awake()
-		{
+			_settings = settings ?? throw new ArgumentNullException( nameof(settings) );
+			_camera = camera ?? throw new ArgumentNullException( nameof(camera) );
+			_transform = transform ?? throw new ArgumentNullException( nameof(transform) );
+			_roadMap = roadMap ?? throw new ArgumentNullException( nameof(roadMap) );
+			
 			RefreshCamera();
-			swipeManager.OnSwipeDetected += OnSwipeDetected;
 		}
 
 		private void Update()
@@ -115,19 +63,25 @@ namespace Game.Systems.CameraSystem
 
 			ClampTransform();
 		}
+		
+		public void Swipe( Swipe swipeDirection, Vector2 swipeVelocity)
+		{
+			velocity = swipeVelocity;
+			velocity.x = 0;
+		}
 
 		public void SetPosition(Vector3 position)
 		{
 			position.x = 0;
-			position.z = transform.position.z;
-			transform.position = position;
+			position.z = _transform.position.z;
+			_transform.position = position;
 
 			ClampTransform();
 		}
 
 		private void ClampTransform()
 		{
-			transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, BottomPointCamera.y, TopPointCamera.y), transform.position.z);
+			_transform.position = new Vector3(_transform.position.x, Mathf.Clamp(_transform.position.y, BottomPointCamera.y, TopPointCamera.y), _transform.position.z);
 		}
 
 		private void PanCamera()
@@ -135,7 +89,7 @@ namespace Game.Systems.CameraSystem
 			if (Input.GetMouseButton(0))
 			{
 				Vector3 delta = lastPosition - Input.mousePosition;
-				transform.Translate(0, delta.y * mouseSensitivity, 0);
+				_transform.Translate(0, delta.y * _settings.MouseSensitivity, 0);
 				lastPosition = Input.mousePosition;
 			}
 		}
@@ -184,26 +138,60 @@ namespace Game.Systems.CameraSystem
 
 		private void RefreshCamera()
 		{
-			var sprites = roadMap.GetSprites();
+			var sprites = _roadMap.GetSprites();
 			var bounds = sprites.CalculateBounds();
 			var height = bounds.size.x / CameraUtilits.GetAspectTarget();
 			var newOrtho = height / 2.0f;
-			Ortographics.SetSize(newOrtho);
+			_camera.orthographicSize = newOrtho;
 		}
 
-		private void OnSwipeDetected(Swipe swipeDirection, Vector2 swipeVelocity)
+		// private void OnDrawGizmos()
+		// {
+		// 	Gizmos.color = Color.red;
+		//
+		// 	Gizmos.DrawSphere(startPoint, 1f);
+		// 	Gizmos.DrawLine(transform.position, BottomPoint);
+		// 	Gizmos.DrawLine(transform.position, TopPoint);
+		// }
+	}
+
+	public sealed partial class VerticalCamera
+	{
+		public Vector3 TopPoint
 		{
-			velocity = swipeVelocity;
-			velocity.x = 0;
+			get
+			{
+				var bounds = _roadMap.GetSprites().CalculateBounds();
+				var point = Vector3.zero;
+				point.y += bounds.size.y;
+				point.y += BottomPoint.y;
+
+				return point + _settings.TopOffset;
+			}
 		}
 
-		private void OnDrawGizmos()
+		public Vector3 TopPointCamera
 		{
-			Gizmos.color = Color.red;
+			get
+			{
+				var point = TopPoint;
+				point.y -= _camera.orthographicSize;
 
-			Gizmos.DrawSphere(startPoint, 1f);
-			Gizmos.DrawLine(transform.position, BottomPoint);
-			Gizmos.DrawLine(transform.position, TopPoint);
+				return point;
+			}
+		}
+
+		public Vector3 BottomPoint => _settings.StartPoint;
+
+		public Vector3 BottomPointCamera
+		{
+			get
+			{
+				var point = BottomPoint;
+				point.y += _camera.orthographicSize;
+
+				return point;
+			}
 		}
 	}
 }

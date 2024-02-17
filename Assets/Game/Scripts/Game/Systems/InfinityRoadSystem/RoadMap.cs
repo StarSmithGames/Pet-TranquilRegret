@@ -1,9 +1,6 @@
 using DG.Tweening;
 
-using Game.Installers;
 using Game.Services;
-using Game.Systems.CameraSystem;
-using Game.Systems.GameSystem;
 using Game.Systems.LevelSystem;
 using Game.Systems.StorageSystem;
 using Game.UI;
@@ -20,7 +17,6 @@ using UnityEditor;
 #endif
 
 using UnityEngine;
-using UnityEngine.UIElements;
 
 using Zenject;
 
@@ -39,12 +35,6 @@ namespace Game.Systems.InfinityRoadSystem
 		public List<LevelConnection> connections = new();
 		public CloudsSettings cloudsSettings;
 
-		[Inject] private VerticalCamera verticalCamera;
-		[Inject] private ViewService viewService;
-#if !DISABLE_SRDEBUGGER
-		[Inject] private SignalBus signalBus;
-#endif
-
 		private int lastIndex = -1;
 		private GameProgress gameProgress;
 		private LevelDialog levelDialog;
@@ -54,6 +44,8 @@ namespace Game.Systems.InfinityRoadSystem
 
 		private List<SpriteRenderer> sprites = new();
 
+		[Inject] private UIRootMenu _rootMenu;
+		[Inject] private ViewService viewService;
 		[Inject] private LevelRegularService _levelRegularService;
 
 		[Inject]
@@ -77,18 +69,11 @@ namespace Game.Systems.InfinityRoadSystem
 			AssignLevels();
 		}
 
-		private void Start()
-		{
-#if !DISABLE_SRDEBUGGER
-			signalBus?.Subscribe<SignalOnLevelChangedCheat>(OnLevelChangedCheat);
-#endif
-		}
-
 		private void Update()
 		{
-			Vector2 pos = verticalCamera.transform.position;
-			float lerp = Mathf.InverseLerp(cloudsSettings.GetWorldStartPoint().y, cloudsSettings.GetWorldEndPoint().y, pos.y);
-			cloudsSettings.clouds.SetLerp(lerp);
+			// Vector2 pos = _rootMenu.camera verticalCamera.transform.position;
+			// float lerp = Mathf.InverseLerp(cloudsSettings.GetWorldStartPoint().y, cloudsSettings.GetWorldEndPoint().y, pos.y);
+			// cloudsSettings.clouds.SetLerp(lerp);
 		}
 
 		public List<SpriteRenderer> GetSprites()
@@ -107,7 +92,7 @@ namespace Game.Systems.InfinityRoadSystem
 			else
 			{
 				Vector3 position = levels[lastIndex].transform.position;
-				verticalCamera.SetPosition(position);
+				// verticalCamera.SetPosition(position);
 				roadPin.transform.position = position;
 			}
 
@@ -159,10 +144,10 @@ namespace Game.Systems.InfinityRoadSystem
 
 				if (i == 0)
 				{
-					Vector3 bottom = verticalCamera.BottomPoint;
-					bottom.y += sprite.bounds.size.y / 2;
-					bottom.z = 0;
-					sprite.transform.position = bottom;
+					// Vector3 bottom = verticalCamera.BottomPoint;
+					// bottom.y += sprite.bounds.size.y / 2;
+					// bottom.z = 0;
+					// sprite.transform.position = bottom;
 				}
 				else
 				{
@@ -277,14 +262,9 @@ namespace Game.Systems.InfinityRoadSystem
 
 		private void OnDrawGizmosSelected()
 		{
-			if(verticalCamera == null)
-			{
-				verticalCamera = FindAnyObjectByType<MenuInstaller>().verticalCamera;
-			}
-
 			if (cloudsSettings.isFromTopCamera)
 			{
-				cloudsSettings.cloudsEndPoint = verticalCamera.TopPointCamera;
+				// cloudsSettings.cloudsEndPoint = verticalCamera.TopPointCamera;
 				EditorUtility.SetDirty(gameObject);
 			}
 

@@ -14,22 +14,22 @@ using Zenject;
 
 namespace Game.Installers
 {
-	public class GameInstaller : MonoInstaller<GameInstaller>
+	public sealed class GameInstaller : MonoInstaller<GameInstaller>
 	{
 		public PhysicsSettings physicsSettings;
 
-		[Header("UI")]
-		public UIRootGame uiRoot;
+		[ Header("UI") ]
+		public UIRootGame UIRootGame;
 		public UIGoal goalPrefab;
 		public UIPickup pickupPrefab;
 
 		public override void InstallBindings()
 		{
+			Container.Bind< UIRootGame >().FromComponentsInNewPrefab( UIRootGame ).AsSingle().NonLazy();
+			
 			Container.BindInstance(FindObjectOfType<CameraSystem>());
 
 			Container.BindInstance(physicsSettings);
-
-			Container.BindInstance(uiRoot);
 
 			//Container.BindFactory<UIPickup, UIPickup.Factory>()
 			//	.FromMonoPoolableMemoryPool(

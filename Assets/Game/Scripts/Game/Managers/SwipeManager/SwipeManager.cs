@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Game.Managers.SwipeManager
 {
-	public class SwipeManager : ITickable
+	public sealed class SwipeManager : ITickable
 	{
 		public bool IsSwiping => swipeDirection != Swipe.None;
 		public bool IsSwipingRight => IsSwipingDirection(Swipe.Right);
@@ -37,17 +37,17 @@ namespace Game.Managers.SwipeManager
 		public const float defaultDPI = 72f;
 		public const float dpcmFactor = 2.54f;
 
-		private Dictionary<Swipe, Vector2> cardinalDirections = new Dictionary<Swipe, Vector2>()
-	{
-		{ Swipe.Up,         CardinalDirection.Up        },
-		{ Swipe.Down,       CardinalDirection.Down      },
-		{ Swipe.Right,      CardinalDirection.Right     },
-		{ Swipe.Left,       CardinalDirection.Left      },
-		{ Swipe.UpRight,    CardinalDirection.UpRight   },
-		{ Swipe.UpLeft,     CardinalDirection.UpLeft    },
-		{ Swipe.DownRight,  CardinalDirection.DownRight },
-		{ Swipe.DownLeft,   CardinalDirection.DownLeft  }
-	};
+		private Dictionary<Swipe, Vector2> cardinalDirections = new()
+		{
+			{ Swipe.Up,         CardinalDirection.Up        },
+			{ Swipe.Down,       CardinalDirection.Down      },
+			{ Swipe.Right,      CardinalDirection.Right     },
+			{ Swipe.Left,       CardinalDirection.Left      },
+			{ Swipe.UpRight,    CardinalDirection.UpRight   },
+			{ Swipe.UpLeft,     CardinalDirection.UpLeft    },
+			{ Swipe.DownRight,  CardinalDirection.DownRight },
+			{ Swipe.DownLeft,   CardinalDirection.DownLeft  }
+		};
 
 		public Vector2 SwipeVelocity { get; private set; }
 
@@ -60,11 +60,11 @@ namespace Game.Managers.SwipeManager
 		private Vector2 firstPressPos;
 		private Vector2 secondPressPos;
 
-		private Settings settings;
+		private Settings _settings;
 
-		public SwipeManager(Settings settings)
+		public SwipeManager( Settings settings )
 		{
-			this.settings = settings;
+			_settings = settings;
 
 			float dpi = (Screen.dpi == 0) ? defaultDPI : Screen.dpi;
 			dpcm = dpi / dpcmFactor;
@@ -96,10 +96,10 @@ namespace Game.Managers.SwipeManager
 				float swipeCm = currentSwipe.magnitude / dpcm;
 
 				// Check the swipe is long enough to count as a swipe (not a touch, etc)
-				if (swipeCm < settings.minSwipeLength)
+				if (swipeCm < _settings.minSwipeLength)
 				{
 					// Swipe was not long enough, abort
-					if (!settings.triggerSwipeAtMinLength)
+					if (!_settings.triggerSwipeAtMinLength)
 					{
 						if (Application.isEditor)
 						{
@@ -152,7 +152,7 @@ namespace Game.Managers.SwipeManager
 				else
 				{
 					// Could count as a swipe if length is long enough
-					if (settings.triggerSwipeAtMinLength)
+					if (_settings.triggerSwipeAtMinLength)
 					{
 						return true;
 					}
@@ -181,7 +181,7 @@ namespace Game.Managers.SwipeManager
 			else
 			{
 				// Could count as a swipe if length is long enough
-				if (settings.triggerSwipeAtMinLength)
+				if (_settings.triggerSwipeAtMinLength)
 				{
 					return true;
 				}
@@ -192,7 +192,7 @@ namespace Game.Managers.SwipeManager
 
 		private bool IsDirection(Vector2 direction, Vector2 cardinalDirection)
 		{
-			var angle = settings.useEightDirections ? eightDirAngle : fourDirAngle;
+			var angle = _settings.useEightDirections ? eightDirAngle : fourDirAngle;
 			return Vector2.Dot(direction, cardinalDirection) > angle;
 		}
 
@@ -226,14 +226,14 @@ namespace Game.Managers.SwipeManager
 
 	class CardinalDirection
 	{
-		public static readonly Vector2 Up = new Vector2(0, 1);
-		public static readonly Vector2 Down = new Vector2(0, -1);
-		public static readonly Vector2 Right = new Vector2(1, 0);
-		public static readonly Vector2 Left = new Vector2(-1, 0);
-		public static readonly Vector2 UpRight = new Vector2(1, 1);
-		public static readonly Vector2 UpLeft = new Vector2(-1, 1);
-		public static readonly Vector2 DownRight = new Vector2(1, -1);
-		public static readonly Vector2 DownLeft = new Vector2(-1, -1);
+		public static readonly Vector2 Up = new(0, 1);
+		public static readonly Vector2 Down = new(0, -1);
+		public static readonly Vector2 Right = new(1, 0);
+		public static readonly Vector2 Left = new(-1, 0);
+		public static readonly Vector2 UpRight = new(1, 1);
+		public static readonly Vector2 UpLeft = new(-1, 1);
+		public static readonly Vector2 DownRight = new(1, -1);
+		public static readonly Vector2 DownLeft = new(-1, -1);
 	}
 
 	public enum Swipe

@@ -42,9 +42,9 @@ namespace Game.Services
 				T prefab = dialogs.OfType<T>().First();
 				if (prefab != null)
 				{
-					var root = GetCurrentUIParent();
-					var dialog = root.Container.InstantiatePrefabForComponent<T>(prefab, customParent ? customParent : root.GetDialogsRoot());
-					return dialog;
+					// var root = GetCurrentUIParent();
+					// var dialog = root.Container.InstantiatePrefabForComponent<T>(prefab, customParent ? customParent : root.GetDialogsRoot());
+					// return dialog;
 				}
 
 				throw new Exception($"[ViewService] Prefabs DOESN'T CONTAINS {typeof(T)} ERROR");

@@ -21,10 +21,5 @@ namespace Game.UI
 		{
 			gameData.IntermediateData.RootGame = null;
 		}
-
-		public override Transform GetDialogsRoot()
-		{
-			return gameCanvas.dialogsRoot;
-		}
 	}
 }
