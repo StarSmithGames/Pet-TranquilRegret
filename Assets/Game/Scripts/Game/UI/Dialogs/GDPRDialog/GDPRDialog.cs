@@ -12,18 +12,6 @@ namespace Game.UI
     {
         public event Action onAgreeClicked;
 
-        [Inject] private ViewService viewService;
-
-		private void Awake()
-		{
-            viewService.ViewDialogRegistrator.Registrate(this);
-		}
-
-		private void OnDestroy()
-		{
-            viewService?.ViewDialogRegistrator.UnRegistrate(this);
-		}
-
 		public void OnTermsClick()
         {
 

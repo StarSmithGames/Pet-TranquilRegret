@@ -17,19 +17,12 @@ namespace Game.UI
         public List<UIRadioButton> stars = new();
 		public Button button;
 
-		[Inject] private ViewService viewService;
-
 		private int currentRate = 0;
 
 		private void Awake()
 		{
 			//Enable(false);
 			UpdateUI();
-		}
-
-		private void OnDestroy()
-		{
-			viewService.ViewDialogRegistrator.UnRegistrate(this);
 		}
 
 		private void UpdateUI()

@@ -40,20 +40,12 @@ namespace Game.UI
 		private RegularLevelData levelData;
 
 		[Inject] private GameService _gameService;
-		[Inject] private ViewService viewService;
 		[Inject] private LocalizationSystem localizationSystem;
 		[Inject] private UIGoalItem.Factory goalFactory;
 
 		private void Awake()
 		{
-			viewService.ViewDialogRegistrator.Registrate(this);
-
 			goalContent.DestroyChildren();
-		}
-
-		private void OnDestroy()
-		{
-			viewService.ViewDialogRegistrator.UnRegistrate(this);
 		}
 
 		public override void Show(Action callback = null)

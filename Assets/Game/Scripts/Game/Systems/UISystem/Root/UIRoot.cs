@@ -9,5 +9,7 @@ namespace Game.UI
 		public DiContainer Container => container;
 
 		[Inject] private DiContainer container;
+
+		public abstract Transform GetDialogsRoot();
 	}
 }

@@ -17,6 +17,7 @@ namespace Game.UI
 		public UIGoal goalPrefab;
 		public UIAward awardPrefab;
 
+		public UISettings UISettings;
 		public List<ViewBase> dialogs = new();
 
 		public override void InstallBindings()
@@ -24,8 +25,7 @@ namespace Game.UI
 			Container.BindFactory<UIGoal, UIGoal.Factory>().FromComponentInNewPrefab(goalPrefab).AsSingle();
 			Container.BindFactory<UIAward, UIAward.Factory>().FromComponentInNewPrefab(awardPrefab).AsSingle();
 
-			Container.BindInstance(dialogs);
-			Container.BindInterfacesAndSelfTo<ViewService>().AsSingle().NonLazy();
+			Container.BindInstance( UISettings );
 		}
 	}
 }

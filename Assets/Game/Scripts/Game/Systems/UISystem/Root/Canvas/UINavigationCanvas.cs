@@ -1,18 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
+using Game.Scripts.Extensions;
 using UnityEngine;
 
-public class UINavigationCanvas : MonoBehaviour
+namespace Game.UI
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public sealed class UINavigationCanvas : UICanvas
+	{
+		public RectTransform TabsContent;
+		
+		public float GetWorldHeight()
+		{
+			return TabsContent.GetImageHeight();
+		}
+	}
 }

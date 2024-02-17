@@ -6,8 +6,6 @@ namespace Game.Systems.CameraSystem
 	{
 		public static readonly Vector2 targetAspectRatio = new( 9f, 16f );
 
-		public static float GetAspectCurrent() => Camera.main.aspect;
-
 		public static float GetAspectTarget() => targetAspectRatio.x / targetAspectRatio.y;
 	}
 }

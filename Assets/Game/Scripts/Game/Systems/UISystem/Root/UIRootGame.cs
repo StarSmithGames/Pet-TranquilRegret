@@ -1,8 +1,4 @@
-using Game.Systems.StorageSystem;
-
 using UnityEngine;
-
-using Zenject;
 
 namespace Game.UI
 {
@@ -10,16 +6,6 @@ namespace Game.UI
 	{
 		public UIGameCanvas gameCanvas;
 
-		[Inject] private StorageSystem gameData;
-
-		private void Awake()
-		{
-			gameData.IntermediateData.RootGame = this;
-		}
-
-		private void OnDestroy()
-		{
-			gameData.IntermediateData.RootGame = null;
-		}
+		public override Transform GetDialogsRoot() => gameCanvas.dialogsRoot;
 	}
 }

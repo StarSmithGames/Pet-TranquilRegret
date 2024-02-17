@@ -18,7 +18,6 @@ namespace Game.Systems.LevelSystem
 
 		[Inject] private StorageSystem.StorageSystem storageSystem;
 		[Inject] private SpawnSystem.SpawnSystem spawnSystem;
-		[Inject] private ViewService viewService;
 		[Inject] private RewardManager rewardManager;
 
 		public LevelPresenter(
@@ -79,7 +78,7 @@ namespace Game.Systems.LevelSystem
 
 			storageSystem.Save();
 
-			viewService.TryShowDialog<FinishLevelDialog>();
+			// viewService.TryShowDialog<FinishLevelDialog>();
 		}
 
 		public void Lose()

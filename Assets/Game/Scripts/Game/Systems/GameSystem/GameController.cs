@@ -4,7 +4,7 @@ using Game.Services;
 using Game.Services.GameService;
 using Game.Systems.LevelSystem;
 using Game.Systems.StorageSystem;
-
+using Game.UI.Services;
 using StarSmithGames.Core.Utils;
 using StarSmithGames.Go.ApplicationHandler;
 using StarSmithGames.Go.LocalizationSystem;
@@ -25,7 +25,6 @@ namespace Game.Systems.GameSystem
 		[Inject] private GameService _gameService;
 		[Inject] private GameplayConfig gameplayConfig;
 		[Inject] private GameManager gameManager;
-		[Inject] private ViewService viewService;
         [Inject] private StorageSystem.StorageSystem storageSystem;
         [Inject] private LocalizationSystem localizationSystem;
 		[Inject] private SignalBus signalBus;
@@ -95,7 +94,7 @@ namespace Game.Systems.GameSystem
 
 				if (gameManager.IsGame)
 				{
-					if (!viewService.IsSafeDialogShowig())
+					// if (!viewService.IsSafeDialogShowig())
 					{
 						//var level = levelManager.CurrentLevel;
 						//var isSafeLevel = !level.Model.UseLives;// || level.Model.UseLives && _livesManager.IsInfiniteLives();

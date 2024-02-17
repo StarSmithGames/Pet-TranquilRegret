@@ -24,7 +24,6 @@ namespace Game.UI
 		public UIRadioButton vibration;
 		public Button exitButton;
 
-		[Inject] private ViewService viewService;
 		[Inject] private StorageSystem storageSystem;
 		[Inject] private GameManager gameManager;
 		[Inject] private GameLoader gameLoader;
@@ -32,16 +31,9 @@ namespace Game.UI
 
 		private void Awake()
 		{
-			viewService.ViewDialogRegistrator.Registrate(this);
-
 			Enable(false);
 
 			AssignData();
-		}
-
-		private void OnDestroy()
-		{
-			viewService.ViewDialogRegistrator.UnRegistrate(this);
 		}
 
 		public override void Show(Action callback = null)

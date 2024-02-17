@@ -1,15 +1,22 @@
-using Game.Extensions;
 using Game.Managers.SwipeManager;
-using Game.Systems.InfinityRoadSystem;
+using Game.Systems.CameraSystem;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Game.Systems.CameraSystem
+namespace Game.Systems.InfinityRoadSystem
 {
-	public sealed partial class VerticalCamera
+	public sealed partial class RoadCamera : MonoBehaviour
 	{
+		public Camera Camera;
+		[Space]
+		public float MouseSensitivity = 0.1f;
+		public float DragDamping = 0.0f;
+		[Space]
+		public Vector3 TopOffset = Vector3.zero;
+
+		private Vector3 _startPoint;
 		private bool isSwiping = false;
 		private float swipeTime = 0.1f;
 		private float t = 0;
@@ -17,26 +24,26 @@ namespace Game.Systems.CameraSystem
 		private Vector3 lastPosition;
 		private Vector3 velocity;
 
-		private readonly VerticalCameraSettings _settings;
-		private readonly Camera _camera;
-		private readonly Transform _transform;
-		private readonly RoadMap _roadMap;
+		private Bounds _roadBounds;
 		
-		public VerticalCamera(
-			VerticalCameraSettings settings,
-			Camera camera,
-			Transform transform,
-			RoadMap roadMap
-			)
+		public void SetBounds( Bounds roadBounds, Vector3 startPoint )
 		{
-			_settings = settings ?? throw new ArgumentNullException( nameof(settings) );
-			_camera = camera ?? throw new ArgumentNullException( nameof(camera) );
-			_transform = transform ?? throw new ArgumentNullException( nameof(transform) );
-			_roadMap = roadMap ?? throw new ArgumentNullException( nameof(roadMap) );
+			_roadBounds = roadBounds;
+			_startPoint = startPoint;
 			
 			RefreshCamera();
+			
+			void RefreshCamera()
+			{
+				var height = _roadBounds.size.x / Camera.aspect;
+				var newOrtho = height / 2.0f;
+				Camera.orthographicSize = newOrtho;
+			}
 		}
 
+		/// <summary>
+		/// TODO: REmove
+		/// </summary>
 		private void Update()
 		{
 			if (!IsPointerOverUIObject())
@@ -73,15 +80,15 @@ namespace Game.Systems.CameraSystem
 		public void SetPosition(Vector3 position)
 		{
 			position.x = 0;
-			position.z = _transform.position.z;
-			_transform.position = position;
+			position.z = transform.position.z;
+			transform.position = position;
 
 			ClampTransform();
 		}
 
 		private void ClampTransform()
 		{
-			_transform.position = new Vector3(_transform.position.x, Mathf.Clamp(_transform.position.y, BottomPointCamera.y, TopPointCamera.y), _transform.position.z);
+			transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, BottomPointCamera.y, TopPointCamera.y), transform.position.z);
 		}
 
 		private void PanCamera()
@@ -89,7 +96,7 @@ namespace Game.Systems.CameraSystem
 			if (Input.GetMouseButton(0))
 			{
 				Vector3 delta = lastPosition - Input.mousePosition;
-				_transform.Translate(0, delta.y * _settings.MouseSensitivity, 0);
+				transform.Translate(0, delta.y * MouseSensitivity, 0);
 				lastPosition = Input.mousePosition;
 			}
 		}
@@ -136,37 +143,20 @@ namespace Game.Systems.CameraSystem
 			return results.Count > 0;
 		}
 
-		private void RefreshCamera()
-		{
-			var sprites = _roadMap.GetSprites();
-			var bounds = sprites.CalculateBounds();
-			var height = bounds.size.x / CameraUtilits.GetAspectTarget();
-			var newOrtho = height / 2.0f;
-			_camera.orthographicSize = newOrtho;
-		}
 
-		// private void OnDrawGizmos()
-		// {
-		// 	Gizmos.color = Color.red;
-		//
-		// 	Gizmos.DrawSphere(startPoint, 1f);
-		// 	Gizmos.DrawLine(transform.position, BottomPoint);
-		// 	Gizmos.DrawLine(transform.position, TopPoint);
-		// }
 	}
 
-	public sealed partial class VerticalCamera
+	public sealed partial class RoadCamera
 	{
 		public Vector3 TopPoint
 		{
 			get
 			{
-				var bounds = _roadMap.GetSprites().CalculateBounds();
 				var point = Vector3.zero;
-				point.y += bounds.size.y;
+				point.y += _roadBounds.size.y;
 				point.y += BottomPoint.y;
 
-				return point + _settings.TopOffset;
+				return point + TopOffset;
 			}
 		}
 
@@ -175,20 +165,20 @@ namespace Game.Systems.CameraSystem
 			get
 			{
 				var point = TopPoint;
-				point.y -= _camera.orthographicSize;
+				point.y -= Camera.orthographicSize;
 
 				return point;
 			}
 		}
 
-		public Vector3 BottomPoint => _settings.StartPoint;
+		public Vector3 BottomPoint => _startPoint;
 
 		public Vector3 BottomPointCamera
 		{
 			get
 			{
 				var point = BottomPoint;
-				point.y += _camera.orthographicSize;
+				point.y += Camera.orthographicSize;
 
 				return point;
 			}

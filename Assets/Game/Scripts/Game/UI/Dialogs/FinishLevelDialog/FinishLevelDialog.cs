@@ -26,20 +26,9 @@ namespace Game.UI
 
 		private List<Transform> awardsTransforms = new();
 
-		[Inject] private ViewService viewService;
 		[Inject] private GameService _gameService;
 		[Inject] private LevelManager _levelManager;
 		[Inject] private UIAward.Factory factoryAward;
-
-		private void Awake()
-		{
-			viewService.ViewDialogRegistrator.Registrate(this);
-		}
-
-		private void OnDestroy()
-		{
-			viewService.ViewDialogRegistrator.UnRegistrate(this);
-		}
 
 		public override void Show(Action callback = null)
 		{

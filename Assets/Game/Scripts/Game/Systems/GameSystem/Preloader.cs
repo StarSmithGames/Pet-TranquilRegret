@@ -18,7 +18,6 @@ namespace Game.Systems.GameSystem
 
 		[Inject] private StorageSystem.StorageSystem gameData;
 		[Inject] private GameplayConfig gameplayConfig;
-		[Inject] private ViewService viewService;
 		[Inject] private GameLoader gameLoader;
 		[Inject] private GameService _gameService;
 
@@ -28,9 +27,9 @@ namespace Game.Systems.GameSystem
 
 			if (!gameData.GameFastData.IsGDPRApplied)
 			{
-				dialog = viewService.ViewDialogRegistrator.GetAs<GDPRDialog>();
-				dialog.onAgreeClicked += OnAgreeClicked;
-				dialog.Show();
+				// dialog = viewService.ViewDialogRegistrator.GetAs<GDPRDialog>();
+				// dialog.onAgreeClicked += OnAgreeClicked;
+				// dialog.Show();
 			}
 			else
 			{

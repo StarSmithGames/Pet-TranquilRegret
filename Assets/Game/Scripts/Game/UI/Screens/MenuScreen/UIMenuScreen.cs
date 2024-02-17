@@ -12,16 +12,13 @@ namespace Game.UI
 		public TMPro.TextMeshProUGUI HardDiamondsText;
 		
 		private StorageSystem _storageSystem;
-		private ViewService _viewService;
 
 		[ Inject ]
 		private void Construct(
-			StorageSystem storageSystem,
-			ViewService viewService
+			StorageSystem storageSystem
 			)
 		{
 			_storageSystem = storageSystem ?? throw new ArgumentNullException( nameof(storageSystem) );
-			_viewService = viewService ?? throw new ArgumentNullException( nameof(viewService) );
 			
 			_storageSystem.GameFastData.SoftCoins.onChanged += CoinsChangedHandler;
 			_storageSystem.GameFastData.HardDiamonds.onChanged += DiamondsChangedHandler;
@@ -37,7 +34,7 @@ namespace Game.UI
 
 		public void OnSettingsButtonClick()
 		{
-			_viewService.TryShowDialog< SettingsDialog >();
+			// _viewService.TryShowDialog< SettingsDialog >();
 		}
 		
 		public void OnCoinsButtonClick()

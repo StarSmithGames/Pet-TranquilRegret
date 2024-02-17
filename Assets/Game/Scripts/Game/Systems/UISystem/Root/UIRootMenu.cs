@@ -1,42 +1,24 @@
-using Game.Systems.StorageSystem;
-
-using Sirenix.OdinInspector;
-
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Zenject;
-
 namespace Game.UI
 {
-    public class UIRootMenu : UIRoot
+    public sealed class UIRootMenu : UIRoot
 	{
-        public Camera camera;
-
-        public UIDynamicCanvas dynamicCanvas;
+		public UINavigationCanvas NavigationCanvas;
+        public UIDynamicCanvas DynamicCanvas;
+        public UIFrontCanvas FrontCanvas;
 
         public List<Canvas> canvases = new();
 
-        [Inject] private StorageSystem gameData;
-
-		private void Awake()
-		{
-            gameData.IntermediateData.RootMenu = this;
-		}
-
-		private void OnDestroy()
-		{
-            gameData.IntermediateData.RootMenu = null;
-		}
-
-		[Button(DirtyOnClick = true)]
-        private void ApplyCamera()
+        public void ApplyCamera( Camera camera )
         {
             for (int i = 0; i < canvases.Count; i++)
             {
                 canvases[i].worldCamera = camera;
             }
         }
-    }
+
+        public override Transform GetDialogsRoot() => DynamicCanvas.dialogsRoot;
+	}
 }

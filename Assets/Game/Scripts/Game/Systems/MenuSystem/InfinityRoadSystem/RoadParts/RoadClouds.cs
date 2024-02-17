@@ -11,10 +11,9 @@ namespace Game.Systems.InfinityRoadSystem
 	[ExecuteAlways]
 #endif
 	public class RoadClouds : MonoBehaviour
-    {
-
-
-		public TMPro.TextMeshPro title;
+	{
+		public CloudsSettings Settings;
+	    public TMPro.TextMeshPro title;
 		public List<Transform> left = new();
 		public List<Transform> right = new();
 
@@ -53,6 +52,21 @@ namespace Game.Systems.InfinityRoadSystem
 
 			title.alpha = Mathf.InverseLerp(0.5f, 1f, lerp);
 		}
+		
+		public Vector2 GetWorldStartPoint()
+		{
+			if ( Settings.isFromEndPoint)
+			{
+				return Settings.cloudsEndPoint - Settings.cloudsStartPoint;
+			}
+
+			return Settings.cloudsStartPoint;
+		}
+
+		public Vector2 GetWorldEndPoint()
+		{
+			return Settings.cloudsEndPoint;
+		}
 
 #if UNITY_EDITOR
 		[Button(DirtyOnClick = true)]
@@ -81,5 +95,14 @@ namespace Game.Systems.InfinityRoadSystem
 			public List<Vector2> startPositions = new();
 			public List<Vector2> endPositions = new();
 		}
+	}
+	
+	[System.Serializable]
+	public class CloudsSettings
+	{
+		public Vector2 cloudsStartPoint;
+		public Vector2 cloudsEndPoint;
+		public bool isFromTopCamera = true;
+		public bool isFromEndPoint = true;
 	}
 }
