@@ -1,7 +1,5 @@
 using DG.Tweening;
-
-using Game.Services;
-using Game.Services.GameService;
+using Game.Systems.GameSystem;
 using Game.Systems.LevelSystem;
 
 using StarSmithGames.Core;

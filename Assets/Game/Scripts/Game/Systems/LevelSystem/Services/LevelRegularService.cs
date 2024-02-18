@@ -1,5 +1,6 @@
 using Game.Systems.GameSystem;
 using System;
+using UnityEngine.SceneManagement;
 
 namespace Game.Systems.LevelSystem
 {
@@ -22,6 +23,11 @@ namespace Game.Systems.LevelSystem
 		public LevelConfig GetLevelConfig( int number )
 		{
 			return _gameplayConfig.levels[ number - 1 ];
+		}
+		
+		public LevelConfig GetLevelConfig( Scene scene )
+		{
+			return _gameplayConfig.GetAllLevels().Find((x) => x.scene.SceneName == scene.name);
 		}
 	}
 }

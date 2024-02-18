@@ -1,12 +1,9 @@
 using Game.Systems.LevelSystem;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
 
-using Zenject;
-
-namespace Game.HUD.Gameplay
+namespace Game.UI
 {
-	public class UITimer : MonoBehaviour
+	public sealed class UITimer : MonoBehaviour
 	{
 		public TMPro.TextMeshProUGUI timeMinutes;
 		public TMPro.TextMeshProUGUI timeSeconds;
@@ -16,18 +13,18 @@ namespace Game.HUD.Gameplay
 		public SliderColor silver;
 		public SliderColor cooper;
 
-		private LevelTimer levelTimer;
+		private Timer _levelTimer;
 
-		[Inject] private LevelManager levelManager;
-
-		private void Start()
+		public void SetTimer( Timer timer )
 		{
-			levelTimer = levelManager.CurrentLevel.Presenter.LevelTimer;
+			_levelTimer = timer;
 		}
 
 		private void Update()
 		{
-			SetRemainigTime(levelTimer.GetMinutes(), levelTimer.GetSeconds(), levelTimer.GetMilliseconds());
+			if ( _levelTimer == null ) return;
+			
+			SetRemainigTime(_levelTimer.GetMinutes(), _levelTimer.GetSeconds(), _levelTimer.GetMilliseconds());
 		}
 
 		public void SetRemainigTime(int minutes, int seconds, int milliseconds)

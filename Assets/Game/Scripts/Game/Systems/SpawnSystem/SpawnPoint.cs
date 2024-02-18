@@ -29,7 +29,6 @@ namespace Game.Systems.SpawnSystem
 		public Settings settings;
 
 		[Inject] private DiContainer diContainer;
-		[Inject] private StorageSystem.StorageSystem gameData;
 		[Inject] private CharacterManager characterManager;
 		[Inject] private CameraSystem.CameraSystem cameraSystem;
 		[Inject] private GameplayConfig gameplayConfig;

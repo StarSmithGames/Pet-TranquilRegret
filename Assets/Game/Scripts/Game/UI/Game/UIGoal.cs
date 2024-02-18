@@ -8,9 +8,9 @@ using UnityEngine.UI;
 
 using Zenject;
 
-namespace Game.HUD.Gameplay
+namespace Game.UI
 {
-	public class UIGoal : MonoBehaviour
+	public sealed class UIGoal : MonoBehaviour
 	{
 		public Image icon;
 		public TMPro.TextMeshProUGUI text;
@@ -19,21 +19,21 @@ namespace Game.HUD.Gameplay
 		public PunchData punch;
 
 		private IGoal currentGoal;
-
-		private void OnDestroy()
-		{
-			if(currentGoal != null)
-			{
-				currentGoal.onChanged -= UpdateCount;
-			}
-		}
-
+		
 		public void SetGoal(IGoal goal)
 		{
 			currentGoal = goal;
 
 			currentGoal.onChanged += UpdateCount;
 			UpdateUI();
+		}
+		
+		private void OnDestroy()
+		{
+			if(currentGoal != null)
+			{
+				currentGoal.onChanged -= UpdateCount;
+			}
 		}
 
 		private void UpdateUI()

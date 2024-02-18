@@ -16,7 +16,7 @@ namespace Game.Systems.MenuSystem
 #if UNITY_EDITOR
 	[ ExecuteAlways ]
 #endif
-	public sealed class MenuSystem : MonoBehaviour
+	public sealed class MenuController : MonoBehaviour
 	{
 		public RoadCamera RoadCamera;
 		public RoadClouds RoadClouds;

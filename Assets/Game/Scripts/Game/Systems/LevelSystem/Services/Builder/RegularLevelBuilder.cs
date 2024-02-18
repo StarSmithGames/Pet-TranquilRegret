@@ -20,7 +20,8 @@ namespace Game.Systems.LevelSystem
 		{
 			LevelModel model = new( _levelRegularService.GetLevelNumber( _levelConfig ), _levelConfig );
 			LevelGameplay gameplay = new( _levelConfig );
-			return new RegularLevel( new( model, gameplay ) );
+			EstimatedTimer timer = new();
+			return new RegularLevel( new( model, gameplay, timer ) );
 		}
 	}
 }

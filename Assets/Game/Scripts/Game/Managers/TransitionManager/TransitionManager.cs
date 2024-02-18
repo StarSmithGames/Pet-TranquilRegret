@@ -1,49 +1,67 @@
-using Game.Managers.GameManager;
+using Cysharp.Threading.Tasks;
 using StarSmithGames.Go.SceneManager;
 using StarSmithGames.IoC.AsyncManager;
 
 using System;
 using System.Collections;
-using UnityEditor;
-
 using UnityEngine;
-
-using Zenject;
 
 namespace Game.Managers.TransitionManager
 {
 	public class TransitionManager
 	{
-		[Inject] private AsyncManager asyncManager;
+		private InfinityLoading _infinityLoading;
+		private AsyncManager _asyncManager;
 
-		private InfinityLoading infinityLoading;
-
-		public TransitionManager(InfinityLoading infinityLoading)
+		public TransitionManager(
+			InfinityLoading infinityLoading,
+			AsyncManager asyncManager
+			)
 		{
-			this.infinityLoading = infinityLoading;
+			_infinityLoading = infinityLoading;
+			_asyncManager = asyncManager;
 		}
 
 		public void StartInfinityLoadingFict(FictProgressHandler fictProgressHandler, Action onShowed = null, Action onHided = null, Action callback = null)
 		{
-			asyncManager.StartCoroutine(LoaderFict(fictProgressHandler, onShowed, onHided, callback));
+			_asyncManager.StartCoroutine(LoaderFict(fictProgressHandler, onShowed, onHided, callback));
 		}
 
+		public void StartInfinityLoadingAsync(Transition transition, Action onShowed = null, Action onHided = null, Action callback = null)
+		{
+			LoaderProgressAsync( transition, onShowed, onHided, callback ).Forget();
+		}
+		
 		public void StartInfinityLoading(Transition transition, Action onShowed = null, Action onHided = null, Action callback = null)
 		{
-			asyncManager.StartCoroutine(LoaderProgress(transition, onShowed, onHided, callback));
+			_asyncManager.StartCoroutine( LoaderProgress( transition, onShowed, onHided, callback ) );
+		}
+		
+		private async UniTask LoaderProgressAsync(Transition transition, Action onShowed = null, Action onHided = null, Action callback = null)
+		{
+			_infinityLoading.SetProgress(0);
+			_infinityLoading.Show(onShowed);
+			await _infinityLoading.WaitUntilProcessDone();
+			await UniTask.WaitForSeconds(0.16f);
+			transition.Invoke();
+			await Loop(transition.Progress);
+			await transition.WaitUntilDone();
+			await UniTask.WaitForSeconds(0.16f);
+			_infinityLoading.Hide(onHided);
+			callback?.Invoke();
 		}
 
 		private IEnumerator LoaderProgress(Transition transition, Action onShowed = null, Action onHided = null, Action callback = null)
 		{
-			infinityLoading.SetProgress(0);
-			infinityLoading.Show(onShowed);
-			yield return infinityLoading.WaitUntilProcessDone();
+			_infinityLoading.SetProgress(0);
+			_infinityLoading.Show(onShowed);
+			yield return _infinityLoading.WaitUntilProcessDone();
 			yield return new WaitForSeconds(0.16f);
 			transition.Invoke();
 			yield return Loop(transition.Progress);
 			yield return transition.WaitUntilDone();
 			yield return new WaitForSeconds(0.16f);
-			infinityLoading.Hide(onHided);
+			_infinityLoading.Hide(onHided);
 			callback?.Invoke();
 		}
 
@@ -51,14 +69,14 @@ namespace Game.Managers.TransitionManager
 		{
 			fictProgressHandler.speed = 65f;
 
-			infinityLoading.Show(() =>
+			_infinityLoading.Show(() =>
 			{
 				onShowed?.Invoke();
 			});
-			yield return infinityLoading.WaitUntilProcessDone();
+			yield return _infinityLoading.WaitUntilProcessDone();
 			yield return null;
 			yield return fictProgressHandler.WaitUntilDone();
-			infinityLoading.Hide(onHided);
+			_infinityLoading.Hide(onHided);
 			callback?.Invoke();
 		}
 
@@ -66,12 +84,12 @@ namespace Game.Managers.TransitionManager
 		{
 			while (!progress.IsDone)
 			{
-				infinityLoading.SetProgress(progress.GetProgress());
+				_infinityLoading.SetProgress(progress.GetProgress());
 
 				yield return null;
 			}
 
-			infinityLoading.SetProgress(100);
+			_infinityLoading.SetProgress(100);
 		}
 	}
 

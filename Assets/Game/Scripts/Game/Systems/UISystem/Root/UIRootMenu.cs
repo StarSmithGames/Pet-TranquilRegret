@@ -20,7 +20,7 @@ namespace Game.Systems.UISystem
 	        UISettings uiSettings
 			)
         {
-	        ViewCreator dialogCreator = new( container, DynamicCanvas.dialogsRoot );
+	        ViewCreator dialogCreator = new( container, DynamicCanvas.DialogsRoot );
 	        DialogAggregator = new( dialogCreator, uiSettings.Dialogs );
         }
 

@@ -1,6 +1,6 @@
 using Game.Managers.CharacterManager;
 using Game.Systems.UISystem;
-
+using Game.UI;
 using Zenject;
 
 namespace Game.Systems.NavigationSystem
@@ -8,8 +8,6 @@ namespace Game.Systems.NavigationSystem
 	public class ControlPresenter
 	{
 		[Inject] private CharacterManager characterManager;
-
-		private UIGameCanvas gameCanvas;
 
 		public ControlPresenter()
 		{

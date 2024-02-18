@@ -46,7 +46,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
-  _monoInstallers: []
+  _monoInstallers:
+  - {fileID: -4425881880583793136}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -76,4 +77,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c51f56775f67492e983f7d0102b148b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UIRootPreloader: {fileID: 0}
+  UIRootPreloader: {fileID: 2695998377094869248, guid: e3d9c16cb7ac64549a5b330a92939d05, type: 3}

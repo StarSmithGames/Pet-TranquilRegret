@@ -22,7 +22,6 @@ namespace Game.Systems.GoalSystem
 			GoalsPrimary = new();
 			for ( int i = 0; i < config.primaryGoals.Count; i++ )
 			{
-				Debug.LogError( config.primaryGoals[ i ].config.BaseName );
 				GoalsPrimary.Add( new Goal( config.primaryGoals[ i ] ) );
 			}
 		}

@@ -2,7 +2,7 @@ using Game.Managers.GameManager;
 using Game.Systems.LevelSystem;
 using System;
 
-namespace Game.Services.GameService
+namespace Game.Systems.GameSystem
 {
 	public sealed class GameService
 	{

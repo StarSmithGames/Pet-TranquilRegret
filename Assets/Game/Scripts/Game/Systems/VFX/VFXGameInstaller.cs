@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Game.VFX
 {
-	public class VFXGameInstaller : MonoInstaller<VFXGameInstaller>
+	public class VFXGameInstaller : MonoInstaller< VFXGameInstaller >
 	{
 		[Header("Particals")]
 		public ParticalVFXFootStep stepFootPrintEffect;

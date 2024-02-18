@@ -24,7 +24,7 @@ namespace Game.UI
 		[Inject] private StorageSystem storageSystem;
 		[ Inject ] private GameplayConfig _gameplayConfig;
 		[Inject] private GameManager gameManager;
-		[Inject] private GameLoader gameLoader;
+		[Inject] private GameLoaderService _gameLoaderService;
 		[Inject] private PauseManager pauseManager;
 
 		private void Awake()
@@ -100,7 +100,7 @@ namespace Game.UI
 
 		public void OnExitClick()
 		{
-			gameLoader.LoadMenu();
+			_gameLoaderService.LoadMenu();
 		}
 	}
 }

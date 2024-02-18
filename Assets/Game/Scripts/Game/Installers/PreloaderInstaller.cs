@@ -1,3 +1,4 @@
+using Game.Systems.GameSystem;
 using Game.Systems.UISystem;
 using UnityEngine;
 using Zenject;
@@ -12,6 +13,7 @@ namespace Game.Installers
 		public override void InstallBindings()
 		{
 			Container.Bind< UIRootPreloader >().FromComponentsInNewPrefab( UIRootPreloader ).AsSingle().NonLazy();
+			Container.BindInterfacesAndSelfTo< Preloader >().AsSingle().NonLazy();
 		}
 	}
 }

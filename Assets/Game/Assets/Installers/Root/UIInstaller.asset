@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: UIInstaller
   m_EditorClassIdentifier: 
   UISettings:
+    PreloadDialogs:
+    - {fileID: 5593679966113353459, guid: 66140f3684149144aabc00e554e61600, type: 3}
     Dialogs:
     - {fileID: 7773918690546248892, guid: 8f74944daeb1e114e8645ba194504551, type: 3}
     - {fileID: 3711055595699338396, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
