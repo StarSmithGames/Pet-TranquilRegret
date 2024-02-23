@@ -1,5 +1,5 @@
 using Cysharp.Threading.Tasks;
-using StarSmithGames.Go.SceneManager;
+using Game.Systems.SceneSystem;
 using StarSmithGames.IoC.AsyncManager;
 
 using System;
@@ -75,7 +75,7 @@ namespace Game.Managers.TransitionManager
 			});
 			yield return _infinityLoading.WaitUntilProcessDone();
 			yield return null;
-			yield return fictProgressHandler.WaitUntilDone();
+			// yield return fictProgressHandler.WaitUntilDone();
 			_infinityLoading.Hide(onHided);
 			callback?.Invoke();
 		}
@@ -95,35 +95,43 @@ namespace Game.Managers.TransitionManager
 
 	public class Transition
 	{
-		public IProgressHandler Progress => progress;
-		private IProgressHandler progress;
+		private event Action _onProgressCompleted;
+		private Func<IProgressHandler> _progressHandler;
+		
+		public IProgressHandler Progress => _progress;
+		private IProgressHandler _progress;
 
-		private event Action onProgressCompleted;
-		private Func<IProgressHandler> progressHandler;
-		private bool isAllowed;
+		private bool _isAllowed;
 
 		public Transition(Func<IProgressHandler> progressHandler, bool allow = true, Action onProgressCompleted = null)
 		{
-			this.progressHandler = progressHandler;
-			this.isAllowed = allow;
-			this.onProgressCompleted = onProgressCompleted;
+			_progressHandler = progressHandler;
+			_isAllowed = allow;
+			_onProgressCompleted = onProgressCompleted;
 		}
 
 		public void Invoke()
 		{
-			progress = progressHandler.Invoke();
+			_progress = _progressHandler.Invoke();
 		}
 
 		public void Allow()
 		{
-			isAllowed = true;
+			_isAllowed = true;
 		}
 
 		public IEnumerator WaitUntilDone()
 		{
-			yield return progress.WaitUntilDone();
-			onProgressCompleted?.Invoke();
-			yield return new WaitUntil(() => isAllowed);
+			yield return new WaitUntil( () => _progress.IsDone );
+			_onProgressCompleted?.Invoke();
+			yield return new WaitUntil( () => _isAllowed );
+		}
+
+		public async UniTask WaitUntilDoneAsync()
+		{
+			await UniTask.WaitUntil( () => _progress.IsDone );
+			_onProgressCompleted?.Invoke();
+			await UniTask.WaitUntil( () => _isAllowed );
 		}
 	}
 }

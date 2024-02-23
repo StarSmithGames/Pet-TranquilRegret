@@ -1,5 +1,7 @@
 using Game.Systems.GameSystem;
 using System;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game.Systems.LevelSystem
 {
@@ -25,17 +27,18 @@ namespace Game.Systems.LevelSystem
 			CurrentLevel?.Dispose();
 
 			_gameLoaderService.LoadLevel( sceneName, true,
-			onShowed: () =>
+			onCompleted: () =>
 			{
 				BuildLevel( builder );
 				onBuilded?.Invoke();
 			},
-			onCompleted: () =>
+			callback:()=>
 			{
 				CurrentLevel?.Start();
 				OnLevelStarted?.Invoke( CurrentLevel );
-			},
-			callback: callback );
+				
+				callback?.Invoke();
+			} );
 		}
 
         public void LeaveLevel( Action onDisposed = null, Action callback = null )

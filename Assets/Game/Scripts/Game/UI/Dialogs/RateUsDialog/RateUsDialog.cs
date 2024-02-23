@@ -1,18 +1,9 @@
-using Game.Services;
-
-using StarSmithGames.Go;
-
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 namespace Game.UI
 {
-
-    public sealed class RateUsDialog : UIViewDialog
+    public sealed class RateUsDialog : UIViewQuartDialog
 	{
         public List<UIRadioButton> stars = new();
 		public Button button;

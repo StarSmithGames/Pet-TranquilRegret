@@ -15,7 +15,7 @@ using Zenject;
 
 namespace Game.UI
 {
-	public sealed class LevelDialog : UIViewDialog
+	public sealed class StartLevelDialog : UIViewQuartDialog
 	{
 		public event Action onStartClicked;
 		public event Action onLeftClicked;
@@ -31,7 +31,7 @@ namespace Game.UI
 		[Space]
 		public List<UILevelStar> stars = new();
 
-		private List<UIGoalItem> goals = new List<UIGoalItem>();
+		private List<UIGoalItem> goals = new();
 		private LevelConfig levelConfig;
 		private RegularLevelData levelData;
 

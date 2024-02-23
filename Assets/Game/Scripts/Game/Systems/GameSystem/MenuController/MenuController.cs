@@ -24,9 +24,9 @@ namespace Game.Systems.MenuSystem
 		public RoadPin RoadPin;
 		public RoadMap RoadMap;
 		[ Space ]
-		public Vector3 StartPoint = new( 0, 95, 0);
+		public Vector3 StartPoint = new( 0, 0, 0);
 
-		private LevelDialog _levelDialog;
+		private StartLevelDialog _startLevelDialog;
 		private GameProgress _gameProgress;
 
 		private UIRootMenu _uiRootMenu;
@@ -112,23 +112,23 @@ namespace Game.Systems.MenuSystem
 		
 		private void ShowLevelWindow()
 		{
-			_levelDialog = _uiRootMenu.DialogAggregator.CreateIfNotExist< LevelDialog >();
-			_levelDialog.onStartClicked += LevelStartClickedHandler;
-			_levelDialog.onClosed += LevelDialogClosedHandler;
-			_levelDialog.SetLevel( _levelRegularService.GetLevelConfig( RoadMap.LastIndex + 1 ), _gameProgress.regularLevels[ RoadMap.LastIndex ] );
-			_levelDialog.Show();
+			_startLevelDialog = _uiRootMenu.DialogAggregator.CreateIfNotExist< StartLevelDialog >();
+			_startLevelDialog.onStartClicked += StartLevelStartClickedHandler;
+			_startLevelDialog.onClosed += StartLevelDialogClosedHandler;
+			_startLevelDialog.SetLevel( _levelRegularService.GetLevelConfig( RoadMap.LastIndex + 1 ), _gameProgress.regularLevels[ RoadMap.LastIndex ] );
+			_startLevelDialog.Show();
 		}
 		
-		private void LevelStartClickedHandler()
+		private void StartLevelStartClickedHandler()
 		{
-			LevelDialogClosedHandler();
+			StartLevelDialogClosedHandler();
 			_storageSystem.GameFastData.LastRegularLevelIndex = RoadMap.LastIndex;
 		}
 
-		private void LevelDialogClosedHandler()
+		private void StartLevelDialogClosedHandler()
 		{
-			_levelDialog.onStartClicked -= LevelStartClickedHandler;
-			_levelDialog.onClosed -= LevelDialogClosedHandler;
+			_startLevelDialog.onStartClicked -= StartLevelStartClickedHandler;
+			_startLevelDialog.onClosed -= StartLevelDialogClosedHandler;
 		}
 
 		private void SwipeDetectedHandler( Swipe swipeDirection, Vector2 swipeVelocity )

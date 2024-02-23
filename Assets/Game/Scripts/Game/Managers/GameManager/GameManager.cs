@@ -40,7 +40,7 @@ namespace Game.Managers.GameManager
 			}
 			else
 			{
-				Debug.LogError($"Try to set state: {gameState}, but it's already setted.");
+				Debug.LogWarning($"Try to set state: {gameState}, but it's already setted.");
 			}
 		}
 	}

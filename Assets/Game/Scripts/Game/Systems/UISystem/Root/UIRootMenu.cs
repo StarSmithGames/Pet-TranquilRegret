@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -21,7 +22,7 @@ namespace Game.Systems.UISystem
 			)
         {
 	        ViewCreator dialogCreator = new( container, DynamicCanvas.DialogsRoot );
-	        DialogAggregator = new( dialogCreator, uiSettings.Dialogs );
+	        DialogAggregator = new( dialogCreator, uiSettings.MenuDialogs.Union( uiSettings.CommonDialogs ).ToList() );
         }
 
         private void OnDestroy()

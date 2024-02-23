@@ -1,4 +1,5 @@
 using Game.Managers.CharacterManager;
+using Game.Managers.DIManager;
 using Game.Managers.PauseManager;
 using Game.Systems.CameraSystem;
 using Game.Systems.LevelSystem;
@@ -35,7 +36,7 @@ namespace Game.Installers
 			PauseManagerInstaller.Install(Container);
 			CharacterManagerInstaller.Install(Container);
 			
-			LevelSystemGameInstaller.Install( Container );
+			Container.Resolve< DIManager >().SetContainer( Container );
 		}
 	}
 }

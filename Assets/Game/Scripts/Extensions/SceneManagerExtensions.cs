@@ -1,3 +1,4 @@
+using Game.Systems.SceneSystem;
 using StarSmithGames.Go.SceneManager;
 
 namespace Game.Extensions
@@ -10,6 +11,11 @@ namespace Game.Extensions
 		}
 
 		public static bool IsLevel(this SceneManager sceneManager)
+		{
+			return sceneManager.GetActiveScene().buildIndex > 1;
+		}
+		
+		public static bool IsLevel(this SceneSystem sceneManager)
 		{
 			return sceneManager.GetActiveScene().buildIndex > 1;
 		}

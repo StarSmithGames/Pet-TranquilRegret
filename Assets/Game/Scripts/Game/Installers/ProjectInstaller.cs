@@ -1,10 +1,13 @@
 using Company.Module.Services.DelayedCallService;
 using Game.Managers.ApplicationManager;
+using Game.Managers.AssetManager;
+using Game.Managers.DIManager;
 using Game.Managers.GameManager;
 using Game.Managers.RewardManager;
 using Game.Services;
 using Game.Systems.GameSystem;
 using Game.Systems.LevelSystem;
+using Game.Systems.SceneSystem;
 using Game.Systems.StorageSystem;
 
 using StarSmithGames.Go.ApplicationHandler;
@@ -26,12 +29,14 @@ namespace Game.Installers
 			ApplicationHandlerInstaller.Install(Container);
 			ApplicationManagerInstaller.Install( Container );
 			DelayedCallServiceInstaller.Install(Container);
+			DIManagerInstaller.Install( Container );
+			ResourcesManagerInstaller.Install( Container );
 			StorageSystemInstaller.Install(Container);
 			GameManagerInstaller.Install(Container);
-			LevelSystemRootInstaller.Install(Container);
+			LevelSystemInstaller.Install(Container);
 			RewardManagerInstaller.Install(Container);
-
-			Container.BindInterfacesAndSelfTo<SceneManager>().AsSingle();
+			SceneSystemInstaller.Install( Container );
+			
 			Container.BindInterfacesAndSelfTo<VSFXService>().AsSingle();
 			Container.BindInterfacesAndSelfTo< GameLoaderService >().AsSingle();
 			Container.BindInterfacesAndSelfTo< GameService >().AsSingle();
@@ -39,6 +44,8 @@ namespace Game.Installers
 			Container.BindInterfacesAndSelfTo< GamePipeline >().AsSingle().NonLazy();
 			
 			Container.BindInstance(gameplayConfig).AsSingle();
+
+			Container.Resolve< DIManager >().SetContainer( Container );
 		}
 	}
 }

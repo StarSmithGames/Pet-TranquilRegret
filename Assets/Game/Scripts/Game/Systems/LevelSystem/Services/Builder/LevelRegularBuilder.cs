@@ -1,5 +1,5 @@
+using Game.Managers.DIManager;
 using System;
-using Zenject;
 
 namespace Game.Systems.LevelSystem
 {
@@ -7,15 +7,15 @@ namespace Game.Systems.LevelSystem
 	{
 		private LevelConfig _config;
 
-		private readonly DiContainer _diContainer;
+		private readonly DIManager _diManager;
 		private readonly LevelRegularService _levelRegularService;
 		
 		public LevelRegularBuilder(
-			DiContainer diContainer,
+			DIManager diManager,
 			LevelRegularService levelRegularService
 			)
 		{
-			_diContainer = diContainer;
+			_diManager = diManager;
 			_levelRegularService = levelRegularService ?? throw new ArgumentNullException( nameof(levelRegularService) );
 		}
 		
@@ -31,7 +31,7 @@ namespace Game.Systems.LevelSystem
 			EstimatedTimer timer = new();
 
 			LevelPresenter presenter = new( model, gameplay, timer );
-			LevelRegularViewModel viewModel = _diContainer.Instantiate< LevelRegularViewModel >();
+			LevelRegularViewModel viewModel = _diManager.CurrentContainer.Instantiate< LevelRegularViewModel >();
 			viewModel.SetPresenter( presenter );
 			
 			return new RegularLevel( presenter, viewModel );

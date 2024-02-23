@@ -1,3 +1,4 @@
+using Game.Managers.DIManager;
 using Game.Managers.GameManager;
 using Game.Systems.InfinityRoadSystem;
 using Game.Systems.UISystem;
@@ -27,6 +28,8 @@ namespace Game.Installers
 
 			Container.BindInstance(roadMap);
 
+			Container.Resolve< DIManager >().SetContainer( Container );
+			
 #if UNITY_EDITOR
 			var gameManager = Container.Resolve<GameManager>();
 			if (gameManager.CurrentGameState == GameState.Empty)

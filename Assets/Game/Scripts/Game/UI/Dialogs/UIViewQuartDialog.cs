@@ -4,7 +4,7 @@ using System;
 
 namespace Game.UI
 {
-	public class UIViewDialog : ViewBase, IUIView
+	public abstract class UIViewQuartDialog : ViewQuartBase, IUIView
 	{
 		public event Action< IUIView > OnDisposed;
 

@@ -1,3 +1,4 @@
+using Game.Managers.DIManager;
 using Game.Systems.GameSystem;
 using Game.Systems.UISystem;
 using UnityEngine;
@@ -14,6 +15,8 @@ namespace Game.Installers
 		{
 			Container.Bind< UIRootPreloader >().FromComponentsInNewPrefab( UIRootPreloader ).AsSingle().NonLazy();
 			Container.BindInterfacesAndSelfTo< Preloader >().AsSingle().NonLazy();
+			
+			Container.Resolve< DIManager >().SetContainer( Container );
 		}
 	}
 }

@@ -39,8 +39,6 @@ namespace Game.Systems.LevelSystem
 			Presenter.Start();
 			ViewModel.Start();
 			
-			Debug.LogError( "STArt" );
-			
 			OnStarted?.Invoke();
 		}
 		

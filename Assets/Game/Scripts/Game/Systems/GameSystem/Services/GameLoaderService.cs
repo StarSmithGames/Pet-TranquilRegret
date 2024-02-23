@@ -1,6 +1,6 @@
+using Cysharp.Threading.Tasks;
 using Game.Managers.GameManager;
 using Game.Managers.TransitionManager;
-using StarSmithGames.Go.SceneManager;
 using System;
 
 namespace Game.Systems.GameSystem
@@ -10,17 +10,17 @@ namespace Game.Systems.GameSystem
 		private Transition _startLevelTransition;
 		
 		private GameManager _gameManager;
-		private SceneManager _sceneManager;
+		private SceneSystem.SceneSystem _sceneSystem;
 		private TransitionManager _transitionManager;
 
 		public GameLoaderService(
 			GameManager gameManager,
-			SceneManager sceneManager,
+			SceneSystem.SceneSystem sceneSystem,
 			TransitionManager transitionManager
 			)
 		{
 			_gameManager = gameManager;
-			_sceneManager = sceneManager;
+			_sceneSystem = sceneSystem;
 			_transitionManager = transitionManager;
 		}
 
@@ -31,8 +31,8 @@ namespace Game.Systems.GameSystem
 			var transition = new Transition(
 			() =>
 			{
-				_sceneManager.LoadSceneAsyncFromBuild(1, true);//Menu
-				return _sceneManager.ProgressHandler;
+				_sceneSystem.LoadSceneAsyncFromBuild(1, true).Forget();//Menu
+				return _sceneSystem.ProgressHandler;
 			}, true, onCompleted);
 			_transitionManager.StartInfinityLoadingAsync(transition, onShowed,
 			onHided: () =>
@@ -50,8 +50,8 @@ namespace Game.Systems.GameSystem
 			() =>
 			{
 				var name = sceneName;
-				_sceneManager.LoadSceneAsyncFromAddressables(name, name);
-				return _sceneManager.ProgressHandler;
+				_sceneSystem.LoadSceneFromAddressables(name, name, allow).Forget();
+				return _sceneSystem.ProgressHandler;
 			}, allow, onCompleted);
 			_transitionManager.StartInfinityLoadingAsync(_startLevelTransition, onShowed, onHided, callback);
 		}

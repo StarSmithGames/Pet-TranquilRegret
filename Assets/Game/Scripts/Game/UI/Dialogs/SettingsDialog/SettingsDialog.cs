@@ -12,7 +12,7 @@ using Zenject;
 
 namespace Game.UI
 {
-	public sealed class SettingsDialog : UIViewDialog
+	public sealed class SettingsDialog : UIViewQuartDialog
 	{
 		public Button backButton;
 		[Space]

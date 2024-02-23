@@ -1,4 +1,5 @@
 using Game.UI;
+using System.Linq;
 using Zenject;
 
 namespace Game.Systems.UISystem
@@ -18,7 +19,7 @@ namespace Game.Systems.UISystem
 		)
 		{
 			ViewCreator dialogCreator = new( container, DynamicCanvas.DialogsRoot );
-			DialogAggregator = new( dialogCreator, uiSettings.Dialogs );
+			DialogAggregator = new( dialogCreator, uiSettings.GameDialogs.Union( uiSettings.CommonDialogs ).ToList()  );
 		}
 	}
 }

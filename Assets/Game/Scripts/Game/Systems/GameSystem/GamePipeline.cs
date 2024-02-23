@@ -1,4 +1,5 @@
 using Game.Extensions;
+using Game.Managers.AssetManager;
 using Game.Systems.LevelSystem;
 using StarSmithGames.Go.LocalizationSystem;
 using StarSmithGames.Go.SceneManager;
@@ -12,21 +13,21 @@ namespace Game.Systems.GameSystem
 		private readonly StorageSystem.StorageSystem _storageSystem;
 		private readonly LocalizationSystem _localizationSystem;
 		private readonly GameService _gameService;
-		private readonly SceneManager _sceneManager;
+		private readonly SceneSystem.SceneSystem _sceneSystem;
 		private readonly LevelRegularService _levelRegularService;
 
 		private GamePipeline(
 			StorageSystem.StorageSystem storageSystem,
 			LocalizationSystem localizationSystem,
 			GameService gameService,
-			SceneManager sceneManager,
+			SceneSystem.SceneSystem sceneSystem,
 			LevelRegularService levelRegularService
 			)
 		{
 			_storageSystem = storageSystem;
 			_localizationSystem = localizationSystem;
 			_gameService = gameService;
-			_sceneManager = sceneManager;
+			_sceneSystem = sceneSystem;
 			_levelRegularService = levelRegularService;
 		}
 
@@ -42,9 +43,9 @@ namespace Game.Systems.GameSystem
 			}
 			
 #if UNITY_EDITOR
-			if ( _sceneManager.IsLevel() )
+			if ( _sceneSystem.IsLevel() )
 			{
-				var config = _levelRegularService.GetLevelConfig( _sceneManager.GetActiveScene() );
+				var config = _levelRegularService.GetLevelConfig( _sceneSystem.GetActiveScene() );
 				_gameService.StartRegularLevel( config );
 			}
 #endif

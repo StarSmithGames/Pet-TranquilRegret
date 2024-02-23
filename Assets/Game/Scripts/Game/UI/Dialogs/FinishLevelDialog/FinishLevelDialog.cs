@@ -13,7 +13,7 @@ using Zenject;
 
 namespace Game.UI
 {
-	public class FinishLevelDialog : UIViewDialog
+	public sealed class FinishLevelDialog : UIViewDialog
 	{
 		public Transform shineEffect;
 		public Transform ribbon;
@@ -21,13 +21,24 @@ namespace Game.UI
 		public GameObject rewardsRoot;
 		public Transform rewardsContent;
 		public Button buttonExit;
+		[Space]
+		public UIAward AwardPrefab;
 
 		private List<Transform> awardsTransforms = new();
 
-		[Inject] private GameService _gameService;
-		[Inject] private LevelManager _levelManager;
-		[Inject] private UIAward.Factory factoryAward;
-
+		private GameService _gameService;
+		private LevelManager _levelManager;
+		
+		[Inject]
+		private void Construct(
+			GameService gameService,
+			LevelManager levelManager
+			)
+		{
+			_gameService = gameService;
+			_levelManager = levelManager;
+		}
+		
 		public override void Show(Action callback = null)
 		{
 			IsInProcess = true;
@@ -67,10 +78,9 @@ namespace Game.UI
 
 			for (int i = 0; i < awards.Count; i++)
 			{
-				var award = factoryAward.Create();
-				award.SetAward(awards[i]);
-				award.transform.SetParent(rewardsContent);
+				var award = GameObject.Instantiate( AwardPrefab, rewardsContent );
 				award.transform.localScale = Vector3.zero;
+				award.SetAward(awards[i]);
 
 				awardsTransforms.Add(award.transform);
 			}

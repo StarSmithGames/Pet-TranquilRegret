@@ -6,7 +6,7 @@ namespace Game.Systems.GameSystem
 {
 	public sealed class Preloader : IDisposable
     {
-		private GDPRDialog dialog;
+		private GdprDialog _dialog;
 
 		private readonly UIRootPreloader _uiRootPreloader;
 		private readonly StorageSystem.StorageSystem _storageSystem;
@@ -37,9 +37,9 @@ namespace Game.Systems.GameSystem
 
 			if (!_storageSystem.GameFastData.IsGDPRApplied)
 			{
-				dialog = _uiRootPreloader.DialogAggregator.CreateIfNotExist< GDPRDialog >();
-				dialog.onAgreeClicked += OnAgreeClicked;
-				dialog.Show();
+				_dialog = _uiRootPreloader.DialogAggregator.CreateIfNotExist< GdprDialog >();
+				_dialog.onAgreeClicked += OnAgreeClicked;
+				_dialog.Show();
 			}
 			else
 			{
@@ -49,9 +49,9 @@ namespace Game.Systems.GameSystem
 
 		public void Dispose()
 		{
-			if(dialog != null)
+			if(_dialog != null)
 			{
-				dialog.onAgreeClicked -= OnAgreeClicked;
+				_dialog.onAgreeClicked -= OnAgreeClicked;
 			}
 		}
 
@@ -72,10 +72,10 @@ namespace Game.Systems.GameSystem
 		{
 			_storageSystem.GameFastData.IsGDPRApplied = true;
 
-			if (dialog != null)
+			if (_dialog != null)
 			{
-				dialog.onAgreeClicked -= OnAgreeClicked;
-				dialog.Hide(() =>
+				_dialog.onAgreeClicked -= OnAgreeClicked;
+				_dialog.Hide(() =>
 				{
 					LoadGame();
 				});

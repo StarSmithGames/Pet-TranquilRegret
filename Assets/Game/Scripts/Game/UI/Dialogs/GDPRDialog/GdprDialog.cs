@@ -1,14 +1,8 @@
-using Game.Services;
-
-using StarSmithGames.Go;
-
 using System;
-
-using Zenject;
 
 namespace Game.UI
 {
-    public class GDPRDialog : UIViewDialog
+    public class GdprDialog : UIViewQuartDialog
     {
         public event Action onAgreeClicked;
 
