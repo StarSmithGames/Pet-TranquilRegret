@@ -1,7 +1,7 @@
 using Game.Managers.CharacterManager;
 using Game.Managers.PauseManager;
 using Game.Systems.CameraSystem;
-using Game.Systems.GameSystem;
+using Game.Systems.LevelSystem;
 using Game.Systems.PhysicsSystem;
 using Game.Systems.SheetSystem.Effects;
 using Game.Systems.SpawnSystem;
@@ -34,8 +34,8 @@ namespace Game.Installers
 			EffectSystemInstaller.Install(Container);
 			PauseManagerInstaller.Install(Container);
 			CharacterManagerInstaller.Install(Container);
-
-			Container.BindInterfacesAndSelfTo< GameController >().AsSingle().NonLazy();
+			
+			LevelSystemGameInstaller.Install( Container );
 		}
 	}
 }

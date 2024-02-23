@@ -28,7 +28,7 @@ namespace Game.Installers
 			DelayedCallServiceInstaller.Install(Container);
 			StorageSystemInstaller.Install(Container);
 			GameManagerInstaller.Install(Container);
-			LevelSystemInstaller.Install(Container);
+			LevelSystemRootInstaller.Install(Container);
 			RewardManagerInstaller.Install(Container);
 
 			Container.BindInterfacesAndSelfTo<SceneManager>().AsSingle();

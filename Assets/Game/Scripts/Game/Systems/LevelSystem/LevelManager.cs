@@ -27,14 +27,12 @@ namespace Game.Systems.LevelSystem
 			_gameLoaderService.LoadLevel( sceneName, true,
 			onShowed: () =>
 			{
-				CurrentLevel = builder.Build();
+				BuildLevel( builder );
 				onBuilded?.Invoke();
-				OnLevelBuilded?.Invoke( CurrentLevel );
 			},
 			onCompleted: () =>
 			{
 				CurrentLevel?.Start();
-				onStarted?.Invoke();
 				OnLevelStarted?.Invoke( CurrentLevel );
 			},
 			callback: callback );
@@ -45,12 +43,23 @@ namespace Game.Systems.LevelSystem
 			_gameLoaderService.LoadMenu(
 			onShowed: () =>
 			{
-				CurrentLevel.Stop();
+				DisposeLevel();
 				onDisposed?.Invoke();
-				OnLevelDisposed?.Invoke( CurrentLevel );
-				CurrentLevel = null;
 			},
 			callback: callback );
 		}
+
+        private void BuildLevel( ILevelBuilder builder )
+        {
+	        CurrentLevel = builder.Build();
+			OnLevelBuilded?.Invoke( CurrentLevel );
+        }
+
+        private void DisposeLevel()
+        {
+	        CurrentLevel.Stop();
+	        OnLevelDisposed?.Invoke( CurrentLevel );
+	        CurrentLevel = null;
+        }
 	}
 }

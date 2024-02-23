@@ -15,7 +15,7 @@ using Zenject;
 
 namespace Game.UI
 {
-	public class LevelDialog : UIViewDialog
+	public sealed class LevelDialog : UIViewDialog
 	{
 		public event Action onStartClicked;
 		public event Action onLeftClicked;

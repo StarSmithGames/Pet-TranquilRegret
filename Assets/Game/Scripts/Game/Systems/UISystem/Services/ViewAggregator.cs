@@ -54,7 +54,7 @@ namespace Game.Systems.UISystem
 			return _viewRegistrator.GetAs<T>();
 		}
 
-		public void ShowOrCreateIfNotExist<T>()
+		public void ShowAndCreateIfNotExist<T>()
 			where T : MonoBehaviour, IUIView
 		{
 			CreateIfNotExist<T>().Show();

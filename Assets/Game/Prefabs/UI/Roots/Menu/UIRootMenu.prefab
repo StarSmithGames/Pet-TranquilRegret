@@ -353,8 +353,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 646d0b57e784c7546a9401b153c82f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DynamicCanvas: {fileID: 3810451188247207898}
   NavigationCanvas: {fileID: 4975750062941674397}
+  DynamicCanvas: {fileID: 3810451188247207898}
   FrontCanvas: {fileID: 8869720277633800475}
   canvases:
   - {fileID: 3810451187558702933}
@@ -476,7 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae2915318bd82b445903cbc01d5bb01b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogsRoot: {fileID: 3810451187688466596}
+  DialogsRoot: {fileID: 3810451187688466596}
 --- !u!1 &3810451188655116904
 GameObject:
   m_ObjectHideFlags: 0

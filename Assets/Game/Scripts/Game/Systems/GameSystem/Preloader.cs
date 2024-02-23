@@ -1,35 +1,45 @@
-using Game.Services;
-using Game.Services.GameService;
-using Game.Systems.LevelSystem;
-using Game.Systems.StorageSystem;
+using Game.Systems.UISystem;
 using Game.UI;
-
-using System.Collections;
-
-using UnityEngine;
-
-using Zenject;
+using System;
 
 namespace Game.Systems.GameSystem
 {
-	public sealed class Preloader : MonoBehaviour
+	public sealed class Preloader : IDisposable
     {
 		private GDPRDialog dialog;
 
-		[Inject] private StorageSystem.StorageSystem gameData;
-		[Inject] private GameplayConfig gameplayConfig;
-		[Inject] private GameLoader gameLoader;
-		[Inject] private GameService _gameService;
-
-		private void Start()
+		private readonly UIRootPreloader _uiRootPreloader;
+		private readonly StorageSystem.StorageSystem _storageSystem;
+		private readonly GameplayConfig _gameplayConfig;
+		private readonly GameLoaderService _gameLoaderService;
+		private readonly GameService _gameService;
+		
+		public Preloader(
+			UIRootPreloader uiRootPreloader,
+			StorageSystem.StorageSystem storageSystem,
+			GameplayConfig gameplayConfig,
+			GameLoaderService gameLoaderService,
+			GameService gameService
+			)
 		{
-			gameData.GameFastData.SessionsCount++;
+			_uiRootPreloader = uiRootPreloader;
+			_storageSystem = storageSystem;
+			_gameplayConfig = gameplayConfig;
+			_gameLoaderService = gameLoaderService;
+			_gameService = gameService;
+			
+			Initialize();
+		}
+		
+		private void Initialize()
+		{
+			_storageSystem.GameFastData.SessionsCount++;
 
-			if (!gameData.GameFastData.IsGDPRApplied)
+			if (!_storageSystem.GameFastData.IsGDPRApplied)
 			{
-				// dialog = viewService.ViewDialogRegistrator.GetAs<GDPRDialog>();
-				// dialog.onAgreeClicked += OnAgreeClicked;
-				// dialog.Show();
+				dialog = _uiRootPreloader.DialogAggregator.CreateIfNotExist< GDPRDialog >();
+				dialog.onAgreeClicked += OnAgreeClicked;
+				dialog.Show();
 			}
 			else
 			{
@@ -37,7 +47,7 @@ namespace Game.Systems.GameSystem
 			}
 		}
 
-		private void OnDestroy()
+		public void Dispose()
 		{
 			if(dialog != null)
 			{
@@ -45,21 +55,22 @@ namespace Game.Systems.GameSystem
 			}
 		}
 
+
 		private void LoadGame()
 		{
-			if (gameData.GameFastData.IsFirstTime)
+			if (_storageSystem.GameFastData.IsFirstTime)
 			{
-				_gameService.StartRegularLevel(gameplayConfig.firstTimeTutorialLevel);
+				_gameService.StartRegularLevel( _gameplayConfig.firstTimeTutorialLevel );
 			}
 			else
 			{
-				gameLoader.LoadMenu();
+				_gameLoaderService.LoadMenu();
 			}
 		}
 
 		private void OnAgreeClicked()
 		{
-			gameData.GameFastData.IsGDPRApplied = true;
+			_storageSystem.GameFastData.IsGDPRApplied = true;
 
 			if (dialog != null)
 			{
@@ -74,5 +85,5 @@ namespace Game.Systems.GameSystem
 				LoadGame();
 			}
 		}
-	}
+    }
 }

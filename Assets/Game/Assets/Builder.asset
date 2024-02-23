@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Builder
   m_EditorClassIdentifier: 
   Setting:
-    ProductName: Billowing Boundary
+    ProductName: Tranquil Regret
     CompanyName: StarSmith Games
     PackageName: com.StarSmithGames.BillowingBoundary
     Version: 0.0.1

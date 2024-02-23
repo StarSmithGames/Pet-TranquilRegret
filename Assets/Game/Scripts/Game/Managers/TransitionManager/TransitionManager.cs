@@ -37,7 +37,7 @@ namespace Game.Managers.TransitionManager
 			_asyncManager.StartCoroutine( LoaderProgress( transition, onShowed, onHided, callback ) );
 		}
 		
-		private async UniTask LoaderProgressAsync(Transition transition, Action onShowed = null, Action onHided = null, Action callback = null)
+		private async UniTask LoaderProgressAsync(Transition transition, Action onShowed = null, Action onLoaded = null, Action onHided = null, Action callback = null)
 		{
 			_infinityLoading.SetProgress(0);
 			_infinityLoading.Show(onShowed);

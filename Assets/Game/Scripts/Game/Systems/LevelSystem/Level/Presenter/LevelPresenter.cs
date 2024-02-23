@@ -10,12 +10,8 @@ namespace Game.Systems.LevelSystem
 	public sealed class LevelPresenter : IDisposable, IPausable
 	{
 		public LevelModel Model { get; }
-		public LevelViewModel ViewModel { get; }
 		public LevelGameplay Gameplay { get; }
 		public EstimatedTimer Timer { get; }
-
-		[ Inject ] private StorageSystem.StorageSystem storageSystem;
-		[ Inject ] private RewardManager rewardManager;
 
 		public LevelPresenter(
 			LevelModel model,
@@ -24,11 +20,8 @@ namespace Game.Systems.LevelSystem
 			)
 		{
 			Model = model ?? throw new ArgumentNullException( nameof(model) );
-			ViewModel = new();
 			Gameplay = gameplay ?? throw new ArgumentNullException( nameof(gameplay) );
 			Timer = timer ?? throw new ArgumentNullException( nameof(timer) );
-			
-			ProjectContext.Instance.Container.Inject( this );
 		}
 
 		public void Dispose()
@@ -61,21 +54,6 @@ namespace Game.Systems.LevelSystem
 		public void Complete()
 		{
 			Timer.Stop();
-
-			var data = storageSystem.GamePlayData.Storage.GameProgress.GetData();
-			var level = data.regularLevels[storageSystem.GameFastData.LastRegularLevelIndex];
-			level.completed = 1;
-			level.stars = 3;
-			level.timestamp = Timer.RemainingTime;
-
-			Model.Config.awards.ForEach((award) =>
-			{
-				rewardManager.Award(award);
-			});
-
-			storageSystem.Save();
-
-			// viewService.TryShowDialog<FinishLevelDialog>();
 		}
 
 		public void Lose()

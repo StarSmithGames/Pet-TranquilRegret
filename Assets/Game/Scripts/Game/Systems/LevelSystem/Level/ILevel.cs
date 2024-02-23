@@ -8,9 +8,10 @@ namespace Game.Systems.LevelSystem
 		event Action OnCompleted;
 		event Action OnDisposed;
 		
-		public LevelPresenter Presenter { get; }
+		LevelPresenter Presenter { get; }
 		
-		public void Start();
-		public void Stop();
+		void Start();
+		void Complete();
+		void Stop();
 	}
 }

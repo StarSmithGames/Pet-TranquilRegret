@@ -1,19 +1,8 @@
 using Cinemachine;
-
-using Game.Character;
-using Game.Managers.CharacterManager;
-
-using Sirenix.OdinInspector;
-
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
-using Unity.VisualScripting;
-
 using UnityEngine;
-
-using Zenject;
 
 namespace Game.Systems.CameraSystem
 {
@@ -28,7 +17,7 @@ namespace Game.Systems.CameraSystem
 		public Camera Camera => brain.OutputCamera;
 
 		public CinemachineBrain brain;
-		public List<CinemachineVirtualCamera> camers = new List<CinemachineVirtualCamera>();
+		public List<CinemachineVirtualCamera> camers = new();
 #if UNITY_EDITOR
 		public Transform lookAtPivotEditor;
 		public Transform folowPivotEditor;

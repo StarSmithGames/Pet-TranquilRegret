@@ -16,7 +16,6 @@ public partial class SROptions
 	[Inject] private StorageSystem storageSystem;
 	[Inject] private LevelManager levelManager;
 	[ Inject ] private GameplayConfig _gameplayConfig;
-	[Inject] private SignalBus signalBus;
 
 	public SROptions()
 	{
@@ -31,7 +30,7 @@ public partial class SROptions
 		var level = levelManager.CurrentLevel;
 		if (level == null) return;
 
-		level.Presenter.Complete();
+		level.Complete();
 	}
 
 	[Category("Level")]
@@ -67,8 +66,6 @@ public partial class SROptions
 	private void RefreshLevel()
 	{
 		//fastTravel = storageSystem.GamePlayData.Storage.GameProgress.GetData().progressMainIndex + 1;
-
-		signalBus?.Fire(new SignalOnLevelChangedCheat());
 	}
 	#endregion
 

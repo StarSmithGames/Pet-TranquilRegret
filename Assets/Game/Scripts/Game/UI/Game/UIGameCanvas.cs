@@ -22,25 +22,28 @@ namespace Game.UI
 
 		private CharacterManager _characterManager;
 		private UIGoal.Factory _goalFactory;
+		private UIRootGame _uiRootGame;
 		
 		[ Inject ]
 		private void Construct(
 			CharacterManager characterManager,
-			UIGoal.Factory goalFactory
-		)
+			UIGoal.Factory goalFactory,
+			UIRootGame uiRootGame
+			)
 		{
 			_characterManager = characterManager;
 			_goalFactory = goalFactory;
+			_uiRootGame = uiRootGame;
 		}
 		
-		public void SetLevel( ILevel level )
+		public void SetLevel( LevelPresenter presenter )
 		{
-			Timer.SetTimer( level.Presenter.Timer );
+			Timer.SetTimer( presenter.Timer );
 			
 			_goals.Clear();
 			goalContent.DestroyChildren(true);
 			
-			var targets = level.Presenter.Gameplay.GoalRegistrator.GoalsPrimary;
+			var targets = presenter.Gameplay.GoalRegistrator.GoalsPrimary;
 			targets.ForEach((x) =>
 			{
 				var goal = _goalFactory.Create();
@@ -54,7 +57,7 @@ namespace Game.UI
 		
 		public void OnSettingsButtonClick()
 		{
-			// _viewService.TryShowDialog< SettingsDialog >();
+			_uiRootGame.DialogAggregator.ShowAndCreateIfNotExist< SettingsDialog >();
 		}
 		
 		public void OnJumpButtonClick()

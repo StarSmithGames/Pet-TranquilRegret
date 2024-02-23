@@ -38,7 +38,7 @@ namespace Game.UI
 
 		public void OnSettingsButtonClick()
 		{
-			_uiRootMenu.DialogAggregator.ShowOrCreateIfNotExist< SettingsDialog >();
+			_uiRootMenu.DialogAggregator.ShowAndCreateIfNotExist< SettingsDialog >();
 		}
 		
 		public void OnCoinsButtonClick()

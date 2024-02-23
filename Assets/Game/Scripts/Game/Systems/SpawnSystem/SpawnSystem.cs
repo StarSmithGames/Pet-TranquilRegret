@@ -16,8 +16,6 @@ namespace Game.Systems.SpawnSystem
 			var point = points.RandomItem();
 			point.Spawn();
 			point.gameObject.SetActive(false);
-			
-		    Debug.LogError( "Spawned" );
 		}
 	}
 }
