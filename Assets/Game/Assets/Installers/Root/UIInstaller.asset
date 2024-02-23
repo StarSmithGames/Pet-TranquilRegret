@@ -15,6 +15,10 @@ MonoBehaviour:
   UISettings:
     PreloadDialogs:
     - {fileID: 5593679966113353459, guid: 66140f3684149144aabc00e554e61600, type: 3}
-    Dialogs:
+    MenuDialogs:
     - {fileID: 7773918690546248892, guid: 8f74944daeb1e114e8645ba194504551, type: 3}
+    GameDialogs:
+    - {fileID: 4922457146085144992, guid: 468153a813d079d4798f44b7e29b0936, type: 3}
+    CommonDialogs:
     - {fileID: 3711055595699338396, guid: 29e1ebdc8174cf14d87f76680eca7436, type: 3}
+    - {fileID: 1717521041030199588, guid: 3fc32d2d2fe552a4f8c974be7bc8e1d7, type: 3}

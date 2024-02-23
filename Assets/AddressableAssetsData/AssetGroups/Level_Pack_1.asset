@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Level_Pack_1
+  m_Name: level_pack_1
   m_EditorClassIdentifier: 
-  m_GroupName: Level_Pack_1
+  m_GroupName: level_pack_1
   m_Data:
     m_SerializedData: []
   m_GUID: f3102ce2850b23a4e9d551d49d6c0ea9
@@ -20,15 +20,13 @@ MonoBehaviour:
   - m_GUID: 41169f98602dee947be480c18c288044
     m_Address: Level_0
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - level_pack_1
   - m_GUID: 85f692a92ceca664c92b2fcb991d3017
     m_Address: Level_1
     m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 8ff3f07b56754ab4a958ea4dd9be486d
-    m_Address: Level_2
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - level_pack_1
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 435dbf675f6f8c8498f60b1660208fe4, type: 2}
   m_SchemaSet:

@@ -16,19 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 491d282600876ce418762dd79a8f7ebb
-  m_SerializeEntries:
-  - m_GUID: eda238b73a609b647b32a4404458cb13
-    m_Address: ui_fr
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-fr
-    - Preload
-  - m_GUID: 32487e651ae2bb14c860fe89cbd4f889
-    m_Address: item_fr
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale-fr
-    - Preload
+  m_SerializeEntries: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 435dbf675f6f8c8498f60b1660208fe4, type: 2}
   m_SchemaSet:

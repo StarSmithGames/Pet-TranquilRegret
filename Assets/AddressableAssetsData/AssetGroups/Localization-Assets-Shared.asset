@@ -16,15 +16,7 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: eeba90f2b3c3cd04a8b302adf92866f5
-  m_SerializeEntries:
-  - m_GUID: ae17e025c881dc244b55e636edcb9ff8
-    m_Address: Assets/Game/Resources/Localization/Tables/ui/ui Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
-  - m_GUID: 6eda9f864bd6e1c4aa6ff930a9c20591
-    m_Address: Assets/Game/Resources/Localization/Tables/item/item Shared Data.asset
-    m_ReadOnly: 1
-    m_SerializedLabels: []
+  m_SerializeEntries: []
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 435dbf675f6f8c8498f60b1660208fe4, type: 2}
   m_SchemaSet:

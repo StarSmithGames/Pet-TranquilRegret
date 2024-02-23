@@ -125,6 +125,7 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - level_pack_1
     - Locale
     - Locale-en
     - Preload
