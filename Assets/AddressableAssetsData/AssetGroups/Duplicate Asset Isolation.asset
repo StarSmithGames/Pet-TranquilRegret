@@ -1,0 +1,513 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Duplicate Asset Isolation
+  m_EditorClassIdentifier: 
+  m_GroupName: Duplicate Asset Isolation
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 2c761fb373317994398b82c1a58c52b9
+  m_SerializeEntries:
+  - m_GUID: bff1e7a5a9fbe8b4796d68387383e77b
+    m_Address: Assets/Game/Images/Simple/RadialSolid.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4fedd24b7a455714ab446b2f39702589
+    m_Address: Assets/Game/Prefabs/Tools/Physical/Friction_min.physicMaterial
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f9938a4e492e2084b9051375b7d884ae
+    m_Address: Assets/Game/Prefabs/VFX/Smoke/ToonDustTrail/ToonDustTrail.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7ffc1bc2bbb1ef64f84b552b2d2f0619
+    m_Address: Assets/JMO Assets/Toony Colors Pro/Shaders/Hybrid/TCP2 Hybrid Shader.shader
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d454e86446b9bbf4d9c51eef79dcd868
+    m_Address: Assets/Game/Prefabs/VFX/Decals/Shaders/DecalBase.shadergraph
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c6ff7e6de43151f49a9421d5ab10473d
+    m_Address: Assets/Game/Prefabs/VFX/Shaders/Smoke/ToonSmokeV2.shadergraph
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b6cd253048acb0b49afa12004026fa8a
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/Path2.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ae4fd5a080706ba4bb41b75f7065c3b8
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/Bush_1.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 80a43be02fa424b40952b5cb600d9afe
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/Road.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ad6084f0661259844bb17dfe3702213c
+    m_Address: Assets/Game/Prefabs/Tools/Colliders/Cylinder.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7ee865f005de0ab4e8f511019ca50bb0
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Outside/Path_2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ad04d901638a70840978172d556f108a
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Balloons_2.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9534dda13b75c9040b21ac3a936659cd
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/Fence.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 17d45012dff26a248a9018e8c2959b34
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Outside/StonePath_2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 06320d7272f24354ca4acbe9b15c02ae
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/Bench.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: db02baf2f09f92145942fd0818261832
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Palette_2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3a850db4f221e504697c705007b09cf6
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/Tree.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a204c8c5ed102bf4d9fc22044bb6755b
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Pizza.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1ca9d52643cd1fb4ca31e0af68f969e7
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Bush/Middle.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a693d976e8d0bce47aea9e2557b00f1d
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/Bench_2.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3ece1d7670e2407438716b70b46bfee2
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Bush/Pot.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d4725f276fd676f43982a08a68d8b163
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Bush/Stick.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a0d3885736f4f7d41a850d18b2284e70
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Bush/Top.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b24544b7ba506034d89c4a54fd64dd6b
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Palette_1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 49400038cf0e9e1438760993538c3d35
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/Attraction.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 53af2d49f127b714ca5fae99e6724f02
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Swing.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f0043179daea2c841a5e24d4224de220
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/CarGreen.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 05f7a2a988457084f891325a47e3af94
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Bush/Branch.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 1f1527a9f2a718c47af0d04e2350950e
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/Bush_2.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a7347d0a7baf1b942ba677aabf945d7a
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/Trolley.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b196387a14bbf3b4c82f5466dc1e1653
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Bush/Leaves.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ba1274caa6f5bef4694318806a11dddf
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Bush/Bottom.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e54eb5ca9f85fc54db0fbb562ae1a0dc
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/WoodenBox.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f2ffebda0f0639d4ead66456bf99d2d0
+    m_Address: Assets/Game/Assets/Goals/Food/GoalFood_Apple.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 93fd2c7ba7be7c44db18a08f936beefc
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/StonePath.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2eb2293cf4df57545a9d3a102658f916
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/PizzaBox.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f1a53cedd46ac1245b0dd4fc23ad5e6c
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Outside/StonePath.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cd08116e97c4e644b9296982cf5894a3
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Bush/Ground.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cf7a976eac40c7f4aa6827f88b486399
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Apple.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0bd2a5ae9861d394eb548f1271fb02c5
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Outside/Fence_Brown.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8d3da9ae20d6bf248a2b62ebf888fe13
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Bottle.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 556172eef9695fc47900290672d91af9
+    m_Address: Assets/Game/Assets/Goals/Food/GoalFood_Soda.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 09447efe22a5f144fbcd7aea30b4bbed
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Plate.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3051110f52b270d4391caa6948f73ad6
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Bush/Heart.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bc30708f0a36a304cbf01d24e7a1f8e5
+    m_Address: Assets/Game/Assets/Goals/Food/GoalFood_Pizza.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 81e9c29f32a2044409ed207561c812af
+    m_Address: Assets/Game/Prefabs/Tools/Physical/Friction_base.physicMaterial
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9d95c4cf148089c4e95f2d41d59c9a3d
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Slide.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 84ed94305ec3c42459de6473f9cd573b
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Walls/17.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9298eb50225ef00408e228cb40467312
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/Houseparts/houseparts.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 55e1d5b0b83b0564abf0c2621ee07556
+    m_Address: Assets/Game/Prefabs/Tools/Colliders/Box_Inverted.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5f2798c0464ceb4428e36c5d5c9b6492
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Keyboard.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 577435a17ec730544a36aa5fe6317ba2
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Toilet.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e206fbd1fb2873b419ccb3ed40f17d25
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Walls/8.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e96c16e1360e77f4d8f79c7316170336
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Palette_0.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f72c0ba299402754b95feaa38e05f126
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Radio.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 23b0ebf2de7b3c04fa7ba44e69ef0601
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Shelf.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ff541df295536954393c23a00280b876
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/Doorstep.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 977b4303b243e6442b46f978e098e201
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/KitchenFloor.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a0030a13cdb53aa4085a167096b345ea
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Walls/4.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f4efa023282b45a40bae5ad4003bc93d
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Mirror.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e68f8a73e96c7124f9a139647992bf99
+    m_Address: Assets/Game/Prefabs/VFX/Decals/RectDecal.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7e15268355a0be94db6b6f5c77c6e9ac
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Walls/9.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d069cc935e6dfcd46a2af46d04d8af17
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Toaster.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e8c825b325d508445b67f4d97e5e8534
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Stove.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fc099fe3b68cd87419a07fef8fb05866
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/Plunger.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 890ab22443343014e813af238c4145c7
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Mouse.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 50e91154cefd1d04ba21068b139ca635
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Bath.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e060d364c267203408d97fec569a631a
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Walls/14.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d050346426b7f984a83b34850c43c57a
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/BathCupboard.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9185596453f99bf44bab1e6e0a1752a9
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/TableRound.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 28810a84e7fa98849931788691c02206
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Lamp.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f8fbded48c7b1774a9e3f54f021d1f03
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/CupWithPlate.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8df1044547c5cb246b60324baadda489
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/CoffeTable.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a7523b75df00a3b4d81b44b85070376d
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Walls/3.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 91d8c0d534996c645b3c6d55bab4bc75
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Desk.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f9d64c36129d5fb4db96fafc45ab183e
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/RemoteController.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a5cb5656c336d58459d3db2507809852
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Fridge.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a5bc5d27baf00264d83bc98d0bf70e45
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/SinkKitchen.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bcb3787783f2a154d86057a65e54a0d7
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/Houseparts/PlaneNew.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 449c80f7edab4084f95dc84c20fb8839
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Spoon.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c2c970086f78cc34f8a47aa5e35546d0
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Chair.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 00374d58a00526b44b9897b15fb76e7b
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Outside/Fence_White.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 012af498e12f1104f9a849a5a888e948
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Walls/10.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 3ff495985a517084da092be95a5cde9a
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Walls/5.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0beae1d88a9f0ca47968e99e44b1ccb4
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Table.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 851e2f393d1f6bd4aa93a15449cf812f
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Cupboard.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: b87722590b8377a43a75a165d1100651
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Walls/7.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a8feb689d07a6754e9f8b5a0ce959e04
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Bed.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 415b5bb9b2afb444ba94067d84eaff6f
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Floor.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 926b4a0a6caf1db469d62cc8b6cc4434
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Walls/16.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6a20748af44cb2447a1b73b330d12eae
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Bag.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: fb19f29a33c541849901004510b18cd9
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/BBQ.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 563221ca5f9c91745b57359c2338425d
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Book.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: d8106d5b8ca429b40a60ab5d1662737f
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/Corner.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a1317d6b511a12d4897f6557321d8659
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Walls/12.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 48ee7d9bed2b8444e95f1da2299b237d
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Walls/15.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 38a9bcabd1b137a47a6cacc53a66c9e1
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/Hydrant.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f209f01cd83189840932def98063b725
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Monitor.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ccdb321ce17304d449f9aaed15a2ef11
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Walls/1.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9ab7c21ceaeb6e4418839bcfac19c0b3
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/Mailbox.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: cb6f6d1c53f964a42b5504f4d8be0f78
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Walls/2.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 4029072cef7d1a5498276213ae06d673
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Frames.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6976eb4c8e84c194ba0ee8c209109522
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/TV.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 0d9a7b7c8bd9b5d4a8c66ce39232260c
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/Vase.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 8049b89c141bcac4ab21a19e52e01fdd
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/BedsideTable.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5160da2d046a3b544aae737e2aaa7a58
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Sink.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6b59724dff8181f4dba8773e28a0c72a
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Walls/6.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f6aa1d8dc5bfa3647b25f08873504746
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/Path1.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ff56e0ad825b00d41bdb796dd9650763
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/KitchenCupboard.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 83decbceaa7cb4248af16bac079f5c62
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/WoodenBoxSmall.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 80994cce9513cc44ea2298340052f9ef
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Clock.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6e255dce659f7d947938f48effed1ccf
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/Trashcan.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 7e0642ee21430344ea5e40cc2b931672
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Cactus1.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: f0c3b5ee7830fb24bbb3558eaf53f2f6
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/TVTable.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: ac2485fec9364a54d8b2788d34b75dbc
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Sofa.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 76b8f35f2813fa74290f50bcaa043657
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/House.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2582ef5f25c391946bae2f0cfd2054cb
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Microwave.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 35c6b17fe98ed4840985377b0c1a0410
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBX/Garage.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5b100b8f597a290418a6bd2d0ef98f9a
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Walls/11.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6a3f679f78fcedc409fd5ea26eb8bb9c
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Cactus2.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 5bf4abcf881421f4083b6b6bab642713
+    m_Address: Assets/Game/Prefabs/Tools/Palettes/Walls/13.mat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: c3fe2ffff8fc2434d8ba89936c081596
+    m_Address: Assets/Game/Prefabs/Environment/Props/House1/FBXFurniture/Kettle.fbx
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 435dbf675f6f8c8498f60b1660208fe4, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b1bef0bfa1685344ab44a68d005972a5, type: 2}
+    - {fileID: 11400000, guid: 9d8be242f5df35146aff0b9646003430, type: 2}

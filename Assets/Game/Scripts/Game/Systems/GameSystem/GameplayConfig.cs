@@ -34,7 +34,6 @@ namespace Game.Systems.GameSystem
 		public UISettings uiSettings;
 
 		[Header("Prefabs")]
-		public Character.Character characterPrefab;
 		public AssetReferenceModel< GameObject > CharacterReference;
 		
 		[NonSerialized] private List<LevelConfig> allLevels;

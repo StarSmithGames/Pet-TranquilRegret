@@ -10,27 +10,41 @@ namespace Game.Managers.AssetManager.AssetReferences
 	public class AssetReferenceModel< T >
 		where T : Object
 	{
-		public bool IsLoaded => reference.OperationHandle.IsValid() && reference.OperationHandle.IsDone;
-		
 		public AssetReferenceT< T > reference;
+
+		public bool IsLoaded => _asset != null;
 		
-		public T Asset => IsLoaded ? reference.OperationHandle.Result as T : null;
+		public T Asset => _asset;
+		private T _asset;
 
 		public void Load( Action callback = null )
 		{
 			LoadAsync( callback ).Forget();
 		}
+		
+		public T Load()
+		{
+			if ( _asset == null )
+			{
+				var operation = reference.LoadAssetAsync();
+				_asset = operation.WaitForCompletion();
+			}
+
+			return _asset;
+		}
 
 		public async UniTask LoadAsync( Action callback = null )
 		{
-			if ( IsLoaded ) return;
-			if ( !reference.IsValid() )
-			{
-				Debug.LogError( $"[Asset] Not Valid" );
-				return;
-			}
+			if ( _asset != null ) return;
 			
-			await reference.LoadAssetAsync();
+			Debug.Log( $"[Asset] Start loading {reference.AssetGUID}" );
+			
+			var handle = reference.LoadAssetAsync();
+			await handle;
+			_asset = handle.Result;
+			
+			Debug.Log( $"[Asset] Asset loaded {reference.AssetGUID} : {Asset.name}" );
+
 			callback?.Invoke();
 		}
 		

@@ -17,14 +17,11 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 2c40b060facf2d246a4f6f06567ec0f1
   m_SerializeEntries:
-  - m_GUID: 7ffc1bc2bbb1ef64f84b552b2d2f0619
-    m_Address: Assets/JMO Assets/Toony Colors Pro/Shaders/Hybrid/TCP2 Hybrid Shader.shader
+  - m_GUID: 181ebc7adbc190445a881e74c320b8c3
+    m_Address: Fox
     m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 933532a4fcc9baf4fa0491de14d08ed7
-    m_Address: Packages/com.unity.render-pipelines.universal/Shaders/Lit.shader
-    m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - shared
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 435dbf675f6f8c8498f60b1660208fe4, type: 2}
   m_SchemaSet:

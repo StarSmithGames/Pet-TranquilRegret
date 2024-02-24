@@ -41,13 +41,16 @@ namespace Game.Managers.AssetManager.PackManager
 			Debug.Log( $"[PackManager] Load {_label}" );
             _packState = PackState.Loading;
 
+            float size = -1;
+            
             _downloadSizeHandle = Addressables.GetDownloadSizeAsync( _label );
             _downloadSizeHandle.Completed += completeSize =>
             {
                 if (completeSize.Status == AsyncOperationStatus.Succeeded)
                 {
                     var bytes = (long)completeSize.Result;
-                    float size = bytes * 0.000001f;
+                    size = bytes;
+                    
                     Debug.Log( $"[PackManager] Complete with size:{size}" );
                 }
                 else
@@ -57,6 +60,12 @@ namespace Game.Managers.AssetManager.PackManager
             };
 
             await _downloadSizeHandle;
+
+            if ( size <= 0 )
+            {
+	            Debug.Log( $"[PackManager] Pack Cached {_label}" );
+	            return;
+            }
 
             _asyncOperationHandle = Addressables.DownloadDependenciesAsync( _label );
             _asyncOperationHandle.Completed += complete =>

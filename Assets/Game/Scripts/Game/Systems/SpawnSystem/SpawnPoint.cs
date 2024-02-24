@@ -35,8 +35,6 @@ namespace Game.Systems.SpawnSystem
 
 		public void Spawn()
 		{
-			Debug.LogError( gameplayConfig.CharacterReference.Asset != null );
-
 			if ( !gameplayConfig.CharacterReference.IsLoaded )
 			{
 				gameplayConfig.CharacterReference.Load( () =>

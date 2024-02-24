@@ -100,23 +100,6 @@ namespace Game.Systems.SceneSystem
                 {
                     _currentScene = GetActiveScene();
 
-                    await UniTask.Yield();
-                    Debug.LogError("Refreshing materials");
-                    var renderers = GameObject.FindObjectsOfType<MeshRenderer>();
-                    
-                    foreach (var meshRenderer in renderers)
-                    {
-	                    foreach (var material in meshRenderer.materials)
-	                    {
-		                    var shader = Shader.Find( material.shader.name );
-		                    if ( shader == null )
-		                    {
-			                    Debug.LogError( $"[Asset] Shader {material.shader.name} equil Null" );
-		                    }
-		                    material.shader = shader;
-	                    }
-                    }
-                    
                     if ( !allow )
                     {
                         await handle.sceneHandle.Result.ActivateAsync();

@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using Game.Managers.AssetManager;
 using Game.Managers.GameManager;
 using Game.Managers.TransitionManager;
 using System;
@@ -11,16 +12,19 @@ namespace Game.Systems.GameSystem
 		
 		private GameManager _gameManager;
 		private SceneSystem.SceneSystem _sceneSystem;
+		private ResourcesManager _resourcesManager;
 		private TransitionManager _transitionManager;
 
 		public GameLoaderService(
 			GameManager gameManager,
 			SceneSystem.SceneSystem sceneSystem,
+			ResourcesManager resourcesManager,
 			TransitionManager transitionManager
 			)
 		{
 			_gameManager = gameManager;
 			_sceneSystem = sceneSystem;
+			_resourcesManager = resourcesManager;
 			_transitionManager = transitionManager;
 		}
 
@@ -52,7 +56,11 @@ namespace Game.Systems.GameSystem
 				var name = sceneName;
 				_sceneSystem.LoadSceneFromAddressables(name, name, allow).Forget();
 				return _sceneSystem.ProgressHandler;
-			}, allow, onCompleted);
+			}, allow, () =>
+			{
+				_resourcesManager.UpdateResourcesMaterials();
+				onCompleted?.Invoke();
+			} );
 			_transitionManager.StartInfinityLoadingAsync(_startLevelTransition, onShowed, onHided, callback);
 		}
 
