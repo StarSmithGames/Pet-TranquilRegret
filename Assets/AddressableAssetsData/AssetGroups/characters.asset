@@ -10,24 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Default Local Group
+  m_Name: characters
   m_EditorClassIdentifier: 
-  m_GroupName: Default Local Group
+  m_GroupName: characters
   m_Data:
     m_SerializedData: []
-  m_GUID: 2c40b060facf2d246a4f6f06567ec0f1
+  m_GUID: 288709b6bcf4dfc47b7764e03c3a85fb
   m_SerializeEntries:
-  - m_GUID: 7ffc1bc2bbb1ef64f84b552b2d2f0619
-    m_Address: Assets/JMO Assets/Toony Colors Pro/Shaders/Hybrid/TCP2 Hybrid Shader.shader
+  - m_GUID: bfd5382e06ba87049980110aae138052
+    m_Address: Assets/Game/Prefabs/Characters
     m_ReadOnly: 0
-    m_SerializedLabels: []
-  - m_GUID: 933532a4fcc9baf4fa0491de14d08ed7
-    m_Address: Packages/com.unity.render-pipelines.universal/Shaders/Lit.shader
+    m_SerializedLabels:
+    - characters
+  - m_GUID: 181ebc7adbc190445a881e74c320b8c3
+    m_Address: Fox
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - characters
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 435dbf675f6f8c8498f60b1660208fe4, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: df2ed72bda378ff4e9be5c8393795d35, type: 2}
-    - {fileID: 11400000, guid: bf5980f41f30e89489f3ef60ff603b90, type: 2}
+    - {fileID: 11400000, guid: 5768366ccb305034ca458fa103e72b7d, type: 2}
+    - {fileID: 11400000, guid: 48e5a7224ea127a4490db199d82965c6, type: 2}

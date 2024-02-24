@@ -108,7 +108,12 @@ namespace Game.Systems.SceneSystem
                     {
 	                    foreach (var material in meshRenderer.materials)
 	                    {
-		                    material.shader = Shader.Find(material.shader.name);
+		                    var shader = Shader.Find( material.shader.name );
+		                    if ( shader == null )
+		                    {
+			                    Debug.LogError( $"[Asset] Shader {material.shader.name} equil Null" );
+		                    }
+		                    material.shader = shader;
 	                    }
                     }
                     

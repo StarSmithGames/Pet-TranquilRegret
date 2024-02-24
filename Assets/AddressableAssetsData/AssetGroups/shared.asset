@@ -17,12 +17,32 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 9ce339c7dfb56ee4d97396425bb45b20
   m_SerializeEntries:
-  - m_GUID: d79ad592e5e82d04580d074c29c9a9c9
-    m_Address: Assets/Game/Prefabs
+  - m_GUID: 0bc8dfc1d805bc145acad5abd2c0fc2c
+    m_Address: Assets/Game/Images/Targets/apple.png
     m_ReadOnly: 0
     m_SerializedLabels: []
-  - m_GUID: 7ffc1bc2bbb1ef64f84b552b2d2f0619
-    m_Address: Assets/JMO Assets/Toony Colors Pro/Shaders/Hybrid/TCP2 Hybrid Shader.shader
+  - m_GUID: f2ffebda0f0639d4ead66456bf99d2d0
+    m_Address: Assets/Game/Assets/Goals/Food/GoalFood_Apple.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: bc30708f0a36a304cbf01d24e7a1f8e5
+    m_Address: Assets/Game/Assets/Goals/Food/GoalFood_Pizza.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 2f555b302d825614183568e46d601559
+    m_Address: Assets/Game/Images/Targets/Pizza.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 556172eef9695fc47900290672d91af9
+    m_Address: Assets/Game/Assets/Goals/Food/GoalFood_Soda.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 280baeca098fd1c49aa28b470669c5de
+    m_Address: Assets/Game/Images/Targets/bottle.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 03d435281335d2249b7b272d101746d3
+    m_Address: Assets/Game/Assets/GameplayConfig.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

@@ -1,3 +1,4 @@
+using Game.Managers.AssetManager.AssetReferences;
 using Game.Systems.LevelSystem;
 using Game.Systems.PreferencesSystem;
 
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Localization;
 using UnityEngine.SceneManagement;
 
@@ -33,6 +35,7 @@ namespace Game.Systems.GameSystem
 
 		[Header("Prefabs")]
 		public Character.Character characterPrefab;
+		public AssetReferenceModel< GameObject > CharacterReference;
 		
 		[NonSerialized] private List<LevelConfig> allLevels;
 

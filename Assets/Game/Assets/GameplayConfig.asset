@@ -47,4 +47,9 @@ MonoBehaviour:
     body_disable: {r: 0.8509804, g: 0.8509804, b: 0.8509804, a: 1}
     frame_disable: {r: 0.5647059, g: 0.49019608, b: 0.38431373, a: 1}
   characterPrefab: {fileID: 5075788677129601735, guid: 181ebc7adbc190445a881e74c320b8c3, type: 3}
-  Shaders: []
+  CharacterReference:
+    reference:
+      m_AssetGUID: 181ebc7adbc190445a881e74c320b8c3
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0

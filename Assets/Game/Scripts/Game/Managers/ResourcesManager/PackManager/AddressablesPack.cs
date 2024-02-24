@@ -33,13 +33,10 @@ namespace Game.Managers.AssetManager.PackManager
 			_loadingStartTime = DateTime.Now;
 			_currentLoadingTime = DateTime.Now;
 			
-			LoadInternal( _packSource );
-
-			await _downloadSizeHandle;
-			await _asyncOperationHandle;
+			await LoadInternal( _packSource );
 		}
 		
-		private void LoadInternal( PackSource source )
+		private async UniTask LoadInternal( PackSource source )
 		{
 			Debug.Log( $"[PackManager] Load {_label}" );
             _packState = PackState.Loading;
@@ -58,6 +55,8 @@ namespace Game.Managers.AssetManager.PackManager
 	                Debug.LogError( $"[PackManager] Complete with error: {completeSize.OperationException.Message}" );
                 }
             };
+
+            await _downloadSizeHandle;
 
             _asyncOperationHandle = Addressables.DownloadDependenciesAsync( _label );
             _asyncOperationHandle.Completed += complete =>
@@ -115,6 +114,7 @@ namespace Game.Managers.AssetManager.PackManager
                     _packState = PackState.NeedReloading;
                 }
             };
-        }
+            await _asyncOperationHandle;
+		}
 	}
 }

@@ -16,7 +16,7 @@ MonoBehaviour:
     ProductName: Tranquil Regret
     CompanyName: StarSmith Games
     PackageName: com.StarSmithGames.BillowingBoundary
-    Version: 0.0.1
+    Version: 0.0.2
     VersionCode: 1
     KeystorePath: user.keystore
     KeystorePassword: Star2l0Dr52M

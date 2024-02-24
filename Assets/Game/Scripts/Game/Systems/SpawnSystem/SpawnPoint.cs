@@ -35,8 +35,23 @@ namespace Game.Systems.SpawnSystem
 
 		public void Spawn()
 		{
-			var character = diContainer.InstantiatePrefab(gameplayConfig.characterPrefab).GetComponent<Character.Character>();
+			Debug.LogError( gameplayConfig.CharacterReference.Asset != null );
 
+			if ( !gameplayConfig.CharacterReference.IsLoaded )
+			{
+				gameplayConfig.CharacterReference.Load( () =>
+				{
+					Spawn( diContainer.InstantiatePrefab( gameplayConfig.CharacterReference.Asset ).GetComponent< Character.Character >() );
+				} );
+			}
+			else
+			{
+				Spawn( diContainer.InstantiatePrefab( gameplayConfig.CharacterReference.Asset ).GetComponent< Character.Character >() );
+			}
+		}
+
+		private void Spawn( Character.Character character )
+		{
 			character.Presenter.View.root.position = transform.position;
 			character.Presenter.View.model.rotation = transform.rotation;
 

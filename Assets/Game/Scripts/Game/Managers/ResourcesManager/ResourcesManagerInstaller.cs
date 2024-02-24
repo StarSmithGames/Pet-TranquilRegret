@@ -6,7 +6,7 @@ namespace Game.Managers.AssetManager
 	{
 		public override void InstallBindings()
 		{
-			Container.BindInterfacesAndSelfTo< ResourcesManager >().AsSingle();
+			Container.BindInterfacesAndSelfTo< ResourcesManager >().AsSingle().NonLazy();
 		}
 	}
 }

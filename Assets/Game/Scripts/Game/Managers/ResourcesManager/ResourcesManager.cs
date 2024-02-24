@@ -26,8 +26,10 @@ namespace Game.Managers.AssetManager
 			await Addressables.InitializeAsync();
 			IsAddressablesInitialized = true;
 			OnAddressablesInitialized?.Invoke();
-			
-			await new AddressablesLevelPack( 1 ).Load( PackSource.Local );
+
+			// await DownloadDependenciesAsync( "character" );
+			// await new AddressablesPack( "characters" ).Load( PackSource.Local );
+			// await new AddressablesLevelPack( 1 ).Load( PackSource.Local );
 		}
 		
 		public async UniTask DownloadDependenciesAsync( string label )
@@ -44,6 +46,8 @@ namespace Game.Managers.AssetManager
 					Debug.LogError( $"[ResourcesManager] Asset undone:{label} status:{complete.Status}" );
 				}
 			};
+
+			await downloadHandle;
 		}
 
 		public async UniTask< Object > RequestResource( bool isInternal, Type type, string name )

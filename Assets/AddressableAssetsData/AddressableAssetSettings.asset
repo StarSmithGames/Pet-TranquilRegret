@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468a46d0ae32c3544b7d98094e6448a9, type: 3}
   m_Name: AddressableAssetSettings
   m_EditorClassIdentifier: 
-  m_DefaultGroup: f3102ce2850b23a4e9d551d49d6c0ea9
+  m_DefaultGroup: 2c40b060facf2d246a4f6f06567ec0f1
   m_CachedHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
@@ -45,6 +45,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cc8b1589f933fa94a9d4a5c598c91d13, type: 2}
   - {fileID: 11400000, guid: 0c7b7e4bad332a8409b53b908646a575, type: 2}
   - {fileID: 11400000, guid: 202757a28d397ff469bd727cd7a15999, type: 2}
+  - {fileID: 11400000, guid: 225f509f88112fa4c9d5dbbb6aef5bc0, type: 2}
   - {fileID: 11400000, guid: be11fd3025357c940a2087ddfd4c886f, type: 2}
   - {fileID: 11400000, guid: 278dc0b17eea8e24fa1cdd381aa9f832, type: 2}
   - {fileID: 11400000, guid: 348163aed6475a545a2e53b4cdb67994, type: 2}
@@ -127,6 +128,8 @@ MonoBehaviour:
   m_LabelTable:
     m_LabelNames:
     - default
+    - shared
+    - characters
     - level_pack_1
     - Locale
     - Locale-en
