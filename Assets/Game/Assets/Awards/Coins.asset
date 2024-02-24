@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Coins
   m_EditorClassIdentifier: 
   information:
-    portrait: {fileID: 21300000, guid: dd05b4179f0946c43ba3810423c1d9aa, type: 3}
+    portrait: {fileID: 21300000, guid: 2b4bd1e775e5a354a84d2538971f7476, type: 3}
     name: 
     isNameId: 1
     description: 

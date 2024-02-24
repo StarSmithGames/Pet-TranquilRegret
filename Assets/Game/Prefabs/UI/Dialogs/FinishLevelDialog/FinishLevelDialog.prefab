@@ -15490,6 +15490,7 @@ MonoBehaviour:
   rewardsRoot: {fileID: 6395537599558949801}
   rewardsContent: {fileID: 498085239408467157}
   buttonExit: {fileID: 7139911833311278600}
+  AwardPrefab: {fileID: 4176134242592844894, guid: dadca49fb21f8e049a9cc7cd8915a09e, type: 3}
 --- !u!1 &8140769029975956812
 GameObject:
   m_ObjectHideFlags: 0

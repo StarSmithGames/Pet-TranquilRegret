@@ -222,7 +222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   collider: {fileID: 2716889549583048245}
-  isDebugSetup: 1
+  isDebugSetup: 0
 --- !u!135 &2716889549583048245
 SphereCollider:
   m_ObjectHideFlags: 0

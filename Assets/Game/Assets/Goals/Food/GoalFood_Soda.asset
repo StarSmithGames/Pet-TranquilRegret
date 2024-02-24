@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 283effccce48cb14abf94b89bd5ce7ed, type: 3}
-  m_Name: GoalFood_Pizza
+  m_Script: {fileID: 11500000, guid: c8d878a56d13467ca8b152bb3cc022c4, type: 3}
+  m_Name: GoalFood_Soda
   m_EditorClassIdentifier: 
-  id: 1
-  name: Pizza
+  id: 2
+  name: Soda
   information:
-    portrait: {fileID: 21300000, guid: 2f555b302d825614183568e46d601559, type: 3}
-    name: Pizza
+    portrait: {fileID: 21300000, guid: 280baeca098fd1c49aa28b470669c5de, type: 3}
+    name: Soda
     isNameId: 0
     description: 
     isDescriptionId: 1

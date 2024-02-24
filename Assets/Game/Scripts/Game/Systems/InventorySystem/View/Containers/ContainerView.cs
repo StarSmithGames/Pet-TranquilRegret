@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 using UnityEngine;
 
 namespace Game.Systems.InventorySystem
@@ -22,7 +20,8 @@ namespace Game.Systems.InventorySystem
 
 		protected void Initialize()
 		{
-			model = new(GetItems());
+			var items = GetItems();
+			model = new( items );
 		}
 
 		public abstract ItemModel[] GetItems();

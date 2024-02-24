@@ -1,8 +1,8 @@
+using Cysharp.Threading.Tasks;
 using Game.Systems.FloatingSystem;
 using Game.Systems.LevelSystem;
 using Game.Systems.NavigationSystem;
-using Game.Systems.StorageSystem;
-
+using UnityEngine;
 using Zenject;
 
 namespace Game.Systems.InventorySystem
@@ -32,7 +32,13 @@ namespace Game.Systems.InventorySystem
 		{
 			Unsubscribe();
 
-			var goal = GetComponent<ItemView>().model.config as GoalItemConfig;
+			var config = GetComponent< ItemView >().model.config;
+			if ( config == null )
+			{
+				Debug.LogError( $"[Asset] Config equal Null {gameObject.name}" );
+				return;
+			}
+			var goal = config as GoalItemConfig;
 			levelManager.CurrentLevel.Presenter.Gameplay.GoalRegistrator.AccumulatePrimaryGoal(goal);
 
 			DoAnimationAsync(character.transform);

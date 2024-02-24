@@ -11701,11 +11701,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4965591499481995265, guid: d543007947a692a4e93ac427766da3c7, type: 3}
       propertyPath: m_Center.x
-      value: 0.00000010954404
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4965591499481995265, guid: d543007947a692a4e93ac427766da3c7, type: 3}
+      propertyPath: m_Center.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4965591499481995265, guid: d543007947a692a4e93ac427766da3c7, type: 3}
       propertyPath: m_Center.z
-      value: -0.000000047020823
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7414242338090830438, guid: d543007947a692a4e93ac427766da3c7, type: 3}
       propertyPath: m_Name

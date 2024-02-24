@@ -17,10 +17,6 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 9ce339c7dfb56ee4d97396425bb45b20
   m_SerializeEntries:
-  - m_GUID: 9e9cd1f9f59c112449d797fea0d16741
-    m_Address: Assets/Game/Assets
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: d79ad592e5e82d04580d074c29c9a9c9
     m_Address: Assets/Game/Prefabs
     m_ReadOnly: 0

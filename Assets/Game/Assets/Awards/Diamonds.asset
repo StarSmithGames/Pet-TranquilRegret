@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Diamonds
   m_EditorClassIdentifier: 
   information:
-    portrait: {fileID: 21300000, guid: f58d9fbee726a2741a1df3c72217ead6, type: 3}
+    portrait: {fileID: 21300000, guid: f6e265c14258fbd45a4e59db2c1de1a3, type: 3}
     name: 
     isNameId: 1
     description: 
