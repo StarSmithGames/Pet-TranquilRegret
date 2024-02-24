@@ -21,29 +21,6 @@ namespace Game.Managers.AssetManager
 			InitializeAddressables().Forget();
 		}
 
-		public void UpdateResourcesMaterials()
-		{
-			Debug.LogError("Refreshing materials");
-			var renderers = GameObject.FindObjectsOfType<MeshRenderer>();
-                    
-			foreach (var meshRenderer in renderers)
-			{
-				foreach (var material in meshRenderer.materials)
-				{
-					if ( material.shader == null )
-					{
-						Debug.LogError( "NULL" );
-					}
-					var shader = Shader.Find( material.shader.name );
-					if ( shader == null )
-					{
-						Debug.LogError( $"[Asset] Shader {material.shader.name} equil Null" );
-					}
-					material.shader = shader;
-				}
-			}
-		}
-
 		private async UniTask InitializeAddressables()
 		{
 			await Addressables.InitializeAsync();

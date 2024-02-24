@@ -17,11 +17,22 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 2c40b060facf2d246a4f6f06567ec0f1
   m_SerializeEntries:
-  - m_GUID: 181ebc7adbc190445a881e74c320b8c3
-    m_Address: Fox
+  - m_GUID: e6f9d95e0c89a184083d2c2785377435
+    m_Address: Assets/Game/Prefabs/Zones
     m_ReadOnly: 0
-    m_SerializedLabels:
-    - shared
+    m_SerializedLabels: []
+  - m_GUID: 1a9d64f4d62c2e64699ca23c11685f48
+    m_Address: Assets/Game/Prefabs/VFX
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 162c235ff2c90b94d9a3a282316050d6
+    m_Address: Assets/Game/Prefabs/Tools
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 6c5c2f81971e64d42af9faea312d11be
+    m_Address: Assets/Game/Prefabs/Environment
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 435dbf675f6f8c8498f60b1660208fe4, type: 2}
   m_SchemaSet:

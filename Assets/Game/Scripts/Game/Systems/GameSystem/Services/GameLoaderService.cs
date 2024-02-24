@@ -58,7 +58,7 @@ namespace Game.Systems.GameSystem
 				return _sceneSystem.ProgressHandler;
 			}, allow, () =>
 			{
-				_resourcesManager.UpdateResourcesMaterials();
+				AddressablesShaderProvider.RefreshScene();
 				onCompleted?.Invoke();
 			} );
 			_transitionManager.StartInfinityLoadingAsync(_startLevelTransition, onShowed, onHided, callback);

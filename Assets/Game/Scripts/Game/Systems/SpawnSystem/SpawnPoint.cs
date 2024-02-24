@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using Sirenix.OdinInspector;
 
 using UnityEngine;
@@ -5,12 +6,13 @@ using UnityEngine;
 using StarSmithGames.Core;
 
 using Game.Character;
-
+using Game.Managers.AssetManager;
 using Zenject;
 
 using Game.Managers.CharacterManager;
 using Game.Systems.StorageSystem;
 using Game.Systems.GameSystem;
+using UnityEngine.AddressableAssets;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -35,17 +37,25 @@ namespace Game.Systems.SpawnSystem
 
 		public void Spawn()
 		{
-			if ( !gameplayConfig.CharacterReference.IsLoaded )
-			{
-				gameplayConfig.CharacterReference.Load( () =>
-				{
-					Spawn( diContainer.InstantiatePrefab( gameplayConfig.CharacterReference.Asset ).GetComponent< Character.Character >() );
-				} );
-			}
-			else
-			{
-				Spawn( diContainer.InstantiatePrefab( gameplayConfig.CharacterReference.Asset ).GetComponent< Character.Character >() );
-			}
+			SpawnAsync().Forget();
+			// if ( !gameplayConfig.CharacterReference.IsLoaded )
+			// {
+			// 	gameplayConfig.CharacterReference.Load( () =>
+			// 	{
+			// 		Spawn( diContainer.InstantiatePrefab( gameplayConfig.CharacterReference.Asset ).GetComponent< Character.Character >() );
+			// 	} );
+			// }
+			// else
+			// {
+			// 	Spawn( diContainer.InstantiatePrefab( gameplayConfig.CharacterReference.Asset ).GetComponent< Character.Character >() );
+			// }
+		}
+
+		private async UniTask SpawnAsync()
+		{
+			var player = Addressables.LoadAssetAsync< GameObject >( "Fox" );
+			await player;
+			Spawn( diContainer.InstantiatePrefab( player.Result ).GetComponent< Character.Character >() );
 		}
 
 		private void Spawn( Character.Character character )
@@ -56,6 +66,8 @@ namespace Game.Systems.SpawnSystem
 			character.Presenter.View.cameraFollowPivot.position = FollowPosition;
 			character.Presenter.View.cameraLookAtPivot.position = LookPosition;
 
+			AddressablesShaderProvider.RefreshGameObject( character.gameObject );
+			
 			if (settings.isPlayer)
 			{
 				characterManager.RegistratePlayer(character);
