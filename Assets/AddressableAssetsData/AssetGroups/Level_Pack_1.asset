@@ -27,6 +27,16 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - level_pack_1
+  - m_GUID: bb52bd92a0163b249abf0b9a04831084
+    m_Address: Assets/Game/Scenes/Levels/Level_0
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - level_pack_1
+  - m_GUID: 0081f64694a3a614c9ac1c43d0dfeb6c
+    m_Address: Assets/Game/Scenes/Levels/Level_1
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - level_pack_1
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 435dbf675f6f8c8498f60b1660208fe4, type: 2}
   m_SchemaSet:

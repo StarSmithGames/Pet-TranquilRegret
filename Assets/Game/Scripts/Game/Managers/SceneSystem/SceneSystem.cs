@@ -101,16 +101,16 @@ namespace Game.Systems.SceneSystem
                     _currentScene = GetActiveScene();
 
                     await UniTask.Yield();
-                    // Debug.Log("Refreshing materials");
-                    // var renderers = GameObject.FindObjectsOfType<MeshRenderer>();
-                    //
-                    // foreach (var meshRenderer in renderers)
-                    // {
-	                   //  foreach (var material in meshRenderer.materials)
-	                   //  {
-		                  //   material.shader = Shader.Find(material.shader.name);
-	                   //  }
-                    // }
+                    Debug.LogError("Refreshing materials");
+                    var renderers = GameObject.FindObjectsOfType<MeshRenderer>();
+                    
+                    foreach (var meshRenderer in renderers)
+                    {
+	                    foreach (var material in meshRenderer.materials)
+	                    {
+		                    material.shader = Shader.Find(material.shader.name);
+	                    }
+                    }
                     
                     if ( !allow )
                     {

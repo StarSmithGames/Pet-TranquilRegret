@@ -2,8 +2,6 @@ using Game.Extensions;
 using Game.Managers.AssetManager;
 using Game.Systems.LevelSystem;
 using StarSmithGames.Go.LocalizationSystem;
-using StarSmithGames.Go.SceneManager;
-using UnityEngine;
 using Zenject;
 
 namespace Game.Systems.GameSystem

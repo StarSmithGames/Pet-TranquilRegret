@@ -33,7 +33,7 @@ namespace Game.Systems.GameSystem
 
 		[Header("Prefabs")]
 		public Character.Character characterPrefab;
-
+		
 		[NonSerialized] private List<LevelConfig> allLevels;
 
 		public LevelConfig GetLevelByScene(Scene scene)
