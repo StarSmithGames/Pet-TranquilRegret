@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace Game.Systems.NavigationSystem
 {
-    public abstract class UIJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
+    public abstract class UIJoystick : TapAndDragPointer
     {
         public float Horizontal { get { return (snapX) ? SnapFloat(input.x, AxisOptions.Horizontal) : input.x; } }
         public float Vertical { get { return (snapY) ? SnapFloat(input.y, AxisOptions.Vertical) : input.y; } }
@@ -37,7 +37,6 @@ namespace Game.Systems.NavigationSystem
 
 		protected Vector2 center = new Vector2(0.5f, 0.5f);
 
-
 		private Canvas canvas;
         private Camera cam;
 
@@ -60,13 +59,7 @@ namespace Game.Systems.NavigationSystem
             handle.anchoredPosition = Vector2.zero;
         }
 
-        public virtual void OnPointerDown(PointerEventData eventData)
-        {
-            
-            OnDrag(eventData);
-        }
-
-        public void OnDrag(PointerEventData eventData)
+        public override void OnDrag(PointerEventData eventData)
         {
             cam = null;
             if (canvas.renderMode == RenderMode.ScreenSpaceCamera)
@@ -78,6 +71,8 @@ namespace Game.Systems.NavigationSystem
             FormatInput();
             HandleInput(input.magnitude, input.normalized, radius, cam);
             handle.anchoredPosition = input * radius * handleRange;
+            
+            base.OnDrag( eventData );
 		}
 
 		protected virtual void HandleInput(float magnitude, Vector2 normalised, Vector2 radius, Camera cam)
@@ -133,10 +128,12 @@ namespace Game.Systems.NavigationSystem
             return 0;
         }
 
-        public virtual void OnPointerUp(PointerEventData eventData)
+        public override void OnEndDrag(PointerEventData eventData)
         {
             input = Vector2.zero;
             handle.anchoredPosition = Vector2.zero;
+            
+            base.OnEndDrag( eventData );
         }
 
         protected Vector2 ScreenPointToAnchoredPosition(Vector2 screenPosition)

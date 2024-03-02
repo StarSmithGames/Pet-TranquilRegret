@@ -1,7 +1,6 @@
-﻿using Sirenix.OdinInspector;
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
 namespace Game.Systems.NavigationSystem
 {
@@ -9,7 +8,7 @@ namespace Game.Systems.NavigationSystem
     {
         public bool IsEnable => canvasGroup.alpha == 1f;
 
-        public bool isMoving = false;
+        public bool isMovingOut;
         public float moveThreshold = 1;
         public CanvasGroup canvasGroup;
 
@@ -25,23 +24,24 @@ namespace Game.Systems.NavigationSystem
 	        canvasGroup.alpha = trigger ? 1f : 0f;
         }
 
-        public override void OnPointerDown(PointerEventData eventData)
+        public override void OnBeginDrag( PointerEventData eventData )
         {
+	        base.OnBeginDrag(eventData);
+	        
             background.anchoredPosition = ScreenPointToAnchoredPosition(eventData.position);
             background.gameObject.SetActive(true);
-            base.OnPointerDown(eventData);
         }
 
-        public override void OnPointerUp(PointerEventData eventData)
+        public override void OnEndDrag( PointerEventData eventData )
         {
-            background.gameObject.SetActive(false);
-            base.OnPointerUp(eventData);
+	        background.gameObject.SetActive(false);
+	        
+	        base.OnEndDrag(eventData);
         }
 
         protected override void HandleInput(float magnitude, Vector2 normalised, Vector2 radius, Camera cam)
         {
-	        if( isMoving )
-            if (magnitude > moveThreshold)
+            if ( isMovingOut && magnitude > moveThreshold)
             {
                 Vector2 difference = normalised * (magnitude - moveThreshold) * radius;
                 background.anchoredPosition += difference;

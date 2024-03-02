@@ -45,7 +45,7 @@ namespace Game.Character
 		{
 			pauseManager.Registrate(this);
 
-			jostick = uiRoot.GameCanvas.Joystick;
+			jostick = uiRoot.ControlCanvas.Joystick;
 			CheckGround();
 		}
 

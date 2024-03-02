@@ -8,6 +8,7 @@ namespace Game.Systems.UISystem
 	{
 		public ViewAggregator DialogAggregator { get; private set; }
 		
+		public UIControlCanvas ControlCanvas;
 		public UIGameCanvas GameCanvas;
 		public UIDynamicCanvas DynamicCanvas;
 		public UIFrontCanvas FrontCanvas;

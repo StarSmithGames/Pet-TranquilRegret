@@ -1,6 +1,5 @@
 using Game.Managers.CharacterManager;
 using Game.Systems.LevelSystem;
-using Game.Systems.NavigationSystem;
 using Game.Systems.UISystem;
 using StarSmithGames.Core;
 using System.Collections.Generic;
@@ -11,16 +10,13 @@ using Zenject;
 
 namespace Game.UI
 {
-	public class UIGameCanvas : UICanvas
+	public sealed class UIGameCanvas : UICanvas
 	{
 		public Transform goalContent;
-		[Header("Control")]
-		public UIJoystick Joystick;
 		public UITimer Timer;
 		
 		private List<UIGoal> _goals = new();
 
-		private CharacterManager _characterManager;
 		private UIGoal.Factory _goalFactory;
 		private UIRootGame _uiRootGame;
 		
@@ -31,7 +27,6 @@ namespace Game.UI
 			UIRootGame uiRootGame
 			)
 		{
-			_characterManager = characterManager;
 			_goalFactory = goalFactory;
 			_uiRootGame = uiRootGame;
 		}
@@ -58,16 +53,6 @@ namespace Game.UI
 		public void OnSettingsButtonClick()
 		{
 			_uiRootGame.DialogAggregator.ShowAndCreateIfNotExist< SettingsDialog >();
-		}
-		
-		public void OnJumpButtonClick()
-		{
-			_characterManager.Player.Presenter.Controller.Jump();
-		}
-		
-		public void OnDropButtonClick()
-		{
-			
 		}
 	}
 }
