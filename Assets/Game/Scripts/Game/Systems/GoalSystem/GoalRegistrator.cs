@@ -26,16 +26,16 @@ namespace Game.Systems.GoalSystem
 			}
 		}
 
-		public void AccumulatePrimaryGoal(GoalItemConfig config)
+		public void AccumulatePrimaryGoal( GoalItemConfig config )
 		{
 			if ( config == null )
 			{
 				Debug.LogError( "[Asset] Config equal Null" );
 				return;
 			}
-			
-			var goal = GoalsPrimary.Find((x) => x.Model.config.GetType() == config.GetType());
-			Assert.IsNotNull(goal, $"[GoalRegistrator] Goal Not Exist for {config.BaseName}");
+
+			var goal = GoalsPrimary.Find( ( x ) => x.Model.config.GetType() == config.GetType() );
+			Assert.IsNotNull( goal, $"[GoalRegistrator] Goal Not Exist for {config.BaseName}" );
 			goal.CurrentValue++;
 
 			onAccumulatedPrimary?.Invoke();

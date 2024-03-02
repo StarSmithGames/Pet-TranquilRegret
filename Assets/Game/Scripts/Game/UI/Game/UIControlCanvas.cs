@@ -1,7 +1,6 @@
 using Game.Managers.CharacterManager;
 using Game.Systems.NavigationSystem;
 using Game.Systems.UISystem;
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -11,6 +10,8 @@ namespace Game.UI
 {
 	public sealed class UIControlCanvas : UICanvas
 	{
+		public UIVisionBooster VisionBooster;
+		[ Header("Control") ]
 		public Button DropButton;
 		public Button JumpButton;
 		public UIJoystick Joystick;

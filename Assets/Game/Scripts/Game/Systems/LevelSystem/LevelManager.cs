@@ -7,9 +7,9 @@ namespace Game.Systems.LevelSystem
 {
 	public sealed class LevelManager
 	{
-		public event Action< ILevel > OnLevelBuilded;
-		public event Action< ILevel > OnLevelStarted;
-		public event Action< ILevel > OnLevelDisposed;
+		public event Action OnLevelBuilded;
+		public event Action OnLevelStarted;
+		public event Action OnLevelDisposed;
 
 		public ILevel CurrentLevel { get; private set; }
 
@@ -35,7 +35,7 @@ namespace Game.Systems.LevelSystem
 			callback:()=>
 			{
 				CurrentLevel?.Start();
-				OnLevelStarted?.Invoke( CurrentLevel );
+				OnLevelStarted?.Invoke();
 				
 				callback?.Invoke();
 			} );
@@ -55,13 +55,13 @@ namespace Game.Systems.LevelSystem
         private void BuildLevel( ILevelBuilder builder )
         {
 	        CurrentLevel = builder.Build();
-			OnLevelBuilded?.Invoke( CurrentLevel );
+			OnLevelBuilded?.Invoke();
         }
 
         private void DisposeLevel()
         {
 	        CurrentLevel.Stop();
-	        OnLevelDisposed?.Invoke( CurrentLevel );
+	        OnLevelDisposed?.Invoke();
 	        CurrentLevel = null;
         }
 	}

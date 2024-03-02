@@ -9,6 +9,7 @@ namespace Game.Systems.LevelSystem
 		event Action OnDisposed;
 		
 		LevelPresenter Presenter { get; }
+		LevelViewModel ViewModel { get; }
 		
 		void Start();
 		void Complete();

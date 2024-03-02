@@ -5,6 +5,7 @@ using Game.Managers.DIManager;
 using Game.Managers.GameManager;
 using Game.Managers.RewardManager;
 using Game.Services;
+using Game.Services.TickableService;
 using Game.Systems.GameSystem;
 using Game.Systems.LevelSystem;
 using Game.Systems.SceneSystem;
@@ -26,6 +27,7 @@ namespace Game.Installers
 		{
 			SignalBusInstaller.Install(Container);
 			AsyncManagerInstaller.Install(Container);
+			TickableServiceInstaller.Install( Container );
 			ApplicationHandlerInstaller.Install(Container);
 			ApplicationManagerInstaller.Install( Container );
 			DelayedCallServiceInstaller.Install(Container);

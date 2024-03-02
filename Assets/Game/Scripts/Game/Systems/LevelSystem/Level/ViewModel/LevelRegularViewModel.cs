@@ -4,8 +4,11 @@ using Game.UI;
 
 namespace Game.Systems.LevelSystem
 {
-	public sealed class LevelRegularViewModel
+	public sealed class LevelRegularViewModel : LevelViewModel
 	{
+		public override LevelView View => RegularViewView;
+		public LevelRegularView RegularViewView { get; private set; }
+		
 		private LevelPresenter _presenter;
 		
 		private readonly UIRootGame _uiRootGame;
@@ -26,8 +29,12 @@ namespace Game.Systems.LevelSystem
 			_rewardManager = rewardManager;
 		}
 
-		public void SetPresenter( LevelPresenter presenter )
+		public void Initialize( 
+			LevelRegularView regularView,
+		    LevelPresenter presenter
+			)
 		{
+			RegularViewView = regularView;
 			_presenter = presenter;
 		}
 

@@ -1,9 +1,6 @@
 using Game.Managers.PauseManager;
-using Game.Managers.RewardManager;
 using System;
 using UnityEngine;
-
-using Zenject;
 
 namespace Game.Systems.LevelSystem
 {

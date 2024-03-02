@@ -2,7 +2,7 @@
 
 namespace Game.Systems.GoalSystem
 {
-	public interface IGoal : IValue<float>, IReadOnlyValue<float>, IObservableValue, IBar
+	public interface IGoal : IValue<float>, IBar
 	{
 		GoalItemModel Model { get; }
 		bool IsCompleted { get; }

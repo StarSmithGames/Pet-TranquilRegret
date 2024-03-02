@@ -1,5 +1,6 @@
 using Game.Managers.DIManager;
 using System;
+using UnityEngine;
 
 namespace Game.Systems.LevelSystem
 {
@@ -32,7 +33,10 @@ namespace Game.Systems.LevelSystem
 
 			LevelPresenter presenter = new( model, gameplay, timer );
 			LevelRegularViewModel viewModel = _diManager.CurrentContainer.Instantiate< LevelRegularViewModel >();
-			viewModel.SetPresenter( presenter );
+			viewModel.Initialize(
+				GameObject.FindFirstObjectByType< LevelRegularView >(),
+				presenter
+				);
 			
 			return new RegularLevel( presenter, viewModel );
 		}

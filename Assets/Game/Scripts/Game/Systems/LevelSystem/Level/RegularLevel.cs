@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 namespace Game.Systems.LevelSystem
 {
@@ -10,7 +9,9 @@ namespace Game.Systems.LevelSystem
 		public event Action OnDisposed;
 		
 		public LevelPresenter Presenter { get; }
-		public LevelRegularViewModel ViewModel { get; }
+		public LevelViewModel ViewModel => RegularViewModel;
+		
+		public LevelRegularViewModel RegularViewModel { get; }
 
 		public RegularLevel(
 			LevelPresenter presenter,
@@ -18,7 +19,7 @@ namespace Game.Systems.LevelSystem
 			)
 		{
 			Presenter = presenter ?? throw new ArgumentNullException( nameof(presenter) );
-			ViewModel = viewModel ?? throw new ArgumentNullException( nameof(viewModel) );
+			RegularViewModel = viewModel ?? throw new ArgumentNullException( nameof(viewModel) );
 
 			Presenter.Gameplay.OnCompleted += GameplayCompletedHandler;
 		}
@@ -37,7 +38,7 @@ namespace Game.Systems.LevelSystem
 		public void Start()
 		{
 			Presenter.Start();
-			ViewModel.Start();
+			RegularViewModel.Start();
 			
 			OnStarted?.Invoke();
 		}
@@ -45,7 +46,7 @@ namespace Game.Systems.LevelSystem
 		public void Complete()
 		{
 			Presenter.Complete();
-			ViewModel.Complete();
+			RegularViewModel.Complete();
 			
 			OnCompleted?.Invoke();
 		}
