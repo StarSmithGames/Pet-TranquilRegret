@@ -10,6 +10,7 @@ namespace Game.UI
 {
 	public sealed class UIControlCanvas : UICanvas
 	{
+		public UISpeedUpBooster SpeedUpBooster;
 		public UIVisionBooster VisionBooster;
 		[ Header("Control") ]
 		public Button DropButton;

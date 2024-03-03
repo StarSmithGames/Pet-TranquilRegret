@@ -5,11 +5,13 @@ using System;
 
 namespace Game.VVM
 {
-	public sealed class VisionBoosterViewModel : InfinityBoosterViewModel< UIVisionBooster, VisionBooster >
+	public sealed class SpeedUpBoosterViewModel : BoosterViewModel< UISpeedUpBooster, SpeedUpBooster >
 	{
+		private SpeedUpBooster _booster;
+		
 		private readonly UIRootGame _rootGame;
 		
-		public VisionBoosterViewModel(
+		public SpeedUpBoosterViewModel(
 			BoosterManager boosterManager,
 
 			UIRootGame rootGame
@@ -17,19 +19,19 @@ namespace Game.VVM
 		{
 			_rootGame = rootGame ?? throw new ArgumentNullException( nameof(rootGame) );
 		}
-
+		
 		public override void Initialize()
 		{
-			_booster = _boosterManager.VisionBooster;
+			_booster = _boosterManager.SpeedUpBooster;
 			
 			EnableView( true );
 		}
-
+		
 		protected override void BoosterClicked()
 		{
-			_boosterManager.UseVision();
+			_boosterManager.UseSpeedUp();
 		}
-
-		protected override UIVisionBooster GetView() => _rootGame.ControlCanvas.VisionBooster;
+		
+		protected override UISpeedUpBooster GetView() => _rootGame.ControlCanvas.SpeedUpBooster;
 	}
 }

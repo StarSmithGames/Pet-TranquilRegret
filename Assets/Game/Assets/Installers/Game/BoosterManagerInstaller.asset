@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BoosterManagerInstaller
   m_EditorClassIdentifier: 
   VisionBoosterSettings:
-    EstimatedTime: 30
+    EstimatedTime: 10
     Outline: {fileID: 11400000, guid: efa6c6f5f9d6e1b41a53f1df82f4eaed, type: 2}

@@ -349,6 +349,7 @@ namespace EPOOutline
         {
             propertiesIsDirty = true;
             SerializedPassProperty result = null;
+
             if (!propertiesById.TryGetValue(hash, out result))
             {
                 Debug.LogError("The property " + hash + " doesn't exist. Use string overload to create one.");
@@ -388,6 +389,7 @@ namespace EPOOutline
                 if (propertiesByName.ContainsKey(serialized.PropertyName))
                     continue;
 
+                //Debug.LogError( serialized.PropertyName + " " + Shader.PropertyToID(serialized.PropertyName) );
                 propertiesById.Add(Shader.PropertyToID(serialized.PropertyName), serialized.Property);
                 propertiesByName.Add(serialized.PropertyName, serialized.Property);
             }

@@ -2,6 +2,7 @@
 using UnityEngine;
 using System;
 using Sirenix.OdinInspector;
+using StarSmithGames.Core;
 
 namespace EPOOutline
 {
@@ -467,18 +468,20 @@ namespace EPOOutline
 		[HideLabel]
 		[SerializeField] private Settings settings;
 
-		private OutlineData dataSave;
-
 		public void SetData(OutlineData data)
 		{
 			this.data = data;
+
+			isCustom = false;
 		}
 
-		public void ResetData()
+		public void SetSettings( Settings settings )
 		{
-			this.data = dataSave;
+			this.settings = settings;
+			
+			isCustom = true;
 		}
-
+		
 		[System.Serializable]
         public class Settings
         {

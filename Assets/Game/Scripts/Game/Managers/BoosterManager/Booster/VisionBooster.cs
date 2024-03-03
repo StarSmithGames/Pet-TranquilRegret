@@ -1,14 +1,17 @@
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Game.Services;
 using Game.Services.TickableService;
 using Game.Systems.BoosterManager.Settings;
-using Game.Systems.LevelSystem;
 using System;
+using System.Threading;
+using UnityEngine;
 
 namespace Game.Systems.BoosterManager
 {
 	public sealed class VisionBooster : InfinityBooster
 	{
-		private ILevel _level;
+		private CancellationTokenSource _cancellationTokenSource;
 
 		private readonly VisionBoosterSettings _settings;
 		private readonly OutlinableService _outlinableService;
@@ -24,12 +27,10 @@ namespace Game.Systems.BoosterManager
 			_outlinableService = outlinableService ?? throw new ArgumentNullException( nameof(outlinableService) );
 		}
 		
-		public void Use( ILevel level )
+		public void Use()
 		{
 			if ( IsInProcess ) return;
 
-			_level = level;
-			
 			StartInfinity();
 		}
 
@@ -37,15 +38,40 @@ namespace Game.Systems.BoosterManager
 		{
 			base.StartInfinity();
 
-			_outlinableService.SetOutlineData( _settings.Outline );
+			var copy = ScriptableObject.Instantiate( _settings.Outline );
+			
+			_outlinableService.SetOutlineData( copy );
 			_outlinableService.Enable( true );
+
+			_cancellationTokenSource = new();
+			Idle( _cancellationTokenSource.Token ).Forget();
 		}
 
 		protected override void StopInfinity()
 		{
 			_outlinableService.Enable( false );
 			
+			_cancellationTokenSource?.Cancel();
+			_cancellationTokenSource?.Dispose();
+			_cancellationTokenSource = null;
+			
 			base.StopInfinity();
+		}
+
+		private async UniTask Idle( CancellationToken token )
+		{
+			bool isCanceled = false;
+			
+			_outlinableService.Fade( 0 );
+			
+			while ( !isCanceled )
+			{
+				isCanceled = await _outlinableService.DOFadeColorFill( 0.5f, 0.66f, Ease.InOutSine, token ).SuppressCancellationThrow();
+				if ( isCanceled ) break;
+				isCanceled = await _outlinableService.DOFadeColorFill( 0f, 0.66f, Ease.InOutSine, token ).SuppressCancellationThrow();
+			}
+			
+			await _outlinableService.DOFadeColorFill( 0f, 0.33f, Ease.OutQuart );
 		}
 
 		public override float GetTicks() => _settings.EstimatedTime - _ticks;

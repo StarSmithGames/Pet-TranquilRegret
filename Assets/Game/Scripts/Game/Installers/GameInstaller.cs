@@ -1,6 +1,7 @@
 using Game.Managers.CharacterManager;
 using Game.Managers.DIManager;
 using Game.Managers.PauseManager;
+using Game.Services;
 using Game.Systems.CameraSystem;
 using Game.Systems.LevelSystem;
 using Game.Systems.PhysicsSystem;
@@ -32,6 +33,7 @@ namespace Game.Installers
 
 			Container.BindInstance( FindObjectOfType< CameraSystem >() );
 			SpawnSystemInstaller.Install(Container);
+			OutlinableSystemInstaller.Install( Container );
 			EffectSystemInstaller.Install(Container);
 			PauseManagerInstaller.Install(Container);
 			CharacterManagerInstaller.Install(Container);

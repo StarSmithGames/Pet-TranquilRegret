@@ -1256,10 +1256,6 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -0.00000023841858
       objectReference: {fileID: 0}
-    - target: {fileID: 831502057622227833, guid: 1ecbd8e0a90a620449916443a66a4852, type: 3}
-      propertyPath: outlineTargets.Array.data[0].IsVisible
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2157974070568374954, guid: 1ecbd8e0a90a620449916443a66a4852, type: 3}
       propertyPath: m_Center.y
       value: -0.15586278
@@ -1267,6 +1263,14 @@ PrefabInstance:
     - target: {fileID: 2308841043546790203, guid: 1ecbd8e0a90a620449916443a66a4852, type: 3}
       propertyPath: m_Center.y
       value: -0.5995644
+      objectReference: {fileID: 0}
+    - target: {fileID: 2946857897362683968, guid: 1ecbd8e0a90a620449916443a66a4852, type: 3}
+      propertyPath: outlineTargets.Array.data[0].IsVisible
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540940380687591878, guid: 1ecbd8e0a90a620449916443a66a4852, type: 3}
+      propertyPath: outlineTargets.Array.data[0].IsVisible
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3792127574069918675, guid: 1ecbd8e0a90a620449916443a66a4852, type: 3}
       propertyPath: outlineTargets.Array.data[0].IsVisible
@@ -1356,7 +1360,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Level_1
       objectReference: {fileID: 0}
+    - target: {fileID: 6138321160365553004, guid: 1ecbd8e0a90a620449916443a66a4852, type: 3}
+      propertyPath: outlineTargets.Array.data[0].IsVisible
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7216409558715030310, guid: 1ecbd8e0a90a620449916443a66a4852, type: 3}
+      propertyPath: outlineTargets.Array.data[0].IsVisible
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7697296804445172661, guid: 1ecbd8e0a90a620449916443a66a4852, type: 3}
       propertyPath: outlineTargets.Array.data[0].IsVisible
       value: 0
       objectReference: {fileID: 0}

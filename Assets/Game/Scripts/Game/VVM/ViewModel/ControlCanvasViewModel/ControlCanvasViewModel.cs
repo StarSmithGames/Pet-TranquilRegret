@@ -32,6 +32,7 @@ namespace Game.VVM
 		{
 			return new()
 			{
+				typeof(SpeedUpBoosterViewModel),
 				typeof(VisionBoosterViewModel),
 			};
 		}
