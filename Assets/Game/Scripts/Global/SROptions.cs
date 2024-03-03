@@ -22,6 +22,23 @@ public partial class SROptions
 		SRDebug.Instance.PanelVisibilityChanged += OnPanelVisibilityChanged;
 	}
 
+	#region Boosters
+	[Category("Boosters")]
+	public void AddSpeedUpBooster()
+	{
+		storageSystem.Storage.SpeedUpBooster.Value.ItemsCount++;
+		storageSystem.Save();
+	}
+	
+	[Category("Boosters")]
+	public void AddVisionBooster()
+	{
+		storageSystem.Storage.VisionBooster.Value.ItemsCount++;
+		storageSystem.Save();
+	}
+	#endregion
+
+
 	#region Level
 	[Category("Level")]
 	[Sort(4)]

@@ -1,32 +1,27 @@
-using Game.Systems.GameSystem;
-using Game.Systems.LevelSystem;
-using Game.UI;
-
 using StarSmithGames.Core.StorageSystem;
 using StarSmithGames.Core.Utils;
 
 using System;
 
-using UnityEngine.SceneManagement;
-
-using Zenject;
-
 namespace Game.Systems.StorageSystem
 {
-	public class StorageSystem
+	public sealed class StorageSystem
 	{
 		public BootstrapData BootstrapData { get; private set; }
 
 		public GameFastData GameFastData { get; }
-		public GamePlayData GamePlayData { get; }
+		
+		public Storage Storage => StorageData.GetStorage();
+		
+		private readonly ISaveLoadStorage< Storage > StorageData;
 
 		public StorageSystem(
 			GameFastData gameFastData,
-			GamePlayData gamePlayData
+			StorageInitializerService storageInitializerService
 			)
 		{
 			GameFastData = gameFastData;
-			GamePlayData = gamePlayData;
+			StorageData = storageInitializerService.InitializeStorage();
 
 			BootstrapData = new()
 			{
@@ -36,29 +31,12 @@ namespace Game.Systems.StorageSystem
 
 		public void Save()
 		{
-			GamePlayData.StorageData.Save();
+			StorageData.Save();
 		}
 
 		public int GetLevelNumber()
 		{
 			return 0;//Storage.GameProgress.GetData().progressMainIndex + 1;
-		}
-	}
-
-	public sealed class Storage : StarSmithGames.Core.StorageSystem.Storage
-	{
-		public StorageData<GameProgress> GameProgress { get; private set; }
-
-		public override void Initialize()
-		{
-			base.Initialize();
-
-			GameProgress = new(Database, "game_progress");
-		}
-
-		public override void Purge()
-		{
-
 		}
 	}
 

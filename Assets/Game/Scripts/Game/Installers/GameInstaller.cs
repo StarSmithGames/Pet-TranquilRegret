@@ -2,6 +2,7 @@ using Game.Managers.CharacterManager;
 using Game.Managers.DIManager;
 using Game.Managers.PauseManager;
 using Game.Services;
+using Game.Systems.BoosterManager;
 using Game.Systems.CameraSystem;
 using Game.Systems.LevelSystem;
 using Game.Systems.PhysicsSystem;
@@ -36,6 +37,7 @@ namespace Game.Installers
 			OutlinableSystemInstaller.Install( Container );
 			EffectSystemInstaller.Install(Container);
 			PauseManagerInstaller.Install(Container);
+			BoostersInstaller.Install( Container );
 			CharacterManagerInstaller.Install(Container);
 			
 			Container.Resolve< DIManager >().SetContainer( Container );

@@ -34,8 +34,7 @@ namespace Game.VVM
 		protected override void OnViewCreated()
 		{
 			base.OnViewCreated();
-			ModelView.EnableCount( true );
-			ModelView.SetCount( "9" );
+			ModelView.EnableBar( false );
 		}
 		
 		private void BoosterStartedHandler()
@@ -47,8 +46,7 @@ namespace Game.VVM
 		private void BoosterStoppedHandler()
 		{
 			ModelView.EnableBar( false );
-			ModelView.EnableCount( true );
-			ModelView.SetCount( "9" );
+			ModelView.EnableCount( !_boosterData.IsEmpty );
 		}
 		
 		private void BoosterTickedHandler()

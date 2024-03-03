@@ -27,7 +27,7 @@ namespace Game.Systems.MenuSystem
 		public Vector3 StartPoint = new( 0, 0, 0);
 
 		private StartLevelDialog _startLevelDialog;
-		private GameProgress _gameProgress;
+		private GameProgressData _gameProgress;
 
 		private UIRootMenu _uiRootMenu;
 		private SwipeManager _swipeManager;
@@ -47,7 +47,7 @@ namespace Game.Systems.MenuSystem
 			_storageSystem = storageSystem;
 			_levelRegularService = levelRegularService;
 			
-			_gameProgress = _storageSystem.GamePlayData.Storage.GameProgress.GetData();
+			_gameProgress = _storageSystem.Storage.GameProgress.GetData();
 			
 			_uiRootMenu.ApplyCamera( RoadCamera.Camera );
 

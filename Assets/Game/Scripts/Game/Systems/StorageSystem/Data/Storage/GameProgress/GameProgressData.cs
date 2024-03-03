@@ -1,16 +1,12 @@
-﻿using Game.Systems.GameSystem;
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Game.Systems.StorageSystem
 {
-	public sealed class GameProgress
+	public sealed class GameProgressData
 	{
 		public List<RegularLevelData> regularLevels = new();
 
-		public GameProgress() { }
-		
-		public GameProgress(int count)
+		public GameProgressData(int count)
 		{
 			regularLevels = new(count);
 			AddRegularLevels(count);
@@ -28,12 +24,5 @@ namespace Game.Systems.StorageSystem
 		{
 			return regularLevels.FindIndex((data) => data.completed == 0);
 		}
-	}
-
-	public sealed class RegularLevelData
-	{
-		public int completed = 0;//1-complete, 0-not
-		public int stars = 0;
-		public float timestamp = 0;
 	}
 }

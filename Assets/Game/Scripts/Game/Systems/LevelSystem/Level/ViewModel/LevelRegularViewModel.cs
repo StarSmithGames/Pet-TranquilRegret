@@ -46,7 +46,7 @@ namespace Game.Systems.LevelSystem
 
 		public void Complete()
 		{
-			var data = _storageSystem.GamePlayData.Storage.GameProgress.GetData();
+			var data = _storageSystem.Storage.GameProgress.GetData();
 			var level = data.regularLevels[ _storageSystem.GameFastData.LastRegularLevelIndex ];
 			level.completed = 1;
 			level.stars = 3;

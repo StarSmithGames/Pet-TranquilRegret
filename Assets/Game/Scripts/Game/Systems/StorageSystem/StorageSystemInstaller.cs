@@ -6,9 +6,9 @@ namespace Game.Systems.StorageSystem
 	{
 		public override void InstallBindings()
 		{
-			Container.BindInterfacesAndSelfTo<GameFastData>().AsSingle().NonLazy();
-			Container.BindInterfacesAndSelfTo<GamePlayData>().AsSingle().NonLazy();
-
+			Container.BindInterfacesAndSelfTo<GameFastData>().AsSingle();
+			
+			Container.BindInterfacesAndSelfTo< StorageInitializerService >().AsSingle().WhenInjectedInto< StorageSystem >();
 			Container.BindInterfacesAndSelfTo<StorageSystem>().AsSingle().NonLazy();
 		}
 	}

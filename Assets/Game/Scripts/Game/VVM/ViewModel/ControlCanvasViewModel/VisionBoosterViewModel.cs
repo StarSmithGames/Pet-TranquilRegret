@@ -20,12 +20,14 @@ namespace Game.VVM
 
 		public override void Initialize()
 		{
-			_booster = _boosterManager.VisionBooster;
+			base.Initialize();
 			
 			EnableView( true );
 		}
 
-		protected override void BoosterClicked()
+		protected override VisionBooster GetBooster() => _boosterManager.VisionBooster;
+
+		protected override void UseBooster()
 		{
 			_boosterManager.UseVision();
 		}

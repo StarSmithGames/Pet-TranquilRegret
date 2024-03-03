@@ -3,6 +3,7 @@ using DG.Tweening;
 using Game.Services;
 using Game.Services.TickableService;
 using Game.Systems.BoosterManager.Settings;
+using Game.Systems.StorageSystem;
 using System;
 using System.Threading;
 using UnityEngine;
@@ -15,22 +16,27 @@ namespace Game.Systems.BoosterManager
 
 		private readonly VisionBoosterSettings _settings;
 		private readonly OutlinableService _outlinableService;
+		private readonly StorageSystem.StorageSystem _storageSystem;
 		
 		public VisionBooster(
 			TickableService tickableService,
 			
-			VisionBoosterSettings settings,
-			OutlinableService outlinableService
+			BoosterSettings settings,
+			OutlinableService outlinableService,
+			StorageSystem.StorageSystem storageSystem
 			) : base(tickableService)
 		{
-			_settings = settings ?? throw new ArgumentNullException( nameof(settings) );
+			_settings = settings?.VisionBoosterSettings ?? throw new ArgumentNullException( nameof(settings) );
 			_outlinableService = outlinableService ?? throw new ArgumentNullException( nameof(outlinableService) );
+			_storageSystem = storageSystem ?? throw new ArgumentNullException( nameof(storageSystem) );
 		}
 		
 		public void Use()
 		{
 			if ( IsInProcess ) return;
 
+			Data.ItemsCount--;
+			
 			StartInfinity();
 		}
 
@@ -79,5 +85,7 @@ namespace Game.Systems.BoosterManager
 		public override float GetProgress() => 1f - ( _ticks / _settings.EstimatedTime );
 		
 		protected override bool IsTick() => _ticks <= _settings.EstimatedTime;
+		
+		protected override BoosterData GetData() => _storageSystem.Storage.VisionBooster.Value;
 	}
 }

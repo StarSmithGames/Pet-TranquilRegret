@@ -5,10 +5,8 @@ using System;
 
 namespace Game.VVM
 {
-	public sealed class SpeedUpBoosterViewModel : BoosterViewModel< UISpeedUpBooster, SpeedUpBooster >
+	public sealed class SpeedUpBoosterViewModel : InfinityBoosterViewModel< UISpeedUpBooster, SpeedUpBooster >
 	{
-		private SpeedUpBooster _booster;
-		
 		private readonly UIRootGame _rootGame;
 		
 		public SpeedUpBoosterViewModel(
@@ -22,12 +20,14 @@ namespace Game.VVM
 		
 		public override void Initialize()
 		{
-			_booster = _boosterManager.SpeedUpBooster;
+			base.Initialize();
 			
 			EnableView( true );
 		}
-		
-		protected override void BoosterClicked()
+
+		protected override SpeedUpBooster GetBooster() => _boosterManager.SpeedUpBooster;
+
+		protected override void UseBooster()
 		{
 			_boosterManager.UseSpeedUp();
 		}
