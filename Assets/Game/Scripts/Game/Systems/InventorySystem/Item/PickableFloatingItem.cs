@@ -28,7 +28,7 @@ namespace Game.Systems.InventorySystem
 			interactionZone.onItemAdded -= OnCharacterAdded;
 		}
 
-		private void OnCharacterAdded(Character.Character character)
+		private void OnCharacterAdded(Entity.CharacterSystem.Character character)
 		{
 			Unsubscribe();
 

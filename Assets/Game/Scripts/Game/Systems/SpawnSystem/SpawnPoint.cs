@@ -5,7 +5,7 @@ using UnityEngine;
 
 using StarSmithGames.Core;
 
-using Game.Character;
+using Game.Entity.CharacterSystem;
 using Game.Managers.AssetManager;
 using Zenject;
 
@@ -55,10 +55,10 @@ namespace Game.Systems.SpawnSystem
 		{
 			var player = Addressables.LoadAssetAsync< GameObject >( "Fox" );
 			await player;
-			Spawn( diContainer.InstantiatePrefab( player.Result ).GetComponent< Character.Character >() );
+			Spawn( diContainer.InstantiatePrefab( player.Result ).GetComponent< Entity.CharacterSystem.Character >() );
 		}
 
-		private void Spawn( Character.Character character )
+		private void Spawn( Entity.CharacterSystem.Character character )
 		{
 			character.Presenter.View.root.position = transform.position;
 			character.Presenter.View.model.rotation = transform.rotation;

@@ -2164,7 +2164,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 15267150951916841}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3fe91dc294731a9428c0941ea7579110, type: 3}
   m_Name: 
@@ -2646,7 +2646,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7512072531212103956, guid: 9c509cb21dcc14b45818871c0ff48c71, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.6081668
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7512072531212103956, guid: 9c509cb21dcc14b45818871c0ff48c71, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2654,19 +2654,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7512072531212103956, guid: 9c509cb21dcc14b45818871c0ff48c71, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 7512072531212103956, guid: 9c509cb21dcc14b45818871c0ff48c71, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7512072531212103956, guid: 9c509cb21dcc14b45818871c0ff48c71, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 7512072531212103956, guid: 9c509cb21dcc14b45818871c0ff48c71, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7512072531212103956, guid: 9c509cb21dcc14b45818871c0ff48c71, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -2823,7 +2823,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1869161261361247407}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3fe91dc294731a9428c0941ea7579110, type: 3}
   m_Name: 
@@ -3939,7 +3939,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 4756118317718564572}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3fe91dc294731a9428c0941ea7579110, type: 3}
   m_Name: 
@@ -15313,7 +15313,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 9078368799098005509}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3fe91dc294731a9428c0941ea7579110, type: 3}
   m_Name: 

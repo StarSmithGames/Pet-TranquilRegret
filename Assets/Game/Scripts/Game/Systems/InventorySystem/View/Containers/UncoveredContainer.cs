@@ -32,7 +32,7 @@ namespace Game.Systems.InventorySystem
 		public CharacterInteractionZone interactionZone;
 		public Settings settings;
 
-		private Character.Character currentTarget;
+		private Entity.CharacterSystem.Character currentTarget;
 		private ItemViewFloating floating;
 
 		[Inject] private LevelManager levelManager;
@@ -72,7 +72,7 @@ namespace Game.Systems.InventorySystem
 			return itemViews.Select((x) => x.model).ToArray();
 		}
 
-		private void OnCharacterAdded(Character.Character character)
+		private void OnCharacterAdded(Entity.CharacterSystem.Character character)
 		{
 			if (currentTarget != null) return;
 
@@ -87,7 +87,7 @@ namespace Game.Systems.InventorySystem
 			() => Dispose());
 		}
 
-		private void OnCharacterRemoved(Character.Character character)
+		private void OnCharacterRemoved(Entity.CharacterSystem.Character character)
 		{
 			Assert.IsNotNull(currentTarget);
 

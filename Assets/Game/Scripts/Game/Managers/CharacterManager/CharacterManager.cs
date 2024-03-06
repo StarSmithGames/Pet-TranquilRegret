@@ -6,10 +6,10 @@ namespace Game.Managers.CharacterManager
 {
 	public class CharacterManager
 	{
-		public Character.Character Player { get; private set; }
-		public Registrator<Character.Character> Registrator { get; } = new();
+		public Entity.CharacterSystem.Character Player { get; private set; }
+		public Registrator<Entity.CharacterSystem.Character> Registrator { get; } = new();
 
-		public void RegistratePlayer(Character.Character character)
+		public void RegistratePlayer(Entity.CharacterSystem.Character character)
 		{
 			Assert.IsNull(Player);
 			Player = character;
@@ -17,7 +17,7 @@ namespace Game.Managers.CharacterManager
 			Registrator.Registrate(character);
 		}
 
-		public void UnRegistrate(Character.Character character)
+		public void UnRegistrate(Entity.CharacterSystem.Character character)
 		{
 			Registrator.UnRegistrate(character);
 		}

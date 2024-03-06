@@ -4,7 +4,7 @@ using Zenject;
 
 namespace Game.VVM.Services
 {
-	public sealed class ViewModelService : Registrator< IViewModel >, IDisposable
+	public sealed class ViewModelService : Registrator< IViewModel >
 	{
         private readonly DiContainer _diContainer;
         

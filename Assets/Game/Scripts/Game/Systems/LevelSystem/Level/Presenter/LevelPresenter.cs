@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Systems.LevelSystem
 {
-	public sealed class LevelPresenter : IDisposable, IPausable
+	public sealed class LevelPresenter : IPausable
 	{
 		public LevelModel Model { get; }
 		public LevelGameplay Gameplay { get; }

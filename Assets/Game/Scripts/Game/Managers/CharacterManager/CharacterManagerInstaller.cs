@@ -1,4 +1,4 @@
-using Game.Character;
+using Game.Entity.CharacterSystem;
 
 using Zenject;
 

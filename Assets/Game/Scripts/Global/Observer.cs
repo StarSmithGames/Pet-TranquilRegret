@@ -51,4 +51,9 @@ public class Observer< T >
 		
 		onCollectionChanged?.Invoke();
 	}
+
+	public virtual bool Contains( T observer )
+	{
+		return Observers.Contains( observer );
+	}
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5436734224223526922}
   - component: {fileID: 6430103645636751042}
   - component: {fileID: 3003069121448022143}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder.1360
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -409,6 +409,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4886950944175152729}
+  - component: {fileID: 8108839539318203397}
   m_Layer: 0
   m_Name: Bush_2
   m_TagString: Untagged
@@ -432,3 +433,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8108839539318203397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8629057452698058221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaa076506f034fd381907573484d461e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

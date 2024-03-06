@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8379d535453445a8905de691ebbaec2, type: 3}
+  m_Name: CombatSystemInstaller
+  m_EditorClassIdentifier: 
+  SlashAttackPrefab: {fileID: 2188075399280448075, guid: ac95e32cc4aaf2a469e3a34a27284fa3, type: 3}

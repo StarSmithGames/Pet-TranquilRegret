@@ -50,6 +50,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0316f4f9fe1890e49b67115692901602, type: 2}
   - {fileID: 11400000, guid: 7ad0c571db82a07498d3444672919ea0, type: 2}
   - {fileID: 11400000, guid: 272fa6fc0fff7a44cb304ccd8132e223, type: 2}
+  - {fileID: 11400000, guid: d5d2f1c15f10f6a41a2f9713ac79e835, type: 2}
   _monoInstallers:
   - {fileID: 2802870694795667563}
   - {fileID: 1865050009513248611}
