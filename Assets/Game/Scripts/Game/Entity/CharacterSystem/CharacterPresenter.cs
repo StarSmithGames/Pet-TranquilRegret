@@ -22,6 +22,8 @@ namespace Game.Entity.CharacterSystem
 
 		[Inject] private CharacterCanvas characterCanvas;
 
+		[Inject] private CharacterGroundImplementation _characterGround;
+		
 		public CharacterPresenter(
 			CharacterModel model,
 			CharacterView view,

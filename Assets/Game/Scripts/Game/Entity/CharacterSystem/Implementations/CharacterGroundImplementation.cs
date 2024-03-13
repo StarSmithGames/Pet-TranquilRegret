@@ -6,16 +6,16 @@ namespace Game.Entity.CharacterSystem
 {
 	public class CharacterGroundImplementation : ITickable
 	{
-		private CharacterController controller;
-		private CharacterVSFXController vsfxController;
+		private CharacterController _controller;
+		private CharacterVSFXController _vsfxController;
 
 		public CharacterGroundImplementation(
 			CharacterController controller,
 			CharacterVSFXController vsfxController,
 			TickableManager tickableManager)
 		{
-			this.controller = controller;
-			this.vsfxController = vsfxController;
+			_controller = controller;
+			_vsfxController = vsfxController;
 
 			controller.onJumped += OnJumped;
 			controller.onLanded += OnLanded;
@@ -25,23 +25,23 @@ namespace Game.Entity.CharacterSystem
 
 		public void Tick()
 		{
-			CheckGround(controller.CurrentGroundLayer);
+			CheckGround(_controller.CurrentGroundLayer);
 		}
 
 		private void EnableDustTrail(bool trigger)
 		{
-			vsfxController.DustTrailEffect.Enable(trigger);
+			_vsfxController.DustTrailEffect.Enable(trigger);
 		}
 
 		private void DoPawSteps(bool isOne)
 		{
 			if (isOne)
 			{
-				vsfxController.PawStep();
+				_vsfxController.PawStep();
 			}
 			else
 			{
-				vsfxController.PawSteps();
+				_vsfxController.PawSteps();
 			}
 		}
 
@@ -54,13 +54,13 @@ namespace Game.Entity.CharacterSystem
 				return;
 			}
 
-			if (controller.IsGrounded && !controller.IsJumping)
+			if (_controller.IsGrounded && !_controller.IsJumping)
 			{
-				if (controller.IsIdling())
+				if (_controller.IsIdling())
 				{
 					EnableDustTrail(false);
 				}
-				else if (controller.IsMoving() && controller.MovingMagnitude > 0.1f)
+				else if (_controller.IsMoving() && _controller.MovingMagnitude > 0.1f)
 				{
 					if (groundLayer is GroundLayerEarth)
 					{
@@ -86,15 +86,15 @@ namespace Game.Entity.CharacterSystem
 
 		private void OnLanded()
 		{
-			if (controller.CurrentGroundLayer is GroundLayerSoft) return;
+			if (_controller.CurrentGroundLayer is GroundLayerSoft) return;
 
-			if (controller.CurrentGroundLayer is GroundLayerEarth)
+			if (_controller.CurrentGroundLayer is GroundLayerEarth)
 			{
-				vsfxController.Poof();
+				_vsfxController.Poof();
 			}
 			else
 			{
-				vsfxController.SmallPoof();
+				_vsfxController.SmallPoof();
 			}
 
 			DoPawSteps(false);

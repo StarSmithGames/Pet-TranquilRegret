@@ -27,9 +27,10 @@ namespace Game.Entity.CharacterSystem
 			Container.BindInstance(characterController);
 			Container.BindInstance(vsfxController);
 			Container.BindInstance(characerCanvas);
-			// Container.BindInterfacesAndSelfTo<CharacterGroundImplementation>().AsSingle();
 			
 			CharacterCombatInstaller.Install( Container );
+			
+			Container.BindInterfacesAndSelfTo<CharacterGroundImplementation>().WhenInjectedInto<CharacterPresenter>();
 			
 			Container.Bind<CharacterPresenter>().AsSingle().NonLazy();
 		}

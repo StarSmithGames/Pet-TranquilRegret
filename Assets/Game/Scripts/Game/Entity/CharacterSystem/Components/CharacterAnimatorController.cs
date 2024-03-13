@@ -42,6 +42,7 @@ namespace Game.Entity.CharacterSystem
 
 		private void OnJumped()
 		{
+			animator.SetTrigger( jumpHash );
 		}
 	}
 }
