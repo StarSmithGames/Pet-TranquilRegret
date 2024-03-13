@@ -18,7 +18,7 @@ namespace Game.Environment.EntitySystem
 				_cachedForward = transform.forward;
 			}
 
-			Animation( Vector3.one * 45f ).Forget();
+			Animation( damage.AttackDirection * 30f ).Forget();
 			// Destruct();
 		}
 
@@ -30,9 +30,8 @@ namespace Game.Environment.EntitySystem
 
 		private async UniTask Animation( Vector3 strength )
 		{
-
-			await transform.DOShakeRotation( 1.66f, strength, 5 );
-			await transform.DORotate(  Quaternion.LookRotation( _cachedForward ).eulerAngles, 0.99f );
+			await transform.DOShakeRotation( Random.Range( 0.33f, 1.66f ), strength, 5 );
+			await transform.DORotate(  Quaternion.LookRotation( _cachedForward ).eulerAngles, Random.Range( 0.33f, 0.99f ) );
 		}
 	}
 }
