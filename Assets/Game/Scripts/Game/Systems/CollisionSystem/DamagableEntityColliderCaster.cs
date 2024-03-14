@@ -1,5 +1,6 @@
 using Game.Entity;
 using Game.Scripts.Extensions;
+using Game.Systems.CombatSystem;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;

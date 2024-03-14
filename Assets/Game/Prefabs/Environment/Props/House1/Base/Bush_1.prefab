@@ -260,3 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa076506f034fd381907573484d461e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MeshFilter: {fileID: 8200190887595811627}
+  force: 10
+  springForce: 20
+  damping: 5

@@ -1,6 +1,4 @@
-using Game.Systems.CombatSystem;
-
-namespace Game.Entity
+namespace Game.Systems.CombatSystem
 {
 	public interface IDamageable
 	{

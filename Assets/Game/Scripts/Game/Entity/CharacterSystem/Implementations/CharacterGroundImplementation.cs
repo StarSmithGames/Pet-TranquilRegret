@@ -1,4 +1,5 @@
-﻿using Game.Systems.NavigationSystem;
+﻿using Game.Environment.SurfaceSystem;
+using Game.Systems.NavigationSystem;
 
 using Zenject;
 
@@ -25,7 +26,7 @@ namespace Game.Entity.CharacterSystem
 
 		public void Tick()
 		{
-			CheckGround(_controller.CurrentGroundLayer);
+			CheckGround(_controller.CurrentSurfaceLayer);
 		}
 
 		private void EnableDustTrail(bool trigger)
@@ -45,9 +46,9 @@ namespace Game.Entity.CharacterSystem
 			}
 		}
 
-		private void CheckGround(GroundLayer groundLayer)
+		private void CheckGround(SurfaceLayer surfaceLayer)
 		{
-			if (groundLayer == null)
+			if (surfaceLayer == null)
 			{
 				EnableDustTrail(false);
 
@@ -62,7 +63,7 @@ namespace Game.Entity.CharacterSystem
 				}
 				else if (_controller.IsMoving() && _controller.MovingMagnitude > 0.1f)
 				{
-					if (groundLayer is GroundLayerEarth)
+					if (surfaceLayer is SurfaceLayerEarth)
 					{
 						EnableDustTrail(true);
 					}
@@ -86,9 +87,9 @@ namespace Game.Entity.CharacterSystem
 
 		private void OnLanded()
 		{
-			if (_controller.CurrentGroundLayer is GroundLayerSoft) return;
+			if (_controller.CurrentSurfaceLayer is SurfaceLayerSoft) return;
 
-			if (_controller.CurrentGroundLayer is GroundLayerEarth)
+			if (_controller.CurrentSurfaceLayer is SurfaceLayerEarth)
 			{
 				_vsfxController.Poof();
 			}

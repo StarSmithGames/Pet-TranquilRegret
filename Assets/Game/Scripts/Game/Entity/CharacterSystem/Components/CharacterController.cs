@@ -1,4 +1,5 @@
 using Game.Entities;
+using Game.Environment.SurfaceSystem;
 using Game.Managers.PauseManager;
 using Game.Services;
 using Game.Systems.CameraSystem;
@@ -22,7 +23,7 @@ namespace Game.Entity.CharacterSystem
 		public bool IsJumping { get; private set; }
 		public bool IsFalling => rb.velocity.y < 0;
 		public bool IsGrounded { get; private set; } = false;
-		public GroundLayer CurrentGroundLayer { get; private set; }
+		public SurfaceLayer CurrentSurfaceLayer { get; private set; }
 
 		public float MovingMagnitude => directionVector.magnitude;
 		private Settings ControllSettings => presenter.Model.Config.controllSettings;
@@ -144,14 +145,14 @@ namespace Game.Entity.CharacterSystem
 		{
 			if (Physics.Raycast(new Ray(transform.position, Vector3.down), out RaycastHit hit, ControllSettings.disstanceToGround, ControllSettings.groundLayer))
 			{
-				CurrentGroundLayer = hit.collider.GetComponent<GroundLayer>();
+				CurrentSurfaceLayer = hit.collider.GetComponent< SurfaceLayer >();
 
 				IsGrounded = true;
 				OnGroundedChanged();
 			}
 			else
 			{
-				CurrentGroundLayer = null;
+				CurrentSurfaceLayer = null;
 
 				IsGrounded = false;
 				OnGroundedChanged();

@@ -1,6 +1,6 @@
 using System;
 
-namespace Game.Entity
+namespace Game.Systems.CombatSystem
 {
 	public interface IDestructible : IDamageable
 	{

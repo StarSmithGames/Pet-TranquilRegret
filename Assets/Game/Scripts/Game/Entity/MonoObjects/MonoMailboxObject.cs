@@ -19,13 +19,6 @@ namespace Game.Environment.EntitySystem
 			}
 
 			Animation( damage.AttackDirection * 30f ).Forget();
-			// Destruct();
-		}
-
-		public override void Destruct()
-		{
-			//puff
-			base.Destruct();
 		}
 
 		private async UniTask Animation( Vector3 strength )

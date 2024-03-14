@@ -1,6 +1,6 @@
 using UnityEngine.Events;
 
-namespace Game.Entity
+namespace Game.Systems.CombatSystem
 {
 	public interface IDieable : IDamageable
 	{
