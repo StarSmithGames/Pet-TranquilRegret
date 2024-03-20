@@ -23,15 +23,15 @@ namespace Game.Entity.CharacterSystem
 		public void Attack()
 		{
 			var vfx = _attackAggregator.GetOrCreateIfNotExist< SlashAttack >().Execute();
-			vfx.transform.position = _view.root.position + Vector3.up * 0.5f;
-			vfx.transform.forward = _view.model.forward;
+			vfx.transform.position = _view.Points.Root.position + Vector3.up * 0.5f;
+			vfx.transform.forward = _view.Points.Rotor.forward;
 			vfx.Play();
 
 			var damage = new Damage()
 			{
 				Amount = new( 0, 5 ),
 				DamageType = DamageType.Slashing,
-				AttackDirection = _view.model.forward
+				AttackDirection = _view.Points.Rotor.forward
 			};
 
 			var list = _view.FrontSphereCaster.Observer.Observers;

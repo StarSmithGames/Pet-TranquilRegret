@@ -42,8 +42,12 @@ namespace Game.Entity.CharacterSystem
 		[Inject] private CameraSystem cameraSystem;
 		[Inject] private PauseManager pauseManager;
 
+		private Transform _rotor;
+		
 		private void Start()
 		{
+			_rotor = presenter.View.Points.Rotor;
+			
 			pauseManager.Registrate(this);
 
 			jostick = uiRoot.ControlCanvas.Joystick;
@@ -67,9 +71,9 @@ namespace Game.Entity.CharacterSystem
 			if (directionVector.x != 0 || directionVector.z != 0)
 			{
 				float targetAngle = Mathf.Atan2(directionVector.x, directionVector.z) * Mathf.Rad2Deg + cameraSystem.EulerAngleY;
-				float angle = Mathf.SmoothDampAngle(presenter.View.model.eulerAngles.y, targetAngle, ref smoothVelocity, turnSmoothTime);
+				float angle = Mathf.SmoothDampAngle(_rotor.eulerAngles.y, targetAngle, ref smoothVelocity, turnSmoothTime);
 
-				presenter.View.model.rotation = Quaternion.Euler(0, angle, 0);
+				_rotor.rotation = Quaternion.Euler(0, angle, 0);
 			}
 
 			//Movement

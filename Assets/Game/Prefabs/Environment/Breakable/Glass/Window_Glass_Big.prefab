@@ -207,9 +207,9 @@ MonoBehaviour:
   FractureGeometry: {fileID: 8517430637284449126}
   Rigidbody: {fileID: 8517430638465707314}
   FractureRoot: {fileID: 8517430638468915857}
+  Radius: 100
+  Force: 30
   ForceThreshold: 0
-  ForceFalloffRadius: 1
-  AdjustForKinematic: 1
   CollidableLayers:
     serializedVersion: 2
     m_Bits: 192

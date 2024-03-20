@@ -70,8 +70,8 @@ namespace Game.Environment.LockpickingSystem
 		{
 			for (int i = 0; i < zones.Count; i++)
 			{
-				zones[i].onItemAdded += OnCharacterAdded;
-				zones[i].onItemRemoved += OnCharacterRemoved;
+				zones[i].OnItemAdded += OnCharacterAdded;
+				zones[i].OnItemRemoved += OnCharacterRemoved;
 			}
 		}
 
@@ -79,8 +79,8 @@ namespace Game.Environment.LockpickingSystem
 		{
 			for (int i = 0; i < zones.Count; i++)
 			{
-				zones[i].onItemAdded -= OnCharacterAdded;
-				zones[i].onItemRemoved -= OnCharacterRemoved;
+				zones[i].OnItemAdded -= OnCharacterAdded;
+				zones[i].OnItemRemoved -= OnCharacterRemoved;
 			}
 		}
 	}

@@ -6,17 +6,17 @@ namespace Game.Systems.CameraSystem
 {
 	public abstract class CameraTracker : MonoBehaviour
 	{
-		private CameraSystem cameraSystem;
+		protected CameraSystem _cameraSystem;
 
 		[Inject]
 		private void Construct(CameraSystem cameraSystem)
 		{
-			this.cameraSystem = cameraSystem;
+			_cameraSystem = cameraSystem;
 		}
 
 		protected virtual void Update()
 		{
-			transform.rotation = cameraSystem.Rotation;
+			transform.rotation = _cameraSystem.Rotation;
 		}
 	}
 }

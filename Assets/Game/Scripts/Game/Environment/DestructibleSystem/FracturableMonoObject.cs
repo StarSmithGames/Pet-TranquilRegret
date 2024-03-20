@@ -12,18 +12,15 @@ namespace Game.Environment.DestructableSystem
 		public Rigidbody Rigidbody;
 		public Transform FractureRoot;
 		[ Space ]
+		public float Radius = 100f;
+		public float Force = 30f;
 		public float ForceThreshold;
-		public float ForceFalloffRadius = 1.0f;
-		public bool AdjustForKinematic = true;
 		public LayerMask CollidableLayers = (LayerMask)int.MaxValue;
 
 		private bool _isFractured = false;
 		private List< GameObject > _fractures = new();
-		private float _thisMass;
 		private Vector3 _impactPoint;
 		private Vector3 _impactImpulse;
-		private float _impactMass;
-		private Rigidbody _impactBody;
 
 		private void Awake()
 		{
@@ -53,13 +50,14 @@ namespace Game.Environment.DestructableSystem
 
 			FractureGeometry.GeneratedPieces = _fractures.RandomItem();
 			
-			_thisMass = Rigidbody.mass;
-			_impactPoint = Vector3.zero;
-			_impactImpulse = Vector3.forward;
+			Debug.LogError( _impactPoint );
 			
-			Vector3 localPoint = transform.worldToLocalMatrix.MultiplyPoint( _impactPoint );
+			Vector3 localPoint = FractureGeometry.transform.worldToLocalMatrix.MultiplyPoint( _impactPoint );//new( Random.Range( -0.5f, 0.5f ), Random.Range( -0.5f, 0.5f ), Random.Range( -0.5f, 0.5f ));
+			
+			Debug.LogError( localPoint );
+			
 			FractureGeometry.FractureType = FractureType.Shatter;
-			FractureGeometry.Fracture( localPoint );
+			FractureGeometry.Fracture( localPoint ).SetCallbackObject(this);;
 		}
 
 		private void OnCollisionEnter( Collision col )
@@ -68,9 +66,6 @@ namespace Game.Environment.DestructableSystem
 			{
 				if ((CollidableLayers.value & (1 << col.gameObject.layer)) != 0)
 				{
-					_impactBody = col.rigidbody;
-					_impactMass = (col.rigidbody != null) ? col.rigidbody.mass : 0.0f;
-
 					_impactPoint = Vector3.zero;
 
 					float sumSeparation = 0.0f;
@@ -97,58 +92,44 @@ namespace Game.Environment.DestructableSystem
 					{
 						Destruct();
 					}
-					else
-					{
-						_impactMass = 0.0f;
-					}
 				}
 			}
 		}
 
 		private void OnFracture( OnFractureEventArgs args )
 		{
-			if ( args.IsValid && args.OriginalObject.gameObject == gameObject && _impactMass > 0.0f )
-			{
-				Vector3 thisImpulse = _impactImpulse * _thisMass / ( _thisMass + _impactMass );
-
-				for ( int i = 0; i < args.FracturePiecesRootObject.transform.childCount; i++ )
-				{
-					Transform piece = args.FracturePiecesRootObject.transform.GetChild( i );
-
-					Rigidbody rb = piece.GetComponent< Rigidbody >();
-					if ( rb != null )
-					{
-						float percentForce = FractureUtilities.GetFracturePieceRelativeMass( piece.gameObject );
-
-						if ( ForceFalloffRadius > 0.0f )
-						{
-							float dist = ( piece.position - _impactPoint ).magnitude;
-							percentForce *= Mathf.Clamp01( 1.0f - ( dist / ForceFalloffRadius ) );
-						}
-
-						rb.AddForce( thisImpulse * percentForce, ForceMode.Impulse );
-					}
-				}
-
-				if ( AdjustForKinematic )
-				{
-					// If the fractured body is kinematic, the collision for the colliding body will
-					// be as if it hit an unmovable wall.  Try to correct for that by adding the same
-					// force to colliding body.
-					if ( Rigidbody.isKinematic && _impactBody != null )
-					{
-						Vector3 impactBodyImpulse = _impactImpulse * _impactMass / ( _thisMass + _impactMass );
-						_impactBody.AddForceAtPosition( impactBodyImpulse, _impactPoint, ForceMode.Impulse );
-					}
-				}
-			}
+			if ( !args.IsValid ) return;
+			
+			Explode(args.FracturePiecesRootObject, args.OriginalMeshBounds, args.OriginalObject.transform.localScale);
 		}
 
 		private void OnFractureCompleted( OnFractureEventArgs args )
 		{
-			if ( args.IsValid && args.OriginalObject.gameObject == gameObject )
+		}
+
+		private void Explode( GameObject root, Bounds bounds, Vector3 scale )
+		{
+			Vector3 adjLocalCenter = new Vector3( bounds.center.x * scale.x, bounds.center.y * scale.y, bounds.center.z * scale.z );
+
+			Transform rootTrans = root.transform;
+			Vector3 center = rootTrans.localToWorldMatrix.MultiplyPoint( adjLocalCenter );
+			for ( int i = 0; i < rootTrans.childCount; i++ )
 			{
-				Debug.LogError( "OnFractureCompleted" );
+				Transform pieceTrans = rootTrans.GetChild( i );
+				Rigidbody body = pieceTrans.GetComponent< Rigidbody >();
+				if ( body != null )
+				{
+					Vector3 forceVector = ( pieceTrans.position - center );
+					float dist = forceVector.magnitude;
+
+					// Normalize the vector and scale it by the explosion radius
+					forceVector *= Mathf.Max( 0.0f, Radius - dist ) / ( Radius * dist );
+
+					// Scale by the force amount
+					forceVector *= Force;
+
+					body.AddForceAtPosition( forceVector, center, ForceMode.Force );
+				}
 			}
 		}
 	}

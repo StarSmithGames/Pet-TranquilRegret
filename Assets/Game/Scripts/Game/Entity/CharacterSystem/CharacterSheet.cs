@@ -7,6 +7,7 @@ namespace Game.Entity.CharacterSystem
     {
         public MoveSpeedStat MoveSpeed { get; private set; }
         public JumpImpulseStat JumpImpulse { get; private set; }
+        // public ThrowImpulse ThrowImpulse { get; private set; }
 
 		public CharacterSheet(CharacterSheetSettings settings)
         {

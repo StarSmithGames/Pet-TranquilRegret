@@ -38,17 +38,6 @@ namespace Game.Systems.SpawnSystem
 		public void Spawn()
 		{
 			SpawnAsync().Forget();
-			// if ( !gameplayConfig.CharacterReference.IsLoaded )
-			// {
-			// 	gameplayConfig.CharacterReference.Load( () =>
-			// 	{
-			// 		Spawn( diContainer.InstantiatePrefab( gameplayConfig.CharacterReference.Asset ).GetComponent< Character.Character >() );
-			// 	} );
-			// }
-			// else
-			// {
-			// 	Spawn( diContainer.InstantiatePrefab( gameplayConfig.CharacterReference.Asset ).GetComponent< Character.Character >() );
-			// }
 		}
 
 		private async UniTask SpawnAsync()
@@ -60,11 +49,12 @@ namespace Game.Systems.SpawnSystem
 
 		private void Spawn( Entity.CharacterSystem.Character character )
 		{
-			character.Presenter.View.root.position = transform.position;
-			character.Presenter.View.model.rotation = transform.rotation;
+			var points = character.Presenter.View.Points;
+			points.Root.position = transform.position;
+			points.Rotor.rotation = transform.rotation;
 
-			character.Presenter.View.cameraFollowPivot.position = FollowPosition;
-			character.Presenter.View.cameraLookAtPivot.position = LookPosition;
+			points.CameraFollowPivot.position = FollowPosition;
+			points.CameraLookAtPivot.position = LookPosition;
 
 			AddressablesShaderProvider.RefreshGameObject( character.gameObject );
 			

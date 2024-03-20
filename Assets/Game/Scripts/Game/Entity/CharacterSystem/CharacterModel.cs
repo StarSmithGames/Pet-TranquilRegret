@@ -16,7 +16,7 @@ namespace Game.Entity.CharacterSystem
 	//{
 	//	public MoveSpeed MoveSpeed { get; private set; }
 	//	public JumpImpulse JumpImpulse { get; private set; }
-	//	public ThrowImpulse ThrowImpulse { get; private set; }
+	//	
 
 	//	public Effects Effects { get; private set; }
 

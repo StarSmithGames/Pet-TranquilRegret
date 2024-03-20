@@ -1,12 +1,17 @@
-using Game.Environment.PickupableSystem;
+using Game.Environment.PickableSystem;
 using Game.Systems.CameraSystem;
-
 using UnityEngine;
 
 namespace Game.Entity.CharacterSystem
 {
-	public class ItemCanvas : CameraTracker
+	public sealed class ItemCanvas : CameraTracker
 	{
-		[field: SerializeField] public UIPickup Pickup { get; private set; }
+		public Canvas Canvas;
+		public UIPickup Pickup;
+
+		private void Start()
+		{
+			Canvas.worldCamera = _cameraSystem.Camera;
+		}
 	}
 }

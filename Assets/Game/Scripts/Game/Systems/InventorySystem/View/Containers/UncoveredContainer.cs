@@ -163,14 +163,14 @@ namespace Game.Systems.InventorySystem
 	{
 		private void Subsctibe()
 		{
-			interactionZone.onItemAdded += OnCharacterAdded;
-			interactionZone.onItemRemoved += OnCharacterRemoved;
+			interactionZone.OnItemAdded += OnCharacterAdded;
+			interactionZone.OnItemRemoved += OnCharacterRemoved;
 		}
 
 		private void Unsubscribe()
 		{
-			interactionZone.onItemAdded -= OnCharacterAdded;
-			interactionZone.onItemRemoved -= OnCharacterRemoved;
+			interactionZone.OnItemAdded -= OnCharacterAdded;
+			interactionZone.OnItemRemoved -= OnCharacterRemoved;
 		}
 	}
 

@@ -15,8 +15,8 @@ namespace Game.Systems.InteractionSystem
 	public abstract class InteractionZone<T> : Zone
 		where T : IZonable
 	{
-		public event Action<T> onItemAdded;
-		public event Action<T> onItemRemoved;
+		public event Action< T > OnItemAdded;
+		public event Action< T > OnItemRemoved;
 
 		public override Collider Collider => collider;
 		public SphereCollider collider;
@@ -24,14 +24,14 @@ namespace Game.Systems.InteractionSystem
 		public bool isDebugSetup = true;
 #endif
 
-		protected override void OnItemAdded(IZonable item)
+		protected override void ItemAddedHandler(IZonable item)
 		{
-			onItemAdded?.Invoke((T)item);
+			OnItemAdded?.Invoke((T)item);
 		}
 
-		protected override void OnItemRemoved(IZonable item)
+		protected override void ItemRemovedHandler(IZonable item)
 		{
-			onItemRemoved?.Invoke((T)item);
+			OnItemRemoved?.Invoke((T)item);
 		}
 
 #if UNITY_EDITOR

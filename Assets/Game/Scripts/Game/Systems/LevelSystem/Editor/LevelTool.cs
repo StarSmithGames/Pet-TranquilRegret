@@ -1,3 +1,4 @@
+using Game.Environment.PickableSystem;
 using Game.Systems.GameSystem;
 using Game.Systems.GoalSystem;
 using Game.Systems.InventorySystem;

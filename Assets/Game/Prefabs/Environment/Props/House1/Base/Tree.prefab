@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4488747864783561032}
   - component: {fileID: 8707227919546885713}
   - component: {fileID: 8646967352343626153}
+  - component: {fileID: 3932482668474005588}
   m_Layer: 0
   m_Name: Plane.563
   m_TagString: Untagged
@@ -83,6 +84,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3932482668474005588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2299961644230840238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b1a1633dd104b55ad54abe563c0cfba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationLoopTime: 2
+  posRange: 0.05
+  rotRange: 2
+  noZMove: 0
+  shouldReturnToStart: 0
+  lockRotToZ: 0
 --- !u!1 &2625540122150550728
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,6 +211,7 @@ GameObject:
   - component: {fileID: 5937262284367747461}
   - component: {fileID: 6951658394627847747}
   - component: {fileID: 2059518289791367539}
+  - component: {fileID: 8724682815716378750}
   m_Layer: 0
   m_Name: Sphere.069
   m_TagString: Untagged
@@ -266,6 +286,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8724682815716378750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3604133411567029656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b1a1633dd104b55ad54abe563c0cfba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationLoopTime: 2
+  posRange: 0.05
+  rotRange: 2
+  noZMove: 0
+  shouldReturnToStart: 0
+  lockRotToZ: 0
 --- !u!1 &4732475097847982651
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,6 +315,7 @@ GameObject:
   - component: {fileID: 557117570006663086}
   - component: {fileID: 2731328426801727858}
   - component: {fileID: 622498338141381019}
+  - component: {fileID: 3984086818243549247}
   m_Layer: 0
   m_Name: Sphere.068
   m_TagString: Untagged
@@ -351,6 +390,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &3984086818243549247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4732475097847982651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b1a1633dd104b55ad54abe563c0cfba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationLoopTime: 2
+  posRange: 0.05
+  rotRange: 2
+  noZMove: 0
+  shouldReturnToStart: 0
+  lockRotToZ: 0
 --- !u!1 &4864058546215813480
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,6 +419,7 @@ GameObject:
   - component: {fileID: 264587997755744308}
   - component: {fileID: 6819445503244113592}
   - component: {fileID: 945694369484168043}
+  - component: {fileID: 8235126349763247347}
   m_Layer: 0
   m_Name: Plane.564
   m_TagString: Untagged
@@ -434,6 +492,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8235126349763247347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4864058546215813480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b1a1633dd104b55ad54abe563c0cfba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationLoopTime: 2
+  posRange: 0.05
+  rotRange: 2
+  noZMove: 0
+  shouldReturnToStart: 0
+  lockRotToZ: 0
 --- !u!1 &6057707205118227018
 GameObject:
   m_ObjectHideFlags: 0

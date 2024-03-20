@@ -123,7 +123,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5373133403413909695}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -8.025719, y: 0.83353263, z: -2.6755028}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 8632144073755259332}
   - component: {fileID: 8198795518200011193}
   - component: {fileID: 1534691494802854775}
+  - component: {fileID: 6596931917695675666}
   m_Layer: 0
   m_Name: Plane.555
   m_TagString: Untagged
@@ -215,6 +216,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6596931917695675666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6902060963024926056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b1a1633dd104b55ad54abe563c0cfba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationLoopTime: 2
+  posRange: 0.05
+  rotRange: 2
+  noZMove: 0
+  shouldReturnToStart: 0
+  lockRotToZ: 0
 --- !u!1 &7413041146719591376
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,6 +244,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3771741721063399759}
   - component: {fileID: 2157553577160027463}
+  - component: {fileID: 3311521793969006335}
   m_Layer: 0
   m_Name: Bush_1
   m_TagString: Untagged
@@ -264,3 +284,21 @@ MonoBehaviour:
   force: 10
   springForce: 20
   damping: 5
+--- !u!114 &3311521793969006335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7413041146719591376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b1a1633dd104b55ad54abe563c0cfba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationLoopTime: 2
+  posRange: 0.01
+  rotRange: 2
+  noZMove: 0
+  shouldReturnToStart: 0
+  lockRotToZ: 0

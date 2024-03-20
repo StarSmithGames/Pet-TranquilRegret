@@ -1,11 +1,11 @@
-using Cysharp.Threading.Tasks;
 using Game.Systems.FloatingSystem;
+using Game.Systems.InventorySystem;
 using Game.Systems.LevelSystem;
 using Game.Systems.NavigationSystem;
 using UnityEngine;
 using Zenject;
 
-namespace Game.Systems.InventorySystem
+namespace Game.Environment.PickableSystem
 {
 	public class PickableFloatingItem : FloatingComponent
 	{
@@ -20,12 +20,12 @@ namespace Game.Systems.InventorySystem
 
 		private void Subsctibe()
 		{
-			interactionZone.onItemAdded += OnCharacterAdded;
+			interactionZone.OnItemAdded += OnCharacterAdded;
 		}
 
 		private void Unsubscribe()
 		{
-			interactionZone.onItemAdded -= OnCharacterAdded;
+			interactionZone.OnItemAdded -= OnCharacterAdded;
 		}
 
 		private void OnCharacterAdded(Entity.CharacterSystem.Character character)

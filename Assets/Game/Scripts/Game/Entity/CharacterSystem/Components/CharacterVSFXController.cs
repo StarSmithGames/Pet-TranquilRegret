@@ -17,7 +17,7 @@ namespace Game.Entity.CharacterSystem
 
 		[Inject] private CharacterPresenter presenter;
 
-		private CharacterView View => presenter.View;
+		private CharacterPoints _points;
 
 		private ParticalVFXPoofEffect.Factory poofEffectFactory;
 		private ParticalVFXPoofEffect.Factory smallPoofEffectFactory;
@@ -39,7 +39,8 @@ namespace Game.Entity.CharacterSystem
 
 		private void Start()
 		{
-			lastStepEmit = View.root.position;
+			_points = presenter.View.Points;
+			lastStepEmit = _points.Root.position;
 		}
 
 		public void FootStep()
@@ -81,18 +82,18 @@ namespace Game.Entity.CharacterSystem
 
 		private void Step(ParticalVFXFootStep.Factory factory)
 		{
-			if (Vector3.Distance(lastStepEmit, View.root.position) > stepDelta)
+			if (Vector3.Distance(lastStepEmit, _points.Root.position) > stepDelta)
 			{
 				var step = factory.Create();
 				stepDir *= -1;
 
 				step.Play(new ParticleSystem.EmitParams()
 				{
-					position = View.root.position + (View.model.right * stepGap * stepDir),
-					rotation = View.model.rotation.eulerAngles.y,
+					position = _points.Root.position + (_points.Rotor.right * stepGap * stepDir),
+					rotation = _points.Rotor.rotation.eulerAngles.y,
 				});
 
-				lastStepEmit = View.root.position;
+				lastStepEmit = _points.Root.position;
 			}
 		}
 
@@ -103,17 +104,17 @@ namespace Game.Entity.CharacterSystem
 
 			stepLeft.Play(new ParticleSystem.EmitParams()
 			{
-				position = View.root.position + (View.model.right * stepGap),
-				rotation = View.model.rotation.eulerAngles.y,
+				position = _points.Root.position + (_points.Rotor.right * stepGap),
+				rotation = _points.Rotor.rotation.eulerAngles.y,
 			});
 
 			stepRight.Play(new ParticleSystem.EmitParams()
 			{
-				position = View.root.position + (View.model.right * stepGap * -1),
-				rotation = View.model.rotation.eulerAngles.y,
+				position = _points.Root.position + (_points.Rotor.right * stepGap * -1),
+				rotation = _points.Rotor.rotation.eulerAngles.y,
 			});
 
-			lastStepEmit = View.root.position;
+			lastStepEmit = _points.Root.position;
 		}
 	}
 }

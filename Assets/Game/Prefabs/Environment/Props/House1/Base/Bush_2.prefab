@@ -390,6 +390,7 @@ GameObject:
   - component: {fileID: 53788139891399647}
   - component: {fileID: 2337600181896286835}
   - component: {fileID: 7339331939661503785}
+  - component: {fileID: 6809340722470093637}
   m_Layer: 0
   m_Name: Plane.556
   m_TagString: Untagged
@@ -462,6 +463,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6809340722470093637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6361767069598902700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b1a1633dd104b55ad54abe563c0cfba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationLoopTime: 2
+  posRange: 0.05
+  rotRange: 2
+  noZMove: 0
+  shouldReturnToStart: 0
+  lockRotToZ: 0
 --- !u!1 &6515641291779009290
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,3 +610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa076506f034fd381907573484d461e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MeshFilter: {fileID: 0}
+  force: 10
+  springForce: 20
+  damping: 5

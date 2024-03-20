@@ -1,5 +1,5 @@
 using StarSmithGames.Core;
-
+using System;
 using UnityEngine;
 
 namespace Game.Systems.ZoneSystem
@@ -19,7 +19,7 @@ namespace Game.Systems.ZoneSystem
 			if (!Registrator.registers.Contains(item))
 			{
 				Registrator.Registrate(item);
-				OnItemAdded(item);
+				ItemAddedHandler(item);
 			}
 		}
 
@@ -31,12 +31,11 @@ namespace Game.Systems.ZoneSystem
 			if (Registrator.registers.Contains(item))
 			{
 				Registrator.UnRegistrate(item);
-				OnItemRemoved(item);
+				ItemRemovedHandler(item);
 			}
 		}
 
-
-		protected virtual void OnItemAdded(IZonable item) { }
-		protected virtual void OnItemRemoved(IZonable item) { }
+		protected virtual void ItemAddedHandler(IZonable item) { }
+		protected virtual void ItemRemovedHandler(IZonable item) { }
 	}
 }

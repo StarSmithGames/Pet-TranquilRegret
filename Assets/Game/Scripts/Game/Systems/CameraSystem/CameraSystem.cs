@@ -55,7 +55,7 @@ namespace Game.Systems.CameraSystem
 
 		public CameraSystem SetTarget(Entity.CharacterSystem.Character character)
 		{
-			return SetTarget(character.Presenter.View.cameraFollowPivot, character.Presenter.View.cameraLookAtPivot);
+			return SetTarget(character.Presenter.View.Points.CameraFollowPivot, character.Presenter.View.Points.CameraLookAtPivot);
 		}
 
 		public CameraSystem SetTarget(Transform target)
