@@ -1,10 +1,10 @@
-using UnityEngine;
+using StarSmithGames.IoC;
 
 using Zenject;
 
 namespace Game.Systems.CameraSystem
 {
-	public abstract class CameraTracker : MonoBehaviour
+	public abstract class CameraTracker : PoolableObject
 	{
 		protected CameraSystem _cameraSystem;
 

@@ -1,6 +1,7 @@
 using Game.Environment.PickableSystem;
 using Game.Systems.CameraSystem;
 using UnityEngine;
+using Zenject;
 
 namespace Game.Entity.CharacterSystem
 {
@@ -13,5 +14,7 @@ namespace Game.Entity.CharacterSystem
 		{
 			Canvas.worldCamera = _cameraSystem.Camera;
 		}
+		
+		public sealed class Factory : PlaceholderFactory< ItemCanvas > { }
 	}
 }

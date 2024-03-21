@@ -101,3 +101,4 @@ MonoBehaviour:
   stepFootPrintEffect: {fileID: 5823451059639025679, guid: 8d7446f1c44bfb94f955d996e0c3b214, type: 3}
   poofEffect: {fileID: 7337268969511371573, guid: 5d97a74136b224b44a91ca46e670c8aa, type: 3}
   smallPoofEffect: {fileID: 3591418448674264809, guid: e1913e842bd34d44aa4b546fe0556e31, type: 3}
+  ItemCanvasPrefab: {fileID: 559356457260201866, guid: 5861e5ce472e97c49b05c4057c8e12c6, type: 3}

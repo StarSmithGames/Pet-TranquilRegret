@@ -1,3 +1,4 @@
+using Game.Entity.CharacterSystem;
 using Game.UI;
 using Game.VFX.Markers;
 using UnityEngine;
@@ -12,8 +13,8 @@ namespace Game.VFX
 		public ParticalVFXFootStep stepFootPrintEffect;
 		public ParticalVFXPoofEffect poofEffect;
 		public ParticalVFXPoofEffect smallPoofEffect;
-		//[Header("Markers")]
-		//public UIPointer pointerUIPrefab;
+		[Header("GUI")]
+		public ItemCanvas ItemCanvasPrefab;
 
 		public override void InstallBindings()
 		{
@@ -34,12 +35,12 @@ namespace Game.VFX
 				.FromComponentInNewPrefab(smallPoofEffect));
 
 
-			//UI
-			//Container
-			//	.BindFactory<UIPointer, UIPointer.Factory>()
-			//	.FromMonoPoolableMemoryPool((x) => x.WithInitialSize(1)
-			//	.FromComponentInNewPrefab(pointerUIPrefab)
-			//	.UnderTransform((x) => x.Container.Resolve<UISubCanvas>().VFX));
+			//GUI
+			Container.BindFactory<ItemCanvas, ItemCanvas.Factory>()
+				.FromMonoPoolableMemoryPool( 
+					(x) => 
+						x.WithInitialSize(1)
+							.FromComponentInNewPrefab(ItemCanvasPrefab));
 		}
 	}
 }
